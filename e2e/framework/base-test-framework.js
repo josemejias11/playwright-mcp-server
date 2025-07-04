@@ -25,8 +25,8 @@ export class BaseTestFramework {
     this.currentTestSuite = testSuiteName;
     this.startTime = Date.now();
     
-    await this.logger.info(`🚀 Initializing ${testSuiteName} Test Suite`);
-    await this.logger.info(`📊 Framework: CaliberFS Professional Testing Framework v1.0`);
+    await this.logger.info(`Initializing ${testSuiteName} Test Suite`);
+    await this.logger.info(`Framework: CaliberFS Professional Testing Framework v1.0`);
     
     try {
       await this.client.launchBrowser(browserType, TestConfig.headless);
@@ -45,7 +45,7 @@ export class BaseTestFramework {
     const timeout = options.timeout || TestConfig.defaultTimeout;
     
     try {
-      await this.logger.info(`▶️  Starting: ${testName}`);
+      await this.logger.info(`Starting: ${testName}`);
       
       // Execute test with timeout
       const timeoutPromise = new Promise((_, reject) => 
@@ -55,7 +55,7 @@ export class BaseTestFramework {
       await Promise.race([testFunction(), timeoutPromise]);
       
       const duration = Date.now() - testStartTime;
-      await this.logger.success(`✅ Passed: ${testName} (${duration}ms)`);
+      await this.logger.success(`Passed: ${testName} (${duration}ms)`);
       
       this.testResults.push({
         name: testName,
@@ -73,7 +73,7 @@ export class BaseTestFramework {
       try {
         const screenshotPath = `e2e/artifacts/failure-${testName.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
         await this.client.takeScreenshot(screenshotPath, true);
-        await this.logger.info(`📸 Failure screenshot saved: ${screenshotPath}`);
+        await this.logger.info(`Failure screenshot saved: ${screenshotPath}`);
       } catch (screenshotError) {
         await this.logger.error(`Failed to capture screenshot: ${screenshotError.message}`);
       }
@@ -144,7 +144,7 @@ export class BaseTestFramework {
     }
     
     await this.client.clickElement(selector);
-    await this.logger.info(`🖱️  Clicked: ${selector}`);
+    await this.logger.info(`Clicked: ${selector}`);
   }
 
   /**
@@ -154,7 +154,7 @@ export class BaseTestFramework {
     for (const [selector, value] of Object.entries(formData)) {
       await this.waitForElement(selector, 'visible');
       await this.client.fillInput(selector, value);
-      await this.logger.info(`📝 Filled "${selector}" with: ${value}`);
+      await this.logger.info(`Filled "${selector}" with: ${value}`);
       
       // Wait a bit for any dynamic validation
       await this.sleep(200);
@@ -194,7 +194,7 @@ export class BaseTestFramework {
       })()
     `);
     
-    await this.logger.info(`⚡ Performance: ${JSON.stringify(performance.output)}`);
+    await this.logger.info(`Performance: ${JSON.stringify(performance.output)}`);
     return performance.output;
   }
 

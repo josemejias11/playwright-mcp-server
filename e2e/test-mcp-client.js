@@ -19,34 +19,34 @@ async function testMcpClient() {
   
   try {
     // Test 1: Launch browser
-    console.log('1️⃣ Testing browser launch...');
+    console.log('1. Testing browser launch...');
     const launchResult = await client.launchBrowser('chromium', false);
-    console.log('✅ Browser launched:', launchResult.output);
+    console.log('✓ Browser launched:', launchResult.output);
     
     // Test 2: Navigate to CaliberFS
-    console.log('\n2️⃣ Testing navigation...');
+    console.log('\n2. Testing navigation...');
     const navResult = await client.navigateTo('https://www.caliberfs.com');
-    console.log('✅ Navigation successful:', navResult.output);
+    console.log('✓ Navigation successful:', navResult.output);
     
     // Test 3: Get page info
-    console.log('\n3️⃣ Testing page info...');
+    console.log('\n3. Testing page info...');
     const pageResult = await client.getPageInfo();
-    console.log('✅ Page info:', pageResult.output);
+    console.log('✓ Page info:', pageResult.output);
     
     // Test 4: Take screenshot
-    console.log('\n4️⃣ Testing screenshot...');
+    console.log('\n4. Testing screenshot...');
     const screenshotResult = await client.takeScreenshot('e2e/artifacts/test-screenshot.png', true);
-    console.log('✅ Screenshot taken:', screenshotResult.output);
+    console.log('✓ Screenshot taken:', screenshotResult.output);
     
     // Test 5: Close browser
-    console.log('\n5️⃣ Testing browser close...');
+    console.log('\n5. Testing browser close...');
     const closeResult = await client.closeBrowser();
-    console.log('✅ Browser closed:', closeResult.output);
+    console.log('✓ Browser closed:', closeResult.output);
     
-    console.log('\n🎉 All MCP client tests passed!');
+    console.log('\nAll MCP client tests passed!');
     
   } catch (error) {
-    console.error('❌ Test failed:', error.message);
+    console.error('✗ Test failed:', error.message);
     try {
       await client.closeBrowser();
     } catch (closeError) {

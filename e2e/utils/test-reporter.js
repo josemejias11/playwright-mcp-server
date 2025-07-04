@@ -32,7 +32,7 @@ export class TestReporter {
     await this.generateJSONReport(reportData);
     await this.generateSummaryReport(reportData);
     
-    console.log(`\n📊 Reports generated in: ${this.options.outputDir}`);
+    console.log(`\nReports generated in: ${this.options.outputDir}`);
   }
 
   /**
@@ -262,7 +262,7 @@ export class TestReporter {
   async generateJSONReport(data) {
     const filePath = join(this.options.outputDir, `report-${Date.now()}.json`);
     writeFileSync(filePath, JSON.stringify(data, null, 2));
-    console.log(`📊 JSON Report: ${filePath}`);
+    console.log(`JSON Report: ${filePath}`);
   }
 
   /**
@@ -290,7 +290,7 @@ Framework: ${meta.framework}
 
     const filePath = join(this.options.outputDir, `summary-${Date.now()}.txt`);
     writeFileSync(filePath, summary);
-    console.log(`📝 Summary Report: ${filePath}`);
+    console.log(`Summary Report: ${filePath}`);
   }
 
   /**

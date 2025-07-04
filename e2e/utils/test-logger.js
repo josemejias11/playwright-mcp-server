@@ -111,14 +111,14 @@ export class TestLogger {
    * Warning logging
    */
   async warn(message) {
-    await this.log('warn', message, '⚠️');
+    await this.log('warn', message, 'WARN');
   }
 
   /**
    * Info logging
    */
   async info(message) {
-    await this.log('info', message, 'ℹ️');
+    await this.log('info', message, 'INFO');
   }
 
   /**
@@ -132,28 +132,28 @@ export class TestLogger {
    * Success logging
    */
   async success(message) {
-    await this.log('success', message, '✅');
+    await this.log('success', message, 'PASS');
   }
 
   /**
    * Step logging (for test steps)
    */
   async step(message) {
-    await this.log('info', message, '▶️');
+    await this.log('info', message, 'START');
   }
 
   /**
    * Performance logging
    */
   async performance(message, timing) {
-    await this.log('info', `${message} (${timing}ms)`, '⚡');
+    await this.log('info', `${message} (${timing}ms)`, 'PERF');
   }
 
   /**
    * Business validation logging
    */
   async business(message) {
-    await this.log('info', message, '💼');
+    await this.log('info', message, 'BIZ');
   }
 
   /**
@@ -175,7 +175,7 @@ export class TestLogger {
    */
   async suiteStart(suiteName) {
     console.log('\n' + '='.repeat(80));
-    await this.log('info', `Starting Test Suite: ${suiteName}`, '🚀');
+    await this.log('info', `Starting Test Suite: ${suiteName}`, 'SUITE');
     console.log('='.repeat(80));
   }
 
@@ -185,7 +185,7 @@ export class TestLogger {
   async suiteEnd(suiteName, summary) {
     console.log('\n' + '='.repeat(80));
     await this.log('info', `Completed Test Suite: ${suiteName}`, '🏁');
-    await this.log('info', `Results: ${summary.passed}/${summary.total} passed (${summary.successRate}%)`, '📊');
+    await this.log('info', `Results: ${summary.passed}/${summary.total} passed (${summary.successRate}%)`, 'RESULTS');
     console.log('='.repeat(80) + '\n');
   }
 
@@ -200,7 +200,7 @@ export class TestLogger {
    * Test end
    */
   async testEnd(testName, status, duration) {
-    const emoji = status === 'PASSED' ? '✅' : '❌';
+    const emoji = status === 'PASSED' ? 'PASS' : 'FAIL';
     await this.log(status === 'PASSED' ? 'success' : 'error', 
       `${testName} - ${status} (${duration}ms)`, emoji);
   }
