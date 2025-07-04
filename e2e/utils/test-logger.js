@@ -104,7 +104,7 @@ export class TestLogger {
    * Error logging
    */
   async error(message) {
-    await this.log('error', message, '❌');
+    await this.log('error', message, 'ERROR');
   }
 
   /**
@@ -193,7 +193,7 @@ export class TestLogger {
    * Test start
    */
   async testStart(testName) {
-    await this.log('info', `Starting test: ${testName}`, '🧪');
+    await this.log('info', `Starting test: ${testName}`, 'TEST');
   }
 
   /**
@@ -231,9 +231,9 @@ export class TestLogger {
     
     try {
       fs.writeFileSync(filePath, JSON.stringify(logData, null, 2));
-      await this.log('info', `Logs exported to: ${filePath}`, '📄');
+      await this.log('info', `Logs exported to: ${filePath}`, 'EXPORT');
     } catch (error) {
-      await this.log('error', `Failed to export logs: ${error.message}`, '❌');
+      await this.log('error', `Failed to export logs: ${error.message}`, 'ERROR');
     }
   }
 }

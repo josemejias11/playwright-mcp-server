@@ -67,7 +67,7 @@ export class BaseTestFramework {
       
     } catch (error) {
       const duration = Date.now() - testStartTime;
-      await this.logger.error(`❌ Failed: ${testName} - ${error.message}`);
+      await this.logger.error(`Failed: ${testName} - ${error.message}`);
       
       // Take screenshot on failure
       try {
@@ -106,7 +106,7 @@ export class BaseTestFramework {
       throw new Error(`Expected page title to contain "${expectedTitle}" but got "${pageInfo.output}"`);
     }
     
-    await this.logger.info(`📄 Navigated to: ${url}`);
+    await this.logger.info(`Navigated to: ${url}`);
     return pageInfo;
   }
 

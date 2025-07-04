@@ -154,7 +154,7 @@ export class TestReporter {
     const filePath = join(this.options.outputDir, `report-${Date.now()}.html`);
     
     writeFileSync(filePath, html);
-    console.log(`📄 HTML Report: ${filePath}`);
+    console.log(`HTML Report: ${filePath}`);
   }
 
   /**

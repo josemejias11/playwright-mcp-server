@@ -369,6 +369,6 @@ async function main() {
 }
 
 main().catch(error => {
-  console.error('❌ Fatal error in test suite:', error);
+  console.error('Fatal error in test suite:', error);
   process.exit(1);
 });

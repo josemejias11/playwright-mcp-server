@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 async function testMcpClient() {
-  console.log('🧪 Testing MCP Client Implementation...\n');
+  console.log('Testing MCP Client Implementation...\n');
   
   const client = new McpClient(join(__dirname, '../build/index.js'));
   
