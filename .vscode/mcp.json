@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "playwright-automation": {
+      "command": "node",
+      "args": ["build/index.js"],
+      "cwd": "/Users/josemejias/VSCodeProject/playwright-mcp-server"
+    }
+  }
+}

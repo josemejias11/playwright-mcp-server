@@ -1,0 +1,33 @@
+{
+  "name": "playwright-mcp-server",
+  "version": "1.0.0",
+  "description": "A Model Context Protocol server for Playwright automation",
+  "type": "module",
+  "bin": {
+    "playwright-mcp-server": "./build/index.js"
+  },
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "tsc && chmod +x build/index.js",
+    "start": "npm run build && node build/index.js",
+    "dev": "tsc --watch",
+    "test:caliber": "node e2e/caliber-financial.test.js",
+    "test:professional": "node e2e/tests/caliber-professional-test-suite.js",
+    "test:smoke": "node e2e/tests/caliber-professional-test-suite.js --suite=smoke",
+    "test:forms": "node e2e/tests/caliber-professional-test-suite.js --suite=forms",
+    "test:performance": "node e2e/tests/caliber-professional-test-suite.js --suite=performance"
+  },
+  "files": ["build"],
+  "keywords": ["mcp", "playwright", "automation", "browser", "testing"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.0",
+    "@types/node": "^24.0.10",
+    "playwright": "^1.53.2",
+    "zod": "^3.25.74"
+  }
+}
