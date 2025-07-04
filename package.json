@@ -11,17 +11,31 @@
     "build": "tsc && chmod +x build/index.js",
     "start": "npm run build && node build/index.js",
     "dev": "tsc --watch",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
     "test:caliber": "node e2e/caliber-financial.test.js",
     "test:professional": "node e2e/tests/caliber-professional-test-suite.js",
     "test:smoke": "node e2e/tests/caliber-professional-test-suite.js --suite=smoke",
     "test:forms": "node e2e/tests/caliber-professional-test-suite.js --suite=forms",
     "test:performance": "node e2e/tests/caliber-professional-test-suite.js --suite=performance"
   },
-  "files": ["build"],
-  "keywords": ["mcp", "playwright", "automation", "browser", "testing"],
+  "files": [
+    "build"
+  ],
+  "keywords": [
+    "mcp",
+    "playwright",
+    "automation",
+    "browser",
+    "testing"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.53.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
