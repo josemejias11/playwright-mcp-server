@@ -10,6 +10,72 @@ QA automation framework demonstrating both traditional Playwright and AI-enhance
 - **Multi-browser Support** - Chromium, Firefox, WebKit
 - **Comprehensive Coverage** - Functional, performance, accessibility, mobile testing
 
+## How MCP-Enhanced Testing Works
+
+The Model Context Protocol (MCP) server integrates with GitHub Copilot to create intelligent, AI-driven test automation that goes beyond traditional scripted testing.
+
+### 🤖 AI-Powered Test Generation Process
+
+1. **Website Discovery** - MCP server launches browser and navigates to target website
+2. **Intelligent Analysis** - Copilot analyzes page structure, content, and functionality  
+3. **Context Understanding** - AI identifies key elements: forms, navigation, business logic
+4. **Dynamic Test Creation** - Generates test scenarios based on discovered website features
+5. **Adaptive Execution** - Tests adjust to page changes and handle dynamic content
+
+### 🔍 How Copilot Searches and Analyzes Websites
+
+```javascript
+// MCP server provides browser context to Copilot
+const page = await browser.newPage();
+await page.goto('https://caliberfs.com');
+
+// Copilot analyzes page structure and creates intelligent selectors
+const contactInfo = await page.locator('[data-testid="contact"]').or(
+  page.getByText('Contact').first()
+).or(
+  page.locator('.contact-section')
+);
+
+// AI generates contextual test scenarios
+if (await contactInfo.isVisible()) {
+  // Test phone number format validation
+  // Test email link functionality  
+  // Test contact form submission
+}
+```
+
+### 🧠 Intelligent Test Scenario Creation
+
+**Traditional Approach** (Static):
+```javascript
+// Fixed, brittle selectors
+await page.click('#submit-button');
+await expect(page.locator('.success-message')).toBeVisible();
+```
+
+**MCP-Enhanced Approach** (Adaptive):
+```javascript
+// AI-generated, resilient test logic
+const submitButton = await mcpClient.findElement({
+  role: 'button',
+  purpose: 'form submission',
+  context: 'contact form'
+});
+
+const result = await mcpClient.validateSubmission({
+  expectedOutcome: 'success confirmation',
+  fallbackValidation: ['url change', 'success message', 'form reset']
+});
+```
+
+### 🎯 Key Advantages of MCP Testing
+
+- **Self-Healing Tests** - AI adapts to UI changes automatically
+- **Business Logic Focus** - Tests validate functionality, not just elements
+- **Contextual Understanding** - Knows what elements should do, not just where they are
+- **Dynamic Content Handling** - Manages loading states, animations, async operations
+- **Intelligent Reporting** - Provides business-meaningful test results and insights
+
 ## Quick Start
 
 ```bash
@@ -105,6 +171,77 @@ npm start                  # Start MCP server
 - **Postman/Newman** - API testing and reporting
 - **Node.js** - Runtime environment
 - **GitHub Actions** - CI/CD pipeline with automated testing
+
+## MCP Architecture & Implementation
+
+### 🏗️ Technical Architecture
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   GitHub        │    │   MCP Server     │    │   Playwright    │
+│   Copilot       │◄──►│   (src/index.ts) │◄──►│   Browser       │
+│                 │    │                  │    │   Automation    │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                       │                       │
+         │              ┌────────▼────────┐              │
+         │              │  Test Framework │              │
+         │              │ (e2e/framework/) │              │
+         │              └─────────────────┘              │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│ AI-Generated    │    │ Page Objects     │    │ Test Reports    │
+│ Test Scenarios  │    │ & Utilities      │    │ & Artifacts     │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+```
+
+### 🔧 Core MCP Server Components
+
+**1. MCP Server (`src/index.ts`)**
+- Exposes browser automation tools to Copilot
+- Handles AI requests for page interaction
+- Manages browser lifecycle and context
+
+**2. MCP Client (`e2e/mcp-client.js`)**
+- Communicates with MCP server
+- Translates AI instructions to browser actions
+- Provides intelligent selectors and validation
+
+**3. Test Framework (`e2e/framework/base-test-framework.js`)**
+- Manages test execution flow
+- Handles errors and retries intelligently
+- Generates comprehensive reports
+
+### 🤝 Copilot Integration Workflow
+
+1. **Test Initiation**: MCP client starts test suite
+2. **AI Analysis**: Copilot analyzes website structure via MCP server
+3. **Dynamic Planning**: AI creates test plan based on discovered features
+4. **Adaptive Execution**: Tests run with AI-guided element detection
+5. **Intelligent Reporting**: Results include business context and insights
+
+### 📋 Example MCP Test Flow
+
+```javascript
+// 1. AI discovers website features
+const siteFeatures = await mcpClient.discoverFeatures('https://caliberfs.com');
+
+// 2. Copilot generates test scenarios
+const testScenarios = await mcpClient.generateScenarios({
+  siteType: 'financial-services',
+  features: siteFeatures,
+  compliance: ['accessibility', 'performance']
+});
+
+// 3. Execute AI-guided tests
+for (const scenario of testScenarios) {
+  await mcpClient.executeScenario({
+    name: scenario.name,
+    steps: scenario.steps,
+    validation: scenario.expectedOutcomes
+  });
+}
+```
 
 ## CI/CD Pipeline
 
