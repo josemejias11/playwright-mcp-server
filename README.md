@@ -6,17 +6,32 @@ A comprehensive QA automation framework for CaliberFS financial services website
 ## 🎯 Framework Overview
 
 ### **Multi-Layer Testing Strategy**
-- **🚀 Traditional Playwright** - 100+ tests across 5 browsers with comprehensive coverage
-- **🤖 MCP-Enhanced Testing** - AI-assisted automation via Model Context Protocol  
+- **🚀 Traditional Playwright** - 5 comprehensive test suites across 3 browsers (Chromium, Firefox, WebKit)
+- **🤖 MCP-Enhanced Testing** - AI-assisted automation via Mo## 🚀 Future Enhancements
+
+### **Planned Improvements**
+1. **Enhanced Cross-browser Coverage** - Extended WebKit and Firefox test coverage
+2. **Advanced API Integration Testing** - Backend service validation and database testing
+3. **Visual Regression Testing** - UI consistency validation with screenshot comparison
+4. **Load Testing** - Performance under stress conditions and concurrent users
+5. **Automated Test Selection** - Smart test execution based on code changes
+
+### **CI/CD Evolution**
+- **Enhanced Notifications** - Slack/Teams integration for test results
+- **Intelligent Deployment Gates** - Automatic promotion based on test results
+- **Performance Benchmarking** - Historical trend analysis and alerting
+- **Multi-Environment Testing** - Staging, pre-production validationotocol with 32 organized tests
 - **📡 API Validation** - Server-side testing with Postman/Newman (15 tests)
 - **🔒 Security & Compliance** - Financial services requirements and WCAG accessibility
 
 ### **Key Features**
-- **Organized Test Suites** - 32 tests organized into 5 categories (Smoke, Functional, Performance, Accessibility, Security)
+- **Organized Test Suites** - 32 MCP tests organized into 5 categories (Smoke, Functional, Performance, Accessibility, Security)
+- **Multi-Browser Support** - Traditional Playwright tests across Chromium, Firefox, and WebKit
 - **Flexible Execution** - Multiple strategies from quick smoke tests (3-5 min) to comprehensive validation (35-45 min)
 - **AI Integration** - Model Context Protocol for intelligent test adaptation and self-healing
 - **Business Focus** - Financial services compliance and professional validation
 - **Comprehensive Reporting** - HTML reports, JSON data, performance metrics, and business insights
+- **CI/CD Integration** - Automated testing pipeline with GitHub Actions
 
 ---
 
@@ -28,11 +43,11 @@ caliberfs-playwright-mcp-server/
 │   └── index.ts                   # MCP server implementation
 ├── 📁 build/                      # Compiled MCP server
 ├── 📁 tests/                      # Traditional Playwright Tests
-│   ├── homepage.spec.js           # Homepage validation (20 tests)
-│   ├── accessibility.spec.js     # WCAG compliance (20 tests)
-│   ├── performance.spec.js       # Performance monitoring (20 tests)
-│   ├── security.spec.js          # Security validation (20 tests)
-│   └── traditional-playwright.spec.js # Multi-browser suite (20 tests)
+│   ├── homepage.spec.js           # Homepage validation tests
+│   ├── accessibility.spec.js     # WCAG compliance tests
+│   ├── performance.spec.js       # Performance monitoring tests
+│   ├── security.spec.js          # Security validation tests
+│   └── traditional-playwright.spec.js # Cross-browser test suite
 ├── 📁 e2e/                        # MCP-Enhanced Framework
 │   ├── 📁 test-plan/              # Test strategy and documentation
 │   │   └── COMPREHENSIVE_TEST_PLAN.md # Complete test strategy
@@ -50,13 +65,13 @@ caliberfs-playwright-mcp-server/
 │   │   ├── homepage.js            # Homepage interactions
 │   │   └── contact-page.js        # Contact page interactions
 │   ├── 📁 config/                 # Test configuration
-│   ├── 📁 artifacts/              # Screenshots and artifacts
-│   ├── 📁 reports/                # Generated test reports
+│   ├── 📁 artifacts/              # Screenshots and test evidence (generated)
+│   ├── 📁 reports/                # Test reports (generated)
 │   └── mcp-client.js              # MCP communication layer
 ├── 📁 postman/                    # API Testing Suite
 │   ├── CaliberFS-API-Tests.postman_collection.json # 15 API tests
 │   ├── CaliberFS-Environment.postman_environment.json # Test environment
-│   └── reports/                   # API test reports
+│   └── reports/                   # API test reports (generated)
 ├── 📁 .github/workflows/          # CI/CD Pipeline
 ├── test-runner.js                 # Master test orchestrator
 ├── playwright.config.js           # Playwright configuration
@@ -70,9 +85,12 @@ caliberfs-playwright-mcp-server/
 ### **Installation & Setup**
 ```bash
 # Clone and install
-git clone <repository>
+git clone https://github.com/josemejias11/caliberfs-playwright-mcp-server
 cd caliberfs-playwright-mcp-server
 npm install
+
+# Install Playwright browsers
+npx playwright install
 
 # Build MCP server
 npm run build
@@ -107,9 +125,10 @@ npm run run:functional      # Business logic validation (14-21 min)
 npm run run:quality         # Performance + Accessibility + Security (13-19 min)
 npm run run:comprehensive   # Full system validation (35-45 min)
 
-# Traditional Playwright tests (100+ tests)
-npm run test                # All browsers
+# Traditional Playwright tests (cross-browser)
+npm run test                # All browsers (Chromium, Firefox, WebKit)
 npm run test:headed         # Visible browser execution
+npx playwright test --project=chromium  # Single browser
 
 # API testing
 npm run test:api            # Basic API validation
@@ -118,9 +137,44 @@ npm run test:api-detailed   # API tests with HTML reports
 
 ---
 
+## ⚙️ CI/CD Integration
+
+### **GitHub Actions Workflow**
+The framework includes a comprehensive CI/CD pipeline that automatically runs on:
+- **Push to main/develop branches**
+- **Pull requests to main**
+- **Daily scheduled runs** (2 AM UTC)
+
+### **Automated Test Execution**
+The CI pipeline includes:
+- **Lint & Build validation** - TypeScript compilation and code quality
+- **Traditional Playwright tests** - Cross-browser testing (Chromium, Firefox, WebKit)
+- **MCP-Enhanced test suites** - AI-assisted testing across 4 categories
+- **API validation tests** - Server-side endpoint testing
+- **Security scanning** - Dependency vulnerabilities and security validation
+- **Performance testing** - Load time and performance metrics
+
+### **Automated Reporting**
+- **Test artifacts** uploaded for each run with 30-day retention
+- **HTML reports** generated and deployed to GitHub Pages
+- **Test summaries** with pass/fail status for each suite
+- **Performance metrics** and accessibility compliance tracking
+
+### **Pipeline Jobs**
+1. **lint-and-build** - TypeScript validation and MCP server build
+2. **test-traditional-playwright** - Cross-browser testing matrix
+3. **test-mcp-enhanced** - AI-assisted test execution
+4. **test-api** - Server-side validation
+5. **security-scan** - Dependency and security validation
+6. **performance-test** - Load time and performance metrics
+7. **test-summary** - Consolidated results dashboard
+8. **deploy-reports** - GitHub Pages deployment (main branch only)
+
+---
+
 ## 🧪 Test Coverage & Organization
 
-### **Test Categories** (32 Organized Tests)
+### **Test Categories** (32 MCP-Enhanced Tests + Traditional Playwright Suite)
 
 #### 1. **🚨 Smoke Tests** (4 tests, 3-5 min)
 **Purpose:** Critical path validation - must pass before deployment
@@ -581,4 +635,4 @@ e2e/test-suites/
 
 ---
 
-**🎉 Results Summary:** 147+ total tests (100 traditional + 32 organized + 15 API) | Comprehensive coverage | AI-enhanced validation | Financial services compliance**
+**🎉 Results Summary:** 47+ total tests (5 traditional test suites + 32 MCP-enhanced + 15 API) | Comprehensive coverage | AI-enhanced validation | Financial services compliance | CI/CD integration
