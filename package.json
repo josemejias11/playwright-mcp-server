@@ -16,11 +16,11 @@
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
-    "test:caliber": "node e2e/caliber-financial.test.js",
+    "demo": "node e2e/tests/simple-demo.js",
+    "demo:mcp": "node e2e/tests/simple-demo.js",
+    "demo:playwright": "playwright test tests/traditional-playwright.spec.js",
     "test:professional": "node e2e/tests/caliber-professional-test-suite.js",
-    "test:smoke": "node e2e/tests/caliber-professional-test-suite.js --suite=smoke",
-    "test:forms": "node e2e/tests/caliber-professional-test-suite.js --suite=forms",
-    "test:performance": "node e2e/tests/caliber-professional-test-suite.js --suite=performance"
+    "test:comprehensive": "node e2e/tests/comprehensive-caliber-test-suite.js"
   },
   "files": [
     "build"
@@ -36,11 +36,12 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.10",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.15.0",
-    "@types/node": "^24.0.10",
+    "dotenv": "^17.0.1",
     "playwright": "^1.53.2",
     "zod": "^3.25.74"
   }

@@ -3,15 +3,18 @@
  * Centralized configuration for professional testing standards
  */
 
+import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+dotenv.config({ path: join(__dirname, '../../.env') });
+
 export const TestConfig = {
   // Environment Configuration
-  baseUrl: 'https://www.caliberfs.com',
+  baseUrl: process.env.BASE_URL || 'https://www.caliberfs.com',
   environment: process.env.TEST_ENV || 'production',
   
   // Browser Configuration
