@@ -104,6 +104,17 @@ npm start                  # Start MCP server
 - **TypeScript/JavaScript** - Implementation languages  
 - **Postman/Newman** - API testing and reporting
 - **Node.js** - Runtime environment
+- **GitHub Actions** - CI/CD pipeline with automated testing
+
+## CI/CD Pipeline
+
+Comprehensive GitHub Actions workflow featuring:
+- **Multi-browser testing** - Chromium, Firefox, WebKit
+- **Parallel test execution** - Traditional Playwright, MCP-enhanced, API tests
+- **Security scanning** - npm audit and dependency checks
+- **Performance monitoring** - Load time and responsiveness validation
+- **Automated reporting** - Test results deployed to GitHub Pages
+- **Artifact management** - Screenshots, reports, and metrics retention
 
 ## Use Cases
 

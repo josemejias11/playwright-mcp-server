@@ -1,0 +1,346 @@
+name: CI - CaliberFS Testing Framework
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+
+env:
+  NODE_VERSION: '18'
+  PLAYWRIGHT_BROWSERS_PATH: 0
+
+jobs:
+  lint-and-build:
+    name: Lint & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint TypeScript
+        run: npx tsc --noEmit
+
+      - name: Build MCP server
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: build/
+          retention-days: 30
+
+  test-traditional-playwright:
+    name: Traditional Playwright Tests
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Run Traditional Playwright Tests
+        run: npm run test
+        env:
+          BROWSER: ${{ matrix.browser }}
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-results-${{ matrix.browser }}
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 30
+
+  test-mcp-enhanced:
+    name: MCP-Enhanced Tests
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        test-suite: 
+          - { name: "simple", script: "demo:mcp" }
+          - { name: "professional", script: "test:professional" }
+          - { name: "comprehensive", script: "test:comprehensive" }
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build/
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run MCP ${{ matrix.test-suite.name }} Tests
+        run: npm run ${{ matrix.test-suite.script }}
+        continue-on-error: true
+
+      - name: Upload MCP test artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mcp-${{ matrix.test-suite.name }}-artifacts
+          path: |
+            e2e/artifacts/
+            e2e/reports/
+          retention-days: 30
+
+  test-api:
+    name: API Tests
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run API Tests
+        run: npm run test:api
+        continue-on-error: true
+
+      - name: Run Detailed API Tests
+        run: npm run test:api-detailed
+        continue-on-error: true
+
+      - name: Upload API test reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: api-test-reports
+          path: postman/reports/
+          retention-days: 30
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: Run dependency check
+        run: npx audit-ci --moderate
+        continue-on-error: true
+
+  performance-test:
+    name: Performance & Load Tests
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build/
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Performance Tests
+        run: npm run test:comprehensive
+        continue-on-error: true
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-results
+          path: |
+            e2e/artifacts/
+            e2e/reports/
+          retention-days: 30
+
+  test-summary:
+    name: Test Summary
+    needs: [test-traditional-playwright, test-mcp-enhanced, test-api, security-scan, performance-test]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create test summary
+        run: |
+          echo "# 🧪 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Test Results Overview" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Suite | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Traditional Playwright | ${{ needs.test-traditional-playwright.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| MCP-Enhanced Tests | ${{ needs.test-mcp-enhanced.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| API Tests | ${{ needs.test-api.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security Scan | ${{ needs.security-scan.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Performance Tests | ${{ needs.performance-test.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Artifacts Generated" >> $GITHUB_STEP_SUMMARY
+          echo "- 📸 Screenshots and test evidence" >> $GITHUB_STEP_SUMMARY
+          echo "- 📊 Test reports (HTML, JSON)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔍 API validation reports" >> $GITHUB_STEP_SUMMARY
+          echo "- ⚡ Performance metrics" >> $GITHUB_STEP_SUMMARY
+
+  deploy-reports:
+    name: Deploy Test Reports
+    needs: [test-traditional-playwright, test-mcp-enhanced, test-api]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && always()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all test artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        continue-on-error: true
+
+      - name: Create combined report structure
+        run: |
+          mkdir -p public
+          mkdir -p public/playwright
+          mkdir -p public/mcp
+          mkdir -p public/api
+          
+          # Copy Playwright reports
+          if [ -d "playwright-results-chromium/playwright-report" ]; then
+            cp -r playwright-results-chromium/playwright-report/* public/playwright/ 2>/dev/null || true
+          fi
+          
+          # Copy MCP reports
+          if [ -d "mcp-comprehensive-artifacts/e2e/reports" ]; then
+            cp -r mcp-comprehensive-artifacts/e2e/reports/* public/mcp/ 2>/dev/null || true
+          fi
+          
+          # Copy API reports
+          if [ -d "api-test-reports" ]; then
+            cp -r api-test-reports/* public/api/ 2>/dev/null || true
+          fi
+          
+          # Create index.html
+          cat > public/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>CaliberFS Test Reports</title>
+              <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; }
+                  .container { max-width: 800px; margin: 0 auto; }
+                  .report-card { border: 1px solid #ddd; margin: 20px 0; padding: 20px; border-radius: 8px; }
+                  .report-card h3 { margin-top: 0; color: #2c3e50; }
+                  .report-card a { color: #3498db; text-decoration: none; }
+                  .report-card a:hover { text-decoration: underline; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>🧪 CaliberFS Test Reports</h1>
+                  <p>Comprehensive test results for the CaliberFS Playwright MCP Testing Framework</p>
+                  
+                  <div class="report-card">
+                      <h3>🎭 Traditional Playwright Reports</h3>
+                      <p>Standard browser automation test results</p>
+                      <a href="./playwright/">View Playwright Reports →</a>
+                  </div>
+                  
+                  <div class="report-card">
+                      <h3>🤖 MCP-Enhanced Test Reports</h3>
+                      <p>AI-assisted testing with comprehensive coverage</p>
+                      <a href="./mcp/">View MCP Reports →</a>
+                  </div>
+                  
+                  <div class="report-card">
+                      <h3>🔗 API Test Reports</h3>
+                      <p>Server-side validation and performance testing</p>
+                      <a href="./api/">View API Reports →</a>
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public/
+        continue-on-error: true
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
