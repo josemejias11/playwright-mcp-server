@@ -1,80 +1,22 @@
 # CaliberFS Playwright MCP Testing Framework
 
-QA automation framework demonstrating both traditional Playwright and AI-enhanced MCP testing approaches for financial services websites.
+QA automation framework demonstrating traditional Playwright and AI-enhanced MCP testing for financial services websites.
 
 ## Features
 
-- **Traditional Playwright** - Standard browser automation
+- **Traditional Playwright** - Standard browser automation with 100 tests across 5 browsers
 - **MCP-Enhanced Testing** - AI-assisted automation via Model Context Protocol  
 - **API Testing** - Server-side validation with Postman/Newman
-- **Multi-browser Support** - Chromium, Firefox, WebKit
-- **Comprehensive Coverage** - Functional, performance, accessibility, mobile testing
+- **Comprehensive Coverage** - Homepage, accessibility, performance, security testing
 
-## How MCP-Enhanced Testing Works
+## MCP-Enhanced Testing
 
-The Model Context Protocol (MCP) server integrates with GitHub Copilot to create intelligent, AI-driven test automation that goes beyond traditional scripted testing.
+Model Context Protocol integrates with GitHub Copilot for intelligent test automation:
 
-### 🤖 AI-Powered Test Generation Process
-
-1. **Website Discovery** - MCP server launches browser and navigates to target website
-2. **Intelligent Analysis** - Copilot analyzes page structure, content, and functionality  
-3. **Context Understanding** - AI identifies key elements: forms, navigation, business logic
-4. **Dynamic Test Creation** - Generates test scenarios based on discovered website features
-5. **Adaptive Execution** - Tests adjust to page changes and handle dynamic content
-
-### 🔍 How Copilot Searches and Analyzes Websites
-
-```javascript
-// MCP server provides browser context to Copilot
-const page = await browser.newPage();
-await page.goto('https://caliberfs.com');
-
-// Copilot analyzes page structure and creates intelligent selectors
-const contactInfo = await page.locator('[data-testid="contact"]').or(
-  page.getByText('Contact').first()
-).or(
-  page.locator('.contact-section')
-);
-
-// AI generates contextual test scenarios
-if (await contactInfo.isVisible()) {
-  // Test phone number format validation
-  // Test email link functionality  
-  // Test contact form submission
-}
-```
-
-### 🧠 Intelligent Test Scenario Creation
-
-**Traditional Approach** (Static):
-```javascript
-// Fixed, brittle selectors
-await page.click('#submit-button');
-await expect(page.locator('.success-message')).toBeVisible();
-```
-
-**MCP-Enhanced Approach** (Adaptive):
-```javascript
-// AI-generated, resilient test logic
-const submitButton = await mcpClient.findElement({
-  role: 'button',
-  purpose: 'form submission',
-  context: 'contact form'
-});
-
-const result = await mcpClient.validateSubmission({
-  expectedOutcome: 'success confirmation',
-  fallbackValidation: ['url change', 'success message', 'form reset']
-});
-```
-
-### 🎯 Key Advantages of MCP Testing
-
-- **Self-Healing Tests** - AI adapts to UI changes automatically
-- **Business Logic Focus** - Tests validate functionality, not just elements
-- **Contextual Understanding** - Knows what elements should do, not just where they are
-- **Dynamic Content Handling** - Manages loading states, animations, async operations
-- **Intelligent Reporting** - Provides business-meaningful test results and insights
+- **AI Analysis** - Copilot analyzes website structure and generates adaptive test scenarios
+- **Self-Healing** - Tests automatically adjust to UI changes
+- **Business Focus** - Validates functionality rather than brittle element selectors
+- **Smart Reporting** - Provides business-meaningful insights and results
 
 ## Quick Start
 
@@ -82,13 +24,11 @@ const result = await mcpClient.validateSubmission({
 # Install and build
 npm install && npm run build
 
-# Run demos
-npm run demo:playwright    # Traditional Playwright
-npm run demo:mcp          # MCP-enhanced
+# Run tests
+npm run test              # Traditional Playwright (100 tests)
+npm run demo:mcp          # MCP-enhanced demo
 npm run test:api          # API tests
-
-# Run test suites
-npm run test:comprehensive # Full test suite (15 tests)
+npm run test:comprehensive # MCP comprehensive suite (15 tests)
 ```
 
 ## Project Structure
@@ -124,44 +64,38 @@ caliberfs-playwright-mcp-server/
 ## Available Scripts
 
 ```bash
-# Demos
-npm run demo:playwright      # Traditional Playwright demo
-npm run demo:mcp            # MCP-enhanced demo
-npm run demo                # Alias for MCP demo
-
-# Test Suites  
-npm run test                # Traditional Playwright tests
+# Test Execution
+npm run test                # Traditional Playwright (100 tests)
 npm run test:headed         # Tests with visible browser
-npm run test:professional   # Full MCP test suite
-npm run test:comprehensive  # Advanced 15-test suite
+npm run demo:mcp           # MCP demo (simple)
+npm run test:professional   # MCP professional suite
+npm run test:comprehensive  # MCP comprehensive (15 tests)
 npm run test:api           # API tests via Newman
 npm run test:api-detailed  # API tests with HTML reports
 
-# Build
+# Development
 npm run build              # Build MCP server
 npm start                  # Start MCP server
 ```
 
 ## Test Capabilities
 
-### Traditional Playwright Tests
-- Multi-browser testing (Chromium, Firefox, WebKit)
-- Contact information validation and navigation testing
-- Built-in Playwright reporting with screenshots
+### Traditional Playwright Tests (100 tests)
+- **Multi-browser** - Chromium, Firefox, WebKit, mobile-chrome, mobile-safari
+- **Homepage validation** - Loading, navigation, contact info, mobile responsiveness
+- **Accessibility compliance** - WCAG standards, keyboard navigation, alt text
+- **Performance monitoring** - Load times, Core Web Vitals, optimization
+- **Security validation** - HTTPS, headers, SSL certificates
 
-### MCP-Enhanced Tests  
-- **Simple Demo** - Basic website validation
-- **Professional Suite** - Business-focused scenarios with detailed reporting
-- **Comprehensive Suite** - 15-test suite covering:
-  - 🔧 **Functional (6)** - Core functionality, navigation, forms
-  - ⚡ **Performance (2)** - Load times, navigation speed  
-  - ♿ **Accessibility (3)** - WCAG compliance, keyboard navigation
-  - 📱 **Mobile (2)** - Responsive design, touch interfaces
-  - 🔍 **Edge Cases (2)** - Error handling, network resilience
+### MCP-Enhanced Tests (15 tests)
+- **AI-powered scenarios** - Intelligent test generation and adaptation
+- **Business logic focus** - Functional validation beyond element testing
+- **Self-healing tests** - Automatic adaptation to UI changes
+- **Advanced reporting** - Business context and insights
 
 ### API Testing
 - **Postman/Newman** - Server-side validation, security, performance
-- **Detailed Reports** - HTML reports with charts and metrics
+- **Detailed reports** - HTML charts and metrics
 
 ## Technology Stack
 
@@ -169,96 +103,14 @@ npm start                  # Start MCP server
 - **MCP (Model Context Protocol)** - AI-browser integration
 - **TypeScript/JavaScript** - Implementation languages  
 - **Postman/Newman** - API testing and reporting
-- **Node.js** - Runtime environment
 - **GitHub Actions** - CI/CD pipeline with automated testing
-
-## MCP Architecture & Implementation
-
-### 🏗️ Technical Architecture
-
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   GitHub        │    │   MCP Server     │    │   Playwright    │
-│   Copilot       │◄──►│   (src/index.ts) │◄──►│   Browser       │
-│                 │    │                  │    │   Automation    │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-         │                       │                       │
-         │              ┌────────▼────────┐              │
-         │              │  Test Framework │              │
-         │              │ (e2e/framework/) │              │
-         │              └─────────────────┘              │
-         │                       │                       │
-         ▼                       ▼                       ▼
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│ AI-Generated    │    │ Page Objects     │    │ Test Reports    │
-│ Test Scenarios  │    │ & Utilities      │    │ & Artifacts     │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-```
-
-### 🔧 Core MCP Server Components
-
-**1. MCP Server (`src/index.ts`)**
-- Exposes browser automation tools to Copilot
-- Handles AI requests for page interaction
-- Manages browser lifecycle and context
-
-**2. MCP Client (`e2e/mcp-client.js`)**
-- Communicates with MCP server
-- Translates AI instructions to browser actions
-- Provides intelligent selectors and validation
-
-**3. Test Framework (`e2e/framework/base-test-framework.js`)**
-- Manages test execution flow
-- Handles errors and retries intelligently
-- Generates comprehensive reports
-
-### 🤝 Copilot Integration Workflow
-
-1. **Test Initiation**: MCP client starts test suite
-2. **AI Analysis**: Copilot analyzes website structure via MCP server
-3. **Dynamic Planning**: AI creates test plan based on discovered features
-4. **Adaptive Execution**: Tests run with AI-guided element detection
-5. **Intelligent Reporting**: Results include business context and insights
-
-### 📋 Example MCP Test Flow
-
-```javascript
-// 1. AI discovers website features
-const siteFeatures = await mcpClient.discoverFeatures('https://caliberfs.com');
-
-// 2. Copilot generates test scenarios
-const testScenarios = await mcpClient.generateScenarios({
-  siteType: 'financial-services',
-  features: siteFeatures,
-  compliance: ['accessibility', 'performance']
-});
-
-// 3. Execute AI-guided tests
-for (const scenario of testScenarios) {
-  await mcpClient.executeScenario({
-    name: scenario.name,
-    steps: scenario.steps,
-    validation: scenario.expectedOutcomes
-  });
-}
-```
-
-## CI/CD Pipeline
-
-Comprehensive GitHub Actions workflow featuring:
-- **Multi-browser testing** - Chromium, Firefox, WebKit
-- **Parallel test execution** - Traditional Playwright, MCP-enhanced, API tests
-- **Security scanning** - npm audit and dependency checks
-- **Performance monitoring** - Load time and responsiveness validation
-- **Automated reporting** - Test results deployed to GitHub Pages
-- **Artifact management** - Screenshots, reports, and metrics retention
 
 ## Use Cases
 
-- **Traditional Playwright**: Standard automation, CI/CD integration, fast parallel execution
-- **MCP-Enhanced**: AI-assisted validation, financial compliance testing, advanced reporting
+- **Traditional Playwright**: Standard automation, CI/CD integration, comprehensive coverage
+- **MCP-Enhanced**: AI-assisted validation, financial compliance, intelligent reporting
 - **API Testing**: Server-side validation, security testing, performance monitoring
 
 ---
 
-**Artifacts**: Screenshots in `e2e/artifacts/`, test reports in `e2e/reports/`, API reports in `postman/reports/`
+**Results**: 100 traditional tests + 15 MCP tests + API validation | Reports in `e2e/reports/`, artifacts in `e2e/artifacts/`
