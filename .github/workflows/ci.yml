@@ -66,10 +66,17 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps ${{ matrix.browser }}
 
+      - name: Setup display (for Linux)
+        run: |
+          export DISPLAY=:99
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
+
       - name: Run Traditional Playwright Tests
-        run: npm run test
+        run: npx playwright test --project=${{ matrix.browser }}
         env:
           BROWSER: ${{ matrix.browser }}
+          CI: true
+        timeout-minutes: 30
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -89,9 +96,10 @@ jobs:
       fail-fast: false
       matrix:
         test-suite: 
-          - { name: "simple", script: "demo:mcp" }
-          - { name: "professional", script: "test:professional" }
-          - { name: "comprehensive", script: "test:comprehensive" }
+          - { name: "smoke", script: "run:smoke" }
+          - { name: "functional", script: "run:functional" }
+          - { name: "quality", script: "run:quality" }
+          - { name: "comprehensive", script: "run:comprehensive" }
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -212,7 +220,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Performance Tests
-        run: npm run test:comprehensive
+        run: npm run run:quality
         continue-on-error: true
 
       - name: Upload performance results
