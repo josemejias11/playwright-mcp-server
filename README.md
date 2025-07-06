@@ -57,6 +57,11 @@ caliberfs-playwright-mcp-server/
 │   │   └── comprehensive-caliber-test-suite.js # Advanced comprehensive tests
 │   ├── artifacts/             # Screenshots
 │   └── reports/               # Test reports
+├── postman/                   # API testing with Postman
+│   ├── CaliberFS-API-Tests.postman_collection.json # API test collection
+│   ├── CaliberFS-Environment.postman_environment.json # Test environment
+│   ├── README.md              # Postman testing documentation
+│   └── reports/               # API test reports
 ├── .vscode/                   # VS Code configuration
 ├── playwright.config.js       # Playwright configuration
 └── package.json
@@ -74,6 +79,8 @@ caliberfs-playwright-mcp-server/
 - `npm run test:headed` - Tests with visible browser ✅
 - `npm run test:professional` - Full MCP test suite ✅
 - `npm run test:comprehensive` - Advanced comprehensive test suite ✅
+- `npm run test:api` - Postman API tests via Newman CLI ✅
+- `npm run test:api-detailed` - API tests with detailed HTML reports ✅
 
 ### Build Scripts
 - `npm run build` - Build MCP server ✅
@@ -107,6 +114,9 @@ caliberfs-playwright-mcp-server/
 - **Accessibility Testing**: WCAG compliance validation
 - **Mobile Responsiveness**: Touch target and layout validation
 - **Error Handling**: Graceful failure management with auto-screenshots
+- **API Testing**: Comprehensive server-side validation with Postman/Newman
+- **Security Testing**: SSL, headers, and security compliance validation
+- **SEO Testing**: Metadata, sitemap, and search optimization validation
 
 ## Technology Stack
 
@@ -147,6 +157,8 @@ caliberfs-playwright-mcp-server/
 - **`demo:mcp`** - Simple MCP demo, basic website validation
 - **`test:professional`** - Business-focused MCP testing with custom reports
 - **`test:comprehensive`** - Advanced 15-test suite covering functionality, performance, accessibility, mobile, and edge cases
+- **`test:api`** - Postman API tests for server-side validation, security, and performance
+- **`test:api-detailed`** - API tests with detailed HTML reports and charts
 
 ---
 

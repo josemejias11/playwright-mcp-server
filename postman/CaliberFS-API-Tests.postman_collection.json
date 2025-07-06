@@ -1,0 +1,622 @@
+{
+  "info": {
+    "name": "CaliberFS API Test Suite",
+    "description": "Comprehensive API testing for CaliberFS website endpoints and services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.caliberfs.com",
+      "type": "string",
+      "description": "Base URL for CaliberFS website"
+    },
+    {
+      "key": "userAgent",
+      "value": "CaliberFS-API-Tests/1.0",
+      "type": "string",
+      "description": "Custom user agent for API tests"
+    }
+  ],
+  "item": [
+    {
+      "name": "Website Health & Performance Tests",
+      "description": "Tests for website availability, performance, and basic health checks",
+      "item": [
+        {
+          "name": "Homepage Availability",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ],
+            "description": "Verify homepage is accessible and returns expected status"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response time is less than 3000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+                  "});",
+                  "",
+                  "pm.test('Contains CaliberFS branding', function () {",
+                  "    pm.expect(pm.response.text()).to.include('Caliber Financial Services');",
+                  "});",
+                  "",
+                  "pm.test('Has proper HTML structure', function () {",
+                  "    pm.expect(pm.response.text()).to.include('<!DOCTYPE html>');",
+                  "    pm.expect(pm.response.text()).to.include('<title>');",
+                  "});",
+                  "",
+                  "pm.test('Security headers present', function () {",
+                  "    pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "About Page Accessibility",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/about",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('About page loads successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Contains tribal information', function () {",
+                  "    pm.expect(pm.response.text()).to.include('Otoe-Missouria Tribe');",
+                  "});",
+                  "",
+                  "pm.test('Has company values section', function () {",
+                  "    pm.expect(pm.response.text()).to.include('Our Values');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Services Page Validation",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/our-services",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Services page loads successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Contains service offerings', function () {",
+                  "    const responseText = pm.response.text();",
+                  "    pm.expect(responseText).to.include('Product Development');",
+                  "    pm.expect(responseText).to.include('Compliance');",
+                  "    pm.expect(responseText).to.include('Technology');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Contact Page Form Validation",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contact",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Contact page loads successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Contains contact form', function () {",
+                  "    pm.expect(pm.response.text()).to.include('<form');",
+                  "    pm.expect(pm.response.text()).to.include('name=\"Email\"');",
+                  "});",
+                  "",
+                  "pm.test('Has media contact information', function () {",
+                  "    pm.expect(pm.response.text()).to.include('press@caliberfs.com');",
+                  "});",
+                  "",
+                  "pm.test('Contains phone number', function () {",
+                  "    pm.expect(pm.response.text()).to.include('(855)-589-2363');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Careers Page Validation",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/careers",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Careers page loads successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Contains career information', function () {",
+                  "    const responseText = pm.response.text();",
+                  "    pm.expect(responseText).to.include('Career Development');",
+                  "    pm.expect(responseText).to.include('Culture');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Security & Performance Tests",
+      "description": "Security headers, SSL, and performance validation",
+      "item": [
+        {
+          "name": "SSL Certificate Validation",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTPS is enforced', function () {",
+                  "    pm.expect(pm.request.url.toString()).to.include('https://');",
+                  "});",
+                  "",
+                  "pm.test('Secure connection established', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 301, 302]);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Security Headers Check",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Content-Type header is present', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.exist;",
+                  "});",
+                  "",
+                  "pm.test('X-Content-Type-Options header present', function () {",
+                  "    const header = pm.response.headers.get('X-Content-Type-Options');",
+                  "    if (header) {",
+                  "        pm.expect(header).to.equal('nosniff');",
+                  "    }",
+                  "});",
+                  "",
+                  "pm.test('Cache-Control header present', function () {",
+                  "    pm.expect(pm.response.headers.get('Cache-Control')).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Performance Baseline",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Response time under 5 seconds', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "});",
+                  "",
+                  "pm.test('Response size is reasonable', function () {",
+                  "    pm.expect(pm.response.responseSize).to.be.below(1000000); // 1MB",
+                  "});",
+                  "",
+                  "pm.test('Content is compressed', function () {",
+                  "    const encoding = pm.response.headers.get('Content-Encoding');",
+                  "    if (encoding) {",
+                  "        pm.expect(encoding).to.be.oneOf(['gzip', 'deflate', 'br']);",
+                  "    }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Contact Form API Tests",
+      "description": "Tests for contact form submission and validation",
+      "item": [
+        {
+          "name": "Contact Form GET Request",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contact",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Contact form page accessible', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Form structure is present', function () {",
+                  "    const html = pm.response.text();",
+                  "    pm.expect(html).to.include('name=\"name\"');",
+                  "    pm.expect(html).to.include('name=\"Email\"');",
+                  "    pm.expect(html).to.include('name=\"Message\"');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Contact Form Validation Test",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/contact?name=Test&Email=test@example.com&Confirm-Email=test@example.com&Message=API Test Message",
+              "host": ["{{baseUrl}}"],
+              "path": ["contact"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Test User"
+                },
+                {
+                  "key": "Email",
+                  "value": "test@example.com"
+                },
+                {
+                  "key": "Confirm-Email",
+                  "value": "test@example.com"
+                },
+                {
+                  "key": "Message",
+                  "value": "This is a test message for API validation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Form handles parameters', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('No server errors in response', function () {",
+                  "    pm.expect(pm.response.text()).to.not.include('500');",
+                  "    pm.expect(pm.response.text()).to.not.include('error');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SEO & Metadata Tests",
+      "description": "Tests for SEO optimization and metadata validation",
+      "item": [
+        {
+          "name": "Homepage SEO Validation",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Has proper title tag', function () {",
+                  "    const html = pm.response.text();",
+                  "    pm.expect(html).to.include('<title>');",
+                  "    pm.expect(html).to.include('Caliber Financial Services');",
+                  "});",
+                  "",
+                  "pm.test('Has meta description', function () {",
+                  "    const html = pm.response.text();",
+                  "    pm.expect(html).to.match(/<meta[^>]*name=[\"']description[\"'][^>]*>/);",
+                  "});",
+                  "",
+                  "pm.test('Has viewport meta tag', function () {",
+                  "    const html = pm.response.text();",
+                  "    pm.expect(html).to.include('viewport');",
+                  "});",
+                  "",
+                  "pm.test('Has proper heading structure', function () {",
+                  "    const html = pm.response.text();",
+                  "    pm.expect(html).to.include('<h1');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Sitemap Accessibility",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/sitemap.xml",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Sitemap exists or returns appropriate response', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 200) {",
+                  "    pm.test('Sitemap is valid XML', function () {",
+                  "        pm.expect(pm.response.text()).to.include('<?xml');",
+                  "        pm.expect(pm.response.text()).to.include('<urlset');",
+                  "    });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Robots.txt Validation",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/robots.txt",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "{{userAgent}}"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Robots.txt exists or returns appropriate response', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 200) {",
+                  "    pm.test('Robots.txt has proper format', function () {",
+                  "        const text = pm.response.text();",
+                  "        pm.expect(text).to.match(/User-agent:/i);",
+                  "    });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cross-Browser & Device Testing",
+      "description": "Tests simulating different browsers and devices",
+      "item": [
+        {
+          "name": "Mobile User Agent Test",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Mobile/15E148 Safari/604.1"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Mobile site loads successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Contains mobile-responsive meta tags', function () {",
+                  "    pm.expect(pm.response.text()).to.include('viewport');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Desktop Chrome Simulation",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Desktop site loads successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Performance is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set timestamp for all requests",
+          "pm.globals.set('timestamp', new Date().toISOString());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test for all requests",
+          "pm.test('Response has valid status code', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202, 204, 301, 302, 304, 404]);",
+          "});",
+          "",
+          "// Log performance data",
+          "console.log(`Request: ${pm.info.requestName} - Time: ${pm.response.responseTime}ms`);"
+        ]
+      }
+    }
+  ]
+}

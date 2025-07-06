@@ -1,0 +1,22 @@
+# Postman Test Reports
+
+This directory contains generated reports from Postman API test runs.
+
+## Report Types
+
+- **HTML Reports** - Visual test reports with charts and detailed results
+- **JSON Reports** - Machine-readable test results for CI/CD integration
+- **CLI Reports** - Console output from Newman test runs
+
+## Generated Files
+
+- `api-test-report.html` - Detailed HTML report with test results and charts
+- `api-test-results.json` - JSON output for programmatic analysis
+
+## Usage
+
+Reports are automatically generated when running:
+- `npm run test:api-detailed` - Generates HTML and JSON reports
+- `npm run test:api` - Generates JSON reports only
+
+Reports are gitignored to avoid committing large test output files.

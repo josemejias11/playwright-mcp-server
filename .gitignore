@@ -16,8 +16,14 @@ e2e/reports/*.html
 e2e/reports/*.json
 e2e/reports/*.txt
 
+# Postman test reports
+postman/reports/*.html
+postman/reports/*.json
+postman/reports/*.xml
+
 # Keep example artifacts
 !e2e/artifacts/.gitkeep
+!postman/reports/.gitkeep
 
 # Logs
 *.log
