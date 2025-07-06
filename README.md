@@ -50,7 +50,6 @@ caliberfs-playwright-mcp-server/
 │   │   ├── homepage.js            # Homepage interactions
 │   │   └── contact-page.js        # Contact page interactions
 │   ├── 📁 config/                 # Test configuration
-│   ├── 📁 legacy-tests/           # Archived original tests
 │   ├── 📁 artifacts/              # Screenshots and artifacts
 │   ├── 📁 reports/                # Generated test reports
 │   └── mcp-client.js              # MCP communication layer
@@ -115,11 +114,6 @@ npm run test:headed         # Visible browser execution
 # API testing
 npm run test:api            # Basic API validation
 npm run test:api-detailed   # API tests with HTML reports
-
-# Legacy MCP tests (for reference)
-npm run demo:mcp            # Original simple demo
-npm run test:professional   # Original professional suite
-npm run test:comprehensive  # Original comprehensive suite
 ```
 
 ---
@@ -503,12 +497,6 @@ e2e/test-suites/
 - **Page Objects:** `e2e/page-objects/` - Reusable components for homepage and contact page interactions
 - **Configuration:** `e2e/config/test-config.js` - Environment settings, URLs, and thresholds
 - **Utilities:** `e2e/utils/` - Helper functions and common operations
-
-### **Legacy Test Migration**
-Original test files preserved in `e2e/legacy-tests/`:
-- **simple-demo.js:** Original simple demo (3 tests)
-- **caliber-professional-test-suite.js:** Original professional suite (16 tests)
-- **comprehensive-caliber-test-suite.js:** Original comprehensive suite (15 tests)
 
 ### **Benefits of Reorganization**
 - **Clear Separation of Concerns:** Each test suite has specific purpose and scope
