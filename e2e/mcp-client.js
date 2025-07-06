@@ -137,9 +137,33 @@ export class McpClient {
 
   async closeServer() {
     if (this.server) {
-      this.server.kill();
-      this.server = null;
-      this.pendingRequests.clear();
+      try {
+        // Send a close signal first
+        if (this.server.stdin && !this.server.stdin.destroyed) {
+          this.server.stdin.end();
+        }
+        
+        // Give it a moment to close gracefully
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Force kill if still running
+        if (!this.server.killed) {
+          this.server.kill('SIGTERM');
+          
+          // Give it another moment
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // Force kill if still not dead
+          if (!this.server.killed) {
+            this.server.kill('SIGKILL');
+          }
+        }
+      } catch (error) {
+        console.error('Error closing server:', error.message);
+      } finally {
+        this.server = null;
+        this.pendingRequests.clear();
+      }
     }
   }
 

@@ -26,7 +26,7 @@ export const TestConfig = {
   },
   
   // Timeout Configuration
-  defaultTimeout: 30000,
+  defaultTimeout: 15000,
   shortTimeout: 5000,
   longTimeout: 60000,
   

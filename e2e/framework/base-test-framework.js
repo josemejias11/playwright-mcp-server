@@ -16,6 +16,47 @@ export class BaseTestFramework {
     this.testResults = [];
     this.currentTestSuite = '';
     this.startTime = null;
+    
+    // Setup cleanup handlers
+    this.setupCleanupHandlers();
+  }
+
+  /**
+   * Setup process cleanup handlers
+   */
+  setupCleanupHandlers() {
+    const cleanup = async () => {
+      try {
+        await this.forceCleanup();
+      } catch (error) {
+        console.error('Force cleanup error:', error);
+      }
+      process.exit(0);
+    };
+
+    process.on('SIGINT', cleanup);
+    process.on('SIGTERM', cleanup);
+    process.on('uncaughtException', async (error) => {
+      console.error('Uncaught exception:', error);
+      await cleanup();
+    });
+    process.on('unhandledRejection', async (reason) => {
+      console.error('Unhandled rejection:', reason);
+      await cleanup();
+    });
+  }
+
+  /**
+   * Force cleanup (emergency cleanup)
+   */
+  async forceCleanup() {
+    try {
+      if (this.client) {
+        await this.client.closeServer();
+      }
+    } catch (error) {
+      console.error('Force cleanup error:', error);
+    }
   }
 
   /**
@@ -210,19 +251,29 @@ export class BaseTestFramework {
    */
   async cleanup() {
     try {
+      // Close browser first
       await this.client.closeBrowser();
       await this.logger.success('🔒 Browser closed successfully');
+      
+      // Close MCP server
+      await this.client.closeServer();
+      await this.logger.success('🔒 MCP server closed successfully');
+      
     } catch (error) {
       await this.logger.error(`Cleanup error: ${error.message}`);
     }
     
-    const totalDuration = Date.now() - this.startTime;
-    await this.reporter.generateReport({
-      suiteName: this.currentTestSuite,
-      results: this.testResults,
-      totalDuration,
-      timestamp: new Date().toISOString()
-    });
+    try {
+      const totalDuration = Date.now() - this.startTime;
+      await this.reporter.generateReport({
+        suiteName: this.currentTestSuite,
+        results: this.testResults,
+        totalDuration,
+        timestamp: new Date().toISOString()
+      });
+    } catch (reportError) {
+      await this.logger.error(`Report generation error: ${reportError.message}`);
+    }
   }
 
   /**
