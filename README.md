@@ -210,7 +210,7 @@ The CI pipeline includes:
 - Contact Form Functionality
 - Invalid Form Submission Handling
 
-#### 3. **⚡ Performance Tests** (4 tests, 4-6 min)
+#### 3. ** Performance Tests** (4 tests, 4-6 min)
 **Purpose:** Load times and performance optimization
 **Success Criteria:** 90% pass rate
 
@@ -219,7 +219,7 @@ The CI pipeline includes:
 - Page-to-Page Navigation Performance
 - Extended Performance Metrics
 
-#### 4. **♿ Accessibility Tests** (3 tests, 3-5 min)
+#### 4. ** Accessibility Tests** (3 tests, 3-5 min)
 **Purpose:** WCAG 2.1 AA compliance validation
 **Success Criteria:** 85% pass rate
 
@@ -279,7 +279,7 @@ The CI pipeline includes:
 
 ## Execution Strategies
 
-### **Strategy 1: Quick Smoke** ⚡ (3-5 minutes)
+### **Strategy 1: Quick Smoke** (3-5 minutes)
 ```bash
 npm run run:smoke
 ```
@@ -317,7 +317,7 @@ npm run run:comprehensive
 
 ---
 
-## 🤖 MCP-Enhanced Testing
+## MCP-Enhanced Testing
 
 ### **Model Context Protocol Integration**
 - **AI Analysis:** GitHub Copilot analyzes website structure and generates adaptive scenarios
