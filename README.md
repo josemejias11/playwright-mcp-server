@@ -3,11 +3,11 @@
 
 A comprehensive QA automation framework for CaliberFS financial services website, featuring traditional Playwright tests, AI-enhanced MCP testing, and complete API validation. Built for reliability, maintainability, and financial services compliance.
 
-## 🎯 Framework Overview
+## Framework Overview
 
 ### **Multi-Layer Testing Strategy**
-- **🚀 Traditional Playwright** - 5 comprehensive test suites across 3 browsers (Chromium, Firefox, WebKit)
-- **🤖 MCP-Enhanced Testing** - AI-assisted automation via Mo## 🚀 Future Enhancements
+- **Traditional Playwright** - 5 comprehensive test suites across 3 browsers (Chromium, Firefox, WebKit)
+- **MCP-Enhanced Testing** - AI-assisted automation via Mo## Future Enhancements
 
 ### **Planned Improvements**
 1. **Enhanced Cross-browser Coverage** - Extended WebKit and Firefox test coverage
@@ -21,8 +21,8 @@ A comprehensive QA automation framework for CaliberFS financial services website
 - **Intelligent Deployment Gates** - Automatic promotion based on test results
 - **Performance Benchmarking** - Historical trend analysis and alerting
 - **Multi-Environment Testing** - Staging, pre-production validationotocol with 32 organized tests
-- **📡 API Validation** - Server-side testing with Postman/Newman (15 tests)
-- **🔒 Security & Compliance** - Financial services requirements and WCAG accessibility
+- **API Validation** - Server-side testing with Postman/Newman (15 tests)
+- **Security & Compliance** - Financial services requirements and WCAG accessibility
 
 ### **Key Features**
 - **Organized Test Suites** - 32 MCP tests organized into 5 categories (Smoke, Functional, Performance, Accessibility, Security)
@@ -35,7 +35,7 @@ A comprehensive QA automation framework for CaliberFS financial services website
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 caliberfs-playwright-mcp-server/
@@ -80,7 +80,7 @@ caliberfs-playwright-mcp-server/
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### **Installation & Setup**
 ```bash
@@ -101,19 +101,19 @@ npm run test:smoke     # Quick validation (3-5 min)
 
 ### **Quick Test Commands**
 ```bash
-# 🔥 Smoke Tests (3-5 min) - Critical path validation
+# Smoke Tests (3-5 min) - Critical path validation
 npm run test:smoke
 
-# 🎯 Functional Tests (5-8 min) - Content validation
+# Functional Tests (5-8 min) - Content validation
 npm run test:functional
 
-# ⚡ Performance Tests (4-6 min) - Load time validation
+# Performance Tests (4-6 min) - Load time validation
 npm run test:performance
 
-# ♿ Accessibility Tests (3-5 min) - WCAG compliance
+# Accessibility Tests (3-5 min) - WCAG compliance
 npm run test:accessibility
 
-# 🔒 Security Tests (6-8 min) - Data protection
+# Security Tests (6-8 min) - Data protection
 npm run test:security
 ```
 
@@ -137,7 +137,7 @@ npm run test:api-detailed   # API tests with HTML reports
 
 ---
 
-## ⚙️ CI/CD Integration
+## CI/CD Integration
 
 ### **GitHub Actions Workflow**
 The framework includes a comprehensive CI/CD pipeline that automatically runs on:
@@ -172,11 +172,11 @@ The CI pipeline includes:
 
 ---
 
-## 🧪 Test Coverage & Organization
+## Test Coverage & Organization
 
 ### **Test Categories** (32 MCP-Enhanced Tests + Traditional Playwright Suite)
 
-#### 1. **🚨 Smoke Tests** (4 tests, 3-5 min)
+#### 1. ** Smoke Tests** (4 tests, 3-5 min)
 **Purpose:** Critical path validation - must pass before deployment
 **Success Criteria:** 100% pass rate (blocks deployment if failed)
 
@@ -185,7 +185,7 @@ The CI pipeline includes:
 - Contact Form Accessibility  
 - Basic Website Validation
 
-#### 2. **🎯 Functional Tests** (15 tests, 14-21 min)
+#### 2. ** Functional Tests** (15 tests, 14-21 min)
 **Purpose:** Core business logic and user workflow validation
 **Success Criteria:** 95% pass rate
 
@@ -227,7 +227,7 @@ The CI pipeline includes:
 - Focus Management
 - ARIA and Semantic HTML Validation
 
-#### 5. **🔒 Security Tests** (6 tests, 6-8 min)
+#### 5. ** Security Tests** (6 tests, 6-8 min)
 **Purpose:** Business validation, trust indicators, data protection
 **Success Criteria:** 95% pass rate
 
@@ -277,7 +277,7 @@ The CI pipeline includes:
 
 ---
 
-## 🎯 Execution Strategies
+## Execution Strategies
 
 ### **Strategy 1: Quick Smoke** ⚡ (3-5 minutes)
 ```bash
@@ -288,7 +288,7 @@ npm run run:smoke
 - **Success:** 100% pass rate required
 - **Blocks:** Deployment if any test fails
 
-### **Strategy 2: Functional Validation** 🎯 (14-21 minutes)
+### **Strategy 2: Functional Validation** (14-21 minutes)
 ```bash
 npm run run:functional
 ```
@@ -297,7 +297,7 @@ npm run run:functional
 - **Success:** 95% pass rate target
 - **Includes:** Smoke + All functional tests
 
-### **Strategy 3: Quality Assurance** 🔍 (13-19 minutes)
+### **Strategy 3: Quality Assurance** (13-19 minutes)
 ```bash
 npm run run:quality
 ```
@@ -306,7 +306,7 @@ npm run run:quality
 - **Success:** 90% pass rate target
 - **Focus:** Non-functional requirements
 
-### **Strategy 4: Comprehensive** 🌟 (35-45 minutes)
+### **Strategy 4: Comprehensive** (35-45 minutes)
 ```bash
 npm run run:comprehensive
 ```
@@ -333,32 +333,32 @@ npm run run:comprehensive
 
 ---
 
-## 📡 API Testing with Postman/Newman
+## API Testing with Postman/Newman
 
 ### **Test Categories Explained**
 
-**🌐 Website Health Tests**
+**Website Health Tests**
 Validate that all main pages are accessible, load correctly, and contain expected content:
 - HTTP status codes (200 OK)
 - Response times (< 3 seconds)
 - Core content presence
 - Basic HTML structure validation
 
-**🔒 Security & Performance**
+**Security & Performance**
 Ensure the website follows security best practices and performs well:
 - HTTPS enforcement
 - Security headers (X-Content-Type-Options, etc.)
 - Response compression (gzip/br)
 - Response size optimization
 
-**📝 Contact Form Testing**
+**Contact Form Testing**
 Validate the contact form functionality without actually submitting:
 - Form structure validation
 - Input field presence
 - Parameter handling
 - Error handling validation
 
-**🔍 SEO & Metadata**
+**SEO & Metadata**
 Check search engine optimization and metadata:
 - Title tag optimization
 - Meta descriptions
@@ -366,7 +366,7 @@ Check search engine optimization and metadata:
 - Heading structure (H1, H2, etc.)
 - Sitemap.xml and robots.txt
 
-**� Cross-Device Testing**
+**Cross-Device Testing**
 Simulate different devices and browsers:
 - Mobile user agent simulation
 - Desktop browser simulation
@@ -395,7 +395,7 @@ newman run CaliberFS-API-Tests.postman_collection.json \
 
 ---
 
-## �📊 Performance & Compliance Benchmarks
+## Performance & Compliance Benchmarks
 
 ### **Performance Thresholds**
 | Metric | Threshold | Test Source |
@@ -423,7 +423,7 @@ newman run CaliberFS-API-Tests.postman_collection.json \
 
 ---
 
-## 📈 Test Results & Reporting
+## Test Results & Reporting
 
 ### **Generated Reports**
 - **HTML Reports:** Visual test execution results with screenshots
@@ -446,7 +446,7 @@ newman run CaliberFS-API-Tests.postman_collection.json \
 
 ---
 
-## � Configuration & Setup
+## Configuration & Setup
 
 ### **Environment Configuration**
 - **Test Configuration:** `e2e/config/test-config.js` - Environment settings, URLs, timeouts
@@ -467,7 +467,7 @@ newman run CaliberFS-API-Tests.postman_collection.json \
 
 ---
 
-## �🛠️ Technology Stack
+## Technology Stack
 
 ### **Core Technologies**
 - **Playwright** - Browser automation engine with multi-browser support
@@ -488,7 +488,7 @@ newman run CaliberFS-API-Tests.postman_collection.json \
 
 ---
 
-## 🎯 Success Criteria & KPIs
+## Success Criteria & KPIs
 
 ### **Test Level Success Rates**
 | Test Level | Pass Rate | Action on Failure |
@@ -514,7 +514,7 @@ newman run CaliberFS-API-Tests.postman_collection.json \
 
 ---
 
-## 📋 Test Coverage Matrix
+## Test Coverage Matrix
 
 ### Current Coverage Analysis
 
@@ -532,7 +532,7 @@ newman run CaliberFS-API-Tests.postman_collection.json \
 
 ---
 
-## 📚 E2E Framework Details
+## E2E Framework Details
 
 ### **Test Suite Architecture**
 The e2e framework is organized into focused, maintainable test suites:
@@ -561,7 +561,7 @@ e2e/test-suites/
 
 ---
 
-## 🔄 Maintenance & Updates
+## Maintenance & Updates
 
 ### **Regular Schedule**
 - **Daily:** Test execution results review and trend analysis
@@ -596,7 +596,7 @@ e2e/test-suites/
 
 ---
 
-## � Future Enhancements
+## Future Enhancements
 
 ### **Planned Improvements**
 1. **Cross-browser Testing:** Enhanced Firefox and Safari support
@@ -613,7 +613,7 @@ e2e/test-suites/
 
 ---
 
-## �📞 Support & Documentation
+## Support & Documentation
 
 ### **Getting Help**
 - **Framework Documentation:** Detailed guides in `e2e/test-plan/COMPREHENSIVE_TEST_PLAN.md`
@@ -635,4 +635,4 @@ e2e/test-suites/
 
 ---
 
-**🎉 Results Summary:** 47+ total tests (5 traditional test suites + 32 MCP-enhanced + 15 API) | Comprehensive coverage | AI-enhanced validation | Financial services compliance | CI/CD integration
+**Results Summary:** 47+ total tests (5 traditional test suites + 32 MCP-enhanced + 15 API) | Comprehensive coverage | AI-enhanced validation | Financial services compliance | CI/CD integration
