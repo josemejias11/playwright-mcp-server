@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "ms-playwright.playwright",
-    "ms-vscode.vscode-typescript-next",
-    "formulahendry.code-runner"
+    "ms-vscode.vscode-typescript-next"
   ]
 }
