@@ -1,7 +1,7 @@
 # CaliberFS QA Automation Framework
 ## Comprehensive Testing with Playwright + MCP + API Validation
 
-A comprehensive QA automation framework for CaliberFS financial services website, featuring traditional Playwright tests, AI-enhanced MCP testing, and complete API validation. Built for reliability, maintainability, and financial services compliance.
+A comprehensive QA automation framework for CaliberFS financial services website, featuring traditional Playwright tests, AI-enhanced MCP testing, and complete API validation.
 
 ## Framework Overview
 
