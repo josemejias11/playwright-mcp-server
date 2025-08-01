@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * CaliberFS Test Runner
+ * Playwright MCP Test Runner
  * 
  * Master test execution script for organized test suites
  * Supports different test levels and execution strategies

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('CaliberFS Security Tests', () => {
+test.describe('Security Tests', () => {
   test('should use HTTPS', async ({ page }) => {
     await page.goto('/');
     expect(page.url()).toMatch(/^https:/);

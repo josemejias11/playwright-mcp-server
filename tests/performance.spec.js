@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('CaliberFS Performance Tests', () => {
+test.describe('Performance Tests', () => {
   test('should load within acceptable time', async ({ page }) => {
     const startTime = Date.now();
     await page.goto('/');

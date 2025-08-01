@@ -1,7 +1,7 @@
-# CaliberFS QA Automation Framework
-## Comprehensive Testing with Playwright + MCP + API Validation
+# Playwright MCP Server QA Automation Framework
 
-A comprehensive QA automation framework for CaliberFS financial services website, featuring traditional Playwright tests, AI-enhanced MCP testing, and complete API validation.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+A comprehensive QA automation framework featuring traditional Playwright tests, AI-enhanced MCP testing, and complete API validation.
 
 ## Framework Overview
 
@@ -38,7 +38,7 @@ A comprehensive QA automation framework for CaliberFS financial services website
 ## Project Structure
 
 ```
-caliberfs-playwright-mcp-server/
+playwright-mcp-server/
 ├── 📁 src/                        # MCP Server (TypeScript)
 │   └── index.ts                   # MCP server implementation
 ├── 📁 build/                      # Compiled MCP server
@@ -69,8 +69,8 @@ caliberfs-playwright-mcp-server/
 │   ├── 📁 reports/                # Test reports (generated)
 │   └── mcp-client.js              # MCP communication layer
 ├── 📁 postman/                    # API Testing Suite
-│   ├── CaliberFS-API-Tests.postman_collection.json # 15 API tests
-│   ├── CaliberFS-Environment.postman_environment.json # Test environment
+│   ├── API-Tests.postman_collection.json # 15 API tests
+│   ├── Environment.postman_environment.json # Test environment
 │   └── reports/                   # API test reports (generated)
 ├── 📁 .github/workflows/          # CI/CD Pipeline
 ├── test-runner.js                 # Master test orchestrator
@@ -85,8 +85,8 @@ caliberfs-playwright-mcp-server/
 ### **Installation & Setup**
 ```bash
 # Clone and install
-git clone https://github.com/josemejias11/caliberfs-playwright-mcp-server
-cd caliberfs-playwright-mcp-server
+git clone https://github.com/josemejias11/playwright-mcp-server
+cd playwright-mcp-server
 npm install
 
 # Install Playwright browsers
@@ -373,10 +373,10 @@ Simulate different devices and browsers:
 - Responsive design validation
 
 ### **API Configuration**
-- **Base URL:** https://www.caliberfs.com
-- **User Agent:** CaliberFS-API-Tests/1.0
+- **Base URL:** https://example.com
+- **User Agent:** API-Tests/1.0
 - **Timeout:** 5000ms
-- **Test Email:** test@caliberfs-qa.com
+- **Test Email:** test@example.com
 
 ### **Performance Benchmarks**
 - Homepage: < 3 seconds response time
@@ -387,8 +387,8 @@ Simulate different devices and browsers:
 ### **CI/CD Integration**
 ```bash
 # Run Postman tests in CI/CD pipeline
-newman run CaliberFS-API-Tests.postman_collection.json \
-  -e CaliberFS-Environment.postman_environment.json \
+newman run API-Tests.postman_collection.json \
+  -e Environment.postman_environment.json \
   --reporters cli,htmlextra \
   --reporter-htmlextra-export reports/api-test-report.html
 ```
@@ -451,7 +451,7 @@ newman run CaliberFS-API-Tests.postman_collection.json \
 ### **Environment Configuration**
 - **Test Configuration:** `e2e/config/test-config.js` - Environment settings, URLs, timeouts
 - **Browser Settings:** `playwright.config.js` - Multi-browser configuration
-- **API Environment:** `postman/CaliberFS-Environment.postman_environment.json` - API test settings
+- **API Environment:** `postman/Environment.postman_environment.json` - API test settings
 
 ### **Timeouts & Thresholds**
 - **Smoke Tests:** 5 minutes total, 10 seconds per test

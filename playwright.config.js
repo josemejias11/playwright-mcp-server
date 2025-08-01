@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Playwright Configuration for CaliberFS Test Suite
+ * Playwright Configuration for Test Suite
  */
 export default defineConfig({
   testDir: './tests',
@@ -15,7 +15,7 @@ export default defineConfig({
     ['list']
   ],
   use: {
-    baseURL: 'https://www.caliberfs.com',
+    baseURL: 'https://example.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

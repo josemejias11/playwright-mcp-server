@@ -1,5 +1,5 @@
 /**
- * Professional Test Reporter for CaliberFS Framework
+ * Professional Test Reporter for Playwright MCP Framework
  * Generates comprehensive HTML and JSON reports
  */
 
@@ -49,10 +49,10 @@ export class TestReporter {
         suiteName,
         timestamp,
         totalDuration,
-        framework: 'CaliberFS Professional Testing Framework v1.0',
+        framework: 'Playwright MCP Professional Testing Framework v1.0',
         environment: process.env.TEST_ENV || 'production',
         browser: 'chromium',
-        url: 'https://www.caliberfs.com'
+        url: 'https://example.com'
       },
       analytics,
       performance,
@@ -169,7 +169,7 @@ export class TestReporter {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CaliberFS Test Report - ${meta.suiteName}</title>
+    <title>Test Report - ${meta.suiteName}</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
         .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -199,7 +199,7 @@ export class TestReporter {
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="title">CaliberFS Test Report</h1>
+            <h1 class="title">Test Report</h1>
             <p class="subtitle">${meta.suiteName} • ${new Date(meta.timestamp).toLocaleString()}</p>
         </div>
 
@@ -271,8 +271,8 @@ export class TestReporter {
   async generateSummaryReport(data) {
     const { meta, analytics } = data;
     const summary = `
-CaliberFS Test Report Summary
-=============================
+Test Report Summary
+===================
 Suite: ${meta.suiteName}
 Date: ${new Date(meta.timestamp).toLocaleString()}
 Duration: ${meta.totalDuration}ms

@@ -1,12 +1,12 @@
 /**
- * CaliberFS Homepage Page Object
- * Demonstrates Page Object Model best practices
+ * Example Homepage Page Object
+ * Demonstrates home page testing patterns
  */
 
-export class CaliberFSHomePage {
+export class ExampleHomePage {
   constructor(client) {
     this.client = client;
-    this.url = 'https://www.caliberfs.com';
+    this.url = 'https://example.com';
   }
 
   async navigate() {
@@ -69,12 +69,12 @@ export class CaliberFSHomePage {
         try {
           return JSON.parse(result.output);
         } catch (e) {
-          return [{ text: 'Home', href: 'https://www.caliberfs.com' }];
+          return [{ text: 'Home', href: 'https://example.com' }];
         }
       }
-      return [{ text: 'Home', href: 'https://www.caliberfs.com' }];
+      return [{ text: 'Home', href: 'https://example.com' }];
     } catch (error) {
-      return [{ text: 'Home', href: 'https://www.caliberfs.com' }];
+      return [{ text: 'Home', href: 'https://example.com' }];
     }
   }
 

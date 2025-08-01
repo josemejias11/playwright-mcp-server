@@ -1,5 +1,5 @@
 /**
- * Professional Test Logger for CaliberFS Framework
+ * Professional Test Logger for Playwright MCP Framework
  * Provides structured logging with different levels and formatting
  */
 

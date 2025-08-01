@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * CaliberFS Security & Compliance Tests
+ * Security & Compliance Tests
  * 
  * Purpose: Regulatory compliance and data protection validation
  * Frequency: Weekly security runs
@@ -12,8 +12,8 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { CaliberFSHomePage } from '../../page-objects/homepage.js';
-import { CaliberFSContactPage } from '../../page-objects/contact-page.js';
+import { ExampleHomePage } from '../../page-objects/homepage.js';
+import { ExampleContactPage } from '../../page-objects/contact-page.js';
 
 class SecurityComplianceTests extends BaseTestFramework {
   constructor() {
@@ -24,8 +24,8 @@ class SecurityComplianceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new CaliberFSHomePage(this.client);
-    this.contactPage = new CaliberFSContactPage(this.client);
+    this.homePage = new ExampleHomePage(this.client);
+    this.contactPage = new ExampleContactPage(this.client);
   }
 
   /**

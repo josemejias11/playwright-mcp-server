@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * CaliberFS Content Validation Tests
+ * Content Validation Tests
  * 
  * Purpose: Verify business requirements and content accuracy
  * Frequency: Daily CI/CD
@@ -12,8 +12,8 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { CaliberFSHomePage } from '../../page-objects/homepage.js';
-import { CaliberFSContactPage } from '../../page-objects/contact-page.js';
+import { ExampleHomePage } from '../../page-objects/homepage.js';
+import { ExampleContactPage } from '../../page-objects/contact-page.js';
 
 class ContentValidationTests extends BaseTestFramework {
   constructor() {
@@ -23,8 +23,8 @@ class ContentValidationTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new CaliberFSHomePage(this.client);
-    this.contactPage = new CaliberFSContactPage(this.client);
+    this.homePage = new ExampleHomePage(this.client);
+    this.contactPage = new ExampleContactPage(this.client);
   }
 
   /**
@@ -36,8 +36,8 @@ class ContentValidationTests extends BaseTestFramework {
       
       // Validate hero content
       const title = await this.homePage.getHeroTitle();
-      if (!title.toLowerCase().includes('caliber')) {
-        throw new Error(`Hero title should contain 'caliber', got: ${title}`);
+      if (!title.toLowerCase().includes('example')) {
+        throw new Error(`Hero title should contain 'example', got: ${title}`);
       }
       
       // Validate financial services content
@@ -57,12 +57,12 @@ class ContentValidationTests extends BaseTestFramework {
    */
   async testAboutPageContent() {
     await this.executeTest('About Page Company Information', async () => {
-      await this.navigateToPage('https://www.caliberfs.com/about', 'About');
+      await this.navigateToPage('https://example.com/about', 'About');
       
-      // Required content for financial services company
+      // Required content for website
       const requiredContent = [
-        'Caliber Financial Services',
-        'Otoe-Missouria Tribe',
+        'Example',
+        'About',
         'Our Values',
         'Our Vision'
       ];
@@ -87,7 +87,7 @@ class ContentValidationTests extends BaseTestFramework {
    */
   async testServicesPageContent() {
     await this.executeTest('Services Page Content Validation', async () => {
-      await this.navigateToPage('https://www.caliberfs.com/our-services', 'Our Services');
+      await this.navigateToPage('https://example.com/services', 'Services');
       
       // Core service areas that should be present
       const serviceAreas = [
@@ -127,7 +127,7 @@ class ContentValidationTests extends BaseTestFramework {
    */
   async testCareersPageContent() {
     await this.executeTest('Careers Page Content Validation', async () => {
-      await this.navigateToPage('https://www.caliberfs.com/careers', 'Careers');
+      await this.navigateToPage('https://example.com/careers', 'Careers');
       
       // Career-related content that should be present
       const careerContent = [

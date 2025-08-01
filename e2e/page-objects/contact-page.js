@@ -1,12 +1,12 @@
 /**
- * CaliberFS Contact Page Object
+ * Example Contact Page Object
  * Demonstrates form handling best practices
  */
 
-export class CaliberFSContactPage {
+export class ExampleContactPage {
   constructor(client) {
     this.client = client;
-    this.url = 'https://www.caliberfs.com/contact';
+    this.url = 'https://example.com/contact';
   }
 
   async navigate() {

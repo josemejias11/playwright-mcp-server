@@ -1,5 +1,5 @@
 /**
- * Test Configuration for CaliberFS Testing Framework
+ * Test Configuration for Playwright MCP Testing Framework
  * Centralized configuration for professional testing standards
  */
 
@@ -14,7 +14,7 @@ dotenv.config({ path: join(__dirname, '../../.env') });
 
 export const TestConfig = {
   // Environment Configuration
-  baseUrl: process.env.BASE_URL || 'https://www.caliberfs.com',
+  baseUrl: process.env.BASE_URL || 'https://example.com',
   environment: process.env.TEST_ENV || 'production',
   
   // Browser Configuration
@@ -37,17 +37,17 @@ export const TestConfig = {
   
   // Test Data
   urls: {
-    homepage: 'https://www.caliberfs.com',
-    services: 'https://www.caliberfs.com/our-services',
-    contact: 'https://www.caliberfs.com/contact',
-    about: 'https://www.caliberfs.com/about',
-    careers: 'https://www.caliberfs.com/careers'
+    homepage: 'https://example.com',
+    services: 'https://example.com/services',
+    contact: 'https://example.com/contact',
+    about: 'https://example.com/about',
+    careers: 'https://example.com/careers'
   },
   
   // Expected Page Titles
   expectedTitles: {
-    homepage: 'Caliber Financial Services',
-    services: 'Our Services',
+    homepage: 'Example',
+    services: 'Services',
     contact: 'Contact',
     about: 'About',
     careers: 'Careers'
@@ -55,10 +55,10 @@ export const TestConfig = {
   
   // Company Information (for validation)
   companyInfo: {
-    name: 'Caliber Financial Services',
-    address: '1611 S. Utica Ave, #527 Tulsa, OK 74104-4909',
-    phone: '(855)-589-2363',
-    fax: '(855)-589-2363'
+    name: 'Example Company',
+    address: '123 Main St, Anytown, USA 12345',
+    phone: '(555) 123-4567',
+    fax: '(555) 123-4567'
   },
   
   // Test Data for Forms

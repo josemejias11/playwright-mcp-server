@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * CaliberFS Critical Path Smoke Tests
+ * Critical Path Smoke Tests
  * 
  * Purpose: Verify core functionality - run first, fail fast
  * Frequency: Every deployment
@@ -12,8 +12,8 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { CaliberFSHomePage } from '../../page-objects/homepage.js';
-import { CaliberFSContactPage } from '../../page-objects/contact-page.js';
+import { ExampleHomePage } from '../../page-objects/homepage.js';
+import { ExampleContactPage } from '../../page-objects/contact-page.js';
 
 class CriticalPathSmokeTests extends BaseTestFramework {
   constructor() {
@@ -23,8 +23,8 @@ class CriticalPathSmokeTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new CaliberFSHomePage(this.client);
-    this.contactPage = new CaliberFSContactPage(this.client);
+    this.homePage = new ExampleHomePage(this.client);
+    this.contactPage = new ExampleContactPage(this.client);
   }
 
   /**

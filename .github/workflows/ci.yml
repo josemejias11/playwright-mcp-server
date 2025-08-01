@@ -1,4 +1,4 @@
-name: CI - CaliberFS Testing Framework
+name: CI - Playwright MCP Testing Framework
 
 on:
   push:
@@ -305,7 +305,7 @@ jobs:
           <!DOCTYPE html>
           <html>
           <head>
-              <title>CaliberFS Test Reports</title>
+              <title>Test Reports</title>
               <style>
                   body { font-family: Arial, sans-serif; margin: 40px; }
                   .container { max-width: 800px; margin: 0 auto; }
@@ -317,8 +317,8 @@ jobs:
           </head>
           <body>
               <div class="container">
-                  <h1>🧪 CaliberFS Test Reports</h1>
-                  <p>Comprehensive test results for the CaliberFS Playwright MCP Testing Framework</p>
+                  <h1>🧪 Test Reports</h1>
+                  <p>Comprehensive test results for the Playwright MCP Testing Framework</p>
                   
                   <div class="report-card">
                       <h3>🎭 Traditional Playwright Reports</h3>

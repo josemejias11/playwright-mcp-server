@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('CaliberFS Homepage Tests', () => {
+test.describe('Homepage Tests', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });
 
   test('should load homepage successfully', async ({ page }) => {
-    await expect(page).toHaveTitle(/Caliber Financial/);
+    await expect(page).toHaveTitle(/Example/);
     await expect(page.locator('body')).toBeVisible();
   });
 
@@ -79,6 +79,6 @@ test.describe('CaliberFS Homepage Tests', () => {
     await expect(page.locator('body')).toBeVisible();
     
     // Check that content is still accessible
-    await expect(page).toHaveTitle(/Caliber Financial/);
+    await expect(page).toHaveTitle(/Example/);
   });
 });

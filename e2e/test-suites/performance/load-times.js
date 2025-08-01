@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * CaliberFS Performance Tests
+ * Performance Tests
  * 
  * Purpose: Ensure optimal user experience and performance
  * Frequency: Weekly performance runs
@@ -12,7 +12,7 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { CaliberFSHomePage } from '../../page-objects/homepage.js';
+import { ExampleHomePage } from '../../page-objects/homepage.js';
 
 class PerformanceTests extends BaseTestFramework {
   constructor() {
@@ -22,7 +22,7 @@ class PerformanceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new CaliberFSHomePage(this.client);
+    this.homePage = new ExampleHomePage(this.client);
   }
 
   /**
@@ -75,10 +75,10 @@ class PerformanceTests extends BaseTestFramework {
   async testPageNavigationPerformance() {
     await this.executeTest('Page Navigation Performance', async () => {
       const pages = [
-        { url: 'https://www.caliberfs.com/about', name: 'About' },
-        { url: 'https://www.caliberfs.com/our-services', name: 'Services' },
-        { url: 'https://www.caliberfs.com/contact', name: 'Contact' },
-        { url: 'https://www.caliberfs.com/careers', name: 'Careers' }
+        { url: 'https://example.com/about', name: 'About' },
+        { url: 'https://example.com/services', name: 'Services' },
+        { url: 'https://example.com/contact', name: 'Contact' },
+        { url: 'https://example.com/careers', name: 'Careers' }
       ];
 
       const navigationMetrics = [];

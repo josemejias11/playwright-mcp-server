@@ -1,5 +1,5 @@
 /**
- * Base Test Framework for CaliberFS
+ * Base Test Framework for Playwright MCP
  * Professional-grade test automation framework for financial services testing
  */
 
@@ -67,7 +67,7 @@ export class BaseTestFramework {
     this.startTime = Date.now();
     
     await this.logger.info(`Initializing ${testSuiteName} Test Suite`);
-    await this.logger.info(`Framework: CaliberFS Professional Testing Framework v1.0`);
+    await this.logger.info(`Framework: Playwright MCP Professional Testing Framework v1.0`);
     
     try {
       await this.client.launchBrowser(browserType, TestConfig.headless);

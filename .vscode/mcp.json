@@ -3,7 +3,7 @@
     "playwright-automation": {
       "command": "node",
       "args": ["build/index.js"],
-      "cwd": "/Users/josemejias/VSCodeProject/playwright-mcp-server/caliberfs-playwright-mcp-server"
+      "cwd": "/Users/josemejias/VSCodeProject/drone-auto/playwright-mcp-server"
     }
   }
 }

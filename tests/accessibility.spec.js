@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('CaliberFS Accessibility Tests', () => {
+test.describe('Accessibility Tests', () => {
   test('should have proper heading structure', async ({ page }) => {
     await page.goto('/');
     
