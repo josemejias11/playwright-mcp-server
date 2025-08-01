@@ -1,20 +1,20 @@
 {
   "info": {
-    "name": "CaliberFS API Test Suite",
-    "description": "Comprehensive API testing for CaliberFS website endpoints and services",
+    "name": "API Test Suite",
+    "description": "Comprehensive API testing for website endpoints and services",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "version": "1.0.0"
   },
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://www.caliberfs.com",
+      "value": "https://example.com",
       "type": "string",
-      "description": "Base URL for CaliberFS website"
+      "description": "Base URL for the website"
     },
     {
       "key": "userAgent",
-      "value": "CaliberFS-API-Tests/1.0",
+      "value": "API-Tests/1.0",
       "type": "string",
       "description": "Custom user agent for API tests"
     }
@@ -51,8 +51,8 @@
                   "    pm.expect(pm.response.responseTime).to.be.below(3000);",
                   "});",
                   "",
-                  "pm.test('Contains CaliberFS branding', function () {",
-                  "    pm.expect(pm.response.text()).to.include('Caliber Financial Services');",
+                  "pm.test('Contains site branding', function () {",
+                  "    pm.expect(pm.response.text()).to.include('Example');",
                   "});",
                   "",
                   "pm.test('Has proper HTML structure', function () {",
@@ -162,8 +162,8 @@
                   "    pm.expect(pm.response.text()).to.include('name=\"Email\"');",
                   "});",
                   "",
-                  "pm.test('Has media contact information', function () {",
-                  "    pm.expect(pm.response.text()).to.include('press@caliberfs.com');",
+                  "pm.test('Has contact information', function () {",
+                  "    pm.expect(pm.response.text()).to.include('contact@example.com');",
                   "});",
                   "",
                   "pm.test('Contains phone number', function () {",
@@ -435,7 +435,7 @@
                   "pm.test('Has proper title tag', function () {",
                   "    const html = pm.response.text();",
                   "    pm.expect(html).to.include('<title>');",
-                  "    pm.expect(html).to.include('Caliber Financial Services');",
+                  "    pm.expect(html).to.include('Example');",
                   "});",
                   "",
                   "pm.test('Has meta description', function () {",
