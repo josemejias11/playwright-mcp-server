@@ -21,6 +21,12 @@ postman/reports/*.html
 postman/reports/*.json
 postman/reports/*.xml
 
+# Newman test reports
+newman/
+newman-run-report-*.json
+newman-run-report-*.html
+newman-run-report-*.xml
+
 # Keep example artifacts
 !e2e/artifacts/.gitkeep
 !postman/reports/.gitkeep
