@@ -90,6 +90,7 @@ Thumbs.db
 /playwright/.cache/
 /tests/test-results/
 /tests/playwright-report/
+e2e/reports/playwright-report/
 
 # MCP specific
 *.mcp-log
