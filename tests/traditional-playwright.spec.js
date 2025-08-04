@@ -9,10 +9,10 @@ test.describe('Traditional Playwright Tests', () => {
   
   test('Basic website validation', async ({ page }) => {
     // Navigate to homepage
-    await page.goto('https://example.com');
+    await page.goto('https://applaudo.com/en/');
     
     // Check page title
-    await expect(page).toHaveTitle(/Example/i);
+    await expect(page).toHaveTitle(/Applaudo/i);
     
     // Check page loads successfully
     await expect(page.locator('body')).toBeVisible();
@@ -25,7 +25,7 @@ test.describe('Traditional Playwright Tests', () => {
   });
 
   test('Contact information check', async ({ page }) => {
-    await page.goto('https://example.com');
+    await page.goto('https://applaudo.com/en/');
     
     // Check for contact elements with more flexible patterns
     const bodyText = await page.locator('body').textContent();
@@ -48,7 +48,7 @@ test.describe('Traditional Playwright Tests', () => {
   });
 
   test('Navigation links check', async ({ page }) => {
-    await page.goto('https://example.com');
+    await page.goto('https://applaudo.com/en/');
     
     // Count navigation links
     const links = await page.locator('a[href]').count();

@@ -8,12 +8,12 @@
  * Timeout: 10 minutes max
  * 
  * Ensures the website meets accessibility standards required
- * for financial services and provides inclusive user experience.
+ * for software development services and provides inclusive user experience.
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { ExampleHomePage } from '../../page-objects/homepage.js';
-import { ExampleContactPage } from '../../page-objects/contact-page.js';
+import { ApplaudoHomePage } from '../../page-objects/homepage.js';
+import { ApplaudoContactPage } from '../../page-objects/contact-page.js';
 
 class AccessibilityComplianceTests extends BaseTestFramework {
   constructor() {
@@ -24,8 +24,8 @@ class AccessibilityComplianceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new ExampleHomePage(this.client);
-    this.contactPage = new ExampleContactPage(this.client);
+    this.homePage = new ApplaudoHomePage(this.client);
+    this.contactPage = new ApplaudoContactPage(this.client);
   }
 
   /**

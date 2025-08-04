@@ -1,12 +1,12 @@
 /**
- * Example Homepage Page Object
+ * Applaudo Homepage Page Object
  * Demonstrates home page testing patterns
  */
 
-export class ExampleHomePage {
+export class ApplaudoHomePage {
   constructor(client) {
     this.client = client;
-    this.url = 'https://example.com';
+    this.url = 'https://applaudo.com/en/';
   }
 
   async navigate() {
@@ -69,12 +69,12 @@ export class ExampleHomePage {
         try {
           return JSON.parse(result.output);
         } catch (e) {
-          return [{ text: 'Home', href: 'https://example.com' }];
+          return [{ text: 'Home', href: 'https://applaudo.com/en/' }];
         }
       }
-      return [{ text: 'Home', href: 'https://example.com' }];
+      return [{ text: 'Home', href: 'https://applaudo.com/en/' }];
     } catch (error) {
-      return [{ text: 'Home', href: 'https://example.com' }];
+      return [{ text: 'Home', href: 'https://applaudo.com/en/' }];
     }
   }
 
@@ -128,27 +128,27 @@ export class ExampleHomePage {
     }
   }
 
-  async validateFinancialServicesElements() {
+  async validateSoftwareDevelopmentElements() {
     try {
       const result = await this.client.evaluateJavaScript(`
         (() => {
           const text = document.body.textContent.toLowerCase();
-          const financialKeywords = ['financial', 'investment', 'advisory', 'portfolio', 'wealth', 'asset', 'planning'];
+          const developmentKeywords = ['development', 'software', 'cloud', 'data', 'ai', 'quality', 'salesforce', 'digital'];
           
-          const foundKeywords = financialKeywords.filter(keyword => text.includes(keyword));
+          const foundKeywords = developmentKeywords.filter(keyword => text.includes(keyword));
           
           return {
-            hasFinancialContent: foundKeywords.length > 0,
+            hasDevelopmentContent: foundKeywords.length > 0,
             keywordsFound: foundKeywords,
             keywordCount: foundKeywords.length,
-            isFinancialSite: foundKeywords.length >= 2
+            isDevelopmentSite: foundKeywords.length >= 2
           };
         })()
       `);
       
-      return result.success ? JSON.parse(result.output) : { hasFinancialContent: true, keywordsFound: ['financial'], keywordCount: 1, isFinancialSite: true };
+      return result.success ? JSON.parse(result.output) : { hasDevelopmentContent: true, keywordsFound: ['development'], keywordCount: 1, isDevelopmentSite: true };
     } catch (error) {
-      return { hasFinancialContent: true, keywordsFound: ['financial'], keywordCount: 1, isFinancialSite: true };
+      return { hasDevelopmentContent: true, keywordsFound: ['development'], keywordCount: 1, isDevelopmentSite: true };
     }
   }
 

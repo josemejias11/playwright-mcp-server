@@ -1,12 +1,12 @@
 /**
- * Example Contact Page Object
+ * Applaudo Contact Page Object
  * Demonstrates form handling best practices
  */
 
-export class ExampleContactPage {
+export class ApplaudoContactPage {
   constructor(client) {
     this.client = client;
-    this.url = 'https://example.com/contact';
+    this.url = 'https://applaudo.com/en/contact/';
   }
 
   async navigate() {
@@ -62,7 +62,7 @@ export class ExampleContactPage {
       // Try to find and fill common form fields
       const formFields = [
         { selector: 'input[name="name"], input[name="full_name"], input[name="firstName"], #name, #full-name', value: testData.name || 'Test User' },
-        { selector: 'input[name="email"], input[type="email"], #email', value: testData.email || 'test@example.com' },
+        { selector: 'input[name="email"], input[type="email"], #email', value: testData.email || 'test@applaudo.com' },
         { selector: 'textarea[name="message"], textarea[name="comment"], #message, #comments', value: testData.message || 'Test message from automation' },
         { selector: 'input[name="phone"], input[type="tel"], #phone', value: testData.phone || '555-123-4567' }
       ];

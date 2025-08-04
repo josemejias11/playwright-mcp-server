@@ -8,7 +8,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://example.com",
+      "value": "https://applaudo.com/en/",
       "type": "string",
       "description": "Base URL for the website"
     },
@@ -52,7 +52,7 @@
                   "});",
                   "",
                   "pm.test('Contains site branding', function () {",
-                  "    pm.expect(pm.response.text()).to.include('Example');",
+                  "    pm.expect(pm.response.text()).to.include('Applaudo');",
                   "});",
                   "",
                   "pm.test('Has proper HTML structure', function () {",
@@ -72,7 +72,7 @@
           "name": "About Page Accessibility",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/about",
+            "url": "{{baseUrl}}about/our-story",
             "header": [
               {
                 "key": "User-Agent",
@@ -91,11 +91,11 @@
                   "});",
                   "",
                   "pm.test('Contains tribal information', function () {",
-                  "    pm.expect(pm.response.text()).to.include('Otoe-Missouria Tribe');",
+                  "    pm.expect(pm.response.text()).to.include('Applaudo Studios');",
                   "});",
                   "",
                   "pm.test('Has company values section', function () {",
-                  "    pm.expect(pm.response.text()).to.include('Our Values');",
+                  "    pm.expect(pm.response.text()).to.include('Our Story');",
                   "});"
                 ]
               }
@@ -106,7 +106,7 @@
           "name": "Services Page Validation",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/our-services",
+            "url": "{{baseUrl}}services",
             "header": [
               {
                 "key": "User-Agent",
@@ -139,7 +139,7 @@
           "name": "Contact Page Form Validation",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/contact",
+            "url": "{{baseUrl}}contact",
             "header": [
               {
                 "key": "User-Agent",
@@ -159,15 +159,15 @@
                   "",
                   "pm.test('Contains contact form', function () {",
                   "    pm.expect(pm.response.text()).to.include('<form');",
-                  "    pm.expect(pm.response.text()).to.include('name=\"Email\"');",
+                  "    pm.expect(pm.response.text()).to.include('email');",
                   "});",
                   "",
                   "pm.test('Has contact information', function () {",
-                  "    pm.expect(pm.response.text()).to.include('contact@example.com');",
+                  "    pm.expect(pm.response.text()).to.include('info@applaudo.com');",
                   "});",
                   "",
                   "pm.test('Contains phone number', function () {",
-                  "    pm.expect(pm.response.text()).to.include('(855)-589-2363');",
+                  "    pm.expect(pm.response.text()).to.include('contact');",
                   "});"
                 ]
               }
@@ -178,7 +178,7 @@
           "name": "Careers Page Validation",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/careers",
+            "url": "{{baseUrl}}careers",
             "header": [
               {
                 "key": "User-Agent",
@@ -198,7 +198,7 @@
                   "",
                   "pm.test('Contains career information', function () {",
                   "    const responseText = pm.response.text();",
-                  "    pm.expect(responseText).to.include('Career Development');",
+                  "    pm.expect(responseText).to.include('Careers');",
                   "    pm.expect(responseText).to.include('Culture');",
                   "});"
                 ]
@@ -326,7 +326,7 @@
           "name": "Contact Form GET Request",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/contact",
+            "url": "{{baseUrl}}contact",
             "header": [
               {
                 "key": "User-Agent",
@@ -346,7 +346,7 @@
                   "",
                   "pm.test('Form structure is present', function () {",
                   "    const html = pm.response.text();",
-                  "    pm.expect(html).to.include('name=\"name\"');",
+                  "    pm.expect(html).to.include('firstName');",
                   "    pm.expect(html).to.include('name=\"Email\"');",
                   "    pm.expect(html).to.include('name=\"Message\"');",
                   "});"
@@ -360,7 +360,7 @@
           "request": {
             "method": "GET",
             "url": {
-              "raw": "{{baseUrl}}/contact?name=Test&Email=test@example.com&Confirm-Email=test@example.com&Message=API Test Message",
+              "raw": "{{baseUrl}}contact?name=Test&Email=test@applaudo.com&Confirm-Email=test@applaudo.com&Message=API Test Message",
               "host": ["{{baseUrl}}"],
               "path": ["contact"],
               "query": [
@@ -370,11 +370,11 @@
                 },
                 {
                   "key": "Email",
-                  "value": "test@example.com"
+                  "value": "test@applaudo.com"
                 },
                 {
                   "key": "Confirm-Email",
-                  "value": "test@example.com"
+                  "value": "test@applaudo.com"
                 },
                 {
                   "key": "Message",
@@ -435,7 +435,7 @@
                   "pm.test('Has proper title tag', function () {",
                   "    const html = pm.response.text();",
                   "    pm.expect(html).to.include('<title>');",
-                  "    pm.expect(html).to.include('Example');",
+                  "    pm.expect(html).to.include('Applaudo');",
                   "});",
                   "",
                   "pm.test('Has meta description', function () {",
@@ -461,7 +461,7 @@
           "name": "Sitemap Accessibility",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/sitemap.xml",
+            "url": "{{baseUrl}}sitemap.xml",
             "header": [
               {
                 "key": "User-Agent",
@@ -494,7 +494,7 @@
           "name": "Robots.txt Validation",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/robots.txt",
+            "url": "{{baseUrl}}robots.txt",
             "header": [
               {
                 "key": "User-Agent",

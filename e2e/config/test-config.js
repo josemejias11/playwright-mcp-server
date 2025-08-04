@@ -14,7 +14,7 @@ dotenv.config({ path: join(__dirname, '../../.env') });
 
 export const TestConfig = {
   // Environment Configuration
-  baseUrl: process.env.BASE_URL || 'https://example.com',
+  baseUrl: process.env.BASE_URL || 'https://applaudo.com/en/',
   environment: process.env.TEST_ENV || 'production',
   
   // Browser Configuration
@@ -37,16 +37,16 @@ export const TestConfig = {
   
   // Test Data
   urls: {
-    homepage: 'https://example.com',
-    services: 'https://example.com/services',
-    contact: 'https://example.com/contact',
-    about: 'https://example.com/about',
-    careers: 'https://example.com/careers'
+    homepage: 'https://applaudo.com/en/',
+    services: 'https://applaudo.com/en/services/',
+    contact: 'https://applaudo.com/en/contact/',
+    about: 'https://applaudo.com/en/about/',
+    careers: 'https://applaudo.com/en/careers/'
   },
   
   // Expected Page Titles
   expectedTitles: {
-    homepage: 'Example',
+    homepage: 'Applaudo Studios',
     services: 'Services',
     contact: 'Contact',
     about: 'About',
@@ -55,10 +55,10 @@ export const TestConfig = {
   
   // Company Information (for validation)
   companyInfo: {
-    name: 'Example Company',
-    address: '123 Main St, Anytown, USA 12345',
-    phone: '(555) 123-4567',
-    fax: '(555) 123-4567'
+    name: 'Applaudo Studios',
+    address: 'San Salvador, El Salvador',
+    phone: '(503) 2505-7000',
+    fax: '(503) 2505-7000'
   },
   
   // Test Data for Forms
@@ -66,9 +66,9 @@ export const TestConfig = {
     contact: {
       validContact: {
         name: 'John Doe',
-        email: 'john.doe@example.com',
-        confirmEmail: 'john.doe@example.com',
-        message: 'I am interested in your financial services and would like to learn more about your offerings.'
+        email: 'john.doe@applaudo.com',
+        confirmEmail: 'john.doe@applaudo.com',
+        message: 'I am interested in your software development services and would like to learn more about your offerings.'
       },
       invalidContact: {
         name: '',

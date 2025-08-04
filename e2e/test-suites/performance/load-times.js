@@ -12,7 +12,7 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { ExampleHomePage } from '../../page-objects/homepage.js';
+import { ApplaudoHomePage } from '../../page-objects/homepage.js';
 
 class PerformanceTests extends BaseTestFramework {
   constructor() {
@@ -22,7 +22,7 @@ class PerformanceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new ExampleHomePage(this.client);
+    this.homePage = new ApplaudoHomePage(this.client);
   }
 
   /**
@@ -39,7 +39,7 @@ class PerformanceTests extends BaseTestFramework {
       // Get detailed performance metrics
       const performance = await this.homePage.checkPerformance();
       
-      // Performance thresholds for financial services
+      // Performance thresholds for software development services
       const thresholds = {
         loadTime: 3000,      // 3 seconds max
         domReady: 1500,      // 1.5 seconds max
@@ -75,10 +75,10 @@ class PerformanceTests extends BaseTestFramework {
   async testPageNavigationPerformance() {
     await this.executeTest('Page Navigation Performance', async () => {
       const pages = [
-        { url: 'https://example.com/about', name: 'About' },
-        { url: 'https://example.com/services', name: 'Services' },
-        { url: 'https://example.com/contact', name: 'Contact' },
-        { url: 'https://example.com/careers', name: 'Careers' }
+        { url: 'https://applaudo.com/en/about/', name: 'About' },
+        { url: 'https://applaudo.com/en/services/', name: 'Services' },
+        { url: 'https://applaudo.com/en/contact/', name: 'Contact' },
+        { url: 'https://applaudo.com/en/careers/', name: 'Careers' }
       ];
 
       const navigationMetrics = [];

@@ -12,8 +12,8 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { ExampleHomePage } from '../../page-objects/homepage.js';
-import { ExampleContactPage } from '../../page-objects/contact-page.js';
+import { ApplaudoHomePage } from '../../page-objects/homepage.js';
+import { ApplaudoContactPage } from '../../page-objects/contact-page.js';
 
 class ContentValidationTests extends BaseTestFramework {
   constructor() {
@@ -23,8 +23,8 @@ class ContentValidationTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new ExampleHomePage(this.client);
-    this.contactPage = new ExampleContactPage(this.client);
+    this.homePage = new ApplaudoHomePage(this.client);
+    this.contactPage = new ApplaudoContactPage(this.client);
   }
 
   /**
@@ -36,18 +36,18 @@ class ContentValidationTests extends BaseTestFramework {
       
       // Validate hero content
       const title = await this.homePage.getHeroTitle();
-      if (!title.toLowerCase().includes('example')) {
-        throw new Error(`Hero title should contain 'example', got: ${title}`);
+      if (!title.toLowerCase().includes('applaudo')) {
+        throw new Error(`Hero title should contain 'applaudo', got: ${title}`);
       }
       
-      // Validate financial services content
-      const financialElements = await this.homePage.validateFinancialServicesElements();
-      if (!financialElements.hasFinancialContent) {
-        throw new Error('Homepage missing financial services content');
+      // Validate software development services content
+      const softwareElements = await this.homePage.validateSoftwareDevelopmentElements();
+      if (!softwareElements.hasDevelopmentContent) {
+        throw new Error('Homepage missing software development services content');
       }
       
       await this.logger.business(`✓ Brand messaging validated: ${title}`);
-      await this.logger.business(`✓ Financial keywords found: ${financialElements.keywordCount}`);
+      await this.logger.business(`✓ Software development keywords found: ${softwareElements.keywordCount}`);
       
     }, { timeout: 8000 });
   }
@@ -57,14 +57,14 @@ class ContentValidationTests extends BaseTestFramework {
    */
   async testAboutPageContent() {
     await this.executeTest('About Page Company Information', async () => {
-      await this.navigateToPage('https://example.com/about', 'About');
+      await this.navigateToPage('https://applaudo.com/en/about/our-story/', 'About');
       
       // Required content for website
       const requiredContent = [
-        'Example',
+        'Applaudo',
         'About',
-        'Our Values',
-        'Our Vision'
+        'Our Story',
+        'Company'
       ];
 
       for (const content of requiredContent) {
@@ -87,16 +87,16 @@ class ContentValidationTests extends BaseTestFramework {
    */
   async testServicesPageContent() {
     await this.executeTest('Services Page Content Validation', async () => {
-      await this.navigateToPage('https://example.com/services', 'Services');
+      await this.navigateToPage('https://applaudo.com/en/services/', 'Services');
       
       // Core service areas that should be present
       const serviceAreas = [
-        'Product Development',
-        'Compliance',
-        'Technology',
-        'Marketing',
-        'Customer Engagement',
-        'Analytics'
+        'Development',
+        'Cloud',
+        'Data',
+        'AI',
+        'Quality',
+        'Salesforce'
       ];
 
       let foundServices = 0;
@@ -127,15 +127,15 @@ class ContentValidationTests extends BaseTestFramework {
    */
   async testCareersPageContent() {
     await this.executeTest('Careers Page Content Validation', async () => {
-      await this.navigateToPage('https://example.com/careers', 'Careers');
+      await this.navigateToPage('https://applaudo.com/en/careers/', 'Careers');
       
       // Career-related content that should be present
       const careerContent = [
-        'hiring',
-        'people',
-        'Career Development',
-        'Culture',
-        'Community'
+        'Careers',
+        'Join',
+        'Team',
+        'Work',
+        'Opportunities'
       ];
 
       let foundCareerContent = 0;

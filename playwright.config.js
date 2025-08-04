@@ -15,7 +15,7 @@ export default defineConfig({
     ['list']
   ],
   use: {
-    baseURL: 'https://example.com',
+    baseURL: 'https://applaudo.com/en/',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

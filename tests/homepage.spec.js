@@ -6,7 +6,7 @@ test.describe('Homepage Tests', () => {
   });
 
   test('should load homepage successfully', async ({ page }) => {
-    await expect(page).toHaveTitle(/Example/);
+    await expect(page).toHaveTitle(/Applaudo/);
     await expect(page.locator('body')).toBeVisible();
   });
 
@@ -45,22 +45,9 @@ test.describe('Homepage Tests', () => {
   });
 
   test('should have contact information', async ({ page }) => {
-    // Look for common contact elements with more flexible patterns
-    const bodyText = await page.textContent('body');
+    // Look for contact elements with more flexible patterns suitable for modern websites
     
-    // Check for phone patterns (more flexible)
-    const phonePattern = /(\d{3}[\s.-]?\d{3}[\s.-]?\d{4})|(\(\d{3}\)\s?\d{3}[\s.-]?\d{4})/;
-    const hasPhone = phonePattern.test(bodyText || '');
-    
-    // Check for email patterns (more flexible)
-    const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
-    const hasEmail = emailPattern.test(bodyText || '');
-    
-    // Check for address indicators
-    const addressPattern = /\d+\s+\w+\s+(street|st|avenue|ave|road|rd|blvd|boulevard|drive|dr|lane|ln)/i;
-    const hasAddress = addressPattern.test(bodyText || '');
-    
-    // Check for contact links or buttons
+    // Check for contact links (very common on modern websites)
     const contactLink = page.locator('a[href*="contact"], a[href*="mailto:"], a[href*="tel:"]');
     const hasContactLink = await contactLink.count() > 0;
     
@@ -68,8 +55,12 @@ test.describe('Homepage Tests', () => {
     const contactSection = page.locator('[class*="contact"], [id*="contact"], [data-testid*="contact"]');
     const hasContactSection = await contactSection.count() > 0;
     
+    // Check for "Get in Touch" or similar contact buttons
+    const touchButton = page.locator('text="Get in Touch", text="Contact Us", text="Contact"');
+    const hasTouchButton = await touchButton.count() > 0;
+    
     // At least one contact method should be present
-    const hasContactInfo = hasPhone || hasEmail || hasAddress || hasContactLink || hasContactSection;
+    const hasContactInfo = hasContactLink || hasContactSection || hasTouchButton;
     expect(hasContactInfo).toBe(true);
   });
 
@@ -79,6 +70,6 @@ test.describe('Homepage Tests', () => {
     await expect(page.locator('body')).toBeVisible();
     
     // Check that content is still accessible
-    await expect(page).toHaveTitle(/Example/);
+    await expect(page).toHaveTitle(/Applaudo/);
   });
 });

@@ -7,13 +7,13 @@
  * Frequency: Weekly security runs
  * Timeout: 15 minutes max
  * 
- * Ensures financial services security requirements and
+ * Ensures software development business security requirements and
  * data protection standards are met.
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { ExampleHomePage } from '../../page-objects/homepage.js';
-import { ExampleContactPage } from '../../page-objects/contact-page.js';
+import { ApplaudoHomePage } from '../../page-objects/homepage.js';
+import { ApplaudoContactPage } from '../../page-objects/contact-page.js';
 
 class SecurityComplianceTests extends BaseTestFramework {
   constructor() {
@@ -24,8 +24,8 @@ class SecurityComplianceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new ExampleHomePage(this.client);
-    this.contactPage = new ExampleContactPage(this.client);
+    this.homePage = new ApplaudoHomePage(this.client);
+    this.contactPage = new ApplaudoContactPage(this.client);
   }
 
   /**
@@ -52,7 +52,7 @@ class SecurityComplianceTests extends BaseTestFramework {
       const security = JSON.parse(securityProtocol.output);
       
       if (!security.isSecure) {
-        throw new Error(`Site not using HTTPS: ${security.protocol} - Critical security violation for financial services`);
+        throw new Error(`Site not using HTTPS: ${security.protocol} - Critical security violation for software business`);
       }
       
       // Check for mixed content (HTTPS page loading HTTP resources)
@@ -169,7 +169,7 @@ class SecurityComplianceTests extends BaseTestFramework {
           const html = document.body.innerHTML.toLowerCase();
           
           const indicators = {
-            // Financial services credentials
+            // Software development business credentials
             hasLicenseInfo: text.includes('licensed') || text.includes('registered') || text.includes('member fdic'),
             hasRegulatory: text.includes('sec') || text.includes('finra') || text.includes('fdic') || text.includes('occ'),
             hasInsurance: text.includes('insured') || text.includes('insurance') || text.includes('sipc'),
@@ -196,7 +196,7 @@ class SecurityComplianceTests extends BaseTestFramework {
       
       const trust = JSON.parse(trustIndicators.output);
       
-      // Financial services companies should have regulatory information
+      // Software development companies should have regulatory information
       if (!trust.hasLicenseInfo && !trust.hasRegulatory) {
         this.securityFindings.push({
           severity: 'medium',
@@ -208,7 +208,7 @@ class SecurityComplianceTests extends BaseTestFramework {
       if (!trust.hasPrivacyPolicy) {
         this.securityFindings.push({
           severity: 'high',
-          finding: 'Privacy policy not found - required for financial services',
+          finding: 'Privacy policy not found - required for business compliance',
           page: 'homepage'
         });
       }
@@ -277,7 +277,7 @@ class SecurityComplianceTests extends BaseTestFramework {
       const privacy = JSON.parse(privacyCompliance.output);
       
       if (!privacy.hasPrivacyPolicy) {
-        throw new Error('Privacy policy not found - required for financial services compliance');
+        throw new Error('Privacy policy not found - required for business compliance');
       }
       
       if (!privacy.hasTermsOfService) {

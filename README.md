@@ -373,10 +373,10 @@ Simulate different devices and browsers:
 - Responsive design validation
 
 ### **API Configuration**
-- **Base URL:** https://example.com
+- **Base URL:** https://applaudo.com/en/
 - **User Agent:** API-Tests/1.0
 - **Timeout:** 5000ms
-- **Test Email:** test@example.com
+- **Test Email:** test@applaudo.com
 
 ### **Performance Benchmarks**
 - Homepage: < 3 seconds response time
