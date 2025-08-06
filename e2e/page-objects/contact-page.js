@@ -1,12 +1,12 @@
 /**
- * Applaudo Contact Page Object
+ * IFSight Contact Page Object
  * Demonstrates form handling best practices
  */
 
-export class ApplaudoContactPage {
+export class IFSightContactPage {
   constructor(client) {
     this.client = client;
-    this.url = 'https://applaudo.com/en/contact/';
+    this.url = 'https://www.ifsight.com/contact';
   }
 
   async navigate() {
@@ -62,7 +62,7 @@ export class ApplaudoContactPage {
       // Try to find and fill common form fields
       const formFields = [
         { selector: 'input[name="name"], input[name="full_name"], input[name="firstName"], #name, #full-name', value: testData.name || 'Test User' },
-        { selector: 'input[name="email"], input[type="email"], #email', value: testData.email || 'test@applaudo.com' },
+        { selector: 'input[name="email"], input[type="email"], #email', value: testData.email || 'test@ifsight.com' },
         { selector: 'textarea[name="message"], textarea[name="comment"], #message, #comments', value: testData.message || 'Test message from automation' },
         { selector: 'input[name="phone"], input[type="tel"], #phone', value: testData.phone || '555-123-4567' }
       ];

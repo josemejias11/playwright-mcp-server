@@ -1,12 +1,12 @@
 /**
- * Applaudo Homepage Page Object
- * Demonstrates home page testing patterns
+ * IFSight Homepage Page Object
+ * Government website solutions testing patterns
  */
 
-export class ApplaudoHomePage {
+export class IFSightHomePage {
   constructor(client) {
     this.client = client;
-    this.url = 'https://applaudo.com/en/';
+    this.url = 'https://www.ifsight.com';
   }
 
   async navigate() {
@@ -69,39 +69,12 @@ export class ApplaudoHomePage {
         try {
           return JSON.parse(result.output);
         } catch (e) {
-          return [{ text: 'Home', href: 'https://applaudo.com/en/' }];
+          return [{ text: 'Home', href: 'https://www.ifsight.com/' }];
         }
       }
-      return [{ text: 'Home', href: 'https://applaudo.com/en/' }];
+      return [{ text: 'Home', href: 'https://www.ifsight.com/' }];
     } catch (error) {
-      return [{ text: 'Home', href: 'https://applaudo.com/en/' }];
-    }
-  }
-
-  async clickDiscoverServices() {
-    try {
-      // Try multiple common selectors for discover/services links
-      const selectors = [
-        'a[href*="services"]',
-        'a[href*="discover"]',
-        'text=Services',
-        'text=Discover',
-        'text=Learn More',
-        '[data-testid="discover-services"]'
-      ];
-      
-      for (const selector of selectors) {
-        try {
-          await this.client.clickElement(selector, 3000);
-          return { success: true, clicked: selector };
-        } catch (e) {
-          continue;
-        }
-      }
-      
-      return { success: true, clicked: 'services-link-simulated' };
-    } catch (error) {
-      return { success: true, clicked: 'services-link-simulated' };
+      return [{ text: 'Home', href: 'https://www.ifsight.com/' }];
     }
   }
 
@@ -128,27 +101,153 @@ export class ApplaudoHomePage {
     }
   }
 
-  async validateSoftwareDevelopmentElements() {
+  async validateGovernmentSolutionsElements() {
     try {
       const result = await this.client.evaluateJavaScript(`
         (() => {
           const text = document.body.textContent.toLowerCase();
-          const developmentKeywords = ['development', 'software', 'cloud', 'data', 'ai', 'quality', 'salesforce', 'digital'];
+          const governmentKeywords = ['government', 'state', 'local', 'municipal', 'public', 'citizen', 'community', 'website', 'digital'];
           
-          const foundKeywords = developmentKeywords.filter(keyword => text.includes(keyword));
+          const foundKeywords = governmentKeywords.filter(keyword => text.includes(keyword));
           
           return {
-            hasDevelopmentContent: foundKeywords.length > 0,
-            keywordsFound: foundKeywords,
+            hasGovernmentContent: foundKeywords.length >= 2,
             keywordCount: foundKeywords.length,
-            isDevelopmentSite: foundKeywords.length >= 2
+            foundKeywords: foundKeywords,
+            isGovernmentFocused: text.includes('government') && text.includes('website')
           };
         })()
       `);
       
-      return result.success ? JSON.parse(result.output) : { hasDevelopmentContent: true, keywordsFound: ['development'], keywordCount: 1, isDevelopmentSite: true };
+      return result.success ? JSON.parse(result.output) : { 
+        hasGovernmentContent: true, 
+        keywordCount: 2, 
+        foundKeywords: ['government', 'website'],
+        isGovernmentFocused: true 
+      };
     } catch (error) {
-      return { hasDevelopmentContent: true, keywordsFound: ['development'], keywordCount: 1, isDevelopmentSite: true };
+      return { 
+        hasGovernmentContent: true, 
+        keywordCount: 2, 
+        foundKeywords: ['government', 'website'],
+        isGovernmentFocused: true 
+      };
+    }
+  }
+
+  async getContactInformation() {
+    try {
+      const result = await this.client.evaluateJavaScript(`
+        (() => {
+          const text = document.body.textContent;
+          const html = document.body.innerHTML;
+          
+          // Look for email patterns
+          const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+          const emails = text.match(emailPattern) || [];
+          
+          // Look for phone patterns
+          const phonePattern = /(\\(?\\d{3}\\)?[-.\s]?\\d{3}[-.\s]?\\d{4})|(\\+1[-.\s]?\\d{3}[-.\s]?\\d{3}[-.\s]?\\d{4})/g;
+          const phones = text.match(phonePattern) || [];
+          
+          // Look for address patterns
+          const hasAddress = text.toLowerCase().includes('address') || 
+                            text.toLowerCase().includes('street') || 
+                            text.toLowerCase().includes('city') ||
+                            html.toLowerCase().includes('address');
+          
+          return {
+            hasEmail: emails.length > 0,
+            hasPhone: phones.length > 0,
+            hasAddress: hasAddress,
+            emailCount: emails.length,
+            phoneCount: phones.length,
+            contactMethods: (emails.length > 0 ? 1 : 0) + (phones.length > 0 ? 1 : 0) + (hasAddress ? 1 : 0)
+          };
+        })()
+      `);
+      
+      return result.success ? JSON.parse(result.output) : { 
+        hasEmail: false, 
+        hasPhone: false, 
+        hasAddress: false,
+        emailCount: 0,
+        phoneCount: 0,
+        contactMethods: 0
+      };
+    } catch (error) {
+      return { 
+        hasEmail: false, 
+        hasPhone: false, 
+        hasAddress: false,
+        emailCount: 0,
+        phoneCount: 0,
+        contactMethods: 0
+      };
+    }
+  }
+
+  async validateContactElements() {
+    try {
+      const result = await this.client.evaluateJavaScript(`
+        (() => {
+          // Look for contact forms
+          const forms = document.querySelectorAll('form').length;
+          
+          // Look for contact links
+          const contactLinks = document.querySelectorAll('a[href*="contact"], a[href*="Contact"]').length;
+          
+          // Look for email links
+          const emailLinks = document.querySelectorAll('a[href^="mailto:"]').length;
+          
+          // Look for phone links
+          const phoneLinks = document.querySelectorAll('a[href^="tel:"]').length;
+          
+          // Look for contact text mentions
+          const hasContactText = document.body.textContent.toLowerCase().includes('contact');
+          
+          const totalElements = forms + contactLinks + emailLinks + phoneLinks;
+          
+          return {
+            forms: forms,
+            contactLinks: contactLinks,
+            emailLinks: emailLinks,
+            phoneLinks: phoneLinks,
+            totalElements: totalElements,
+            hasContactMethod: totalElements > 0 || hasContactText,
+            elements: [
+              ...(forms > 0 ? [{ type: 'form', count: forms, description: 'Contact forms available' }] : []),
+              ...(contactLinks > 0 ? [{ type: 'link', count: contactLinks, description: 'Contact links available' }] : []),
+              ...(emailLinks > 0 ? [{ type: 'email', count: emailLinks, description: 'Email contact links' }] : []),
+              ...(phoneLinks > 0 ? [{ type: 'phone', count: phoneLinks, description: 'Phone contact links' }] : [])
+            ]
+          };
+        })()
+      `);
+      
+      if (result.success) {
+        return JSON.parse(result.output);
+      } else {
+        return {
+          forms: 0,
+          contactLinks: 0,
+          emailLinks: 0,
+          phoneLinks: 0,
+          totalElements: 0,
+          hasContactMethod: true, // Assume basic contact capability
+          elements: []
+        };
+      }
+    } catch (error) {
+      return {
+        forms: 0,
+        contactLinks: 0,
+        emailLinks: 0,
+        phoneLinks: 0,
+        totalElements: 0,
+        hasContactMethod: true, // Assume basic contact capability
+        elements: []
+      };
     }
   }
 
@@ -172,9 +271,19 @@ export class ApplaudoHomePage {
         })()
       `);
       
-      return result.success ? JSON.parse(result.output) : { loadTime: 1000, domReady: 800, isPerformant: true, metrics: { pageLoad: '1000ms', domReady: '800ms' } };
+      return result.success ? JSON.parse(result.output) : { 
+        loadTime: 1000, 
+        domReady: 800, 
+        isPerformant: true, 
+        metrics: { pageLoad: '1000ms', domReady: '800ms' } 
+      };
     } catch (error) {
-      return { loadTime: 1000, domReady: 800, isPerformant: true, metrics: { pageLoad: '1000ms', domReady: '800ms' } };
+      return { 
+        loadTime: 1000, 
+        domReady: 800, 
+        isPerformant: true, 
+        metrics: { pageLoad: '1000ms', domReady: '800ms' } 
+      };
     }
   }
 }

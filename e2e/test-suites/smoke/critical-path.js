@@ -12,8 +12,8 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { ApplaudoHomePage } from '../../page-objects/homepage.js';
-import { ApplaudoContactPage } from '../../page-objects/contact-page.js';
+import { IFSightHomePage } from '../../page-objects/homepage.js';
+import { IFSightContactPage } from '../../page-objects/contact-page.js';
 
 class CriticalPathSmokeTests extends BaseTestFramework {
   constructor() {
@@ -23,8 +23,8 @@ class CriticalPathSmokeTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new ApplaudoHomePage(this.client);
-    this.contactPage = new ApplaudoContactPage(this.client);
+    this.homePage = new IFSightHomePage(this.client);
+    this.contactPage = new IFSightContactPage(this.client);
   }
 
   /**

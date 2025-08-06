@@ -1,35 +1,22 @@
 # Playwright MCP Server QA Automation Framework
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-A comprehensive QA automation framework featuring traditional Playwright tests, AI-enhanced MCP testing, and complete API validation.
+A comprehensive QA automation framework featuring traditional Playwright tests, advanced MCP testing, and complete API validation.
 
 ## Framework Overview
 
 ### **Multi-Layer Testing Strategy**
 - **Traditional Playwright** - 5 comprehensive test suites across 3 browsers (Chromium, Firefox, WebKit)
-- **MCP-Enhanced Testing** - AI-assisted automation via Mo## Future Enhancements
-
-### **Planned Improvements**
-1. **Enhanced Cross-browser Coverage** - Extended WebKit and Firefox test coverage
-2. **Advanced API Integration Testing** - Backend service validation and database testing
-3. **Visual Regression Testing** - UI consistency validation with screenshot comparison
-4. **Load Testing** - Performance under stress conditions and concurrent users
-5. **Automated Test Selection** - Smart test execution based on code changes
-
-### **CI/CD Evolution**
-- **Enhanced Notifications** - Slack/Teams integration for test results
-- **Intelligent Deployment Gates** - Automatic promotion based on test results
-- **Performance Benchmarking** - Historical trend analysis and alerting
-- **Multi-Environment Testing** - Staging, pre-production validationotocol with 32 organized tests
+- **Advanced MCP Testing** - Intelligent automation via Model Context Protocol with 32 organized tests
 - **API Validation** - Server-side testing with Postman/Newman (15 tests)
-- **Security & Compliance** - Financial services requirements and WCAG accessibility
+- **Security & Compliance** - Government website requirements and WCAG accessibility
 
 ### **Key Features**
 - **Organized Test Suites** - 32 MCP tests organized into 5 categories (Smoke, Functional, Performance, Accessibility, Security)
 - **Multi-Browser Support** - Traditional Playwright tests across Chromium, Firefox, and WebKit
 - **Flexible Execution** - Multiple strategies from quick smoke tests (3-5 min) to comprehensive validation (35-45 min)
-- **AI Integration** - Model Context Protocol for intelligent test adaptation and self-healing
-- **Business Focus** - Financial services compliance and professional validation
+- **Advanced Integration** - Model Context Protocol for intelligent test adaptation and self-healing
+- **Government Focus** - Government website solutions validation and professional testing
 - **Comprehensive Reporting** - HTML reports, JSON data, performance metrics, and business insights
 - **CI/CD Integration** - Automated testing pipeline with GitHub Actions
 
@@ -48,7 +35,7 @@ playwright-mcp-server/
 │   ├── performance.spec.js       # Performance monitoring tests
 │   ├── security.spec.js          # Security validation tests
 │   └── traditional-playwright.spec.js # Cross-browser test suite
-├── 📁 e2e/                        # MCP-Enhanced Framework
+├── 📁 e2e/                        # Advanced MCP Framework
 │   ├── 📁 test-plan/              # Test strategy and documentation
 │   │   └── COMPREHENSIVE_TEST_PLAN.md # Complete test strategy
 │   ├── 📁 test-suites/            # Organized test execution
@@ -96,34 +83,51 @@ npx playwright install
 npm run build
 
 # Verify installation
-npm run test:smoke     # Quick validation (3-5 min)
+npm run smoke     # Quick validation (3-5 min)
 ```
 
-### **Quick Test Commands**
+### **Quick Test Commands** 🚀
 ```bash
-# Smoke Tests (3-5 min) - Critical path validation
-npm run test:smoke
+# Individual test suites (clean, simple names)
+npm run smoke          # Critical path validation (3-5 min)
+npm run functional     # Standard content validation (5-8 min) 
+npm run functional:advanced  # Advanced content validation (4-6 min)
+npm run performance    # Load time validation (4-6 min)
+npm run accessibility  # WCAG compliance (3-5 min)
+npm run security       # Data protection (6-8 min)
+```
 
-# Functional Tests (5-8 min) - Content validation
-npm run test:functional
+### **Test Suite Combinations** 📊
+```bash
+# Logical groupings for common scenarios
+npm run suite:quick    # Smoke + Functional for rapid feedback (8-13 min)
+npm run suite:content  # Both content validation tests (9-14 min)
+npm run suite:quality  # Performance + Accessibility (7-11 min) 
+npm run suite:all      # All individual test suites (25-35 min)
+```
 
-# Performance Tests (4-6 min) - Load time validation
-npm run test:performance
-
-# Accessibility Tests (3-5 min) - WCAG compliance
-npm run test:accessibility
-
-# Security Tests (6-8 min) - Data protection
-npm run test:security
+### **Advanced Orchestrated Testing** ⚡
+```bash
+# Master test runner with enhanced reporting and coordination
+npm run orchestrated:smoke           # Quick validation (3-5 min)
+npm run orchestrated:functional      # Business logic validation (14-21 min)
+npm run orchestrated:quality         # Performance + Accessibility + Security (13-19 min)
+npm run orchestrated:comprehensive   # Full system validation (35-45 min)
 ```
 
 ### **Complete Test Strategies**
 ```bash
-# Orchestrated test execution with master test runner
-npm run run:smoke           # Quick validation (3-5 min)
-npm run run:functional      # Business logic validation (14-21 min)
-npm run run:quality         # Performance + Accessibility + Security (13-19 min)
-npm run run:comprehensive   # Full system validation (35-45 min)
+# Advanced Orchestrated Testing (with master test runner)
+npm run orchestrated:smoke           # Quick validation (3-5 min)
+npm run orchestrated:functional      # Business logic validation (14-21 min)
+npm run orchestrated:quality         # Performance + Accessibility + Security (13-19 min)
+npm run orchestrated:comprehensive   # Full system validation (35-45 min)
+
+# Direct Test Suite Combinations
+npm run suite:quick                   # Smoke + Functional for rapid feedback (8-13 min)
+npm run suite:content                 # Both content validation tests (9-14 min)
+npm run suite:quality                 # Performance + Accessibility (7-11 min)
+npm run suite:all                     # All test suites (25-35 min)
 
 # Traditional Playwright tests (cross-browser)
 npm run test                # All browsers (Chromium, Firefox, WebKit)
@@ -131,8 +135,8 @@ npm run test:headed         # Visible browser execution
 npx playwright test --project=chromium  # Single browser
 
 # API testing
-npm run test:api            # Basic API validation
-npm run test:api-detailed   # API tests with HTML reports
+npm run api            # Basic API validation
+npm run api:detailed   # API tests with HTML reports
 ```
 
 ---
@@ -149,7 +153,7 @@ The framework includes a comprehensive CI/CD pipeline that automatically runs on
 The CI pipeline includes:
 - **Lint & Build validation** - TypeScript compilation and code quality
 - **Traditional Playwright tests** - Cross-browser testing (Chromium, Firefox, WebKit)
-- **MCP-Enhanced test suites** - AI-assisted testing across 4 categories
+- **Advanced MCP test suites** - Intelligent testing across 4 categories
 - **API validation tests** - Server-side endpoint testing
 - **Security scanning** - Dependency vulnerabilities and security validation
 - **Performance testing** - Load time and performance metrics
@@ -163,7 +167,7 @@ The CI pipeline includes:
 ### **Pipeline Jobs**
 1. **lint-and-build** - TypeScript validation and MCP server build
 2. **test-traditional-playwright** - Cross-browser testing matrix
-3. **test-mcp-enhanced** - AI-assisted test execution
+3. **test-advanced-mcp** - Intelligent test execution
 4. **test-api** - Server-side validation
 5. **security-scan** - Dependency and security validation
 6. **performance-test** - Load time and performance metrics
@@ -174,7 +178,7 @@ The CI pipeline includes:
 
 ## Test Coverage & Organization
 
-### **Test Categories** (32 MCP-Enhanced Tests + Traditional Playwright Suite)
+### **Test Categories** (32 Advanced MCP Tests + Traditional Playwright Suite)
 
 #### 1. **Smoke Tests** (4 tests, 3-5 min)
 **Purpose:** Critical path validation - must pass before deployment
@@ -317,18 +321,18 @@ npm run run:comprehensive
 
 ---
 
-## MCP-Enhanced Testing
+## Advanced MCP Testing
 
 ### **Model Context Protocol Integration**
-- **AI Analysis:** GitHub Copilot analyzes website structure and generates adaptive scenarios
+- **Intelligent Analysis:** Advanced analysis of website structure and adaptive test scenarios
 - **Self-Healing:** Tests automatically adjust to UI changes
 - **Business Focus:** Validates functionality rather than brittle element selectors
 - **Smart Reporting:** Provides business-meaningful insights and recommendations
 
 ### **Enhanced Capabilities**
 - **Intelligent Error Handling:** Robust JSON parsing and fallback strategies
-- **Dynamic Test Adaptation:** AI-powered test scenario generation
-- **Business Context:** Financial services compliance validation
+- **Dynamic Test Adaptation:** Advanced test scenario generation
+- **Business Context:** Government website solutions compliance validation
 - **Advanced Analytics:** Performance trends and accessibility compliance tracking
 
 ---
@@ -373,10 +377,10 @@ Simulate different devices and browsers:
 - Responsive design validation
 
 ### **API Configuration**
-- **Base URL:** https://applaudo.com/en/
+- **Base URL:** https://www.ifsight.com/
 - **User Agent:** API-Tests/1.0
 - **Timeout:** 5000ms
-- **Test Email:** test@applaudo.com
+- **Test Email:** test@ifsight.com
 
 ### **Performance Benchmarks**
 - Homepage: < 3 seconds response time
@@ -417,9 +421,9 @@ newman run API-Tests.postman_collection.json \
 | Requirement | Validation Method | Success Criteria |
 |-------------|------------------|------------------|
 | HTTPS Enforcement | Form security check | 100% secure protocols |
-| Company Information | Address/phone validation | Tulsa, OK location verified |
+| Government Information | Address/phone validation | IFSight government solutions verified |
 | Trust Indicators | SSL, contact info, address | ≥ 2/3 indicators present |
-| Financial Keywords | Content analysis | ≥ 3 industry keywords |
+| Government Keywords | Content analysis | ≥ 3 government website keywords |
 
 ---
 
@@ -430,7 +434,7 @@ newman run API-Tests.postman_collection.json \
 - **JSON Data:** Structured test results for analysis and trending
 - **Performance Metrics:** Load times, Core Web Vitals, optimization suggestions
 - **Accessibility Reports:** WCAG compliance scores and recommendations
-- **Business Validation:** Company information accuracy and trust indicators
+- **Business Validation:** Government website information accuracy and trust indicators
 
 ### **Report Locations**
 - **E2E Reports:** `e2e/reports/` - MCP test results
@@ -471,7 +475,7 @@ newman run API-Tests.postman_collection.json \
 
 ### **Core Technologies**
 - **Playwright** - Browser automation engine with multi-browser support
-- **MCP (Model Context Protocol)** - AI-browser integration for enhanced testing
+- **MCP (Model Context Protocol)** - Advanced browser integration for enhanced testing
 - **TypeScript/JavaScript** - Implementation languages for framework and tests
 - **Node.js** - Runtime environment and dependency management
 
@@ -484,7 +488,7 @@ newman run API-Tests.postman_collection.json \
 - **WCAG 2.1 AA** - Accessibility compliance validation
 - **Performance Monitoring** - Core Web Vitals and load time tracking
 - **Security Validation** - HTTPS, headers, SSL certificate verification
-- **Business Compliance** - Financial services requirements validation
+- **Government Compliance** - Government website solutions requirements validation
 
 ---
 
@@ -611,6 +615,21 @@ e2e/test-suites/
 - Intelligent deployment decisions
 - Performance trend monitoring and alerting
 
+### **Framework Evolution**
+- **Clean Architecture** - Consolidated testing capabilities without terminology bloat
+- **Unified Page Objects** - Single comprehensive homepage.js with all methods
+- **Advanced Testing** - Intelligent test adaptation and government website validation
+- **Streamlined Execution** - Both standard and advanced content validation available
+
+### **Recent Updates (August 2025)**
+- **Consolidated Framework** - Merged advanced testing capabilities into clean, maintainable structure
+- **Removed Redundancy** - Eliminated duplicate files and terminology while preserving all functionality
+- **Enhanced Page Objects** - Complete homepage.js with government website testing methods
+- **Streamlined Test Suites** - Both content-validation.js and content-validation-advanced.js with 100% success rates
+- **Target Focus** - All tests now properly configured for IFSight.com government website solutions
+- **Test Results** - Content Validation: 4/4 passing, Advanced Content Validation: 4/4 passing, Smoke Tests: 3/3 passing
+- **Reorganized Scripts** - Clean, intuitive script organization with logical groupings and clear naming
+
 ---
 
 ## Support & Documentation
@@ -635,4 +654,4 @@ e2e/test-suites/
 
 ---
 
-**Results Summary:** 47+ total tests (5 traditional test suites + 32 MCP-enhanced + 15 API) | Comprehensive coverage | AI-enhanced validation | Financial services compliance | CI/CD integration
+**Results Summary:** 47+ total tests (5 traditional test suites + 32 advanced MCP + 15 API) | Comprehensive coverage | Intelligent validation | Government website solutions compliance | CI/CD integration

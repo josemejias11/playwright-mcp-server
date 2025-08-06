@@ -11,29 +11,33 @@
     "build": "tsc && chmod +x build/index.js",
     "start": "npm run build && node build/index.js",
     "dev": "tsc --watch",
+    
     "test": "playwright test",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
-    "demo:playwright": "playwright test tests/traditional-playwright.spec.js",
-    "test:api": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,json",
-    "test:api-detailed": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export postman/reports/api-test-report.html",
-    "test:smoke": "node e2e/test-suites/smoke/critical-path.js",
-    "test:functional": "node e2e/test-suites/functional/content-validation.js",
-    "test:performance": "node e2e/test-suites/performance/load-times.js",
-    "test:accessibility": "node e2e/test-suites/accessibility/wcag-compliance.js",
-    "test:security": "node e2e/test-suites/security/data-protection.js",
-    "test:suite:smoke": "npm run test:smoke",
-    "test:suite:functional": "npm run test:functional",
-    "test:suite:quality": "npm run test:performance && npm run test:accessibility",
-    "test:suite:security": "npm run test:security",
-    "test:suite:all": "npm run test:smoke && npm run test:functional && npm run test:performance && npm run test:accessibility && npm run test:security",
-    "run:smoke": "node test-runner.js smoke",
-    "run:functional": "node test-runner.js functional",
-    "run:quality": "node test-runner.js quality",
-    "run:security": "node test-runner.js security",
-    "run:comprehensive": "node test-runner.js comprehensive"
+    
+    "smoke": "node e2e/test-suites/smoke/critical-path.js",
+    "functional": "node e2e/test-suites/functional/content-validation.js",
+    "functional:advanced": "node e2e/test-suites/functional/content-validation-advanced.js",
+    "performance": "node e2e/test-suites/performance/load-times.js",
+    "accessibility": "node e2e/test-suites/accessibility/wcag-compliance.js",
+    "security": "node e2e/test-suites/security/data-protection.js",
+    
+    "suite:content": "npm run functional && npm run functional:advanced",
+    "suite:quality": "npm run performance && npm run accessibility",
+    "suite:all": "npm run smoke && npm run functional && npm run functional:advanced && npm run performance && npm run accessibility && npm run security",
+    "suite:quick": "npm run smoke && npm run functional",
+    
+    "orchestrated:smoke": "node test-runner.js smoke",
+    "orchestrated:functional": "node test-runner.js functional", 
+    "orchestrated:quality": "node test-runner.js quality",
+    "orchestrated:security": "node test-runner.js security",
+    "orchestrated:comprehensive": "node test-runner.js comprehensive",
+    
+    "api": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,json",
+    "api:detailed": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export postman/reports/api-test-report.html"
   },
   "files": [
     "build"

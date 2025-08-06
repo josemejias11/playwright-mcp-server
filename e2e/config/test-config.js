@@ -14,7 +14,7 @@ dotenv.config({ path: join(__dirname, '../../.env') });
 
 export const TestConfig = {
   // Environment Configuration
-  baseUrl: process.env.BASE_URL || 'https://applaudo.com/en/',
+  baseUrl: process.env.BASE_URL || 'https://www.ifsight.com',
   environment: process.env.TEST_ENV || 'production',
   
   // Browser Configuration
@@ -37,16 +37,16 @@ export const TestConfig = {
   
   // Test Data
   urls: {
-    homepage: 'https://applaudo.com/en/',
-    services: 'https://applaudo.com/en/services/',
-    contact: 'https://applaudo.com/en/contact/',
-    about: 'https://applaudo.com/en/about/',
-    careers: 'https://applaudo.com/en/careers/'
+    homepage: 'https://www.ifsight.com',
+    services: 'https://www.ifsight.com/services',
+    contact: 'https://www.ifsight.com/contact',
+    about: 'https://www.ifsight.com/about',
+    careers: 'https://www.ifsight.com/careers'
   },
   
   // Expected Page Titles
   expectedTitles: {
-    homepage: 'Applaudo Studios',
+    homepage: 'IFSight',
     services: 'Services',
     contact: 'Contact',
     about: 'About',
@@ -55,10 +55,10 @@ export const TestConfig = {
   
   // Company Information (for validation)
   companyInfo: {
-    name: 'Applaudo Studios',
-    address: 'San Salvador, El Salvador',
-    phone: '(503) 2505-7000',
-    fax: '(503) 2505-7000'
+    name: 'IFSight',
+    address: 'United States',
+    phone: '(555) 123-4567',
+    fax: '(555) 123-4567'
   },
   
   // Test Data for Forms
@@ -66,8 +66,8 @@ export const TestConfig = {
     contact: {
       validContact: {
         name: 'John Doe',
-        email: 'john.doe@applaudo.com',
-        confirmEmail: 'john.doe@applaudo.com',
+        email: 'john.doe@ifsight.com',
+        confirmEmail: 'john.doe@ifsight.com',
         message: 'I am interested in your software development services and would like to learn more about your offerings.'
       },
       invalidContact: {
