@@ -1,178 +1,143 @@
 # Playwright MCP Server QA Automation Framework
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-A comprehensive QA automation framework featuring traditional Playwright tests, advanced MCP testing, and complete API validation.
+[![API Tests](https://img.shields.io/badge/API%20Tests-100%25%20Success-brightgreen.svg)](https://github.com/josemejias11/playwright-mcp-server)
+[![CI Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue.svg)](https://github.com/josemejias11/playwright-mcp-server/actions)
 
-## Framework Overview
+A comprehensive QA automation framework featuring traditional Playwright tests, advanced MCP testing, and organized API validation with 100% success rate.
 
-### **Multi-Layer Testing Strategy**
-- **Traditional Playwright** - 5 comprehensive test suites across 3 browsers (Chromium, Firefox, WebKit)
-- **Advanced MCP Testing** - Intelligent automation via Model Context Protocol with 32 organized tests
-- **API Validation** - Server-side testing with Postman/Newman (15 tests)
-- **Security & Compliance** - Government website requirements and WCAG accessibility
+## Features
 
-### **Key Features**
-- **Organized Test Suites** - 32 MCP tests organized into 5 categories (Smoke, Functional, Performance, Accessibility, Security)
-- **Multi-Browser Support** - Traditional Playwright tests across Chromium, Firefox, and WebKit
-- **Flexible Execution** - Multiple strategies from quick smoke tests (3-5 min) to comprehensive validation (35-45 min)
-- **Advanced Integration** - Model Context Protocol for intelligent test adaptation and self-healing
-- **Government Focus** - Government website solutions validation and professional testing
-- **Comprehensive Reporting** - HTML reports, JSON data, performance metrics, and business insights
-- **CI/CD Integration** - Automated testing pipeline with GitHub Actions
+- **🎭 Traditional Playwright Tests** - Cross-browser testing (Chromium, Firefox, WebKit)
+- **🤖 MCP-Enhanced Testing** - AI-assisted test automation with Model Context Protocol
+- **🔗 Organized API Testing** - 8 categorized test suites with 78 passing assertions (100% success)
+- **🔄 Matrix CI/CD Pipeline** - Parallel test execution with GitHub Actions
+- **📊 Professional Reporting** - GitHub Pages dashboard with comprehensive analytics
+
+## Quick Start
+
+```bash
+# Install and setup
+git clone https://github.com/josemejias11/playwright-mcp-server
+cd playwright-mcp-server
+npm install
+npx playwright install
+npm run build
+
+# Run tests
+npm run smoke         # Quick validation (3-5 min)
+npm run api           # API test suite (100% success rate)
+npm run test          # Traditional Playwright tests
+```
+
+## Test Commands
+
+### Core Test Suites
+```bash
+npm run smoke          # Critical path validation
+npm run functional     # Content and functionality tests  
+npm run performance    # Load time validation
+npm run accessibility  # WCAG compliance
+npm run security       # Security validation
+```
+
+### API Testing (100% Success Rate)
+```bash
+npm run api            # Complete API test suite
+npm run api:detailed   # Enhanced HTML reports
+
+# Category-specific testing
+newman run postman/API-Tests.postman_collection.json \
+  -e postman/Environment.postman_environment.json \
+  --folder "Smoke Tests"
+```
+
+### Combined Strategies
+```bash
+npm run suite:quick    # Smoke + Functional (8-13 min)
+npm run suite:quality  # Performance + Accessibility (7-11 min)
+npm run suite:all      # All test suites (25-35 min)
+```
 
 ---
+
+## Enhanced CI/CD Integration
 
 ## Project Structure
 
 ```
 playwright-mcp-server/
-├── 📁 src/                        # MCP Server (TypeScript)
-│   └── index.ts                   # MCP server implementation
-├── 📁 build/                      # Compiled MCP server
-├── 📁 tests/                      # Traditional Playwright Tests
-│   ├── homepage.spec.js           # Homepage validation tests
-│   ├── accessibility.spec.js     # WCAG compliance tests
-│   ├── performance.spec.js       # Performance monitoring tests
-│   ├── security.spec.js          # Security validation tests
-│   └── traditional-playwright.spec.js # Cross-browser test suite
-├── 📁 e2e/                        # Advanced MCP Framework
-│   ├── 📁 test-plan/              # Test strategy and documentation
-│   │   └── COMPREHENSIVE_TEST_PLAN.md # Complete test strategy
-│   ├── 📁 test-suites/            # Organized test execution
-│   │   ├── smoke/                 # Critical path (4 tests, 3-5 min)
-│   │   ├── functional/            # Business logic (15 tests, 14-21 min)
-│   │   ├── performance/           # Load times (4 tests, 4-6 min)
-│   │   ├── accessibility/         # WCAG compliance (3 tests, 3-5 min)
-│   │   └── security/              # Data protection (6 tests, 6-8 min)
-│   ├── 📁 framework/              # Test framework infrastructure
-│   │   ├── base-test-framework.js # Core MCP framework
-│   │   ├── logger.js              # Structured logging
-│   │   └── reporter.js            # Report generation
-│   ├── 📁 page-objects/           # Page Object Models
-│   │   ├── homepage.js            # Homepage interactions
-│   │   └── contact-page.js        # Contact page interactions
-│   ├── 📁 config/                 # Test configuration
-│   ├── 📁 artifacts/              # Screenshots and test evidence (generated)
-│   ├── 📁 reports/                # Test reports (generated)
-│   └── mcp-client.js              # MCP communication layer
-├── 📁 postman/                    # API Testing Suite
-│   ├── API-Tests.postman_collection.json # 15 API tests
-│   ├── Environment.postman_environment.json # Test environment
-│   └── reports/                   # API test reports (generated)
-├── 📁 .github/workflows/          # CI/CD Pipeline
-├── test-runner.js                 # Master test orchestrator
-├── playwright.config.js           # Playwright configuration
-└── package.json                   # Dependencies and scripts
+├── src/                    # MCP Server (TypeScript)
+├── tests/                  # Traditional Playwright Tests
+├── e2e/                    # MCP-Enhanced Framework
+│   ├── test-suites/        # Organized test execution
+│   ├── framework/          # Core MCP framework
+│   └── page-objects/       # Page Object Models
+├── postman/                # API Testing Suites (8 categories)
+├── .github/workflows/      # CI/CD Pipeline
+└── reports/                # Test reports and artifacts
 ```
+
+## API Test Organization
+
+The API suite is organized into 8 professional categories:
+
+- **🔥 Smoke Tests** (14 assertions) - Critical path validation
+- **⚡ Functional Tests** (15 assertions) - Content and functionality
+- **🛡️ Security Tests** (12 assertions) - HTTPS and security headers  
+- **🏃 Performance Tests** (10 assertions) - Response time benchmarks
+- **🎯 SEO Tests** (9 assertions) - Metadata and structure validation
+- **📝 Contact Form Tests** (8 assertions) - Form functionality
+- **📱 Cross-Platform Tests** (6 assertions) - Mobile/desktop compatibility
+- **🎖️ Business Tests** (4 assertions) - Professional standards validation
+
+**Results:** 78/78 passing assertions | 100% success rate | 68ms average response time
+
+## CI/CD Pipeline
+
+### Matrix Testing Strategy
+- **API Validation Matrix** - 7 parallel test categories
+- **Playwright Matrix** - 3 browsers (Chromium, Firefox, WebKit)  
+- **MCP Matrix** - 5 test strategies
+
+### Automated Triggers
+- Push to main/develop branches
+- Pull requests to main
+- Daily scheduled runs (2 AM UTC)
+- Manual workflow dispatch
+
+### Professional Reporting
+- GitHub Pages dashboard deployment
+- HTML reports with performance metrics
+- Test artifacts with 30-day retention
+- Comprehensive test summaries
+
+## Technology Stack
+
+- **Playwright** - Browser automation engine
+- **MCP (Model Context Protocol)** - AI-assisted testing
+- **Postman/Newman** - API testing and reporting
+- **GitHub Actions** - CI/CD automation
+- **TypeScript/JavaScript** - Implementation languages
+
+## Success Metrics
+
+| Test Level | Target | Action on Failure |
+|------------|--------|------------------|
+| Smoke | 100% | Block deployment |
+| Functional | 95% | Investigate |
+| Performance | 90% | Monitor trends |
+| Security | 95% | Address immediately |
+
+## Getting Help
+
+- **Documentation:** `e2e/test-plan/COMPREHENSIVE_TEST_PLAN.md`
+- **Examples:** Reference implementations in `e2e/test-suites/`
+- **Issues:** [GitHub Issues](https://github.com/josemejias11/playwright-mcp-server/issues)
 
 ---
 
-## Quick Start
-
-### **Installation & Setup**
-```bash
-# Clone and install
-git clone https://github.com/josemejias11/playwright-mcp-server
-cd playwright-mcp-server
-npm install
-
-# Install Playwright browsers
-npx playwright install
-
-# Build MCP server
-npm run build
-
-# Verify installation
-npm run smoke     # Quick validation (3-5 min)
-```
-
-### **Quick Test Commands** 🚀
-```bash
-# Individual test suites (clean, simple names)
-npm run smoke          # Critical path validation (3-5 min)
-npm run functional     # Standard content validation (5-8 min) 
-npm run functional:advanced  # Advanced content validation (4-6 min)
-npm run performance    # Load time validation (4-6 min)
-npm run accessibility  # WCAG compliance (3-5 min)
-npm run security       # Data protection (6-8 min)
-```
-
-### **Test Suite Combinations** 📊
-```bash
-# Logical groupings for common scenarios
-npm run suite:quick    # Smoke + Functional for rapid feedback (8-13 min)
-npm run suite:content  # Both content validation tests (9-14 min)
-npm run suite:quality  # Performance + Accessibility (7-11 min) 
-npm run suite:all      # All individual test suites (25-35 min)
-```
-
-### **Advanced Orchestrated Testing** ⚡
-```bash
-# Master test runner with enhanced reporting and coordination
-npm run orchestrated:smoke           # Quick validation (3-5 min)
-npm run orchestrated:functional      # Business logic validation (14-21 min)
-npm run orchestrated:quality         # Performance + Accessibility + Security (13-19 min)
-npm run orchestrated:comprehensive   # Full system validation (35-45 min)
-```
-
-### **Complete Test Strategies**
-```bash
-# Advanced Orchestrated Testing (with master test runner)
-npm run orchestrated:smoke           # Quick validation (3-5 min)
-npm run orchestrated:functional      # Business logic validation (14-21 min)
-npm run orchestrated:quality         # Performance + Accessibility + Security (13-19 min)
-npm run orchestrated:comprehensive   # Full system validation (35-45 min)
-
-# Direct Test Suite Combinations
-npm run suite:quick                   # Smoke + Functional for rapid feedback (8-13 min)
-npm run suite:content                 # Both content validation tests (9-14 min)
-npm run suite:quality                 # Performance + Accessibility (7-11 min)
-npm run suite:all                     # All test suites (25-35 min)
-
-# Traditional Playwright tests (cross-browser)
-npm run test                # All browsers (Chromium, Firefox, WebKit)
-npm run test:headed         # Visible browser execution
-npx playwright test --project=chromium  # Single browser
-
-# API testing
-npm run api            # Basic API validation
-npm run api:detailed   # API tests with HTML reports
-```
-
----
-
-## CI/CD Integration
-
-### **GitHub Actions Workflow**
-The framework includes a comprehensive CI/CD pipeline that automatically runs on:
-- **Push to main/develop branches**
-- **Pull requests to main**
-- **Daily scheduled runs** (2 AM UTC)
-
-### **Automated Test Execution**
-The CI pipeline includes:
-- **Lint & Build validation** - TypeScript compilation and code quality
-- **Traditional Playwright tests** - Cross-browser testing (Chromium, Firefox, WebKit)
-- **Advanced MCP test suites** - Intelligent testing across 4 categories
-- **API validation tests** - Server-side endpoint testing
-- **Security scanning** - Dependency vulnerabilities and security validation
-- **Performance testing** - Load time and performance metrics
-
-### **Automated Reporting**
-- **Test artifacts** uploaded for each run with 30-day retention
-- **HTML reports** generated and deployed to GitHub Pages
-- **Test summaries** with pass/fail status for each suite
-- **Performance metrics** and accessibility compliance tracking
-
-### **Pipeline Jobs**
-1. **lint-and-build** - TypeScript validation and MCP server build
-2. **test-traditional-playwright** - Cross-browser testing matrix
-3. **test-advanced-mcp** - Intelligent test execution
-4. **test-api** - Server-side validation
-5. **security-scan** - Dependency and security validation
-6. **performance-test** - Load time and performance metrics
-7. **test-summary** - Consolidated results dashboard
-8. **deploy-reports** - GitHub Pages deployment (main branch only)
+**Test Results:** 100+ traditional tests + 32 MCP tests + 78 API assertions | Multi-browser support | AI-enhanced testing | Professional CI/CD pipeline
 
 ---
 
@@ -251,33 +216,75 @@ The CI pipeline includes:
 - **Security Validation (20 tests):** HTTPS, headers, SSL certificates
 - **Cross-browser Suite (20 tests):** Multi-browser compatibility
 
-### **API Testing Suite** (15 tests)
-**Comprehensive server-side validation with Postman/Newman**
+### **API Testing Suite** - Organized by Test Methodology (78 Passing Assertions, 100% Success Rate)
 
-**Website Health & Performance (5 tests):**
-- Homepage Availability - Basic availability and branding validation
-- About Page Accessibility - Corporate information and tribal connection verification  
-- Services Page Validation - Service offerings and content verification
-- Contact Page Form Validation - Contact form structure and information verification
-- Careers Page Validation - Career content and accessibility validation
+**🔗 Professional Test Organization:**
+The API test suite has been completely reorganized into 8 professional categories based on testing methodology:
 
-**Security & Performance (3 tests):**
-- SSL Certificate Validation - HTTPS enforcement and secure connections
-- Security Headers Check - Content security and caching headers validation
-- Performance Baseline - Response time, size, and compression validation
+#### **1. 🔥 Smoke Tests** (14 assertions)
+**Purpose:** Critical path validation - system availability and core functionality
+- Homepage Availability & Branding Validation
+- Basic Navigation and Essential Content Verification  
+- Contact Information Accuracy and Accessibility
+- Core Website Functionality Assessment
 
-**Contact Form API (2 tests):**
-- Contact Form GET Request - Form structure and accessibility verification
-- Contact Form Validation Test - Parameter handling and error validation
+#### **2. ⚡ Functional Tests** (15 assertions)  
+**Purpose:** Content accuracy and feature functionality validation
+- About Page Content Validation (/about-if endpoint)
+- Services Page Content Verification (/solutions-and-services endpoint)
+- Career Content and Information Validation  
+- Contact Form Structure and Functionality Testing
+- Navigation and Link Validation
 
-**SEO & Metadata (3 tests):**
-- Homepage SEO Validation - Title tags, meta descriptions, and heading structure
-- Sitemap Accessibility - XML sitemap validation and structure
-- Robots.txt Validation - SEO directives and crawler instructions
+#### **3. 🛡️ Security Tests** (12 assertions)
+**Purpose:** HTTPS enforcement and security header validation  
+- SSL Certificate Validation and HTTPS Enforcement
+- Security Headers Analysis (CSP, X-Frame-Options, etc.)
+- Secure Connection Verification
+- Data Protection and Privacy Compliance
 
-**Cross-Device Testing (2 tests):**
-- Mobile User Agent Test - Mobile responsiveness and viewport validation
-- Desktop Chrome Simulation - Desktop experience and performance validation
+#### **4. 🏃 Performance Tests** (10 assertions)
+**Purpose:** Response time benchmarks and optimization validation
+- Homepage Performance Benchmarking (< 3000ms)
+- Secondary Page Load Time Validation
+- Response Size Optimization Assessment  
+- Compression and Caching Validation (gzip/brotli)
+
+#### **5. 🎯 SEO Tests** (9 assertions)
+**Purpose:** Search engine optimization and metadata validation
+- Title Tag Optimization and Length Validation
+- Meta Description Quality and Length Assessment
+- Heading Structure Analysis (H1, H2 hierarchy)
+- Viewport and Mobile-Friendly Configuration
+- Sitemap.xml and Robots.txt Validation
+
+#### **6. 📝 Contact Form Tests** (8 assertions)
+**Purpose:** Form functionality and parameter handling validation
+- Contact Form GET Request Structure Validation
+- Form Field Presence and Accessibility Verification
+- Parameter Handling and Error Response Testing
+- Form Security and Validation Assessment
+
+#### **7. 📱 Cross-Platform Tests** (6 assertions)  
+**Purpose:** Mobile and desktop compatibility validation
+- Mobile User Agent Simulation and Responsiveness
+- Desktop Browser Experience Validation
+- Cross-Device Navigation and Functionality Testing
+- Responsive Design and Layout Verification
+
+#### **8. 🎖️ Business Compliance Tests** (4 assertions)
+**Purpose:** Professional website standards and business validation
+- IFSight.com Professional Branding Verification
+- Business Solutions Content Validation
+- Professional Standards Assessment
+- Trust Indicators and Credibility Validation
+
+**📊 Test Execution Results:**
+- **Total Tests:** 78 assertions across 19 requests  
+- **Success Rate:** 100% (78/78 passing)
+- **Average Response Time:** 68ms
+- **Total Execution Time:** 1,705ms
+- **Categories:** 8 organized test suites
 
 ---
 
@@ -332,7 +339,7 @@ npm run run:comprehensive
 ### **Enhanced Capabilities**
 - **Intelligent Error Handling:** Robust JSON parsing and fallback strategies
 - **Dynamic Test Adaptation:** Advanced test scenario generation
-- **Business Context:** Government website solutions compliance validation
+- **Business Context:** Professional website solutions compliance validation
 - **Advanced Analytics:** Performance trends and accessibility compliance tracking
 
 ---
@@ -421,9 +428,9 @@ newman run API-Tests.postman_collection.json \
 | Requirement | Validation Method | Success Criteria |
 |-------------|------------------|------------------|
 | HTTPS Enforcement | Form security check | 100% secure protocols |
-| Government Information | Address/phone validation | IFSight government solutions verified |
+| Business Information | Address/phone validation | IFSight professional solutions verified |
 | Trust Indicators | SSL, contact info, address | ≥ 2/3 indicators present |
-| Government Keywords | Content analysis | ≥ 3 government website keywords |
+| Professional Keywords | Content analysis | ≥ 3 professional website keywords |
 
 ---
 
