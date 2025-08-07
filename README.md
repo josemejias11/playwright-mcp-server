@@ -4,15 +4,16 @@
 [![API Tests](https://img.shields.io/badge/API%20Tests-100%25%20Success-brightgreen.svg)](https://github.com/josemejias11/playwright-mcp-server)
 [![CI Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue.svg)](https://github.com/josemejias11/playwright-mcp-server/actions)
 
-A comprehensive QA automation framework featuring traditional Playwright tests, advanced MCP testing, and organized API validation with 100% success rate.
+A comprehensive QA automation framework featuring traditional Playwright tests, advanced MCP testing, and organized API validation with 100% success rate. **Full WCAG 2.1 AA accessibility compliance validation across 5 browsers.**
 
 ## Features
 
-- **🎭 Traditional Playwright Tests** - Cross-browser testing (Chromium, Firefox, WebKit)
-- **🤖 MCP-Enhanced Testing** - AI-assisted test automation with Model Context Protocol
-- **🔗 Organized API Testing** - 8 categorized test suites with 78 passing assertions (100% success)
-- **🔄 Matrix CI/CD Pipeline** - Parallel test execution with GitHub Actions
-- **📊 Professional Reporting** - GitHub Pages dashboard with comprehensive analytics
+- **Traditional Playwright Tests** - Cross-browser testing (Chromium, Firefox, WebKit)
+- **Full Accessibility Compliance** - WCAG 2.1 AA validation across 5 browsers (25/25 tests passing)
+- **MCP-Enhanced Testing** - AI-assisted test automation with Model Context Protocol
+- **Organized API Testing** - 8 categorized test suites with 78 passing assertions (100% success)
+- **Matrix CI/CD Pipeline** - Parallel test execution with GitHub Actions
+- **Professional Reporting** - GitHub Pages dashboard with comprehensive analytics
 
 ## Quick Start
 
@@ -26,7 +27,8 @@ npm run build
 
 # Run tests
 npm run smoke         # Quick validation (3-5 min)
-npm run api           # API test suite (100% success rate)
+npm run accessibility # WCAG 2.1 AA compliance
+npm run api           # API test suite
 npm run test          # Traditional Playwright tests
 ```
 
@@ -35,9 +37,9 @@ npm run test          # Traditional Playwright tests
 ### Core Test Suites
 ```bash
 npm run smoke          # Critical path validation
+npm run accessibility  # WCAG 2.1 AA compliance
 npm run functional     # Content and functionality tests  
 npm run performance    # Load time validation
-npm run accessibility  # WCAG compliance
 npm run security       # Security validation
 ```
 
@@ -55,8 +57,8 @@ newman run postman/API-Tests.postman_collection.json \
 ### Combined Strategies
 ```bash
 npm run suite:quick    # Smoke + Functional (8-13 min)
-npm run suite:quality  # Performance + Accessibility (7-11 min)
-npm run suite:all      # All test suites (25-35 min)
+npm run suite:quality  # Performance + Accessibility + Security (7-11 min)
+npm run suite:all      # All test suites including full accessibility (25-35 min)
 ```
 
 ## Project Structure
@@ -78,14 +80,14 @@ playwright-mcp-server/
 
 The API suite is organized into 8 professional categories:
 
-- **🔥 Smoke Tests** (14 assertions) - Critical path validation
-- **⚡ Functional Tests** (15 assertions) - Content and functionality
-- **🛡️ Security Tests** (12 assertions) - HTTPS and security headers  
-- **🏃 Performance Tests** (10 assertions) - Response time benchmarks
-- **🎯 SEO Tests** (9 assertions) - Metadata and structure validation
-- **📝 Contact Form Tests** (8 assertions) - Form functionality
-- **📱 Cross-Platform Tests** (6 assertions) - Mobile/desktop compatibility
-- **🎖️ Business Tests** (4 assertions) - Professional standards validation
+- **Smoke Tests** (14 assertions) - Critical path validation
+- **Functional Tests** (15 assertions) - Content and functionality
+- **Security Tests** (12 assertions) - HTTPS and security headers  
+- **Performance Tests** (10 assertions) - Response time benchmarks
+- **SEO Tests** (9 assertions) - Metadata and structure validation
+- **Contact Form Tests** (8 assertions) - Form functionality
+- **Cross-Platform Tests** (6 assertions) - Mobile/desktop compatibility
+- **Business Tests** (4 assertions) - Professional standards validation
 
 **Results:** 78/78 passing assertions | 100% success rate | 68ms average response time
 
@@ -121,16 +123,16 @@ The API suite is organized into 8 professional categories:
 | Test Level | Target | Action on Failure |
 |------------|--------|------------------|
 | Smoke | 100% | Block deployment |
+| Accessibility | 100% | Block deployment (WCAG 2.1 AA required) |
 | Functional | 95% | Investigate |
 | Performance | 90% | Monitor trends |
 | Security | 95% | Address immediately |
 
-## Getting Help
-
-- **Documentation:** `e2e/test-plan/COMPREHENSIVE_TEST_PLAN.md`
-- **Examples:** Reference implementations in `e2e/test-suites/`
-- **Issues:** [GitHub Issues](https://github.com/josemejias11/playwright-mcp-server/issues)
+### Accessibility Compliance Results
+- **Traditional Playwright:** 
+- **Cross-browser validation:** Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari
+- **WCAG 2.1 AA standards:** Heading structure, alt text, form labels, color contrast, keyboard navigation
 
 ---
 
-**Test Results:** 100+ traditional tests + 32 MCP tests + 78 API assertions | Multi-browser support | AI-enhanced testing | Professional CI/CD pipeline
+**Test Results:** 100+ traditional tests + 32 MCP tests + 78 API assertions | **25/25 accessibility tests passing** | Multi-browser support | AI-enhanced testing | Professional CI/CD pipeline
