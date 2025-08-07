@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "suiteName": "Critical Path Smoke Tests",
+    "timestamp": "2025-08-07T16:34:45.688Z",
+    "totalDuration": 7174,
+    "framework": "Playwright MCP Professional Testing Framework v1.0",
+    "environment": "production",
+    "browser": "chromium",
+    "url": "https://www.ifsight.com/"
+  },
+  "analytics": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "successRate": "100.00",
+    "avgDuration": 1467,
+    "categories": {
+      "PASSED": 3
+    },
+    "trends": {
+      "timePattern": {
+        "10": 3
+      },
+      "errorPatterns": {},
+      "reliability": "100.0"
+    }
+  },
+  "performance": {
+    "fastest": 436,
+    "slowest": 2159,
+    "median": 1807,
+    "percentile95": 2159
+  },
+  "results": [
+    {
+      "name": "Website Availability Check",
+      "status": "PASSED",
+      "duration": 2159,
+      "timestamp": "2025-08-07T16:34:42.345Z",
+      "suite": "Critical Path Smoke Tests"
+    },
+    {
+      "name": "Homepage Core Elements",
+      "status": "PASSED",
+      "duration": 436,
+      "timestamp": "2025-08-07T16:34:42.782Z",
+      "suite": "Critical Path Smoke Tests"
+    },
+    {
+      "name": "Contact Path Accessibility",
+      "status": "PASSED",
+      "duration": 1807,
+      "timestamp": "2025-08-07T16:34:44.589Z",
+      "suite": "Critical Path Smoke Tests"
+    }
+  ],
+  "raw": {
+    "suiteName": "Critical Path Smoke Tests",
+    "results": [
+      {
+        "name": "Website Availability Check",
+        "status": "PASSED",
+        "duration": 2159,
+        "timestamp": "2025-08-07T16:34:42.345Z",
+        "suite": "Critical Path Smoke Tests"
+      },
+      {
+        "name": "Homepage Core Elements",
+        "status": "PASSED",
+        "duration": 436,
+        "timestamp": "2025-08-07T16:34:42.782Z",
+        "suite": "Critical Path Smoke Tests"
+      },
+      {
+        "name": "Contact Path Accessibility",
+        "status": "PASSED",
+        "duration": 1807,
+        "timestamp": "2025-08-07T16:34:44.589Z",
+        "suite": "Critical Path Smoke Tests"
+      }
+    ],
+    "totalDuration": 7174,
+    "timestamp": "2025-08-07T16:34:45.688Z"
+  }
+}

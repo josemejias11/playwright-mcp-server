@@ -1,0 +1,16 @@
+
+Test Report Summary
+===================
+Suite: Advanced Content Validation Tests
+Date: 8/7/2025, 10:35:27 AM
+Duration: 7942ms
+
+Results:
+- Total Tests: 4
+- Passed: 4
+- Failed: 0
+- Success Rate: 100.00%
+
+Environment: production
+Target: https://www.ifsight.com/
+Framework: Playwright MCP Professional Testing Framework v1.0

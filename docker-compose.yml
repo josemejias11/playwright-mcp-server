@@ -10,9 +10,11 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
       - ./postman/reports:/app/postman/reports
       - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
     command: npm run test:all
 
   # Individual Test Containers (same image, different commands)
@@ -24,6 +26,7 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
     command: npm run smoke
     profiles: [smoke]
@@ -36,6 +39,7 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
     command: npm run functional
     profiles: [functional]
@@ -48,6 +52,7 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
     command: npm run performance
     profiles: [performance]
@@ -60,8 +65,10 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
       - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
     command: npm run test -- --grep accessibility
     profiles: [accessibility]
 
@@ -73,6 +80,7 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
     command: npm run security
     profiles: [security]
@@ -84,6 +92,7 @@ services:
       - NODE_ENV=test
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./postman/reports:/app/postman/reports
     command: npm run api
     profiles: [api]
@@ -97,6 +106,7 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
     command: npm run suite:content
     profiles: [suite-content]
@@ -109,8 +119,10 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
       - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
     command: npm run suite:quality
     profiles: [suite-quality]
 
@@ -122,7 +134,11 @@ services:
       - HEADLESS=true
       - BASE_URL=https://www.ifsight.com
     volumes:
+      - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
+      - ./postman/reports:/app/postman/reports
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
     command: npm run suite:all
     profiles: [suite-all]
 

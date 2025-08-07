@@ -36,7 +36,7 @@ fi
 
 # Create necessary directories
 create_dirs() {
-    mkdir -p e2e/reports postman/reports playwright-report e2e/artifacts
+    mkdir -p artifacts e2e/reports e2e/artifacts postman/reports playwright-report test-results
 }
 
 # Handle commands
@@ -150,6 +150,34 @@ case "${1:-help}" in
         fi
         ;;
     
+    "artifacts")
+        print_header "Collecting Test Artifacts"
+        create_dirs
+        
+        # Create organized artifact structure
+        timestamp=$(date +"%Y%m%d-%H%M%S")
+        artifact_dir="artifacts/run-$timestamp"
+        mkdir -p "$artifact_dir"
+        
+        # Copy all test results to unified artifact location
+        [ -d "e2e/reports" ] && cp -r e2e/reports/* "$artifact_dir/" 2>/dev/null || true
+        [ -d "postman/reports" ] && cp -r postman/reports/* "$artifact_dir/" 2>/dev/null || true
+        [ -d "playwright-report" ] && cp -r playwright-report/* "$artifact_dir/" 2>/dev/null || true
+        [ -d "test-results" ] && cp -r test-results/* "$artifact_dir/" 2>/dev/null || true
+        
+        # Create artifact summary
+        echo "Test Run: $(date)" > "$artifact_dir/run-summary.txt"
+        echo "Docker Image: playwright-mcp-server:latest" >> "$artifact_dir/run-summary.txt"
+        echo "Artifacts collected from:" >> "$artifact_dir/run-summary.txt"
+        echo "  - E2E Reports: $(ls e2e/reports 2>/dev/null | wc -l) files" >> "$artifact_dir/run-summary.txt"
+        echo "  - Postman Reports: $(ls postman/reports 2>/dev/null | wc -l) files" >> "$artifact_dir/run-summary.txt"
+        echo "  - Playwright Reports: $(ls playwright-report 2>/dev/null | wc -l) files" >> "$artifact_dir/run-summary.txt"
+        echo "  - Test Results: $(ls test-results 2>/dev/null | wc -l) files" >> "$artifact_dir/run-summary.txt"
+        
+        print_success "Artifacts collected in: $artifact_dir"
+        print_info "View summary: cat $artifact_dir/run-summary.txt"
+        ;;
+    
     "help"|*)
         echo "Comprehensive Docker Test Runner for Playwright MCP Server"
         echo ""
@@ -173,6 +201,7 @@ case "${1:-help}" in
         echo "  clean        - Clean up containers and images"
         echo "  status       - Show Docker status and containers"
         echo "  logs [name]  - Show logs (optionally for specific service)"
+        echo "  artifacts    - Collect all test artifacts in organized structure"
         echo ""
         echo "Examples:"
         echo "  ./docker-test.sh build"

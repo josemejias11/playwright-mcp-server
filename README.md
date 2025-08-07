@@ -39,7 +39,7 @@ npm run test          # Traditional Playwright tests
 git clone https://github.com/josemejias11/playwright-mcp-server
 cd playwright-mcp-server
 
-# Build Docker images
+# Build Docker image
 ./docker-test.sh build
 
 # Run specific test suites
@@ -159,7 +159,7 @@ The API suite is organized into 8 professional categories:
 ### Docker Commands
 ```bash
 # Quick start with Docker
-./docker-test.sh build    # Build all Docker images
+./docker-test.sh build    # Build Docker image
 ./docker-test.sh smoke    # Run smoke tests (3-5 min)
 ./docker-test.sh api      # Run API tests (78/78 assertions)
 ./docker-test.sh test     # Run comprehensive test suite
@@ -182,11 +182,12 @@ The API suite is organized into 8 professional categories:
 ```
 
 ### Docker Benefits
+- **Single Image Architecture** - One comprehensive image serves all test profiles
 - **Consistent Environment** - Same results across all machines
 - **No Local Dependencies** - Playwright browsers included in container
 - **Isolated Testing** - Tests run in clean environment every time
 - **Easy CI/CD Integration** - Ready for containerized deployment
-- **Multiple Test Profiles** - Separate containers for different test types
+- **Multiple Test Profiles** - Different containers run different commands from same image
 
 ## Success Metrics
 

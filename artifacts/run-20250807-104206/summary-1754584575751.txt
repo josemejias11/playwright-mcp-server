@@ -1,0 +1,16 @@
+
+Test Report Summary
+===================
+Suite: Security & Compliance Tests
+Date: 8/7/2025, 10:36:15 AM
+Duration: 7486ms
+
+Results:
+- Total Tests: 5
+- Passed: 0
+- Failed: 5
+- Success Rate: 0.00%
+
+Environment: production
+Target: https://www.ifsight.com/
+Framework: Playwright MCP Professional Testing Framework v1.0

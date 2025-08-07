@@ -30,7 +30,7 @@ COPY . .
 RUN npm run build
 
 # Create required directories
-RUN mkdir -p e2e/reports e2e/artifacts postman/reports
+RUN mkdir -p e2e/reports e2e/artifacts postman/reports artifacts test-results
 
 # Set environment
 ENV NODE_ENV=test

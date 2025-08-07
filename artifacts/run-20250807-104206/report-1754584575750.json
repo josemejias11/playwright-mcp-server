@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "suiteName": "Security & Compliance Tests",
+    "timestamp": "2025-08-07T16:36:15.731Z",
+    "totalDuration": 7486,
+    "framework": "Playwright MCP Professional Testing Framework v1.0",
+    "environment": "production",
+    "browser": "chromium",
+    "url": "https://www.ifsight.com/"
+  },
+  "analytics": {
+    "total": 5,
+    "passed": 0,
+    "failed": 5,
+    "successRate": "0.00",
+    "avgDuration": 974,
+    "categories": {
+      "FAILED": 5
+    },
+    "trends": {
+      "timePattern": {
+        "10": 5
+      },
+      "errorPatterns": {
+        "other": 5
+      },
+      "reliability": "0.0"
+    }
+  },
+  "performance": {
+    "fastest": 400,
+    "slowest": 2234,
+    "median": 856,
+    "percentile95": 2234
+  },
+  "results": [
+    {
+      "name": "HTTPS Enforcement Validation",
+      "status": "FAILED",
+      "duration": 939,
+      "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+      "timestamp": "2025-08-07T16:36:10.024Z",
+      "suite": "Security & Compliance Tests"
+    },
+    {
+      "name": "Form Data Protection Validation",
+      "status": "FAILED",
+      "duration": 856,
+      "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+      "timestamp": "2025-08-07T16:36:10.930Z",
+      "suite": "Security & Compliance Tests"
+    },
+    {
+      "name": "Trust Indicators and Credentials",
+      "status": "FAILED",
+      "duration": 400,
+      "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+      "timestamp": "2025-08-07T16:36:11.582Z",
+      "suite": "Security & Compliance Tests"
+    },
+    {
+      "name": "Data Privacy Compliance Check",
+      "status": "FAILED",
+      "duration": 443,
+      "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+      "timestamp": "2025-08-07T16:36:12.301Z",
+      "suite": "Security & Compliance Tests"
+    },
+    {
+      "name": "Input Validation and XSS Protection",
+      "status": "FAILED",
+      "duration": 2234,
+      "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+      "timestamp": "2025-08-07T16:36:14.628Z",
+      "suite": "Security & Compliance Tests"
+    }
+  ],
+  "raw": {
+    "suiteName": "Security & Compliance Tests",
+    "results": [
+      {
+        "name": "HTTPS Enforcement Validation",
+        "status": "FAILED",
+        "duration": 939,
+        "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+        "timestamp": "2025-08-07T16:36:10.024Z",
+        "suite": "Security & Compliance Tests"
+      },
+      {
+        "name": "Form Data Protection Validation",
+        "status": "FAILED",
+        "duration": 856,
+        "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+        "timestamp": "2025-08-07T16:36:10.930Z",
+        "suite": "Security & Compliance Tests"
+      },
+      {
+        "name": "Trust Indicators and Credentials",
+        "status": "FAILED",
+        "duration": 400,
+        "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+        "timestamp": "2025-08-07T16:36:11.582Z",
+        "suite": "Security & Compliance Tests"
+      },
+      {
+        "name": "Data Privacy Compliance Check",
+        "status": "FAILED",
+        "duration": 443,
+        "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+        "timestamp": "2025-08-07T16:36:12.301Z",
+        "suite": "Security & Compliance Tests"
+      },
+      {
+        "name": "Input Validation and XSS Protection",
+        "status": "FAILED",
+        "duration": 2234,
+        "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+        "timestamp": "2025-08-07T16:36:14.628Z",
+        "suite": "Security & Compliance Tests"
+      }
+    ],
+    "totalDuration": 7486,
+    "timestamp": "2025-08-07T16:36:15.731Z"
+  }
+}

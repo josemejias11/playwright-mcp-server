@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "suiteName": "Performance Tests",
+    "timestamp": "2025-08-07T16:36:01.882Z",
+    "totalDuration": 5518,
+    "framework": "Playwright MCP Professional Testing Framework v1.0",
+    "environment": "production",
+    "browser": "chromium",
+    "url": "https://www.ifsight.com/"
+  },
+  "analytics": {
+    "total": 4,
+    "passed": 1,
+    "failed": 3,
+    "successRate": "25.00",
+    "avgDuration": 709,
+    "categories": {
+      "PASSED": 1,
+      "FAILED": 3
+    },
+    "trends": {
+      "timePattern": {
+        "10": 4
+      },
+      "errorPatterns": {
+        "other": 3
+      },
+      "reliability": "25.0"
+    }
+  },
+  "performance": {
+    "fastest": 414,
+    "slowest": 1042,
+    "median": 690,
+    "percentile95": 1042
+  },
+  "results": [
+    {
+      "name": "Homepage Load Performance",
+      "status": "PASSED",
+      "duration": 1042,
+      "timestamp": "2025-08-07T16:35:58.181Z",
+      "suite": "Performance Tests"
+    },
+    {
+      "name": "Page Navigation Performance",
+      "status": "FAILED",
+      "duration": 869,
+      "error": "Expected page title to contain \"About\" but got \"Page Information:\nTitle: Error 404 | Page not found\nURL: https://www.ifsight.com/about/\nViewport: 1280x720\"",
+      "timestamp": "2025-08-07T16:35:59.089Z",
+      "suite": "Performance Tests"
+    },
+    {
+      "name": "Resource Loading Performance",
+      "status": "FAILED",
+      "duration": 414,
+      "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+      "timestamp": "2025-08-07T16:36:00.041Z",
+      "suite": "Performance Tests"
+    },
+    {
+      "name": "Mobile Performance",
+      "status": "FAILED",
+      "duration": 511,
+      "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+      "timestamp": "2025-08-07T16:36:00.795Z",
+      "suite": "Performance Tests"
+    }
+  ],
+  "raw": {
+    "suiteName": "Performance Tests",
+    "results": [
+      {
+        "name": "Homepage Load Performance",
+        "status": "PASSED",
+        "duration": 1042,
+        "timestamp": "2025-08-07T16:35:58.181Z",
+        "suite": "Performance Tests"
+      },
+      {
+        "name": "Page Navigation Performance",
+        "status": "FAILED",
+        "duration": 869,
+        "error": "Expected page title to contain \"About\" but got \"Page Information:\nTitle: Error 404 | Page not found\nURL: https://www.ifsight.com/about/\nViewport: 1280x720\"",
+        "timestamp": "2025-08-07T16:35:59.089Z",
+        "suite": "Performance Tests"
+      },
+      {
+        "name": "Resource Loading Performance",
+        "status": "FAILED",
+        "duration": 414,
+        "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+        "timestamp": "2025-08-07T16:36:00.041Z",
+        "suite": "Performance Tests"
+      },
+      {
+        "name": "Mobile Performance",
+        "status": "FAILED",
+        "duration": 511,
+        "error": "Unexpected token 'J', \"JavaScript\"... is not valid JSON",
+        "timestamp": "2025-08-07T16:36:00.795Z",
+        "suite": "Performance Tests"
+      }
+    ],
+    "totalDuration": 5518,
+    "timestamp": "2025-08-07T16:36:01.882Z"
+  }
+}
