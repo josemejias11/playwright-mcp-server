@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "suiteName": "Content Validation Tests",
+    "timestamp": "2025-08-07T15:50:22.761Z",
+    "totalDuration": 3934,
+    "framework": "Playwright MCP Professional Testing Framework v1.0",
+    "environment": "docker",
+    "browser": "chromium",
+    "url": "https://www.ifsight.com/"
+  },
+  "analytics": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "successRate": "100.00",
+    "avgDuration": 687,
+    "categories": {
+      "PASSED": 4
+    },
+    "trends": {
+      "timePattern": {
+        "15": 4
+      },
+      "errorPatterns": {},
+      "reliability": "100.0"
+    }
+  },
+  "performance": {
+    "fastest": 415,
+    "slowest": 1076,
+    "median": 627.5,
+    "percentile95": 1076
+  },
+  "results": [
+    {
+      "name": "Homepage Brand Messaging",
+      "status": "PASSED",
+      "duration": 1076,
+      "timestamp": "2025-08-07T15:50:20.069Z",
+      "suite": "Content Validation Tests"
+    },
+    {
+      "name": "Homepage Content Validation",
+      "status": "PASSED",
+      "duration": 415,
+      "timestamp": "2025-08-07T15:50:20.485Z",
+      "suite": "Content Validation Tests"
+    },
+    {
+      "name": "Navigation Structure Validation",
+      "status": "PASSED",
+      "duration": 834,
+      "timestamp": "2025-08-07T15:50:21.319Z",
+      "suite": "Content Validation Tests"
+    },
+    {
+      "name": "Contact Information Validation",
+      "status": "PASSED",
+      "duration": 421,
+      "timestamp": "2025-08-07T15:50:21.740Z",
+      "suite": "Content Validation Tests"
+    }
+  ],
+  "raw": {
+    "suiteName": "Content Validation Tests",
+    "results": [
+      {
+        "name": "Homepage Brand Messaging",
+        "status": "PASSED",
+        "duration": 1076,
+        "timestamp": "2025-08-07T15:50:20.069Z",
+        "suite": "Content Validation Tests"
+      },
+      {
+        "name": "Homepage Content Validation",
+        "status": "PASSED",
+        "duration": 415,
+        "timestamp": "2025-08-07T15:50:20.485Z",
+        "suite": "Content Validation Tests"
+      },
+      {
+        "name": "Navigation Structure Validation",
+        "status": "PASSED",
+        "duration": 834,
+        "timestamp": "2025-08-07T15:50:21.319Z",
+        "suite": "Content Validation Tests"
+      },
+      {
+        "name": "Contact Information Validation",
+        "status": "PASSED",
+        "duration": 421,
+        "timestamp": "2025-08-07T15:50:21.740Z",
+        "suite": "Content Validation Tests"
+      }
+    ],
+    "totalDuration": 3934,
+    "timestamp": "2025-08-07T15:50:22.761Z"
+  }
+}

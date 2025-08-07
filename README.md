@@ -17,6 +17,7 @@ A comprehensive QA automation framework featuring traditional Playwright tests, 
 
 ## Quick Start
 
+### Local Installation
 ```bash
 # Install and setup
 git clone https://github.com/josemejias11/playwright-mcp-server
@@ -32,15 +33,43 @@ npm run api           # API test suite
 npm run test          # Traditional Playwright tests
 ```
 
+### Docker Installation
+```bash
+# Clone and run with Docker
+git clone https://github.com/josemejias11/playwright-mcp-server
+cd playwright-mcp-server
+
+# Build Docker images
+./docker-test.sh build
+
+# Run specific test suites
+./docker-test.sh smoke         # Quick validation (3-5 min)
+./docker-test.sh api           # API tests (78/78 assertions)  
+./docker-test.sh accessibility # WCAG 2.1 AA compliance (25/25 tests)
+./docker-test.sh test          # Comprehensive test suite
+```
+
 ## Test Commands
 
-### Core Test Suites
+### Local Execution
 ```bash
 npm run smoke          # Critical path validation
 npm run accessibility  # WCAG 2.1 AA compliance
 npm run functional     # Content and functionality tests  
 npm run performance    # Load time validation
 npm run security       # Security validation
+```
+
+### Docker Execution (Isolated & Consistent)
+```bash
+./docker-test.sh smoke          # Smoke tests in Docker
+./docker-test.sh accessibility  # Accessibility tests (25/25 tests)
+./docker-test.sh functional     # Functional tests in Docker
+./docker-test.sh api            # API tests (78/78 assertions)
+./docker-test.sh test           # All tests comprehensively
+./docker-test.sh performance    # Performance tests
+./docker-test.sh security       # Security tests
+./docker-test.sh clean          # Clean up containers
 ```
 
 ### API Testing (100% Success Rate)
@@ -73,6 +102,8 @@ playwright-mcp-server/
 │   └── page-objects/       # Page Object Models
 ├── postman/                # API Testing Suites (8 categories)
 ├── .github/workflows/      # CI/CD Pipeline
+├── docker-test.sh          # Docker test runner script
+├── docker-compose.yml      # Container orchestration
 └── reports/                # Test reports and artifacts
 ```
 
@@ -112,11 +143,50 @@ The API suite is organized into 8 professional categories:
 
 ## Technology Stack
 
+- **Docker** - Containerized testing environment for consistency
 - **Playwright** - Browser automation engine
 - **MCP (Model Context Protocol)** - AI-assisted testing
 - **Postman/Newman** - API testing and reporting
 - **GitHub Actions** - CI/CD automation
 - **TypeScript/JavaScript** - Implementation languages
+
+## Docker Support
+
+### Prerequisites
+- Docker and Docker Compose installed
+- Git for cloning the repository
+
+### Docker Commands
+```bash
+# Quick start with Docker
+./docker-test.sh build    # Build all Docker images
+./docker-test.sh smoke    # Run smoke tests (3-5 min)
+./docker-test.sh api      # Run API tests (78/78 assertions)
+./docker-test.sh test     # Run comprehensive test suite
+
+# Individual test types
+./docker-test.sh functional    # Functional tests
+./docker-test.sh performance   # Performance tests
+./docker-test.sh security      # Security tests
+./docker-test.sh accessibility # WCAG 2.1 AA compliance
+
+# Test suites
+./docker-test.sh suite-content # Content validation suite
+./docker-test.sh suite-quality # Quality assurance suite
+./docker-test.sh suite-all     # All comprehensive test suites
+
+# Maintenance
+./docker-test.sh clean    # Clean up containers and volumes
+./docker-test.sh status   # Check Docker status
+./docker-test.sh logs     # View test logs
+```
+
+### Docker Benefits
+- **Consistent Environment** - Same results across all machines
+- **No Local Dependencies** - Playwright browsers included in container
+- **Isolated Testing** - Tests run in clean environment every time
+- **Easy CI/CD Integration** - Ready for containerized deployment
+- **Multiple Test Profiles** - Separate containers for different test types
 
 ## Success Metrics
 

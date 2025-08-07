@@ -1,0 +1,143 @@
+# Comprehensive Docker Compose for Playwright MCP Server
+services:
+  # Main test service - runs all tests
+  playwright-tests:
+    build: .
+    container_name: playwright-mcp-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+      - ./postman/reports:/app/postman/reports
+      - ./playwright-report:/app/playwright-report
+    command: npm run test:all
+
+  # Individual Test Types
+  smoke:
+    build: .
+    container_name: smoke-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+    command: npm run smoke
+    profiles: [smoke]
+
+  functional:
+    build: .
+    container_name: functional-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+    command: npm run functional
+    profiles: [functional]
+
+  performance:
+    build: .
+    container_name: performance-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+    command: npm run performance
+    profiles: [performance]
+
+  accessibility:
+    build: .
+    container_name: accessibility-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+      - ./playwright-report:/app/playwright-report
+    command: npm run test -- --grep accessibility
+    profiles: [accessibility]
+
+  security:
+    build: .
+    container_name: security-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+    command: npm run security
+    profiles: [security]
+
+  api:
+    build: .
+    container_name: api-tests
+    environment:
+      - NODE_ENV=test
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./postman/reports:/app/postman/reports
+    command: npm run api
+    profiles: [api]
+
+  # Test Suites
+  suite-content:
+    build: .
+    container_name: content-suite-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+    command: npm run suite:content
+    profiles: [suite-content]
+
+  suite-quality:
+    build: .
+    container_name: quality-suite-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+      - ./playwright-report:/app/playwright-report
+    command: npm run suite:quality
+    profiles: [suite-quality]
+
+  suite-all:
+    build: .
+    container_name: all-suite-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+    command: npm run suite:all
+    profiles: [suite-all]
+
+  # Orchestrated Tests
+  orchestrated-comprehensive:
+    build: .
+    container_name: orchestrated-comprehensive-tests
+    environment:
+      - NODE_ENV=test
+      - HEADLESS=true
+      - BASE_URL=https://www.ifsight.com
+    volumes:
+      - ./e2e/reports:/app/e2e/reports
+    command: npm run orchestrated:comprehensive
+    profiles: [orchestrated]
+
+networks:
+  default:
+    name: playwright-mcp-network

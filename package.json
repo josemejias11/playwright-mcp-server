@@ -13,6 +13,7 @@
     "dev": "tsc --watch",
     
     "test": "playwright test",
+    "test:all": "npm run smoke && npm run api && npm run test -- --grep accessibility",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",

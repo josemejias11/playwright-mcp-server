@@ -1,0 +1,16 @@
+
+Test Report Summary
+===================
+Suite: Critical Path Smoke Tests
+Date: 8/7/2025, 3:49:32 PM
+Duration: 3867ms
+
+Results:
+- Total Tests: 3
+- Passed: 3
+- Failed: 0
+- Success Rate: 100.00%
+
+Environment: docker
+Target: https://www.ifsight.com/
+Framework: Playwright MCP Professional Testing Framework v1.0
