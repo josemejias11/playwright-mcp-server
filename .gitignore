@@ -27,6 +27,12 @@ newman-run-report-*.json
 newman-run-report-*.html
 newman-run-report-*.xml
 
+# Artifacts directory - all generated artifacts
+artifacts/
+
+# Reports directory - all generated reports  
+reports/
+
 # Keep example artifacts
 !e2e/artifacts/.gitkeep
 !postman/reports/.gitkeep

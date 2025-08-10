@@ -1,7 +1,0 @@
-Test Run: Thu Aug  7 10:39:47 CST 2025
-Docker Image: playwright-mcp-server:latest
-Artifacts collected from:
-  - E2E Reports:       18 files
-  - Postman Reports:        0 files
-  - Playwright Reports:        0 files
-  - Test Results:        0 files
