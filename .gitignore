@@ -29,9 +29,11 @@ newman-run-report-*.xml
 
 # Artifacts directory - all generated artifacts
 artifacts/
+!artifacts/.gitkeep
 
 # Reports directory - all generated reports  
 reports/
+!reports/.gitkeep
 
 # Keep example artifacts
 !e2e/artifacts/.gitkeep
@@ -92,7 +94,9 @@ Thumbs.db
 
 # Playwright browsers
 /test-results/
+!test-results/.gitkeep
 /playwright-report/
+!playwright-report/.gitkeep
 /playwright/.cache/
 /tests/test-results/
 /tests/playwright-report/
