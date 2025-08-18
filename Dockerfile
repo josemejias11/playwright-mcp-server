@@ -1,5 +1,5 @@
 # Simple single-stage Dockerfile for Playwright MCP Server
-FROM node:20-bullseye-slim
+FROM node:20-bookworm-slim
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     procps \
     curl \
     git \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
 # Set working directory
 WORKDIR /app
@@ -31,6 +33,11 @@ RUN npm run build
 
 # Create required directories
 RUN mkdir -p e2e/reports e2e/artifacts postman/reports artifacts test-results
+
+# Create non-root user for security
+RUN groupadd -r playwright && useradd -r -g playwright playwright
+RUN chown -R playwright:playwright /app
+USER playwright
 
 # Set environment
 ENV NODE_ENV=test
