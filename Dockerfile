@@ -1,17 +1,21 @@
 # Simple single-stage Dockerfile for Playwright MCP Server
-FROM node:20-bookworm-slim
+FROM node:22-alpine3.21
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apk update && apk add --no-cache \
     wget \
     gnupg \
     ca-certificates \
-    procps \
     curl \
     git \
-    && apt-get upgrade -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+    bash \
+    chromium \
+    nss \
+    freetype \
+    freetype-dev \
+    harfbuzz \
+    ttf-freefont \
+    && apk upgrade --no-cache
 
 # Set working directory
 WORKDIR /app
@@ -22,8 +26,8 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci
 
-# Install Playwright browsers
-RUN npx playwright install --with-deps
+# Install Playwright browsers 
+RUN npx playwright install chromium
 
 # Copy all source code
 COPY . .
@@ -35,7 +39,8 @@ RUN npm run build
 RUN mkdir -p e2e/reports e2e/artifacts postman/reports artifacts test-results
 
 # Create non-root user for security
-RUN groupadd -r playwright && useradd -r -g playwright playwright
+RUN addgroup -g 1001 -S playwright && \
+    adduser -S -D -H -u 1001 -s /sbin/nologin -G playwright playwright
 RUN chown -R playwright:playwright /app
 USER playwright
 
