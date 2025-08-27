@@ -1,9 +1,3 @@
 {
-  "servers": {
-    "playwright-automation": {
-      "command": "node",
-      "args": ["build/index.js"],
-      "cwd": "/Users/josemejias/VSCodeProject/drone-auto/playwright-mcp-server"
-    }
-  }
+	"servers": {}
 }
