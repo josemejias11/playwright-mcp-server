@@ -222,10 +222,8 @@ jobs:
         with:
           name: mcp-${{ matrix.test-suite.name }}-artifacts
           path: |
-            e2e/artifacts/
-            e2e/reports/
+            reports/
             test-results/
-            playwright-report/
           retention-days: 30
         continue-on-error: true
 
@@ -408,10 +406,8 @@ jobs:
         with:
           name: performance-results
           path: |
-            e2e/artifacts/
-            e2e/reports/
+            reports/
             test-results/
-            playwright-report/
           retention-days: 30
         continue-on-error: true
 

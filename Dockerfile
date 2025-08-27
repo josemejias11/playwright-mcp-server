@@ -36,7 +36,7 @@ COPY . .
 RUN npm run build
 
 # Create required directories
-RUN mkdir -p e2e/reports e2e/artifacts postman/reports artifacts test-results
+RUN mkdir -p reports/e2e reports/api reports/artifacts/screenshots reports/artifacts/videos reports/artifacts/traces test-results
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S playwright && \

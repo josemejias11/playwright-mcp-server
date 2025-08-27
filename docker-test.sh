@@ -36,7 +36,7 @@ fi
 
 # Create necessary directories
 create_dirs() {
-    mkdir -p artifacts e2e/reports e2e/artifacts postman/reports playwright-report test-results
+    mkdir -p reports/e2e reports/api reports/artifacts/screenshots reports/artifacts/videos reports/artifacts/traces test-results
 }
 
 # Handle commands

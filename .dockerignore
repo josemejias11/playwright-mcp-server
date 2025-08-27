@@ -12,11 +12,8 @@ build/
 dist/
 *.tsbuildinfo
 
-# Test artifacts and reports
-e2e/reports/
-e2e/artifacts/
-postman/reports/
-playwright-report/
+# Test artifacts and reports (centralized)
+reports/
 test-results/
 
 # Environment files
