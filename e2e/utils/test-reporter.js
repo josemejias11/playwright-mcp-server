@@ -9,7 +9,7 @@ import { join, dirname } from 'path';
 export class TestReporter {
   constructor(options = {}) {
     this.options = {
-      outputDir: options.outputDir || 'e2e/reports',
+      outputDir: options.outputDir || 'reports/e2e',
       includeScreenshots: options.includeScreenshots !== false,
       includePerformance: options.includePerformance !== false,
       ...options

@@ -74,8 +74,8 @@ export const TestConfig = {
   
   // Framework Paths
   serverPath: join(__dirname, '../../build/index.js'),
-  artifactsPath: join(__dirname, '../artifacts'),
-  reportsPath: join(__dirname, '../reports'),
+  artifactsPath: join(__dirname, '../../reports/artifacts'),
+  reportsPath: join(__dirname, '../../reports/e2e'),
   
   // Test Data
   urls: {

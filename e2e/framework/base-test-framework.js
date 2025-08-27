@@ -112,7 +112,7 @@ export class BaseTestFramework {
       
       // Take screenshot on failure
       try {
-        const screenshotPath = `e2e/artifacts/failure-${testName.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
+        const screenshotPath = `reports/artifacts/screenshots/failure-${testName.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
         await this.client.takeScreenshot(screenshotPath, true);
         await this.logger.info(`Failure screenshot saved: ${screenshotPath}`);
       } catch (screenshotError) {

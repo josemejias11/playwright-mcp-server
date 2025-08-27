@@ -28,8 +28,13 @@
     "accessibility": "node e2e/test-suites/accessibility/wcag-compliance.js",
     "security": "node e2e/test-suites/security/data-protection.js",
     
-    "api": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,json",
-    "api:detailed": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export postman/reports/api-test-report.html",
+    "api": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,json --reporter-json-export reports/api/api-results.json",
+    "api:detailed": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export reports/api/api-test-report.html",
+    
+    "reports:init": "node e2e/utils/report-manager.js init",
+    "reports:clean": "node e2e/utils/report-manager.js clean", 
+    "reports:status": "node e2e/utils/report-manager.js status",
+    "reports:archive": "node e2e/utils/report-manager.js archive",
     
     "quality": "npm run functional && npm run performance && npm run accessibility",
     "all": "npm run smoke && npm run quality && npm run security && npm run api"
