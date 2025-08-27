@@ -10,7 +10,7 @@
  * Features:
  * - Adaptive content expectations
  * - Smart fallback strategies  
- * - Government domain expertise
+ * - Cruise industry expertise
  * - Quality-based assessments
  */
 
@@ -28,26 +28,26 @@ class AdvancedContentValidationTests extends BaseTestFramework {
   }
 
   /**
-   * TEST 1: Homepage Government Solutions Focus
+   * TEST 1: Homepage Cruise Brand Messaging
    */
   async testHomepageBrandMessaging() {
     await this.executeTest('Homepage Brand Messaging', async () => {
       await this.homePage.navigate();
       
-      // Validate hero content for government website solutions
+      // Validate hero content for cruise website
       const title = await this.homePage.getHeroTitle();
       const titleText = typeof title === 'string' ? title : String(title);
       
-      // Validate government solutions content
-      const governmentElements = await this.homePage.validateGovernmentSolutionsElements();
-      if (!governmentElements.hasGovernmentContent && !titleText.toLowerCase().includes('government')) {
-        await this.logger.business('⚠️ Limited government solutions content detected, continuing with adaptive validation');
+      // Validate cruise content
+      const cruiseElements = await this.homePage.validateCruiseElements();
+      if (!cruiseElements.hasCruiseContent && !titleText.toLowerCase().includes('cruise')) {
+        await this.logger.business('⚠️ Limited cruise content detected, continuing with adaptive validation');
       }
       
       await this.logger.business(`✓ Brand messaging validated: Text from h1: ${titleText}`);
-      await this.logger.business(`✓ Government solutions focus: ${governmentElements.isGovernmentFocused ? 'confirmed' : 'basic website'}`);
-      await this.logger.business(`✓ Government keywords found: ${governmentElements.foundKeywords ? governmentElements.foundKeywords.join(', ') : 'detected'}`);
-      await this.logger.business(`✓ Website specialization: ${titleText.includes('Government') ? 'State and Local Government Solutions' : 'Professional Services'}`);
+      await this.logger.business(`✓ Cruise focus: ${cruiseElements.isCruiseFocused ? 'confirmed' : 'general travel website'}`);
+      await this.logger.business(`✓ Cruise keywords found: ${cruiseElements.foundKeywords ? cruiseElements.foundKeywords.join(', ') : 'detected'}`);
+      await this.logger.business(`✓ Website specialization: ${titleText.includes('Cruise') || titleText.includes('Royal Caribbean') ? 'Cruise Vacations and Travel' : 'Travel Services'}`);
       
     }, { timeout: 8000 });
   }
@@ -151,8 +151,8 @@ class AdvancedContentValidationTests extends BaseTestFramework {
         // Fallback: Look for contact forms or other contact methods
         const contactElements = await this.homePage.validateContactElements();
         if (!contactElements.hasContactMethod && contactElements.totalElements === 0) {
-          // Government websites often have basic contact capability
-          await this.logger.business('✓ Basic contact capability assumed for government website');
+          // Cruise websites often have basic contact capability
+          await this.logger.business('✓ Basic contact capability assumed for cruise website');
         }
       }
       
@@ -160,7 +160,7 @@ class AdvancedContentValidationTests extends BaseTestFramework {
       const contactElements = await this.homePage.validateContactElements();
       const contactAccessibility = contactElements.totalElements > 0 ? 'direct' : 
                                   (contactInfo.hasEmail || contactInfo.hasPhone) ? 'information provided' : 
-                                  'standard government website';
+                                  'standard cruise website';
       
       await this.logger.business(`✓ Contact email: ${contactInfo.hasEmail ? 'found' : 'not found'}`);
       await this.logger.business(`✓ Contact phone: ${contactInfo.hasPhone ? 'found' : 'not found'}`);
@@ -212,28 +212,28 @@ class AdvancedContentValidationTests extends BaseTestFramework {
         successRate: summary.successRate || '0.00'
       },
       contentAreas: [
-        'Government Solutions Focus',
+        'Cruise Brand Focus',
         'Content Depth & Quality',
         'Smart Navigation',
         'Contact Integration'
       ],
       recommendations: summary.passed === summary.total ? [
-        '🎉 Excellent content validation - website meets government solutions standards',
+        '🎉 Excellent content validation - website meets cruise industry standards',
         '✅ Continue monitoring content quality with automated testing',
-        '🤖 Advanced testing provides adaptive validation for government websites',
+        '🤖 Advanced testing provides adaptive validation for cruise websites',
         '📊 Regular content analysis recommended monthly'
       ] : [
         '✅ Good content foundation with room for optimization',
-        '🔍 Review failed areas for government sector requirements',
-        '🤖 Advanced testing provides adaptive validation for government websites',
+        '🔍 Review failed areas for cruise industry requirements',
+        '🤖 Advanced testing provides adaptive validation for cruise websites',
         '📊 Regular content analysis recommended monthly'
       ],
-      websiteType: 'Government Website Solutions',
-      focus: 'State and Local Government Digital Services',
+      websiteType: 'Cruise Travel Website',
+      focus: 'Royal Caribbean Cruise Vacations and Travel',
       enhancements: [
         'Adaptive content expectations',
         'Smart fallback strategies',
-        'Government domain expertise',
+        'Cruise industry expertise',
         'Quality-based assessments'
       ]
     };

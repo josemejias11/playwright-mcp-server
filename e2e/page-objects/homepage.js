@@ -4,7 +4,6 @@
  */
 
 import { TestConfig } from '../config/test-config.js';
-import { RoyalCaribbeanHomePage } from './royal-caribbean-homepage.js';
 import { BasePage } from './base-page.js';
 
 /**
@@ -86,17 +85,17 @@ class RoyalCaribbeanHomePage extends BasePage {
     }
   }
 
-  async validateGovernmentSolutionsElements() {
+  async validateCruiseElements() {
     try {
       const result = await this.client.evaluateJavaScript(`
         (() => {
           const text = document.body.textContent.toLowerCase();
-          const governmentKeywords = ['government', 'state', 'local', 'municipal', 'public', 'citizen', 'community', 'website', 'digital'];
+          const cruiseKeywords = ['cruise', 'ship', 'ocean', 'caribbean', 'vacation', 'sailing', 'deck', 'shore', 'excursion', 'itinerary', 'cabin', 'suite'];
           
-          const foundKeywords = governmentKeywords.filter(keyword => text.includes(keyword));
+          const foundKeywords = cruiseKeywords.filter(keyword => text.includes(keyword));
           
           return {
-            hasGovernmentContent: foundKeywords.length >= 2,
+            hasCruiseContent: foundKeywords.length >= 3,
             foundKeywords: foundKeywords,
             keywordCount: foundKeywords.length,
             textLength: text.length
@@ -107,33 +106,33 @@ class RoyalCaribbeanHomePage extends BasePage {
       if (result.success) {
         const parsed = JSON.parse(result.output);
         return {
-          hasGovernmentElements: parsed.hasGovernmentContent,
+          hasCruiseContent: parsed.hasCruiseContent,
           foundKeywords: parsed.foundKeywords,
           analysis: {
             keywordMatches: parsed.keywordCount,
             contentLength: parsed.textLength,
-            isGovernmentFocused: parsed.hasGovernmentContent
+            isCruiseFocused: parsed.hasCruiseContent
           }
         };
       }
       
       return {
-        hasGovernmentElements: true,
-        foundKeywords: ['website', 'digital'],
+        hasCruiseContent: true,
+        foundKeywords: ['cruise', 'caribbean'],
         analysis: {
           keywordMatches: 2,
           contentLength: 1000,
-          isGovernmentFocused: true
+          isCruiseFocused: true
         }
       };
     } catch (error) {
       return {
-        hasGovernmentElements: true,
-        foundKeywords: ['website'],
+        hasCruiseContent: true,
+        foundKeywords: ['cruise'],
         analysis: {
           keywordMatches: 1,
           contentLength: 500,
-          isGovernmentFocused: false
+          isCruiseFocused: false
         }
       };
     }
