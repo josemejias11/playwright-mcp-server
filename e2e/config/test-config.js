@@ -1,23 +1,60 @@
 /**
  * Test Configuration for Playwright MCP Testing Framework
- * Centralized configuration for professional testing standards
+ * Centralized configuration for Royal Caribbean testing
  */
 
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { getCurrentWebsiteConfig } from './website-configs.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 dotenv.config({ path: join(__dirname, '../../.env') });
 
-// Get current website configuration
-const websiteConfig = getCurrentWebsiteConfig();
+// Royal Caribbean configuration
+const websiteConfig = {
+  name: 'Royal Caribbean',
+  type: 'cruise-booking',
+  baseUrl: 'https://www.royalcaribbean.com',
+  industry: 'cruise'
+};
 
 export const TestConfig = {
   // Website Configuration
+  website: websiteConfig,
+  baseUrl: process.env.BASE_URL || websiteConfig.baseUrl,
+  environment: process.env.TEST_ENV || 'production',
+  
+  // Selectors Configuration
+  selectors: {
+    hero: {
+      title: ['h1', '.hero-title', '.banner-title', '.main-title', '[data-testid="hero-title"]'],
+      subtitle: ['.hero-subtitle', '.banner-subtitle', '.hero p', '.main-subtitle'],
+      cta: ['.hero .btn', '.cta-button', '.book-now', '.find-cruise', '[data-testid="hero-cta"]']
+    },
+    navigation: {
+      menu: ['nav', '.main-navigation', '.header-nav', '[role="navigation"]'],
+      menuItems: ['nav a', '.nav-item', '.menu-link', '.navigation a'],
+      logo: ['.logo', '.brand-logo', '.rc-logo', '.header-logo']
+    },
+    content: {
+      sections: ['.content-section', '.page-section', 'main section', '.feature'],
+      headings: ['h1', 'h2', 'h3', '.heading', '.section-title'],
+      paragraphs: ['p', '.text-content', '.description']
+    },
+    forms: {
+      search: ['.search-form', '.cruise-search', '[data-testid="search"]'],
+      contact: ['.contact-form', '.inquiry-form', 'form'],
+      inputs: ['input', 'select', 'textarea'],
+      buttons: ['button', '.btn', '[type="submit"]', '.cta']
+    },
+    booking: {
+      deals: ['.deal-card', '.offer', '.promotion', '.cruise-deal'],
+      prices: ['.price', '.cost', '.rate', '[data-testid="price"]'],
+      availability: ['.available', '.dates', '.calendar']
+    }
+  },
   website: websiteConfig,
   baseUrl: process.env.BASE_URL || websiteConfig.baseUrl,
   environment: process.env.TEST_ENV || 'production',

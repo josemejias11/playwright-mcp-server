@@ -13,7 +13,6 @@
     "dev": "tsc --watch",
     
     "demo": "node demo.js",
-    "demo:royal-caribbean": "node e2e/simple-royal-caribbean-demo.js",
     "demo:advanced": "node e2e/royal-caribbean-demo.js",
     
     "test": "playwright test",
@@ -24,25 +23,16 @@
     "test:report": "playwright show-report",
     
     "smoke": "node e2e/test-suites/smoke/critical-path.js",
-    "functional": "node e2e/test-suites/functional/content-validation.js",
-    "functional:flexible": "node e2e/test-suites/functional/flexible-content-validation.js",
+    "functional": "node e2e/test-suites/functional/content-validation-advanced.js",
     "performance": "node e2e/test-suites/performance/load-times.js",
     "accessibility": "node e2e/test-suites/accessibility/wcag-compliance.js",
     "security": "node e2e/test-suites/security/data-protection.js",
     
-    "suite:content": "npm run functional && npm run functional:advanced",
-    "suite:quality": "npm run performance && npm run accessibility",
-    "suite:all": "npm run smoke && npm run functional && npm run functional:advanced && npm run performance && npm run accessibility && npm run security",
-    "suite:quick": "npm run smoke && npm run functional",
-    
-    "orchestrated:smoke": "node test-runner.js smoke",
-    "orchestrated:functional": "node test-runner.js functional", 
-    "orchestrated:quality": "node test-runner.js quality",
-    "orchestrated:security": "node test-runner.js security",
-    "orchestrated:comprehensive": "node test-runner.js comprehensive",
-    
     "api": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,json",
-    "api:detailed": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export postman/reports/api-test-report.html"
+    "api:detailed": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export postman/reports/api-test-report.html",
+    
+    "quality": "npm run functional && npm run performance && npm run accessibility",
+    "all": "npm run smoke && npm run quality && npm run security && npm run api"
   },
   "files": [
     "build"

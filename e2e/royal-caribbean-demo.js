@@ -44,7 +44,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
         await this.logger.business(`📝 Main Heading: "${heading.output}"`);
       }
       
-      await this.logger.summary('✅ Homepage visual validation completed');
+      await this.logger.success('✅ Homepage visual validation completed');
     });
   }
 
@@ -69,7 +69,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       // Take navigation screenshot
       await this.client.takeScreenshot('e2e/artifacts/royal-caribbean-navigation.png', false);
       
-      await this.logger.summary('✅ Navigation elements validation completed');
+      await this.logger.success('✅ Navigation elements validation completed');
     });
   }
 
@@ -116,7 +116,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
         }
       }
 
-      await this.logger.summary('✅ Cruise functionality validation completed');
+      await this.logger.success('✅ Cruise functionality validation completed');
     });
   }
 
@@ -146,7 +146,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       await this.client.takeScreenshot('e2e/artifacts/royal-caribbean-mobile.png', true);
       
       await this.logger.business('📱 Mobile viewport simulation completed');
-      await this.logger.summary('✅ Mobile responsiveness check completed');
+      await this.logger.success('✅ Mobile responsiveness check completed');
     });
   }
 
@@ -188,7 +188,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
         }
       }
 
-      await this.logger.summary('✅ Performance overview completed');
+      await this.logger.success('✅ Performance overview completed');
     });
   }
 
@@ -208,8 +208,8 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       await this.testMobileView();
       await this.testPerformanceOverview();
       
-      await this.logger.summary('🎉 Royal Caribbean demo test suite completed successfully!');
-      await this.logger.summary('📸 Screenshots saved to e2e/artifacts/');
+      await this.logger.success('🎉 Royal Caribbean demo test suite completed successfully!');
+      await this.logger.success('📸 Screenshots saved to e2e/artifacts/');
       
     } catch (error) {
       await this.logger.error(`❌ Demo test failed: ${error.message}`);

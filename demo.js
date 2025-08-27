@@ -5,7 +5,7 @@
  * Simple command-line interface for demo purposes
  */
 
-import { SimpleRoyalCaribbeanDemo } from './e2e/simple-royal-caribbean-demo.js';
+import { RoyalCaribbeanDemo } from './e2e/royal-caribbean-demo.js';
 
 console.log(`
 🚢 Royal Caribbean Testing Framework Demo
@@ -27,7 +27,7 @@ Starting demo in 3 seconds...
 await new Promise(resolve => setTimeout(resolve, 3000));
 
 try {
-  const demo = new SimpleRoyalCaribbeanDemo();
+  const demo = new RoyalCaribbeanDemo();
   await demo.runDemo();
   
   console.log(`
