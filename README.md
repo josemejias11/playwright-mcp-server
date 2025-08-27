@@ -64,10 +64,10 @@ npm run demo:royal-caribbean
 
 After running the demo, check these files:
 
-- `e2e/artifacts/royal-caribbean-homepage.png` - Full homepage
-- `e2e/artifacts/royal-caribbean-navigation.png` - Navigation elements
-- `e2e/artifacts/royal-caribbean-interaction.png` - User interactions
-- `e2e/artifacts/royal-caribbean-mobile.png` - Mobile view
+- `reports/artifacts/screenshots/royal-caribbean-homepage.png` - Full homepage
+- `reports/artifacts/screenshots/royal-caribbean-navigation.png` - Navigation elements
+- `reports/artifacts/screenshots/royal-caribbean-interaction.png` - User interactions
+- `reports/artifacts/screenshots/royal-caribbean-mobile.png` - Mobile view
 
 ## Quick Start
 

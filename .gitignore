@@ -8,36 +8,21 @@ yarn-error.log*
 build/
 dist/
 
-# Test artifacts
-e2e/artifacts/*.png
-e2e/artifacts/*.jpg
-e2e/artifacts/*.jpeg
-e2e/reports/*.html
-e2e/reports/*.json
-e2e/reports/*.txt
+# Test artifacts - centralized reports
+reports/e2e/*.html
+reports/e2e/*.json  
+reports/e2e/*.txt
+reports/artifacts/screenshots/*.png
+reports/artifacts/screenshots/*.jpg
+reports/artifacts/screenshots/*.jpeg
+reports/artifacts/videos/*.mp4
+reports/artifacts/traces/*.zip
+reports/api/*.html
+reports/api/*.json
 
-# Postman test reports
-postman/reports/*.html
-postman/reports/*.json
-postman/reports/*.xml
-
-# Newman test reports
-newman/
-newman-run-report-*.json
-newman-run-report-*.html
-newman-run-report-*.xml
-
-# Artifacts directory - all generated artifacts
-artifacts/
-!artifacts/.gitkeep
-
-# Reports directory - all generated reports  
-reports/
-!reports/.gitkeep
-
-# Keep example artifacts
-!e2e/artifacts/.gitkeep
-!postman/reports/.gitkeep
+# Keep report directory structure
+!reports/*/.gitkeep
+!reports/*/*/.gitkeep
 
 # Logs
 *.log
