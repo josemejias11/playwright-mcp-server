@@ -12,6 +12,10 @@
     "start": "npm run build && node build/index.js",
     "dev": "tsc --watch",
     
+    "demo": "node demo.js",
+    "demo:royal-caribbean": "node e2e/simple-royal-caribbean-demo.js",
+    "demo:advanced": "node e2e/royal-caribbean-demo.js",
+    
     "test": "playwright test",
     "test:all": "npm run smoke && npm run api && npm run test -- --grep accessibility",
     "test:headed": "playwright test --headed",
@@ -21,7 +25,7 @@
     
     "smoke": "node e2e/test-suites/smoke/critical-path.js",
     "functional": "node e2e/test-suites/functional/content-validation.js",
-    "functional:advanced": "node e2e/test-suites/functional/content-validation-advanced.js",
+    "functional:flexible": "node e2e/test-suites/functional/flexible-content-validation.js",
     "performance": "node e2e/test-suites/performance/load-times.js",
     "accessibility": "node e2e/test-suites/accessibility/wcag-compliance.js",
     "security": "node e2e/test-suites/security/data-protection.js",

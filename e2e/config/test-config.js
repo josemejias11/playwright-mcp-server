@@ -6,15 +6,20 @@
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { getCurrentWebsiteConfig } from './website-configs.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 dotenv.config({ path: join(__dirname, '../../.env') });
 
+// Get current website configuration
+const websiteConfig = getCurrentWebsiteConfig();
+
 export const TestConfig = {
-  // Environment Configuration
-  baseUrl: process.env.BASE_URL || 'https://www.ifsight.com',
+  // Website Configuration
+  website: websiteConfig,
+  baseUrl: process.env.BASE_URL || websiteConfig.baseUrl,
   environment: process.env.TEST_ENV || 'production',
   
   // Browser Configuration

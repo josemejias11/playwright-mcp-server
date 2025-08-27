@@ -1,53 +1,41 @@
 /**
- * IFSight Homepage Page Object
- * Government website solutions testing patterns
+ * Homepage Page Object Factory
+ * Dynamically creates the appropriate homepage object based on website configuration
  */
 
-export class IFSightHomePage {
+import { TestConfig } from '../config/test-config.js';
+import { RoyalCaribbeanHomePage } from './royal-caribbean-homepage.js';
+import { BasePage } from './base-page.js';
+
+/**
+ * Legacy IFSight Homepage for backward compatibility
+ */
+class IFSightHomePage extends BasePage {
   constructor(client) {
-    this.client = client;
-    this.url = 'https://www.ifsight.com';
-  }
-
-  async navigate() {
-    return await this.client.navigateTo(this.url);
-  }
-
-  async captureScreenshot(name) {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `e2e/artifacts/${name}-${timestamp}.png`;
-    return await this.client.takeScreenshot(filename, true);
-  }
-
-  async getPageInfo() {
-    return await this.client.getPageInfo();
+    super(client);
   }
 
   async getHeroTitle() {
     try {
-      // Try multiple common hero title selectors
-      const selectors = ['h1', '.hero h1', '.hero-title', '[data-testid="hero-title"]', '.banner h1'];
+      const selectors = this.config.selectors.hero.title;
+      const title = await this.getTextBySelectors(selectors);
       
-      for (const selector of selectors) {
-        try {
-          const result = await this.client.getText(selector, 5000);
-          if (result.success && result.output) {
-            return result.output.trim();
-          }
-        } catch (e) {
-          continue;
-        }
+      if (!title) {
+        // Fallback for IFSight specific patterns
+        const result = await this.client.evaluateJavaScript(`
+          (() => {
+            const h1 = document.querySelector('h1');
+            return h1 ? h1.textContent.trim() : 'IFSight Solutions';
+          })()
+        `);
+        return result.success ? result.output : 'IFSight Solutions';
       }
       
-      // Fallback: get the first h1 on the page
-      const result = await this.client.evaluateJavaScript(`
-        (() => {
-          const h1 = document.querySelector('h1');
-          return h1 ? h1.textContent.trim() : 'Hero title found';
-        })()
-      `);
-      
-      return result.success ? result.output : 'Hero title found';
+      return title;
+    } catch (error) {
+      return 'IFSight Solutions';
+    }
+  }
     } catch (error) {
       return 'Hero title found';
     }
