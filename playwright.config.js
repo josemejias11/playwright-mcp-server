@@ -15,7 +15,7 @@ export default defineConfig({
     ['list']
   ],
   use: {
-    baseURL: 'https://www.ifsight.com',
+    baseURL: 'https://example.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

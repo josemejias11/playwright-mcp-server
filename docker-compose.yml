@@ -8,7 +8,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
@@ -24,7 +24,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
@@ -37,7 +37,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
@@ -50,7 +50,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
@@ -63,7 +63,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
@@ -78,7 +78,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
@@ -90,7 +90,7 @@ services:
     container_name: api-tests
     environment:
       - NODE_ENV=test
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./postman/reports:/app/postman/reports
@@ -104,7 +104,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
@@ -117,7 +117,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports
@@ -132,7 +132,7 @@ services:
     environment:
       - NODE_ENV=test
       - HEADLESS=true
-      - BASE_URL=https://www.ifsight.com
+      - BASE_URL=https://example.com
     volumes:
       - ./artifacts:/app/artifacts
       - ./e2e/reports:/app/e2e/reports

@@ -6,7 +6,7 @@ test.describe('Homepage Tests', () => {
   });
 
   test('should load homepage successfully', async ({ page }) => {
-    await expect(page).toHaveTitle(/Home|IFSight/);
+    await expect(page).toHaveTitle(/Home|Example/);
     await expect(page.locator('body')).toBeVisible();
   });
 
@@ -70,6 +70,6 @@ test.describe('Homepage Tests', () => {
     await expect(page.locator('body')).toBeVisible();
     
     // Check that content is still accessible
-    await expect(page).toHaveTitle(/Home|IFSight/);
+    await expect(page).toHaveTitle(/Home|Example/);
   });
 });

@@ -42,16 +42,16 @@ export const TestConfig = {
   
   // Test Data
   urls: {
-    homepage: 'https://www.ifsight.com',
-    services: 'https://www.ifsight.com/services',
-    contact: 'https://www.ifsight.com/contact',
-    about: 'https://www.ifsight.com/about',
-    careers: 'https://www.ifsight.com/careers'
+    homepage: 'https://example.com',
+    services: 'https://example.com/services',
+    contact: 'https://example.com/contact',
+    about: 'https://example.com/about',
+    careers: 'https://example.com/careers'
   },
   
   // Expected Page Titles
-  expectedTitles: {
-    homepage: 'IFSight',
+  expected: {
+    homepage: 'Example Company',
     services: 'Services',
     contact: 'Contact',
     about: 'About',
@@ -60,7 +60,7 @@ export const TestConfig = {
   
   // Company Information (for validation)
   companyInfo: {
-    name: 'IFSight',
+    name: 'Example Company',
     address: 'United States',
     phone: '(555) 123-4567',
     fax: '(555) 123-4567'
@@ -71,8 +71,8 @@ export const TestConfig = {
     contact: {
       validContact: {
         name: 'John Doe',
-        email: 'john.doe@ifsight.com',
-        confirmEmail: 'john.doe@ifsight.com',
+        email: 'john.doe@example.com',
+        confirmEmail: 'john.doe@example.com',
         message: 'I am interested in your software development services and would like to learn more about your offerings.'
       },
       invalidContact: {

@@ -12,8 +12,8 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { IFSightHomePage } from '../../page-objects/homepage.js';
-import { IFSightContactPage } from '../../page-objects/contact-page.js';
+import { ExampleHomePage } from '../../page-objects/homepage.js';
+import { ExampleContactPage } from '../../page-objects/contact-page.js';
 
 class AccessibilityComplianceTests extends BaseTestFramework {
   constructor() {
@@ -24,8 +24,8 @@ class AccessibilityComplianceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new IFSightHomePage(this.client);
-    this.contactPage = new IFSightContactPage(this.client);
+    this.homePage = new ExampleHomePage(this.client);
+    this.contactPage = new ExampleContactPage(this.client);
   }
 
   /**

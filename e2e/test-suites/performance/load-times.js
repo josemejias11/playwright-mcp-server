@@ -12,7 +12,7 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { IFSightHomePage } from '../../page-objects/homepage.js';
+import { ExampleHomePage } from '../../page-objects/homepage.js';
 
 class PerformanceTests extends BaseTestFramework {
   constructor() {
@@ -22,7 +22,7 @@ class PerformanceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new IFSightHomePage(this.client);
+    this.homePage = new ExampleHomePage(this.client);
   }
 
   /**
@@ -75,10 +75,10 @@ class PerformanceTests extends BaseTestFramework {
   async testPageNavigationPerformance() {
     await this.executeTest('Page Navigation Performance', async () => {
       const pages = [
-        { url: 'https://www.ifsight.com/about/', name: 'About' },
-        { url: 'https://www.ifsight.com/services/', name: 'Services' },
-        { url: 'https://www.ifsight.com/contact/', name: 'Contact' },
-        { url: 'https://www.ifsight.com/careers/', name: 'Careers' }
+        { url: 'https://example.com/about/', name: 'About' },
+        { url: 'https://example.com/services/', name: 'Services' },
+        { url: 'https://example.com/contact/', name: 'Contact' },
+        { url: 'https://example.com/careers/', name: 'Careers' }
       ];
 
       const navigationMetrics = [];

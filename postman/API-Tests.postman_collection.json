@@ -1,20 +1,20 @@
 {
   "info": {
-    "name": "IFSight Government Solutions API Test Suite",
-    "description": "Comprehensive API testing for IFSight.com government website solutions - Organized by test type",
+    "name": "Example Company Government Solutions API Test Suite",
+    "description": "Comprehensive API testing for Example Company.com government website solutions - Organized by test type",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "version": "1.0.0"
   },
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://www.ifsight.com",
+      "value": "https://example.com",
       "type": "string",
-      "description": "Base URL for IFSight government solutions website"
+      "description": "Base URL for Example Company government solutions website"
     },
     {
       "key": "userAgent",
-      "value": "IFSight-Government-Solutions-API-Tests/3.0",
+      "value": "Example Company-Government-Solutions-API-Tests/3.0",
       "type": "string",
       "description": "Government solutions API testing user agent"
     }
@@ -185,9 +185,9 @@
                   "    pm.response.to.have.status(200);",
                   "});",
                   "",
-                  "pm.test('Contains IFSight branding', function () {",
+                  "pm.test('Contains Example Company branding', function () {",
                   "    const text = pm.response.text();",
-                  "    pm.expect(text).to.match(/IF|ifsight\\.com|if-tiny-color/i);",
+                  "    pm.expect(text).to.match(/IF|example.com|if-tiny-color/i);",
                   "});",
                   "",
                   "pm.test('Government website solutions messaging present', function () {",
@@ -229,7 +229,7 @@
                   "",
                   "pm.test('Contains company information', function () {",
                   "    const text = pm.response.text();",
-                  "    pm.expect(text).to.match(/IF|about|company|ifsight\\.com/i);",
+                  "    pm.expect(text).to.match(/IF|about|company|example.com/i);",
                   "});",
                   "",
                   "pm.test('Company story and specialization present', function () {",
@@ -317,7 +317,7 @@
                   "",
                   "pm.test('Contact information available', function () {",
                   "    const text = pm.response.text();",
-                  "    pm.expect(text).to.match(/contact|info.*ifsight|email|ifsight\\.com/i);",
+                  "    pm.expect(text).to.match(/contact|info.*example|email|example.com/i);",
                   "});",
                   "",
                   "pm.test('Accessibility compliance', function () {",
@@ -514,7 +514,7 @@
                   "pm.test('SEO: Title tag present and contains branding', function () {",
                   "    const html = pm.response.text();",
                   "    pm.expect(html).to.include('<title>');",
-                  "    pm.expect(html).to.match(/Home|IF|ifsight\\.com/i);",
+                  "    pm.expect(html).to.match(/Home|IF|example.com/i);",
                   "});",
                   "",
                   "pm.test('SEO: Meta description present', function () {",
@@ -656,7 +656,7 @@
           "request": {
             "method": "GET",
             "url": {
-              "raw": "{{baseUrl}}/contact?name=Government%20Agency%20Test&Email=government-test@ifsight.com&Confirm-Email=government-test@ifsight.com&Message=Government%20Solutions%20Inquiry%20-%20State%20and%20Local%20Digital%20Services",
+              "raw": "{{baseUrl}}/contact?name=Government%20Agency%20Test&Email=government-test@example.com&Confirm-Email=government-test@example.com&Message=Government%20Solutions%20Inquiry%20-%20State%20and%20Local%20Digital%20Services",
               "host": ["{{baseUrl}}"],
               "path": ["contact"],
               "query": [
@@ -666,11 +666,11 @@
                 },
                 {
                   "key": "Email",
-                  "value": "government-test@ifsight.com"
+                  "value": "government-test@example.com"
                 },
                 {
                   "key": "Confirm-Email",
-                  "value": "government-test@ifsight.com"
+                  "value": "government-test@example.com"
                 },
                 {
                   "key": "Message",
@@ -776,7 +776,7 @@
                   "",
                   "pm.test('Desktop: User experience optimized', function () {",
                   "    const html = pm.response.text();",
-                  "    pm.expect(html).to.match(/IF|government|solutions|digital|services|ifsight\\.com/i);",
+                  "    pm.expect(html).to.match(/IF|government|solutions|digital|services|example.com/i);",
                   "});"
                 ]
               }

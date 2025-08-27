@@ -15,7 +15,7 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { IFSightHomePage } from '../../page-objects/homepage.js';
+import { ExampleHomePage } from '../../page-objects/homepage.js';
 
 class AdvancedContentValidationTests extends BaseTestFramework {
   constructor() {
@@ -24,7 +24,7 @@ class AdvancedContentValidationTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new IFSightHomePage(this.client);
+    this.homePage = new ExampleHomePage(this.client);
   }
 
   /**
@@ -178,7 +178,7 @@ class AdvancedContentValidationTests extends BaseTestFramework {
       await this.initialize('Advanced Content Validation Tests', 'chromium');
       await this.initializePageObjects();
       
-      // Execute comprehensive content validation tests for IFSight
+      // Execute comprehensive content validation tests for Example Company
       await this.testHomepageBrandMessaging();
       await this.testHomepageContentDepth();
       await this.testNavigationStructure(); 
