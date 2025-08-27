@@ -89,7 +89,7 @@ export class BasePage {
   async captureScreenshot(name, fullPage = true) {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const websiteName = this.config.name.toLowerCase().replace(/\s+/g, '-');
-    const filename = `e2e/artifacts/${websiteName}-${name}-${timestamp}.png`;
+    const filename = `reports/artifacts/screenshots/${websiteName}-${name}-${timestamp}.png`;
     return await this.client.takeScreenshot(filename, fullPage);
   }
 

@@ -18,7 +18,7 @@ This demo will:
 ✅ Test mobile responsiveness
 ✅ Assess basic performance
 
-Screenshots will be saved to e2e/artifacts/
+Screenshots will be saved to reports/artifacts/screenshots/
 
 Starting demo in 3 seconds...
 `);
@@ -35,10 +35,10 @@ try {
 ==============================
 
 Check the following files:
-📸 e2e/artifacts/royal-caribbean-homepage.png
-📸 e2e/artifacts/royal-caribbean-navigation.png
-📸 e2e/artifacts/royal-caribbean-interaction.png
-📸 e2e/artifacts/royal-caribbean-mobile.png
+📸 reports/artifacts/screenshots/royal-caribbean-homepage.png
+📸 reports/artifacts/screenshots/royal-caribbean-navigation.png
+📸 reports/artifacts/screenshots/royal-caribbean-interaction.png
+📸 reports/artifacts/screenshots/royal-caribbean-mobile.png
 
 The framework successfully demonstrated:
 🔍 Visual validation and screenshot capture

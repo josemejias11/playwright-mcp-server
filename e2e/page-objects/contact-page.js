@@ -15,7 +15,7 @@ export class RoyalCaribbeanContactPage {
 
   async captureScreenshot(name) {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `e2e/artifacts/${name}-${timestamp}.png`;
+    const filename = `reports/artifacts/screenshots/${name}-${timestamp}.png`;
     return await this.client.takeScreenshot(filename, true);
   }
 

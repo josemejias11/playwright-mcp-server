@@ -27,7 +27,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       await new Promise(resolve => setTimeout(resolve, 3000));
       
       // Take full-page screenshot
-      await this.client.takeScreenshot('e2e/artifacts/royal-caribbean-homepage.png', true);
+      await this.client.takeScreenshot('reports/artifacts/screenshots/royal-caribbean-homepage.png', true);
       
       // Get page title
       const pageInfo = await this.client.getPageInfo();
@@ -67,7 +67,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       }
 
       // Take navigation screenshot
-      await this.client.takeScreenshot('e2e/artifacts/royal-caribbean-navigation.png', false);
+      await this.client.takeScreenshot('reports/artifacts/screenshots/royal-caribbean-navigation.png', false);
       
       await this.logger.success('✅ Navigation elements validation completed');
     });
@@ -111,7 +111,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
         if (clickResult.success) {
           await this.logger.business(`🎯 Successfully clicked: ${selector}`);
           await new Promise(resolve => setTimeout(resolve, 2000));
-          await this.client.takeScreenshot('e2e/artifacts/royal-caribbean-interaction.png', false);
+          await this.client.takeScreenshot('reports/artifacts/screenshots/royal-caribbean-interaction.png', false);
           break;
         }
       }
@@ -143,7 +143,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Take mobile screenshot
-      await this.client.takeScreenshot('e2e/artifacts/royal-caribbean-mobile.png', true);
+      await this.client.takeScreenshot('reports/artifacts/screenshots/royal-caribbean-mobile.png', true);
       
       await this.logger.business('📱 Mobile viewport simulation completed');
       await this.logger.success('✅ Mobile responsiveness check completed');
@@ -209,7 +209,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       await this.testPerformanceOverview();
       
       await this.logger.success('🎉 Royal Caribbean demo test suite completed successfully!');
-      await this.logger.success('📸 Screenshots saved to e2e/artifacts/');
+      await this.logger.success('📸 Screenshots saved to reports/artifacts/screenshots/');
       
     } catch (error) {
       await this.logger.error(`❌ Demo test failed: ${error.message}`);
