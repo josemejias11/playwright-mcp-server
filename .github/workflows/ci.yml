@@ -18,7 +18,7 @@ env:
   NODE_VERSION: '18'
   PLAYWRIGHT_BROWSERS_PATH: 0
   API_TEST_TIMEOUT: 30000
-  API_BASE_URL: 'https://example.com'
+  API_BASE_URL: 'https://www.royalcaribbean.com'
   ENABLE_API_MATRIX_TESTS: true
 
 jobs:

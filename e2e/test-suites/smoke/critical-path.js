@@ -12,8 +12,8 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { ExampleHomePage } from '../../page-objects/homepage.js';
-import { ExampleContactPage } from '../../page-objects/contact-page.js';
+import { RoyalCaribbeanHomePage } from '../../page-objects/homepage.js';
+import { RoyalCaribbeanContactPage } from '../../page-objects/contact-page.js';
 
 class CriticalPathSmokeTests extends BaseTestFramework {
   constructor() {
@@ -23,8 +23,8 @@ class CriticalPathSmokeTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new ExampleHomePage(this.client);
-    this.contactPage = new ExampleContactPage(this.client);
+    this.homePage = new RoyalCaribbeanHomePage(this.client);
+    this.contactPage = new RoyalCaribbeanContactPage(this.client);
   }
 
   /**

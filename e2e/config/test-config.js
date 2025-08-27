@@ -42,16 +42,16 @@ export const TestConfig = {
   
   // Test Data
   urls: {
-    homepage: 'https://example.com',
-    services: 'https://example.com/services',
-    contact: 'https://example.com/contact',
-    about: 'https://example.com/about',
-    careers: 'https://example.com/careers'
+    homepage: 'https://www.royalcaribbean.com',
+    services: 'https://www.royalcaribbean.com/cruise-ships',
+    contact: 'https://www.royalcaribbean.com/customer-service/contact-us',
+    about: 'https://www.royalcaribbean.com/experience',
+    careers: 'https://www.royalcaribbean.com/careers'
   },
   
   // Expected Page Titles
   expected: {
-    homepage: 'Example Company',
+    homepage: 'Royal Caribbean',
     services: 'Services',
     contact: 'Contact',
     about: 'About',
@@ -60,7 +60,7 @@ export const TestConfig = {
   
   // Company Information (for validation)
   companyInfo: {
-    name: 'Example Company',
+    name: 'Royal Caribbean',
     address: 'United States',
     phone: '(555) 123-4567',
     fax: '(555) 123-4567'
@@ -71,8 +71,8 @@ export const TestConfig = {
     contact: {
       validContact: {
         name: 'John Doe',
-        email: 'john.doe@example.com',
-        confirmEmail: 'john.doe@example.com',
+        email: 'test@royalcaribbean.com',
+        confirmEmail: 'test@royalcaribbean.com',
         message: 'I am interested in your software development services and would like to learn more about your offerings.'
       },
       invalidContact: {

@@ -1,20 +1,20 @@
 {
   "info": {
-    "name": "Example Company Government Solutions API Test Suite",
-    "description": "Comprehensive API testing for Example Company.com government website solutions - Organized by test type",
+    "name": "Royal Caribbean Government Solutions API Test Suite",
+    "description": "Comprehensive API testing for Royal Caribbean.com government website solutions - Organized by test type",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "version": "1.0.0"
   },
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://example.com",
+      "value": "https://www.royalcaribbean.com",
       "type": "string",
-      "description": "Base URL for Example Company government solutions website"
+      "description": "Base URL for Royal Caribbean government solutions website"
     },
     {
       "key": "userAgent",
-      "value": "Example Company-Government-Solutions-API-Tests/3.0",
+      "value": "Royal Caribbean-Government-Solutions-API-Tests/3.0",
       "type": "string",
       "description": "Government solutions API testing user agent"
     }
@@ -185,9 +185,9 @@
                   "    pm.response.to.have.status(200);",
                   "});",
                   "",
-                  "pm.test('Contains Example Company branding', function () {",
+                  "pm.test('Contains Royal Caribbean branding', function () {",
                   "    const text = pm.response.text();",
-                  "    pm.expect(text).to.match(/IF|example.com|if-tiny-color/i);",
+                  "    pm.expect(text).to.match(/IF|royalcaribbean.com|if-tiny-color/i);",
                   "});",
                   "",
                   "pm.test('Government website solutions messaging present', function () {",
@@ -229,7 +229,7 @@
                   "",
                   "pm.test('Contains company information', function () {",
                   "    const text = pm.response.text();",
-                  "    pm.expect(text).to.match(/IF|about|company|example.com/i);",
+                  "    pm.expect(text).to.match(/IF|about|company|royalcaribbean.com/i);",
                   "});",
                   "",
                   "pm.test('Company story and specialization present', function () {",
@@ -317,7 +317,7 @@
                   "",
                   "pm.test('Contact information available', function () {",
                   "    const text = pm.response.text();",
-                  "    pm.expect(text).to.match(/contact|info.*example|email|example.com/i);",
+                  "    pm.expect(text).to.match(/contact|info.*example|email|royalcaribbean.com/i);",
                   "});",
                   "",
                   "pm.test('Accessibility compliance', function () {",
@@ -514,7 +514,7 @@
                   "pm.test('SEO: Title tag present and contains branding', function () {",
                   "    const html = pm.response.text();",
                   "    pm.expect(html).to.include('<title>');",
-                  "    pm.expect(html).to.match(/Home|IF|example.com/i);",
+                  "    pm.expect(html).to.match(/Home|IF|royalcaribbean.com/i);",
                   "});",
                   "",
                   "pm.test('SEO: Meta description present', function () {",
@@ -656,7 +656,7 @@
           "request": {
             "method": "GET",
             "url": {
-              "raw": "{{baseUrl}}/contact?name=Government%20Agency%20Test&Email=government-test@example.com&Confirm-Email=government-test@example.com&Message=Government%20Solutions%20Inquiry%20-%20State%20and%20Local%20Digital%20Services",
+              "raw": "{{baseUrl}}/contact?name=Government%20Agency%20Test&Email=government-test@royalcaribbean.com&Confirm-Email=government-test@royalcaribbean.com&Message=Government%20Solutions%20Inquiry%20-%20State%20and%20Local%20Digital%20Services",
               "host": ["{{baseUrl}}"],
               "path": ["contact"],
               "query": [
@@ -666,11 +666,11 @@
                 },
                 {
                   "key": "Email",
-                  "value": "government-test@example.com"
+                  "value": "government-test@royalcaribbean.com"
                 },
                 {
                   "key": "Confirm-Email",
-                  "value": "government-test@example.com"
+                  "value": "government-test@royalcaribbean.com"
                 },
                 {
                   "key": "Message",
@@ -776,7 +776,7 @@
                   "",
                   "pm.test('Desktop: User experience optimized', function () {",
                   "    const html = pm.response.text();",
-                  "    pm.expect(html).to.match(/IF|government|solutions|digital|services|example.com/i);",
+                  "    pm.expect(html).to.match(/IF|government|solutions|digital|services|royalcaribbean.com/i);",
                   "});"
                 ]
               }

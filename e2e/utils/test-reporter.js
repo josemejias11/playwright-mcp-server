@@ -52,7 +52,7 @@ export class TestReporter {
         framework: 'Playwright MCP Professional Testing Framework v1.0',
         environment: process.env.TEST_ENV || 'production',
         browser: 'chromium',
-        url: 'https://example.com/'
+        url: 'https://www.royalcaribbean.com/'
       },
       analytics,
       performance,

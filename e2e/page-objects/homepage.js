@@ -9,9 +9,9 @@ import { BasePage } from './base-page.js';
 
 /**
  * Homepage Page Object
- * Legacy Example Homepage for backward compatibility
+ * Legacy Royal Caribbean Homepage for backward compatibility
  */
-class ExampleHomePage extends BasePage {
+class RoyalCaribbeanHomePage extends BasePage {
   constructor(client) {
     super(client);
   }
@@ -22,19 +22,19 @@ class ExampleHomePage extends BasePage {
       const title = await this.getTextBySelectors(selectors);
       
       if (!title) {
-        // Fallback for Example specific patterns
+        // Fallback for Royal Caribbean specific patterns
         const result = await this.client.evaluateJavaScript(`
           (() => {
             const h1 = document.querySelector('h1');
-            return h1 ? h1.textContent.trim() : 'Example Company';
+            return h1 ? h1.textContent.trim() : 'Royal Caribbean';
           })()
         `);
-        return result.success ? result.output : 'Example Company';
+        return result.success ? result.output : 'Royal Caribbean';
       }
       
       return title;
     } catch (error) {
-      return 'Example Company';
+      return 'Royal Caribbean';
     }
   }
 
@@ -54,12 +54,12 @@ class ExampleHomePage extends BasePage {
         try {
           return JSON.parse(result.output);
         } catch (e) {
-          return [{ text: 'Home', href: 'https://example.com/' }];
+          return [{ text: 'Home', href: 'https://www.royalcaribbean.com/' }];
         }
       }
-      return [{ text: 'Home', href: 'https://example.com/' }];
+      return [{ text: 'Home', href: 'https://www.royalcaribbean.com/' }];
     } catch (error) {
-      return [{ text: 'Home', href: 'https://example.com/' }];
+      return [{ text: 'Home', href: 'https://www.royalcaribbean.com/' }];
     }
   }
 
@@ -179,8 +179,8 @@ class ExampleHomePage extends BasePage {
       // Fallback contact information
       return {
         hasContactInfo: true,
-        emails: ['contact@example.com'],
-        phones: ['(555) 123-4567'],
+        emails: ['contact@royalcaribbean.com'],
+        phones: ['(866) 562-7625'],
         hasAddress: true,
         contactMethods: {
           email: true,
@@ -191,8 +191,8 @@ class ExampleHomePage extends BasePage {
     } catch (error) {
       return {
         hasContactInfo: true,
-        emails: ['contact@example.com'],
-        phones: ['(555) 123-4567'],
+        emails: ['contact@royalcaribbean.com'],
+        phones: ['(866) 562-7625'],
         hasAddress: false,
         contactMethods: {
           email: true,
@@ -352,11 +352,12 @@ export class HomePage {
       return new RoyalCaribbeanHomePage(client);
     }
     
-    // Default to Example HomePage for backward compatibility
-    return new ExampleHomePage(client);
+    // Default to Royal Caribbean HomePage
+    return new RoyalCaribbeanHomePage(client);
   }
 }
 
 // For backward compatibility - export the class directly as well
-export { ExampleHomePage };
-export { ExampleHomePage as IFSightHomePage }; // Legacy alias
+export { RoyalCaribbeanHomePage };
+export { RoyalCaribbeanHomePage as ExampleHomePage }; // Legacy alias
+export { RoyalCaribbeanHomePage as IFSightHomePage }; // Legacy alias
