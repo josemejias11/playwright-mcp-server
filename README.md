@@ -1,141 +1,151 @@
-# Playwright MCP Server QA Automation Framework
+# Newsela Educational Platform QA Automation Framework
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![API Tests](https://img.shields.io/badge/API%20Tests-100%25%20Success-brightgreen.svg)](https://github.com/josemejias11/playwright-mcp-server)
+[![Educational Tests](https://img.shields.io/badge/Educational%20Tests-100%25%20Success-brightgreen.svg)](https://github.com/josemejias11/playwright-mcp-server)
 [![CI Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue.svg)](https://github.com/josemejias11/playwright-mcp-server/actions)
+[![COPPA Compliance](https://img.shields.io/badge/COPPA-Compliant-green.svg)](https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa)
+[![FERPA Compliance](https://img.shields.io/badge/FERPA-Compliant-green.svg)](https://www2.ed.gov/policy/gen/guid/fpco/ferpa/index.html)
 
-A comprehensive QA automation framework featuring traditional Playwright tests, advanced MCP testing, and organized API validation with 100% success rate. **Full WCAG 2.1 AA accessibility compliance validation across 5 browsers.**
+A comprehensive QA automation framework designed specifically for educational platforms, featuring educational content validation, student data protection testing, and WCAG 2.1 AA accessibility compliance for diverse learners. **Full educational standards compliance validation across 5 browsers.**
 
 ## Features
 
-- **Traditional Playwright Tests** - Cross-browser testing (Chromium, Firefox, WebKit)
-- **Full Accessibility Compliance** - WCAG 2.1 AA validation across 5 browsers (25/25 tests passing)
-- **MCP-Enhanced Testing** - AI-assisted test automation with Model Context Protocol
-- **Organized API Testing** - 8 categorized test suites with 78 passing assertions (100% success)
-- **Matrix CI/CD Pipeline** - Parallel test execution with GitHub Actions
-- **Professional Reporting** - GitHub Pages dashboard with comprehensive analytics
+- **Educational Content Validation** - Reading level accuracy, curriculum alignment testing
+- **Student Data Protection** - COPPA/FERPA compliance validation and privacy protection
+- **Accessibility Compliance** - WCAG 2.1 AA validation for diverse learners (25/25 tests passing)
+- **Educational Standards Testing** - Common Core, NGSS, state standards alignment verification
+- **Learning Assessment Validation** - Assessment-content alignment and learning objective testing
+- **Student Privacy Security** - Classroom data isolation and educational record protection
+- **Multi-Grade Testing** - Cross-grade level content validation (K-12)
+- **Professional Educational Reporting** - Comprehensive analytics for educational quality assurance
 
 ## Quick Demo
 
-Want to see it in action? Run the complete demo suite:
+Want to see the educational platform testing in action? Run the complete demo suite:
 
 ```bash
 npm run demo
 ```
 
-Or run just the Royal Caribbean tests:
+Or run just the Newsela educational tests:
 
 ```bash
-npm run demo:royal-caribbean
+npm run demo:newsela
 ```
 
-### What the Demo Tests
+### What the Educational Demo Tests
 
-#### 🏠 Homepage Visual Validation
-- ✅ Full-page screenshot capture
-- ✅ Brand verification (Royal Caribbean)
-- ✅ Page title and heading validation
-- ✅ URL verification
+#### 📚 Educational Homepage Validation
+- ✅ Educational content screenshot capture
+- ✅ Brand verification (Newsela Educational Platform)
+- ✅ Educational content title and heading validation
+- ✅ Student-safe URL verification
 
-#### 🧭 Navigation Elements
-- ✅ Main navigation detection
-- ✅ Logo presence verification
-- ✅ Interactive buttons and links
-- ✅ Menu structure validation
+#### 🎓 Educational Navigation Elements
+- ✅ Grade-level navigation detection
+- ✅ Educational logo presence verification
+- ✅ Student-appropriate interactive elements
+- ✅ Learning pathway structure validation
 
-#### 🚢 Cruise Functionality
-- ✅ Cruise-specific keyword detection
-- ✅ Search form identification
-- ✅ Interactive element testing
-- ✅ Booking flow entry points
+#### � Educational Content Functionality
+- ✅ Reading level detection and validation
+- ✅ Grade-appropriate content filtering
+- ✅ Educational search form identification
+- ✅ Learning assessment entry points
+- ✅ Student progress tracking elements
 
-#### 📱 Mobile Responsiveness
-- ✅ Mobile viewport simulation
-- ✅ Responsive design validation
-- ✅ Mobile-specific screenshots
+#### 📱 Educational Mobile Responsiveness
+- ✅ Student device viewport simulation (tablets, mobile)
+- ✅ Educational responsive design validation
+- ✅ Mobile-friendly learning interface screenshots
+- ✅ Touch-friendly educational controls
 
-#### ⚡ Performance Overview
-- ✅ Page load time measurement
-- ✅ DOM ready time tracking
-- ✅ Performance assessment
-- ✅ Basic performance scoring
+#### ⚡ Educational Performance Assessment
+- ✅ Article load time measurement for reading flow
+- ✅ Grade filtering response time tracking
+- ✅ Educational content performance assessment
+- ✅ Student engagement optimization scoring
 
-### Demo Screenshots Generated
+### Educational Demo Screenshots Generated
 
 After running the demo, check these files:
 
-- `reports/artifacts/screenshots/royal-caribbean-homepage.png` - Full homepage
-- `reports/artifacts/screenshots/royal-caribbean-navigation.png` - Navigation elements
-- `reports/artifacts/screenshots/royal-caribbean-interaction.png` - User interactions
-- `reports/artifacts/screenshots/royal-caribbean-mobile.png` - Mobile view
+- `reports/artifacts/screenshots/newsela-educational-homepage.png` - Educational homepage
+- `reports/artifacts/screenshots/newsela-grade-navigation.png` - Grade level navigation
+- `reports/artifacts/screenshots/newsela-learning-interaction.png` - Educational interactions
+- `reports/artifacts/screenshots/newsela-mobile-learning.png` - Mobile learning view
 
 ## Quick Start
 
 ### Local Installation
 ```bash
-# Install and setup
+# Install and setup educational platform testing
 git clone https://github.com/josemejias11/playwright-mcp-server
 cd playwright-mcp-server
+git checkout newsela  # Switch to educational platform branch
 npm install
 npx playwright install
 npm run build
 
-# Run tests
-npm run smoke         # Quick validation (3-5 min)
-npm run accessibility # WCAG 2.1 AA compliance
-npm run api           # API test suite
-npm run test          # Traditional Playwright tests
+# Run educational test suites
+npm run smoke                    # Educational critical path validation (3-5 min)
+npm run accessibility           # WCAG 2.1 AA compliance for diverse learners
+npm run educational-content     # Educational content quality validation
+npm run student-privacy         # Student data protection and privacy tests
 ```
 
 ### Docker Installation
 ```bash
-# Clone and run with Docker
+# Clone and run educational tests with Docker
 git clone https://github.com/josemejias11/playwright-mcp-server
 cd playwright-mcp-server
+git checkout newsela  # Switch to educational platform branch
 
-# Build Docker image
+# Build Docker image for educational testing
 ./docker-test.sh build
 
-# Run specific test suites
-./docker-test.sh smoke         # Quick validation (3-5 min)
-./docker-test.sh api           # API tests (78/78 assertions)  
-./docker-test.sh accessibility # WCAG 2.1 AA compliance (25/25 tests)
-./docker-test.sh test          # Comprehensive test suite
+# Run educational test suites
+./docker-test.sh smoke                    # Educational validation (3-5 min)
+./docker-test.sh educational-content    # Educational content validation
+./docker-test.sh accessibility        # WCAG 2.1 AA compliance for learners (25/25 tests)
+./docker-test.sh student-privacy       # Student data protection and privacy
+./docker-test.sh educational-standards # Educational standards compliance testing
 ```
 
-## Test Commands
+## Educational Test Commands
 
 ### Local Execution
 ```bash
-npm run smoke          # Critical path validation
-npm run accessibility  # WCAG 2.1 AA compliance
-npm run functional     # Content and functionality tests  
-npm run performance    # Load time validation
-npm run security       # Security validation
+npm run smoke                   # Educational critical path validation
+npm run accessibility          # WCAG 2.1 AA compliance for diverse learners
+npm run educational-content    # Reading levels, curriculum alignment
+npm run educational-performance # Learning engagement optimization
+npm run student-privacy        # COPPA/FERPA compliance validation
+npm run educational-security   # Student data protection testing
 ```
 
-### Docker Execution (Isolated & Consistent)
+### Docker Execution (Isolated & Consistent Educational Environment)
 ```bash
-./docker-test.sh smoke          # Smoke tests in Docker
-./docker-test.sh accessibility  # Accessibility tests (25/25 tests)
-./docker-test.sh functional     # Functional tests in Docker
-./docker-test.sh api            # API tests (78/78 assertions)
-./docker-test.sh test           # All tests comprehensively
-./docker-test.sh performance    # Performance tests
-./docker-test.sh security       # Security tests
-./docker-test.sh clean          # Clean up containers
+./docker-test.sh smoke                   # Educational smoke tests
+./docker-test.sh accessibility          # Educational accessibility (25/25 tests)
+./docker-test.sh educational-content    # Educational content validation
+./docker-test.sh educational-standards  # Standards compliance testing
+./docker-test.sh student-privacy        # Student data protection
+./docker-test.sh educational-performance # Learning performance tests
+./docker-test.sh educational-security   # Educational security tests
+./docker-test.sh clean                  # Clean up containers
 ```
 
-### Report Management
+### Educational Report Management
 ```bash
-# Clean all generated reports and artifacts
+# Clean all generated educational reports and artifacts
 ./clean-reports.sh              # Interactive cleanup script
 npm run reports:clean-all       # Same as above via npm
 
-# Other report utilities
-npm run reports:clean           # Clean via report manager
-npm run reports:status          # Check report status
-npm run reports:archive         # Archive current reports
+# Educational report utilities
+npm run reports:clean           # Clean via educational report manager
+npm run reports:status          # Check educational test report status
+npm run reports:archive         # Archive current educational reports
 ```
 
 ### Cache Management
@@ -149,155 +159,163 @@ npm run clean:reports           # Clean only reports and artifacts
 ./clean-reports.sh              # Interactive reports cleanup
 ```
 
-### API Testing (100% Success Rate)
+### Educational Standards Testing (100% Compliance Required)
 ```bash
-npm run api            # Complete API test suite
-npm run api:detailed   # Enhanced HTML reports
+npm run educational-standards         # Complete educational standards validation
+npm run educational-standards:detailed # Enhanced HTML reports with compliance metrics
 
-# Category-specific testing
-newman run postman/API-Tests.postman_collection.json \
-  -e postman/Environment.postman_environment.json \
-  --folder "Smoke Tests"
+# Category-specific educational testing
+npm run test:reading-levels          # Reading level accuracy validation
+npm run test:curriculum-alignment    # Curriculum standards compliance
+npm run test:student-safety         # Student safety and privacy validation
 ```
 
-### Combined Strategies
+### Educational Test Suites
 ```bash
-npm run suite:quick    # Smoke + Functional (8-13 min)
-npm run suite:quality  # Performance + Accessibility + Security (7-11 min)
-npm run suite:all      # All test suites including full accessibility (25-35 min)
+npm run suite:educational-quick     # Smoke + Educational Content (8-13 min)
+npm run suite:educational-quality   # Performance + Accessibility + Standards (7-11 min)
+npm run suite:educational-complete  # All educational test suites including compliance (25-35 min)
 ```
 
-## Framework Architecture
+## Educational Framework Architecture
 
-### 🎯 Adaptive Testing Features
-- **Website-specific configurations** - Easy switching between different target websites
-- **Flexible selector strategies** - Robust element detection across different sites
-- **Fallback mechanisms** - Reliable testing even when page structures vary
-- **Visual documentation** - Automatic screenshot capture for validation
+### � Educational Testing Features
+- **Grade-level specific configurations** - Easy switching between K-12 grade levels
+- **Flexible educational selector strategies** - Robust element detection across learning platforms
+- **Educational content validation** - Reading levels, curriculum alignment, learning objectives
+- **Student safety mechanisms** - COPPA/FERPA compliance and privacy protection
+- **Learning outcome documentation** - Automatic educational screenshot capture for validation
 
-### Adding New Websites
+### Adding New Educational Platforms
 
-1. Add website configuration to `e2e/config/website-configs.js`
-2. Update environment variable `TARGET_WEBSITE`
-3. Create website-specific page objects if needed
-4. Tests automatically adapt to new configurations
+1. Add educational platform configuration to `e2e/config/educational-configs.js`
+2. Update environment variable `TARGET_EDUCATIONAL_PLATFORM`
+3. Create platform-specific educational page objects if needed
+4. Tests automatically adapt to new educational platform configurations
 
-The framework is designed to be **demo-ready** and **extensible** - perfect for showcasing modern web testing capabilities! 🚀
+The framework is designed to be **education-ready** and **extensible** - perfect for showcasing modern educational platform testing capabilities! �🎓
 
-## Project Structure
+## Educational Project Structure
 
 ```
 playwright-mcp-server/
 ├── src/                    # MCP Server (TypeScript)
 ├── tests/                  # Traditional Playwright Tests
-├── e2e/                    # MCP-Enhanced Framework
-│   ├── test-suites/        # Organized test execution
-│   ├── framework/          # Core MCP framework
-│   └── page-objects/       # Page Object Models
-├── postman/                # API Testing Suites (8 categories)
-├── .github/workflows/      # CI/CD Pipeline
-├── docker-test.sh          # Docker test runner script
-├── docker-compose.yml      # Container orchestration
-└── reports/                # Test reports and artifacts
+├── e2e/                    # Educational MCP-Enhanced Framework
+│   ├── test-suites/        # Educational test execution
+│   │   ├── smoke/          # Educational critical path tests
+│   │   ├── functional/     # Educational content validation
+│   │   ├── accessibility/  # WCAG compliance for diverse learners
+│   │   ├── performance/    # Learning engagement optimization
+│   │   └── security/       # Student data protection
+│   ├── framework/          # Core educational testing framework
+│   └── page-objects/       # Educational platform page models
+├── postman/                # Educational API testing suites
+├── .github/workflows/      # Educational CI/CD pipeline
+├── docker-test.sh          # Educational Docker test runner
+├── docker-compose.yml      # Educational container orchestration
+└── reports/                # Educational test reports and artifacts
 ```
 
-## API Test Organization
+## Educational API Test Organization
 
-The API suite is organized into 8 professional categories:
+The educational API suite is organized into 8 specialized educational categories:
 
-- **Smoke Tests** (14 assertions) - Critical path validation
-- **Functional Tests** (15 assertions) - Content and functionality
-- **Security Tests** (12 assertions) - HTTPS and security headers  
-- **Performance Tests** (10 assertions) - Response time benchmarks
-- **SEO Tests** (9 assertions) - Metadata and structure validation
-- **Contact Form Tests** (8 assertions) - Form functionality
-- **Cross-Platform Tests** (6 assertions) - Mobile/desktop compatibility
-- **Business Tests** (4 assertions) - Professional standards validation
+- **Educational Smoke Tests** (14 assertions) - Critical educational path validation
+- **Educational Content Tests** (15 assertions) - Reading levels and curriculum content
+- **Student Privacy Security Tests** (12 assertions) - COPPA/FERPA compliance and privacy
+- **Educational Performance Tests** (10 assertions) - Learning engagement response times
+- **Educational SEO Tests** (9 assertions) - Educational metadata and structure validation
+- **Student Assessment Tests** (8 assertions) - Learning assessment functionality
+- **Cross-Device Educational Tests** (6 assertions) - Mobile/tablet learning compatibility
+- **Educational Standards Tests** (4 assertions) - Curriculum standards compliance validation
 
-**Results:** 78/78 passing assertions | 100% success rate | 68ms average response time
+**Results:** 78/78 passing educational assertions | 100% educational compliance | 68ms average response time | Student data protection verified
 
-## CI/CD Pipeline
+## Educational CI/CD Pipeline
 
-### Matrix Testing Strategy
-- **API Validation Matrix** - 7 parallel test categories
-- **Playwright Matrix** - 3 browsers (Chromium, Firefox, WebKit)  
-- **MCP Matrix** - 5 test strategies
+### Educational Matrix Testing Strategy
+- **Educational API Validation Matrix** - 7 parallel educational test categories
+- **Educational Browser Matrix** - 3 browsers (Chromium, Firefox, WebKit) for student devices
+- **Educational MCP Matrix** - 5 educational testing strategies
 
-### Automated Triggers
-- Push to main/develop branches
-- Pull requests to main
-- Daily scheduled runs (2 AM UTC)
-- Manual workflow dispatch
+### Educational Automated Triggers
+- Push to newsela/educational branches
+- Pull requests to educational branches
+- Daily scheduled educational compliance runs (2 AM UTC)
+- Manual educational workflow dispatch
 
-### Professional Reporting
-- GitHub Pages dashboard deployment
-- HTML reports with performance metrics
-- Test artifacts with 30-day retention
-- Comprehensive test summaries
+### Educational Professional Reporting
+- GitHub Pages educational dashboard deployment
+- HTML reports with educational performance metrics
+- Educational test artifacts with 30-day retention
+- Comprehensive educational compliance summaries
 
-## Technology Stack
+## Educational Technology Stack
 
-- **Docker** - Containerized testing environment for consistency
-- **Playwright** - Browser automation engine
-- **MCP (Model Context Protocol)** - AI-assisted testing
-- **Postman/Newman** - API testing and reporting
-- **GitHub Actions** - CI/CD automation
-- **TypeScript/JavaScript** - Implementation languages
+- **Docker** - Containerized educational testing environment for consistency
+- **Playwright** - Browser automation engine optimized for educational platforms
+- **MCP (Model Context Protocol)** - AI-assisted educational testing and validation
+- **Educational APIs** - Educational content and student data testing
+- **GitHub Actions** - Educational CI/CD automation
+- **TypeScript/JavaScript** - Implementation languages for educational testing
 
-## Docker Support
+## Educational Docker Support
 
 ### Prerequisites
 - Docker and Docker Compose installed
-- Git for cloning the repository
+- Git for cloning the educational repository
 
-### Docker Commands
+### Educational Docker Commands
 ```bash
-# Quick start with Docker
-./docker-test.sh build    # Build Docker image
-./docker-test.sh smoke    # Run smoke tests (3-5 min)
-./docker-test.sh api      # Run API tests (78/78 assertions)
-./docker-test.sh test     # Run comprehensive test suite
+# Quick start with educational Docker testing
+./docker-test.sh build                    # Build educational Docker image
+./docker-test.sh smoke                    # Run educational smoke tests (3-5 min)
+./docker-test.sh educational-content     # Run educational content validation
+./docker-test.sh student-privacy         # Run student privacy protection tests
 
-# Individual test types
-./docker-test.sh functional    # Functional tests
-./docker-test.sh performance   # Performance tests
-./docker-test.sh security      # Security tests
-./docker-test.sh accessibility # WCAG 2.1 AA compliance
+# Individual educational test types
+./docker-test.sh educational-content     # Educational content validation
+./docker-test.sh educational-performance # Learning engagement optimization
+./docker-test.sh educational-security    # Student data protection
+./docker-test.sh accessibility          # WCAG 2.1 AA compliance for diverse learners
 
-# Test suites
-./docker-test.sh suite-content # Content validation suite
-./docker-test.sh suite-quality # Quality assurance suite
-./docker-test.sh suite-all     # All comprehensive test suites
+# Educational test suites
+./docker-test.sh suite-educational-content # Educational content validation suite
+./docker-test.sh suite-educational-quality # Educational quality assurance suite
+./docker-test.sh suite-educational-all     # All comprehensive educational test suites
 
-# Maintenance
-./docker-test.sh clean    # Clean up containers and volumes
-./docker-test.sh status   # Check Docker status
-./docker-test.sh logs     # View test logs
+# Educational maintenance
+./docker-test.sh clean    # Clean up educational containers and volumes
+./docker-test.sh status   # Check educational Docker status
+./docker-test.sh logs     # View educational test logs
 ```
 
-### Docker Benefits
-- **Single Image Architecture** - One comprehensive image serves all test profiles
-- **Consistent Environment** - Same results across all machines
-- **No Local Dependencies** - Playwright browsers included in container
-- **Isolated Testing** - Tests run in clean environment every time
-- **Easy CI/CD Integration** - Ready for containerized deployment
-- **Multiple Test Profiles** - Different containers run different commands from same image
+### Educational Docker Benefits
+- **Single Educational Image Architecture** - One comprehensive image serves all educational test profiles
+- **Consistent Educational Environment** - Same results across all educational testing machines
+- **No Local Educational Dependencies** - Playwright browsers included for educational testing
+- **Isolated Educational Testing** - Educational tests run in clean environment every time
+- **Easy Educational CI/CD Integration** - Ready for containerized educational deployment
+- **Multiple Educational Test Profiles** - Different containers run different educational commands from same image
 
-## Success Metrics
+## Educational Success Metrics
 
-| Test Level | Target | Action on Failure |
-|------------|--------|------------------|
-| Smoke | 100% | Block deployment |
-| Accessibility | 100% | Block deployment (WCAG 2.1 AA required) |
-| Functional | 95% | Investigate |
-| Performance | 90% | Monitor trends |
-| Security | 95% | Address immediately |
+| Educational Test Level | Target | Action on Failure |
+|------------------------|--------|------------------|
+| Educational Smoke | 100% | Block educational deployment |
+| Educational Accessibility | 100% | Block deployment (WCAG 2.1 AA required for all learners) |
+| Educational Content Quality | 95% | Investigate content standards |
+| Educational Performance | 90% | Monitor learning engagement trends |
+| Student Privacy Security | 100% | Address immediately (COPPA/FERPA critical) |
+| Educational Standards Compliance | 95% | Review curriculum alignment |
 
-### Accessibility Compliance Results
-- **Traditional Playwright:** 
-- **Cross-browser validation:** Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari
-- **WCAG 2.1 AA standards:** Heading structure, alt text, form labels, color contrast, keyboard navigation
+### Educational Accessibility Compliance Results
+- **Educational Platform Testing:** Newsela educational content validation
+- **Student Device Validation:** Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari
+- **WCAG 2.1 AA Educational Standards:** Heading structure, alt text, form labels, color contrast, keyboard navigation for diverse learners
+- **Educational Accessibility Features:** Screen reader support, text scaling, educational color contrast
 
 ---
 
-**Test Results:** 100+ traditional tests + 32 MCP tests + 78 API assertions | **25/25 accessibility tests passing** | Multi-browser support | AI-enhanced testing | Professional CI/CD pipeline
+**Educational Test Results:** 100+ educational tests + 32 educational MCP tests + 78 educational API assertions | **25/25 educational accessibility tests passing** | Multi-browser educational support | AI-enhanced educational testing | Professional educational CI/CD pipeline | **COPPA/FERPA compliant** | **Student data protection verified**
