@@ -504,7 +504,7 @@ main().catch(error => {
       await this.logger.business(`✓ Brand messaging validated: Text from h1: ${titleText}`);
       await this.logger.business(`✓ Cruise focus: ${cruiseElements.isCruiseFocused ? 'confirmed' : 'general travel website'}`);
       await this.logger.business(`✓ Cruise keywords found: ${cruiseElements.foundKeywords ? cruiseElements.foundKeywords.join(', ') : 'detected'}`);
-      await this.logger.business(`✓ Website specialization: ${titleText.includes('Cruise') || titleText.includes('Royal Caribbean') ? 'Cruise Vacations and Travel' : 'Travel Services'}`);
+      await this.logger.business(`✓ Website specialization: ${titleText.includes('Educational') || titleText.includes('Newsela') ? 'Educational Platform' : 'Educational Services'}`);
       
     }, { timeout: 8000 });
   }
@@ -635,7 +635,7 @@ main().catch(error => {
       await this.initialize('Advanced Content Validation Tests', 'chromium');
       await this.initializePageObjects();
       
-      // Execute comprehensive content validation tests for Royal Caribbean
+      // Execute comprehensive content validation tests for Newsela
       await this.testHomepageBrandMessaging();
       await this.testHomepageContentDepth();
       await this.testNavigationStructure(); 
@@ -686,7 +686,7 @@ main().catch(error => {
         '📊 Regular content analysis recommended monthly'
       ],
       websiteType: 'Cruise Travel Website',
-      focus: 'Royal Caribbean Cruise Vacations and Travel',
+      focus: 'Newsela Educational Platform and Learning Content',
       enhancements: [
         'Adaptive content expectations',
         'Smart fallback strategies',

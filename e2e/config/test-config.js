@@ -155,8 +155,8 @@ const websiteConfigs = {
 
 // Get current website configuration
 function getCurrentWebsiteConfig() {
-  const websiteType = process.env.TARGET_WEBSITE || 'royalcaribbean';
-  return websiteConfigs[websiteType] || websiteConfigs.royalcaribbean;
+  const websiteType = process.env.TARGET_WEBSITE || 'newsela';
+  return websiteConfigs[websiteType] || websiteConfigs.newsela;
 }
 
 const currentWebsite = getCurrentWebsiteConfig();

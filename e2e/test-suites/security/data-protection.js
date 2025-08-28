@@ -12,8 +12,8 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { RoyalCaribbeanHomePage } from '../../page-objects/homepage.js';
-import { RoyalCaribbeanContactPage } from '../../page-objects/contact-page.js';
+import { NewselaHomePage } from '../../page-objects/homepage.js';
+import { NewselaContactPage } from '../../page-objects/contact-page.js';
 
 class SecurityComplianceTests extends BaseTestFramework {
   constructor() {
@@ -24,8 +24,8 @@ class SecurityComplianceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new RoyalCaribbeanHomePage(this.client);
-    this.contactPage = new RoyalCaribbeanContactPage(this.client);
+    this.homePage = new NewselaHomePage(this.client);
+    this.contactPage = new NewselaContactPage(this.client);
   }
 
   /**

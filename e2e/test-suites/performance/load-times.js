@@ -12,7 +12,7 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { RoyalCaribbeanHomePage } from '../../page-objects/homepage.js';
+import { NewselaHomePage } from '../../page-objects/homepage.js';
 
 class PerformanceTests extends BaseTestFramework {
   constructor() {
@@ -22,7 +22,7 @@ class PerformanceTests extends BaseTestFramework {
   }
 
   async initializePageObjects() {
-    this.homePage = new RoyalCaribbeanHomePage(this.client);
+    this.homePage = new NewselaHomePage(this.client);
   }
 
   /**
@@ -75,10 +75,10 @@ class PerformanceTests extends BaseTestFramework {
   async testPageNavigationPerformance() {
     await this.executeTest('Page Navigation Performance', async () => {
       const pages = [
-        { url: 'https://www.royalcaribbean.com/experience/', name: 'Experience' },
-        { url: 'https://www.royalcaribbean.com/cruise-ships/', name: 'Ships' },
-        { url: 'https://www.royalcaribbean.com/customer-service/contact-us/', name: 'Contact' },
-        { url: 'https://www.royalcaribbean.com/careers/', name: 'Careers' }
+        { url: 'https://newsela.com/about/', name: 'About' },
+        { url: 'https://newsela.com/subject/', name: 'Articles' },
+        { url: 'https://newsela.com/support/', name: 'Support' },
+        { url: 'https://newsela.com/educators/', name: 'Educators' }
       ];
 
       const navigationMetrics = [];
