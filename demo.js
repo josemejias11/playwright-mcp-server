@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 
 /**
- * Demo Runner - Quick test execution for Royal Caribbean
- * Simple command-line interface for demo purposes
+ * Royal Caribbean Demo Runner  
+ * Cruise line testing for RRCL branch
  */
 
 import { RoyalCaribbeanDemo } from './e2e/royal-caribbean-demo.js';
 
 console.log(`
-🚢 Royal Caribbean Testing Framework Demo
-=========================================
+🚢 Royal Caribbean Testing Framework
+===================================
+
+This is the dedicated Royal Caribbean testing branch.
+
+Testing: Cruise booking and vacation planning platform
 
 This demo will:
 ✅ Test homepage visuals and branding
@@ -20,7 +24,7 @@ This demo will:
 
 Screenshots will be saved to reports/artifacts/screenshots/
 
-Starting demo in 3 seconds...
+Starting Royal Caribbean demo in 3 seconds...
 `);
 
 // Add a short delay for demo effect
@@ -31,8 +35,8 @@ try {
   await demo.runDemo();
   
   console.log(`
-🎉 Demo Completed Successfully!
-==============================
+🎉 Royal Caribbean Demo Completed Successfully!
+==============================================
 
 Check the following files:
 📸 reports/artifacts/screenshots/royal-caribbean-homepage.png
@@ -40,28 +44,33 @@ Check the following files:
 📸 reports/artifacts/screenshots/royal-caribbean-interaction.png
 📸 reports/artifacts/screenshots/royal-caribbean-mobile.png
 
-The framework successfully demonstrated:
+The Royal Caribbean framework successfully demonstrated:
 🔍 Visual validation and screenshot capture
-🧪 Basic functionality testing
+🧪 Cruise functionality testing
 📱 Mobile responsiveness checks
-⚡ Performance monitoring
-🎯 Adaptive testing approach
+⚡ Performance monitoring for booking platforms
+🎯 Cruise-specific testing approach
 
-Ready for production testing! 🚀
+Ready for cruise line production testing! 🚀
 `);
 
 } catch (error) {
   console.error(`
-❌ Demo Failed
-=============
+❌ Royal Caribbean Demo Failed
+============================
 Error: ${error.message}
 
 This might be due to:
 - Network connectivity issues
-- Website changes
+- Royal Caribbean website changes
 - Browser compatibility
 
 Please check your internet connection and try again.
+
+Note: This is the Royal Caribbean-specific testing branch.
+For other websites, switch to the appropriate branch:
+- git checkout newsela (Newsela educational platform)
+- git checkout main (Core framework)
 `);
   process.exit(1);
 }
