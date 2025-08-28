@@ -1,6 +1,6 @@
 /**
  * Test Configuration for Playwright MCP Testing Framework
- * Centralized configuration for Royal Caribbean testing
+ * Multi-website configuration supporting Royal Caribbean and Newsela
  */
 
 import dotenv from 'dotenv';
@@ -12,52 +12,175 @@ const __dirname = dirname(__filename);
 
 dotenv.config({ path: join(__dirname, '../../.env') });
 
-// Royal Caribbean configuration
-const websiteConfig = {
-  name: 'Royal Caribbean',
-  type: 'cruise-booking',
-  baseUrl: 'https://www.royalcaribbean.com',
-  industry: 'cruise'
-};
-
-export const TestConfig = {
-  // Website Configuration
-  website: websiteConfig,
-  baseUrl: process.env.BASE_URL || websiteConfig.baseUrl,
-  environment: process.env.TEST_ENV || 'production',
-  
-  // Selectors Configuration
-  selectors: {
-    hero: {
-      title: ['h1', '.hero-title', '.banner-title', '.main-title', '[data-testid="hero-title"]'],
-      subtitle: ['.hero-subtitle', '.banner-subtitle', '.hero p', '.main-subtitle'],
-      cta: ['.hero .btn', '.cta-button', '.book-now', '.find-cruise', '[data-testid="hero-cta"]']
+// Website configurations
+const websiteConfigs = {
+  royalcaribbean: {
+    name: 'Royal Caribbean',
+    type: 'royal-caribbean',
+    baseUrl: 'https://www.royalcaribbean.com',
+    industry: 'cruise',
+    selectors: {
+      hero: {
+        title: ['h1', '.hero-title', '.banner-title', '.main-title', '[data-testid="hero-title"]'],
+        subtitle: ['.hero-subtitle', '.banner-subtitle', '.hero p', '.main-subtitle'],
+        cta: ['.hero .btn', '.cta-button', '.book-now', '.find-cruise', '[data-testid="hero-cta"]']
+      },
+      navigation: {
+        menu: ['nav', '.main-navigation', '.header-nav', '[role="navigation"]'],
+        menuItems: ['nav a', '.nav-item', '.menu-link', '.navigation a'],
+        logo: ['.logo', '.brand-logo', '.rc-logo', '.header-logo']
+      },
+      content: {
+        sections: ['.content-section', '.page-section', 'main section', '.feature'],
+        headings: ['h1', 'h2', 'h3', '.heading', '.section-title'],
+        paragraphs: ['p', '.text-content', '.description']
+      },
+      forms: {
+        search: ['.search-form', '.cruise-search', '[data-testid="search"]'],
+        contact: ['.contact-form', '.inquiry-form', 'form'],
+        inputs: ['input', 'select', 'textarea'],
+        buttons: ['button', '.btn', '[type="submit"]', '.cta']
+      },
+      booking: {
+        deals: ['.deal-card', '.offer', '.promotion', '.cruise-deal'],
+        prices: ['.price', '.cost', '.rate', '[data-testid="price"]'],
+        availability: ['.available', '.dates', '.calendar']
+      }
     },
-    navigation: {
-      menu: ['nav', '.main-navigation', '.header-nav', '[role="navigation"]'],
-      menuItems: ['nav a', '.nav-item', '.menu-link', '.navigation a'],
-      logo: ['.logo', '.brand-logo', '.rc-logo', '.header-logo']
+    urls: {
+      homepage: 'https://www.royalcaribbean.com',
+      services: 'https://www.royalcaribbean.com/cruise-ships',
+      contact: 'https://www.royalcaribbean.com/customer-service/contact-us',
+      about: 'https://www.royalcaribbean.com/experience',
+      careers: 'https://www.royalcaribbean.com/careers'
     },
-    content: {
-      sections: ['.content-section', '.page-section', 'main section', '.feature'],
-      headings: ['h1', 'h2', 'h3', '.heading', '.section-title'],
-      paragraphs: ['p', '.text-content', '.description']
+    expected: {
+      homepage: 'Royal Caribbean',
+      services: 'Services',
+      contact: 'Contact',
+      about: 'About',
+      careers: 'Careers'
     },
-    forms: {
-      search: ['.search-form', '.cruise-search', '[data-testid="search"]'],
-      contact: ['.contact-form', '.inquiry-form', 'form'],
-      inputs: ['input', 'select', 'textarea'],
-      buttons: ['button', '.btn', '[type="submit"]', '.cta']
+    companyInfo: {
+      name: 'Royal Caribbean',
+      address: 'United States',
+      phone: '(555) 123-4567',
+      fax: '(555) 123-4567'
     },
-    booking: {
-      deals: ['.deal-card', '.offer', '.promotion', '.cruise-deal'],
-      prices: ['.price', '.cost', '.rate', '[data-testid="price"]'],
-      availability: ['.available', '.dates', '.calendar']
+    testData: {
+      contact: {
+        validContact: {
+          name: 'John Doe',
+          email: 'test@royalcaribbean.com',
+          confirmEmail: 'test@royalcaribbean.com',
+          message: 'I am interested in your cruise offerings and would like to learn more.'
+        }
+      }
     }
   },
-  website: websiteConfig,
-  baseUrl: process.env.BASE_URL || websiteConfig.baseUrl,
+  
+  newsela: {
+    name: 'Newsela',
+    type: 'newsela',
+    baseUrl: 'https://newsela.com',
+    industry: 'education',
+    selectors: {
+      hero: {
+        title: ['h1', '.hero-title', '.header-title', '.brand-title', '[data-testid="hero-title"]'],
+        subtitle: ['.hero-subtitle', '.header-subtitle', '.hero p', '.tagline'],
+        cta: ['.hero .btn', '.cta-button', '.get-started', '.sign-up', '[data-testid="hero-cta"]']
+      },
+      navigation: {
+        menu: ['nav', '.main-navigation', '.header-nav', '[role="navigation"]', '.navbar'],
+        menuItems: ['nav a', '.nav-item', '.menu-link', '.navigation a', '.nav-link'],
+        logo: ['.logo', '.brand-logo', '.newsela-logo', '.header-logo', '[data-testid="logo"]']
+      },
+      content: {
+        sections: ['.content-section', '.article-section', 'main section', '.feature', '.content-area'],
+        headings: ['h1', 'h2', 'h3', '.heading', '.section-title', '.article-title'],
+        paragraphs: ['p', '.text-content', '.description', '.article-text']
+      },
+      forms: {
+        search: ['.search-form', '.article-search', '[data-testid="search"]', '.search-input'],
+        contact: ['.contact-form', '.support-form', '.help-form', 'form'],
+        inputs: ['input', 'select', 'textarea'],
+        buttons: ['button', '.btn', '[type="submit"]', '.cta', '.button']
+      },
+      educational: {
+        grades: ['.grade-level', '.grade-filter', '[data-testid="grade"]', '.grade-selector'],
+        subjects: ['.subject-filter', '.subject-menu', '[data-testid="subject"]', '.subject-selector'],
+        articles: ['.article-card', '.content-card', '.reading-card', '[data-testid="article"]'],
+        readingLevels: ['.reading-level', '.lexile-level', '[data-testid="reading-level"]']
+      }
+    },
+    urls: {
+      homepage: 'https://newsela.com',
+      articles: 'https://newsela.com/subject',
+      support: 'https://newsela.com/support',
+      about: 'https://newsela.com/about',
+      educators: 'https://newsela.com/educators'
+    },
+    expected: {
+      homepage: 'Newsela',
+      articles: 'Articles',
+      support: 'Support',
+      about: 'About',
+      educators: 'Educators'
+    },
+    companyInfo: {
+      name: 'Newsela',
+      address: 'United States',
+      email: 'support@newsela.com'
+    },
+    testData: {
+      contact: {
+        validContact: {
+          name: 'Test Teacher',
+          email: 'teacher@school.edu',
+          confirmEmail: 'teacher@school.edu',
+          message: 'I am interested in using Newsela for my classroom and would like more information.',
+          school: 'Test Elementary School',
+          grade: '5'
+        }
+      },
+      educational: {
+        gradeLevel: process.env.NEWSELA_GRADE_LEVEL || '5',
+        subject: process.env.NEWSELA_SUBJECT || 'Science',
+        language: process.env.NEWSELA_LANGUAGE || 'English',
+        readingLevel: process.env.NEWSELA_READING_LEVEL || '4'
+      }
+    }
+  }
+};
+
+// Get current website configuration
+function getCurrentWebsiteConfig() {
+  const websiteType = process.env.TARGET_WEBSITE || 'royalcaribbean';
+  return websiteConfigs[websiteType] || websiteConfigs.royalcaribbean;
+}
+
+const currentWebsite = getCurrentWebsiteConfig();
+
+export const TestConfig = {
+  // Website Configuration - dynamically set based on environment
+  website: currentWebsite,
+  baseUrl: process.env.BASE_URL || currentWebsite.baseUrl,
   environment: process.env.TEST_ENV || 'production',
+  
+  // Selectors Configuration - from current website
+  selectors: currentWebsite.selectors,
+  
+  // URLs - from current website  
+  urls: currentWebsite.urls,
+  
+  // Expected values - from current website
+  expected: currentWebsite.expected,
+  
+  // Company info - from current website
+  companyInfo: currentWebsite.companyInfo,
+  
+  // Test data - from current website
+  testData: currentWebsite.testData,
   
   // Browser Configuration
   headless: process.env.HEADLESS === 'true' || false,
@@ -76,50 +199,6 @@ export const TestConfig = {
   serverPath: join(__dirname, '../../build/index.js'),
   artifactsPath: join(__dirname, '../../reports/artifacts'),
   reportsPath: join(__dirname, '../../reports/e2e'),
-  
-  // Test Data
-  urls: {
-    homepage: 'https://www.royalcaribbean.com',
-    services: 'https://www.royalcaribbean.com/cruise-ships',
-    contact: 'https://www.royalcaribbean.com/customer-service/contact-us',
-    about: 'https://www.royalcaribbean.com/experience',
-    careers: 'https://www.royalcaribbean.com/careers'
-  },
-  
-  // Expected Page Titles
-  expected: {
-    homepage: 'Royal Caribbean',
-    services: 'Services',
-    contact: 'Contact',
-    about: 'About',
-    careers: 'Careers'
-  },
-  
-  // Company Information (for validation)
-  companyInfo: {
-    name: 'Royal Caribbean',
-    address: 'United States',
-    phone: '(555) 123-4567',
-    fax: '(555) 123-4567'
-  },
-  
-  // Test Data for Forms
-  testData: {
-    contact: {
-      validContact: {
-        name: 'John Doe',
-        email: 'test@royalcaribbean.com',
-        confirmEmail: 'test@royalcaribbean.com',
-        message: 'I am interested in your software development services and would like to learn more about your offerings.'
-      },
-      invalidContact: {
-        name: '',
-        email: 'invalid-email',
-        confirmEmail: 'different@email.com',
-        message: ''
-      }
-    }
-  },
   
   // Performance Thresholds
   performance: {
@@ -177,5 +256,24 @@ export const TestConfig = {
     performance: ['load-times', 'network-analysis'],
     security: ['https-validation', 'headers-check'],
     accessibility: ['a11y-compliance', 'keyboard-navigation']
+  },
+  
+  // Utility methods
+  getCurrentConfig: () => currentWebsite,
+  getWebsiteConfigs: () => websiteConfigs,
+  setWebsite: (websiteType) => {
+    const newConfig = websiteConfigs[websiteType];
+    if (newConfig) {
+      Object.assign(TestConfig.website, newConfig);
+      Object.assign(TestConfig.selectors, newConfig.selectors);
+      Object.assign(TestConfig.urls, newConfig.urls);
+      Object.assign(TestConfig.expected, newConfig.expected);
+      Object.assign(TestConfig.companyInfo, newConfig.companyInfo);
+      Object.assign(TestConfig.testData, newConfig.testData);
+      TestConfig.baseUrl = newConfig.baseUrl;
+    }
   }
 };
+
+// Export website configurations for direct access
+export { websiteConfigs };
