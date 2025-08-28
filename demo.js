@@ -1,67 +1,56 @@
 #!/usr/bin/env node
 
 /**
- * Demo Runner - Quick test execution for Royal Caribbean
- * Simple command-line interface for demo purposes
+ * Core Framework Demo Guide
+ * Pure core framework - no website-specific code
  */
 
-import { RoyalCaribbeanDemo } from './e2e/royal-caribbean-demo.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const websiteType = process.env.TARGET_WEBSITE || '';
 
 console.log(`
-🚢 Royal Caribbean Testing Framework Demo
-=========================================
+🏗️ Core Automated Testing Framework
+==================================
 
-This demo will:
-✅ Test homepage visuals and branding
-✅ Validate navigation elements  
-✅ Check cruise functionality
-✅ Test mobile responsiveness
-✅ Assess basic performance
+This is the core automation framework without website-specific implementations.
 
-Screenshots will be saved to reports/artifacts/screenshots/
+📋 Branch Strategy:
+  🌟 main branch    - Core framework (current)
+  🚢 RRCL branch    - Royal Caribbean testing
+  📚 newsela branch - Newsela educational platform testing
 
-Starting demo in 3 seconds...
+🎯 To run website-specific tests, switch to the appropriate branch:
+
+Royal Caribbean Testing:
+  git checkout RRCL
+  node demo.js
+
+Newsela Educational Testing:
+  git checkout newsela  
+  node demo.js
+
+Return to Core Framework:
+  git checkout main
+
+💡 Why this approach?
+- Clean separation of concerns
+- Each branch is focused and optimized for its target
+- Core framework remains lightweight and reusable
+- Easy to add new websites by creating new branches from main
+
+${websiteType ? `\n⚠️  TARGET_WEBSITE=${websiteType} detected but ignored.
+This branch contains only the core framework.
+Use dedicated branches for website testing.` : ''}
 `);
 
-// Add a short delay for demo effect
-await new Promise(resolve => setTimeout(resolve, 3000));
+console.log('🔧 Core framework components available:');
+console.log('  📂 Framework utilities');
+console.log('  🧪 Base test classes'); 
+console.log('  � MCP server integration');
+console.log('  📊 Reporting infrastructure');
+console.log('  🛠️  Configuration system');
 
-try {
-  const demo = new RoyalCaribbeanDemo();
-  await demo.runDemo();
-  
-  console.log(`
-🎉 Demo Completed Successfully!
-==============================
-
-Check the following files:
-📸 reports/artifacts/screenshots/royal-caribbean-homepage.png
-📸 reports/artifacts/screenshots/royal-caribbean-navigation.png
-📸 reports/artifacts/screenshots/royal-caribbean-interaction.png
-📸 reports/artifacts/screenshots/royal-caribbean-mobile.png
-
-The framework successfully demonstrated:
-🔍 Visual validation and screenshot capture
-🧪 Basic functionality testing
-📱 Mobile responsiveness checks
-⚡ Performance monitoring
-🎯 Adaptive testing approach
-
-Ready for production testing! 🚀
-`);
-
-} catch (error) {
-  console.error(`
-❌ Demo Failed
-=============
-Error: ${error.message}
-
-This might be due to:
-- Network connectivity issues
-- Website changes
-- Browser compatibility
-
-Please check your internet connection and try again.
-`);
-  process.exit(1);
-}
+process.exit(0);

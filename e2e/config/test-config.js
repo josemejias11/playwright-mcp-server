@@ -1,6 +1,6 @@
 /**
- * Test Configuration for Playwright MCP Testing Framework
- * Centralized configuration for Royal Caribbean testing
+ * Core Framework Test Configuration
+ * Base configuration for the automated testing framework
  */
 
 import dotenv from 'dotenv';
@@ -12,52 +12,44 @@ const __dirname = dirname(__filename);
 
 dotenv.config({ path: join(__dirname, '../../.env') });
 
-// Royal Caribbean configuration
-const websiteConfig = {
-  name: 'Royal Caribbean',
-  type: 'cruise-booking',
-  baseUrl: 'https://www.royalcaribbean.com',
-  industry: 'cruise'
+// Generic website configuration structure
+const defaultWebsiteConfig = {
+  name: 'Generic Website',
+  type: 'generic',
+  baseUrl: process.env.BASE_URL || 'https://example.com',
+  industry: 'generic'
 };
 
 export const TestConfig = {
-  // Website Configuration
-  website: websiteConfig,
-  baseUrl: process.env.BASE_URL || websiteConfig.baseUrl,
+  // Website Configuration - will be overridden by specific branches
+  website: defaultWebsiteConfig,
+  baseUrl: process.env.BASE_URL || defaultWebsiteConfig.baseUrl,
   environment: process.env.TEST_ENV || 'production',
   
-  // Selectors Configuration
+  // Generic Selectors Configuration - common patterns most websites use
   selectors: {
     hero: {
-      title: ['h1', '.hero-title', '.banner-title', '.main-title', '[data-testid="hero-title"]'],
-      subtitle: ['.hero-subtitle', '.banner-subtitle', '.hero p', '.main-subtitle'],
-      cta: ['.hero .btn', '.cta-button', '.book-now', '.find-cruise', '[data-testid="hero-cta"]']
+      title: ['h1', '.hero-title', '.banner-title', '.main-title', '.title'],
+      subtitle: ['.hero-subtitle', '.banner-subtitle', '.subtitle', '.tagline'],
+      cta: ['.hero .btn', '.cta-button', '.btn-primary', 'button']
     },
     navigation: {
-      menu: ['nav', '.main-navigation', '.header-nav', '[role="navigation"]'],
-      menuItems: ['nav a', '.nav-item', '.menu-link', '.navigation a'],
-      logo: ['.logo', '.brand-logo', '.rc-logo', '.header-logo']
+      menu: ['nav', '.navigation', '.nav', '[role="navigation"]'],
+      menuItems: ['nav a', '.nav-item', '.menu-link', '.nav-link'],
+      logo: ['.logo', '.brand', '.brand-logo', '.header-logo']
     },
     content: {
-      sections: ['.content-section', '.page-section', 'main section', '.feature'],
-      headings: ['h1', 'h2', 'h3', '.heading', '.section-title'],
-      paragraphs: ['p', '.text-content', '.description']
+      sections: ['.content', '.section', 'main section', '.container'],
+      headings: ['h1', 'h2', 'h3', '.heading', '.title'],
+      paragraphs: ['p', '.text', '.description', '.content']
     },
     forms: {
-      search: ['.search-form', '.cruise-search', '[data-testid="search"]'],
-      contact: ['.contact-form', '.inquiry-form', 'form'],
+      search: ['.search-form', '.search', '[data-testid="search"]'],
+      contact: ['.contact-form', '.form', 'form'],
       inputs: ['input', 'select', 'textarea'],
-      buttons: ['button', '.btn', '[type="submit"]', '.cta']
-    },
-    booking: {
-      deals: ['.deal-card', '.offer', '.promotion', '.cruise-deal'],
-      prices: ['.price', '.cost', '.rate', '[data-testid="price"]'],
-      availability: ['.available', '.dates', '.calendar']
+      buttons: ['button', '.btn', '[type="submit"]']
     }
   },
-  website: websiteConfig,
-  baseUrl: process.env.BASE_URL || websiteConfig.baseUrl,
-  environment: process.env.TEST_ENV || 'production',
   
   // Browser Configuration
   headless: process.env.HEADLESS === 'true' || false,
@@ -77,50 +69,6 @@ export const TestConfig = {
   artifactsPath: join(__dirname, '../../reports/artifacts'),
   reportsPath: join(__dirname, '../../reports/e2e'),
   
-  // Test Data
-  urls: {
-    homepage: 'https://www.royalcaribbean.com',
-    services: 'https://www.royalcaribbean.com/cruise-ships',
-    contact: 'https://www.royalcaribbean.com/customer-service/contact-us',
-    about: 'https://www.royalcaribbean.com/experience',
-    careers: 'https://www.royalcaribbean.com/careers'
-  },
-  
-  // Expected Page Titles
-  expected: {
-    homepage: 'Royal Caribbean',
-    services: 'Services',
-    contact: 'Contact',
-    about: 'About',
-    careers: 'Careers'
-  },
-  
-  // Company Information (for validation)
-  companyInfo: {
-    name: 'Royal Caribbean',
-    address: 'United States',
-    phone: '(555) 123-4567',
-    fax: '(555) 123-4567'
-  },
-  
-  // Test Data for Forms
-  testData: {
-    contact: {
-      validContact: {
-        name: 'John Doe',
-        email: 'test@royalcaribbean.com',
-        confirmEmail: 'test@royalcaribbean.com',
-        message: 'I am interested in your software development services and would like to learn more about your offerings.'
-      },
-      invalidContact: {
-        name: '',
-        email: 'invalid-email',
-        confirmEmail: 'different@email.com',
-        message: ''
-      }
-    }
-  },
-  
   // Performance Thresholds
   performance: {
     pageLoadTime: 5000, // ms
@@ -128,7 +76,7 @@ export const TestConfig = {
     domContentLoaded: 2000 // ms
   },
   
-  // Financial Services Compliance Requirements
+  // Compliance Requirements (generic)
   compliance: {
     requireHttps: true,
     requiredHeaders: ['X-Frame-Options', 'X-Content-Type-Options'],
