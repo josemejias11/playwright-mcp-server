@@ -23,7 +23,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       await this.client.navigateTo(this.baseUrl);
       
       // Wait for page to load
-      await this.client.waitForElement('body', 10000);
+      await this.client.waitForElement('body', 'visible', 10000);
       await new Promise(resolve => setTimeout(resolve, 3000));
       
       // Take full-page screenshot
@@ -62,7 +62,7 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
       ];
 
       for (const element of navElements) {
-        const found = await this.client.waitForElement(element.selector, 3000);
+        const found = await this.client.waitForElement(element.selector, 'visible', 3000);
         await this.logger.business(`🔍 ${element.name}: ${found.success ? '✅ Found' : '❌ Not found'}`);
       }
 
@@ -99,9 +99,12 @@ class RoyalCaribbeanDemo extends BaseTestFramework {
 
       if (cruiseElements.success) {
         const data = cruiseElements.output;
-        await this.logger.business(`🔑 Cruise Keywords Found: ${data.keywords.join(', ')}`);
+        const keywords = data.keywords || [];
+        await this.logger.business(`🔑 Cruise Keywords Found: ${keywords.length > 0 ? keywords.join(', ') : 'None detected'}`);
         await this.logger.business(`🔍 Search Form Present: ${data.hasSearchForm ? '✅ Yes' : '❌ No'}`);
-        await this.logger.business(`🔘 Interactive Buttons: ${data.buttonCount}`);
+        await this.logger.business(`🔘 Interactive Buttons: ${data.buttonCount || 0}`);
+      } else {
+        await this.logger.business(`⚠️ Could not analyze cruise functionality: ${cruiseElements.error || 'Unknown error'}`);
       }
 
       // Try to interact with search if available

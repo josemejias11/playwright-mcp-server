@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "ms-playwright.playwright",
-    "esbenp.prettier-vscode",
-    "ms-azuretools.vscode-docker",
-    "ms-vscode-remote.remote-containers",
-    "dbaeumer.vscode-eslint"
-  ]
-}

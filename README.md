@@ -126,6 +126,29 @@ npm run security       # Security validation
 ./docker-test.sh clean          # Clean up containers
 ```
 
+### Report Management
+```bash
+# Clean all generated reports and artifacts
+./clean-reports.sh              # Interactive cleanup script
+npm run reports:clean-all       # Same as above via npm
+
+# Other report utilities
+npm run reports:clean           # Clean via report manager
+npm run reports:status          # Check report status
+npm run reports:archive         # Archive current reports
+```
+
+### Cache Management
+```bash
+# Clean all caches (npm, Playwright browsers, Docker, system temp)
+./clean-cache.sh                # Interactive cache cleanup
+npm run clean:cache             # Same as above via npm
+
+# Quick cleanup commands
+npm run clean:reports           # Clean only reports and artifacts
+./clean-reports.sh              # Interactive reports cleanup
+```
+
 ### API Testing (100% Success Rate)
 ```bash
 npm run api            # Complete API test suite

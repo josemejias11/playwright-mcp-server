@@ -21,7 +21,7 @@ export class BasePage {
   async findElementBySelectors(selectors, timeout = 5000) {
     for (const selector of selectors) {
       try {
-        const result = await this.client.waitForElement(selector, timeout / selectors.length);
+        const result = await this.client.waitForElement(selector, 'visible', timeout / selectors.length);
         if (result.success) {
           return { success: true, selector, element: result.element };
         }

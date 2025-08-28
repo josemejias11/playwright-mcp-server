@@ -245,4 +245,3 @@ export class RoyalCaribbeanContactPage {
 
 // For backward compatibility - export the class with legacy aliases
 export { RoyalCaribbeanContactPage as ExampleContactPage };
-export { RoyalCaribbeanContactPage as IFSightContactPage };

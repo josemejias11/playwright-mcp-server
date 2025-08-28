@@ -359,4 +359,3 @@ export class HomePage {
 // For backward compatibility - export the class directly as well
 export { RoyalCaribbeanHomePage };
 export { RoyalCaribbeanHomePage as ExampleHomePage }; // Legacy alias
-export { RoyalCaribbeanHomePage as IFSightHomePage }; // Legacy alias
