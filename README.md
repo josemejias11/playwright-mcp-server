@@ -128,18 +128,3 @@ Script mapping (Chrome by default unless BROWSERS provided):
 ## MCP Server
 
 Entry point: src/mcp-server.ts (run with npm run mcp:server)
-
-
-## Troubleshooting
-
-| Symptom                                              | Fix                                                                 |
-| ---------------------------------------------------- | ------------------------------------------------------------------- |
-| Safari session not created / remote automation error | Enable Develop > Allow Remote Automation in Safari                  |
-| Geckodriver not starting                             | Verify geckodriver version vs installed Firefox; reinstall deps     |
-| Flaky network-dependent tests                        | Raise `waitforTimeout` or add explicit waits                        |
-| Element not interactable (esp. Safari)               | Add scroll/focus helpers or small pauses                            |
-| Window size not 1440x900                             | Ensure no extensions resizing; confirm `setWindowSize` not removed  |
-
-## License
-
-MIT
