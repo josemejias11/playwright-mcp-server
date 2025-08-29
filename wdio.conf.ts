@@ -3,10 +3,16 @@ import type { Options } from '@wdio/types';
 export const config: Options.Testrunner = {
     runner: 'local',
     
-    // Tests folder removed; keep empty array to allow wdio invocation without error
+    // Single landing page smoke spec
     specs: [
-        // No specs present intentionally; MCP server does not rely on WDIO spec tests now
+        './tests/landing.spec.ts'
     ],
+    autoCompileOpts: {
+        tsNodeOpts: {
+            transpileOnly: true,
+            files: true
+        }
+    },
     
     maxInstances: 10,
     capabilities: [{

@@ -17,13 +17,12 @@
     "emitDecoratorMetadata": true
   },
   "include": [
-    "src/**/*",
-    "tests/**/*",
-    "examples/**/*"
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "examples/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "tests"
+    "dist"
   ]
 }
