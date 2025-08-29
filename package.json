@@ -29,7 +29,7 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "validate:workflow": "node scripts/validate-workflow.js"
+  "validate:workflow": "tsx scripts/validate-workflow.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.4.0",
