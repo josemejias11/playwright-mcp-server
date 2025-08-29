@@ -1,3 +1,4 @@
+import { expect } from 'expect';
 /// <reference types="@wdio/globals" />
 
 describe('Landing Page', () => {
@@ -7,8 +8,11 @@ describe('Landing Page', () => {
     // 1. Title resilience: Should mention either brand or product concept
     const title = (await browser.getTitle()).toLowerCase();
     expect(title.length).toBeGreaterThan(10);
-    expect([title.includes('newsela'), title.includes('learning'), title.includes('education')]
-      .some(Boolean)).toBe(true);
+    expect(
+      [title.includes('newsela'), title.includes('learning'), title.includes('education')].some(
+        Boolean
+      )
+    ).toBe(true);
 
     // 2. Hero heading: non-empty and not a generic placeholder
     const hero = await $('h1');
@@ -21,7 +25,7 @@ describe('Landing Page', () => {
     // 3. Primary CTA buttons/links existence (sample selectors)
     const ctaSelectors = [
       'a[href*="join"], a[href*="signup"], a[href*="sign-up"], a[href*="get-started"]',
-      'a[href*="contact"], a[href*="get-in-touch"]'
+      'a[href*="contact"], a[href*="get-in-touch"]',
     ];
     let ctaFound = 0;
     for (const sel of ctaSelectors) {
@@ -32,9 +36,11 @@ describe('Landing Page', () => {
 
     // 4. Navigation structure sanity (soft check): collect distinct nav link texts if present
     const navTexts: string[] = await browser.execute(() => {
-      const nodes = Array.from(document.querySelectorAll('header a[href], nav a[href]')) as HTMLElement[];
-      const texts = nodes.map(n => (n.innerText || '').trim()).filter(t => t);
-      return Array.from(new Set(texts)).filter(t => t.length < 40);
+      const nodes = Array.from(
+        document.querySelectorAll('header a[href], nav a[href]')
+      ) as HTMLElement[];
+      const texts = nodes.map((n) => (n.innerText || '').trim()).filter((t) => t);
+      return Array.from(new Set(texts)).filter((t) => t.length < 40);
     });
     console.log('Nav texts (soft check):', navTexts);
     if (navTexts.length > 0) {

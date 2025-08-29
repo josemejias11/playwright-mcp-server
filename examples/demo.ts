@@ -7,10 +7,10 @@
 
 async function demonstrateWebAutomation(): Promise<void> {
   console.log('🚀 Starting WebDriverIO MCP Server Demo');
-  
+
   try {
     console.log('📱 WebDriverIO MCP Server Capabilities');
-    
+
     console.log('✅ WebDriverIO MCP Server is ready!');
     console.log('🔧 Available tools:');
     console.log('   - navigate: Go to any URL');
@@ -28,13 +28,12 @@ async function demonstrateWebAutomation(): Promise<void> {
     console.log('   - refresh_page: Refresh the page');
     console.log('   - go_back: Navigate back');
     console.log('   - go_forward: Navigate forward');
-    
+
     console.log('');
     console.log('🎯 To use this server with an MCP client:');
     console.log('   npm run mcp:server');
     console.log('');
     console.log('📚 See README-WEBDRIVERIO.md for detailed usage examples');
-    
   } catch (error) {
     console.error('❌ Error:', error);
   }

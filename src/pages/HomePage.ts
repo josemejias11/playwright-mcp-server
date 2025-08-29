@@ -13,17 +13,22 @@ export class HomePage {
   }
 
   async navMenuItems(): Promise<string[]> {
-    await browser.waitUntil(async () => {
-      const count = (await $$('header a[href], nav a[href]')).length;
-      return count > 0;
-    }, { timeout: 8000, timeoutMsg: 'Navigation links did not appear' });
+    await browser.waitUntil(
+      async () => {
+        const count = (await $$('header a[href], nav a[href]')).length;
+        return count > 0;
+      },
+      { timeout: 8000, timeoutMsg: 'Navigation links did not appear' }
+    );
     const els = await $$('header a[href], nav a[href]');
     const texts: string[] = [];
     for (const el of els) {
       try {
         const t = (await el.getText()).trim();
         if (t && t.length < 60) texts.push(t);
-      } catch {}
+      } catch (err) {
+        // swallow individual element text retrieval failures (e.g., stale element) intentionally
+      }
     }
     return Array.from(new Set(texts));
   }

@@ -1,4 +1,4 @@
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import type { Tool } from '@modelcontextprotocol/sdk/types.js';
 
 export function registerWebAutomationTools(): Tool[] {
   return [
@@ -156,7 +156,8 @@ export function registerWebAutomationTools(): Tool[] {
         properties: {
           selector: {
             type: 'string',
-            description: 'CSS selector for the element to scroll to (optional if using coordinates)',
+            description:
+              'CSS selector for the element to scroll to (optional if using coordinates)',
           },
           x: {
             type: 'number',

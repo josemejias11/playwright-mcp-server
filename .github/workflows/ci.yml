@@ -2,10 +2,10 @@ name: CI - WebDriverIO MCP Server
 
 on:
   push:
-    branches: [ newsela ]
+    branches: [newsela]
   pull_request:
-    branches: [ newsela ]
-  workflow_dispatch:  # Allow manual triggers
+    branches: [newsela]
+  workflow_dispatch: # Allow manual triggers
 
 permissions:
   contents: read
@@ -18,9 +18,8 @@ env:
 
 jobs:
   lint-and-build:
-    name: Lint, Build & Test
+    name: Lint & Build
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,30 +33,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: ESLint
+        run: npm run lint
+
       - name: Lint TypeScript
         run: npx tsc --noEmit
 
       - name: Build MCP server
         run: npm run build
-
-      - name: Setup Chrome for WebDriverIO
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: ${{ env.CHROME_VERSION }}
-
-      - name: Run WebDriverIO tests
-        run: npm test
-
-      - name: Test MCP server demo
-        run: npm run demo
-
-      - name: Upload test reports
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: test-reports
-          path: reports/
-          retention-days: 30
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -66,11 +49,98 @@ jobs:
           path: dist/
           retention-days: 30
 
+  wdio-browser-matrix:
+    name: WebDriverIO (${{ matrix.browser }})
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, firefox]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (reuse artifacts optional)
+        run: npm run build
+
+      - name: Setup Chrome
+        if: matrix.browser == 'chrome'
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+
+      - name: Run tests (${{ matrix.browser }})
+        env:
+          BROWSERS: ${{ matrix.browser }}
+        run: npm test
+
+      - name: Generate Allure HTML
+        run: |
+          npx allure generate reports/allure-results --clean -o reports/allure-report || echo "Allure generation skipped"
+
+      - name: Upload reports (${{ matrix.browser }})
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.browser }}
+          path: reports/
+          retention-days: 30
+
+  wdio-safari:
+    name: WebDriverIO (safari)
+    needs: lint-and-build
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Enable safaridriver
+        run: sudo safaridriver --enable
+
+      - name: Run tests (safari)
+        env:
+          BROWSERS: safari
+        run: npm test
+
+      - name: Generate Allure HTML
+        run: |
+          npx allure generate reports/allure-results --clean -o reports/allure-report || echo "Allure generation skipped"
+
+      - name: Upload reports (safari)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-safari
+          path: reports/
+          retention-days: 30
+
   mcp-server-validation:
     name: MCP Server Validation
     needs: lint-and-build
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -166,17 +236,29 @@ jobs:
         continue-on-error: true
 
   generate-reports:
-    name: Generate Test Reports
-    needs: [lint-and-build, mcp-server-validation]
+    name: Aggregate Test Reports
+    needs: [wdio-browser-matrix, wdio-safari, mcp-server-validation]
     runs-on: ubuntu-latest
     if: always()
-    
+
     steps:
-      - name: Download test reports
+      - name: Download Chrome reports
         uses: actions/download-artifact@v4
         with:
-          name: test-reports
-          path: reports/
+          name: test-reports-chrome
+          path: reports/chrome
+
+      - name: Download Firefox reports
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports-firefox
+          path: reports/firefox
+
+      - name: Download Safari reports
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports-safari
+          path: reports/safari
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -203,14 +285,17 @@ jobs:
           <body>
               <h1>🚀 WebDriverIO MCP Server - Test Reports</h1>
               <p><strong>Branch:</strong> newsela | <strong>Build:</strong> ${{ github.run_number }}</p>
+              <p><strong>Browsers:</strong> Chrome, Firefox, Safari</p>
               
               <div class="report-section success">
                   <h2>📊 Available Reports</h2>
                   <ul>
-                      <li>📄 <a href="json/">JSON Test Results</a> - Machine-readable test data</li>
-                      <li>📋 <a href="junit/">JUnit XML Reports</a> - CI/CD integration format</li>
-                      <li>📸 <a href="screenshots/">Screenshots</a> - Test execution screenshots</li>
-                      <li>📝 <a href="wdio/">WebDriverIO Logs</a> - Detailed execution logs</li>
+                      <li>📄 <a href="chrome/json/">Chrome JSON Results</a></li>
+                      <li>📄 <a href="firefox/json/">Firefox JSON Results</a></li>
+                      <li>📄 <a href="safari/json/">Safari JSON Results</a></li>
+                      <li>📋 <a href="chrome/junit/">JUnit (Chrome)</a> | <a href="firefox/junit/">(Firefox)</a> | <a href="safari/junit/">(Safari)</a></li>
+                      <li>📸 <a href="chrome/screenshots/">Screenshots (Chrome)</a> | <a href="firefox/screenshots/">(Firefox)</a> | <a href="safari/screenshots/">(Safari)</a></li>
+                      <li>📝 <a href="chrome/wdio/">Logs (Chrome)</a> | <a href="firefox/wdio/">(Firefox)</a> | <a href="safari/wdio/">(Safari)</a></li>
                   </ul>
               </div>
 
@@ -238,28 +323,20 @@ jobs:
     needs: generate-reports
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/newsela'
-    
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - name: Download reports
-        uses: actions/download-artifact@v4
-        with:
-          name: test-reports
-          path: reports/
-
-      - name: Display deployment info
-        run: |
-          echo "✅ Reports generated successfully"
-          echo "📊 To enable GitHub Pages deployment:"
-          echo "1. Go to repository Settings → Pages"
-          echo "2. Set source to 'GitHub Actions'"
-          echo "3. Re-run this workflow"
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
 
   test-summary:
     name: Test Summary
-    needs: [lint-and-build, mcp-server-validation, security-scan]
+    needs: [lint-and-build, wdio-browser-matrix, wdio-safari, mcp-server-validation, security-scan]
     runs-on: ubuntu-latest
     if: always()
-    
+
     steps:
       - name: Create test summary
         run: |
@@ -267,22 +344,24 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 📊 Test Results Overview" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Test Suite | Status | Description |" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status | Notes |" >> $GITHUB_STEP_SUMMARY
           echo "|------------|--------|-------------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Build & Test | ${{ needs.lint-and-build.result }} | TypeScript compilation and WebDriverIO tests |" >> $GITHUB_STEP_SUMMARY
+          echo "| Lint & Build | ${{ needs.lint-and-build.result }} | TypeScript compile & bundle |" >> $GITHUB_STEP_SUMMARY
+          echo "| WebDriverIO (Chrome/Firefox) | ${{ needs.wdio-browser-matrix.result }} | Matrix browser runs |" >> $GITHUB_STEP_SUMMARY
+          echo "| WebDriverIO (Safari) | ${{ needs.wdio-safari.result }} | Safari remote automation |" >> $GITHUB_STEP_SUMMARY
           echo "| MCP Validation | ${{ needs.mcp-server-validation.result }} | MCP server startup and WebDriver functionality |" >> $GITHUB_STEP_SUMMARY
           echo "| Security Scan | ${{ needs.security-scan.result }} | Dependency vulnerability assessment |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 🎯 Branch: newsela" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ **WebDriverIO Integration**: Complete web automation framework" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ **Multi-Browser Integration**: Chrome, Firefox, Safari covered" >> $GITHUB_STEP_SUMMARY
           echo "- 🔧 **TypeScript Migration**: Full type safety and modern build process" >> $GITHUB_STEP_SUMMARY
-          echo "- 📊 **Centralized Reporting**: All test results in reports/ folder" >> $GITHUB_STEP_SUMMARY
+          echo "- 📊 **Centralized Reporting**: Aggregated per-browser artifacts" >> $GITHUB_STEP_SUMMARY
           echo "- 🚀 **15 MCP Tools**: Comprehensive web automation capabilities" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 📋 Available Tools" >> $GITHUB_STEP_SUMMARY
-          echo "- 🌐 **Navigation**: navigate, wait_for_element" >> $GITHUB_STEP_SUMMARY
-          echo "- 🖱️ **Interaction**: click, double_click, right_click, hover" >> $GITHUB_STEP_SUMMARY
-          echo "- ⌨️ **Input**: type, clear, select_option" >> $GITHUB_STEP_SUMMARY
-          echo "- 📸 **Capture**: take_screenshot, get_page_source" >> $GITHUB_STEP_SUMMARY
-          echo "- 🔍 **Information**: get_element_text, get_element_attribute, get_page_title, get_current_url" >> $GITHUB_STEP_SUMMARY
-          echo "- ⏳ **Synchronization**: execute_script" >> $GITHUB_STEP_SUMMARY
+          echo "- 🌐 **Navigation**: navigate, go_back, go_forward, refresh_page" >> $GITHUB_STEP_SUMMARY
+          echo "- 🖱️ **Interaction**: click, hover, scroll_to" >> $GITHUB_STEP_SUMMARY
+          echo "- ⌨️ **Input**: type, fill_form, select_option" >> $GITHUB_STEP_SUMMARY
+          echo "- 📸 **Capture**: screenshot" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔍 **Information**: get_text, get_page_title, get_current_url" >> $GITHUB_STEP_SUMMARY
+          echo "- ⏳ **Synchronization**: wait_for_element" >> $GITHUB_STEP_SUMMARY

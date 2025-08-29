@@ -1,16 +1,24 @@
-import { remote, RemoteOptions, Browser } from 'webdriverio';
+import { remote } from 'webdriverio';
+import type { RemoteOptions, Browser } from 'webdriverio';
 import * as fs from 'fs';
 import * as path from 'path';
 
+interface ChromeCapabilities {
+  browserName: 'chrome';
+  'goog:chromeOptions': {
+    args: string[];
+  };
+}
+
 export class WebDriverManager {
   private driver: Browser | null = null;
-  private options: RemoteOptions;
+  private options: RemoteOptions & { capabilities: ChromeCapabilities };
   private screenshotDir: string;
 
   constructor() {
     this.screenshotDir = './reports/screenshots';
     this.ensureDirectoryExists(this.screenshotDir);
-    
+
     this.options = {
       logLevel: 'info',
       capabilities: {
@@ -21,11 +29,11 @@ export class WebDriverManager {
             '--no-sandbox',
             '--disable-dev-shm-usage',
             '--disable-gpu',
-            '--window-size=1920,1080'
-          ]
-        }
-      } as any
-    };
+            '--window-size=1920,1080',
+          ],
+        },
+      },
+    } as RemoteOptions & { capabilities: ChromeCapabilities };
   }
 
   async getDriver(): Promise<Browser> {
@@ -52,8 +60,7 @@ export class WebDriverManager {
   }
 
   async setHeadlessMode(headless: boolean): Promise<void> {
-    const capabilities = this.options.capabilities as any;
-    const chromeOptions = capabilities['goog:chromeOptions'];
+    const chromeOptions = this.options.capabilities['goog:chromeOptions'];
     if (headless) {
       if (!chromeOptions.args.includes('--headless')) {
         chromeOptions.args.push('--headless');
@@ -71,11 +78,10 @@ export class WebDriverManager {
   }
 
   async setWindowSize(width: number, height: number): Promise<void> {
-    const capabilities = this.options.capabilities as any;
-    const chromeOptions = capabilities['goog:chromeOptions'];
-    const sizeArgIndex = chromeOptions.args.findIndex((arg: string) => arg.startsWith('--window-size='));
+    const chromeOptions = this.options.capabilities['goog:chromeOptions'];
+    const sizeArgIndex = chromeOptions.args.findIndex((arg) => arg.startsWith('--window-size='));
     const newSizeArg = `--window-size=${width},${height}`;
-    
+
     if (sizeArgIndex > -1) {
       chromeOptions.args[sizeArgIndex] = newSizeArg;
     } else {
