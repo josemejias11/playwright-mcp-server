@@ -33,6 +33,30 @@ Automation test harness using WebdriverIO + TypeScript with multi-browser suppor
    npm run test:report
    npm run allure:open
 
+## Code Quality (ESLint & Prettier)
+
+Lint the codebase:
+
+   npm run lint
+
+Auto-fix lint issues where possible:
+
+   npm run lint:fix
+
+Check formatting (no changes written):
+
+   npm run format:check
+
+Write formatting changes:
+
+   npm run format
+
+Integrate locally via a pre-commit hook (optional example using Husky):
+
+   npx husky add .husky/pre-commit "npm run lint && npm run format:check"
+
+Current policy: lint warnings allowed in tests; errors blocked in core src. Prettier ensures consistent style across contributors.
+
 ## Selecting Browsers Dynamically
 
 Use env var BROWSERS (comma separated):
