@@ -323,12 +323,9 @@ jobs:
     needs: generate-reports
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/newsela'
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
-        id: deploy
+        id: deployment
         uses: actions/deploy-pages@v4
 
   test-summary:
