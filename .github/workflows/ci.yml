@@ -260,16 +260,6 @@ jobs:
         with:
           name: test-reports-firefox
           path: reports/firefox
-
-      - name: Download Safari reports
-        uses: actions/download-artifact@v4
-        with:
-          name: test-reports-safari
-          path: reports/safari
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
       - name: Create index page for reports
         run: |
           mkdir -p reports/
@@ -320,20 +310,13 @@ jobs:
           </html>
           EOF
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload aggregated reports artifact
+        uses: actions/upload-artifact@v4
         with:
+          name: aggregated-reports
           path: reports/
 
-  deploy-reports:
-    name: Deploy Reports to Pages
-    needs: generate-reports
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/newsela'
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  # GitHub Pages deployment removed until explicitly enabled in repository settings.
 
   test-summary:
     name: Test Summary
