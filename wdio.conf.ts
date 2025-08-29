@@ -1,3 +1,4 @@
+/// <reference types="@wdio/globals" />
 import type { Options } from '@wdio/types';
 
 // Allow selecting browsers via env var, e.g. BROWSERS=chrome,firefox,safari
@@ -11,7 +12,13 @@ const capabilityCatalog: Record<string, any> = {
   chrome: {
     browserName: 'chrome',
     'goog:chromeOptions': {
-      args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--window-size=1920,1080'],
+      args: [
+        '--no-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--window-size=1920,1080',
+        ...(process.env.HEADLESS ? ['--headless=new'] : []),
+      ],
     },
     acceptInsecureCerts: true,
     maxInstances: 5,
@@ -54,7 +61,8 @@ export const config: Options.Testrunner = {
   // Dynamically generated capability list based on BROWSERS env var
   capabilities: resolvedCapabilities.length ? resolvedCapabilities : [capabilityCatalog.chrome],
 
-  logLevel: 'info',
+  // Allow overriding log level (e.g. LOG_LEVEL=debug) for CI troubleshooting
+  logLevel: (process.env.LOG_LEVEL as any) || 'info',
   bail: 0,
   baseUrl: 'https://newsela.com',
   waitforTimeout: 10000,
@@ -108,5 +116,25 @@ export const config: Options.Testrunner = {
   mochaOpts: {
     ui: 'bdd',
     timeout: 60000,
+  },
+
+  // Retry flaky specs in CI once to mitigate transient network/content issues
+  specFileRetries: process.env.CI ? 1 : 0,
+  specFileRetriesDelay: 2,
+  specFileRetriesDeferred: true,
+
+  beforeTest: async function (test, context) {
+    // Short defensive wait for network-heavy marketing pages to settle
+    await browser.pause(150);
+  },
+
+  afterTest: async function (test, context, { error }) {
+    if (error) {
+      try {
+        await browser.saveScreenshot(`./reports/screenshots/FAIL_${Date.now()}_${test.title}.png`);
+      } catch (_) {
+        /* ignore */
+      }
+    }
   },
 };
