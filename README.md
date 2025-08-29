@@ -7,8 +7,12 @@ Automation test harness using WebdriverIO + TypeScript with multi-browser suppor
 1. Install & build:
    npm install
    npm run build
+
+   
 2. Run default (Chrome only):
    npm test
+
+
 3. Run specific browsers:
    # Chrome
    npm run test:chrome
@@ -20,6 +24,8 @@ Automation test harness using WebdriverIO + TypeScript with multi-browser suppor
    npm run test:cross
    # All 3 (requires Safari setup below)
    npm run test:all-browsers
+
+
 4. Run individual suites (Chrome default unless BROWSERS is set):
    # Smoke
    npm run test:smoke
@@ -29,6 +35,8 @@ Automation test harness using WebdriverIO + TypeScript with multi-browser suppor
    npm run test:links
    # Forms
    npm run test:forms
+
+
 5. Generate & open Allure report (aggregates last run):
    npm run test:report
    npm run allure:open
