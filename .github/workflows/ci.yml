@@ -79,9 +79,16 @@ jobs:
         with:
           chrome-version: ${{ env.CHROME_VERSION }}
 
+      - name: Setup Firefox
+        if: matrix.browser == 'firefox'
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: 'latest'
+
       - name: Run tests (${{ matrix.browser }})
         env:
           BROWSERS: ${{ matrix.browser }}
+          HEADLESS: ${{ matrix.browser == 'firefox' && '1' || '' }}
         run: npm test
 
       - name: Generate Allure HTML
