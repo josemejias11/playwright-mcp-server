@@ -1,6 +1,6 @@
 # WebDriverIO MCP Server
 
-Automation test harness using WebdriverIO + TypeScript with multi-browser support (Chrome, Firefox, Safari) and Model Context Protocol server utilities.
+Automation test harness using WebdriverIO + TypeScript with multi-browser support (Chrome, Firefox, Safari) and Model Context Protocol server utilities. Default headed resolution is 1440x900 (all browsers). Headless only when HEADLESS=1.
 
 ## Quick Start
 
@@ -68,8 +68,8 @@ If omitted it defaults to chrome.
 Environment variables summary:
 
 - BROWSERS: comma separated list of browser keys (chrome,firefox,safari)
-- HEADLESS: set to 1 to request headless Firefox (others can be extended similarly)
-- SAFARI_TP: set to 1 to request Safari Technology Preview (if installed)
+- HEADLESS=1: run supported browsers headless (Chrome uses --headless=new; Firefox adds -headless with width/height flags)
+- SAFARI_TP=1: request Safari Technology Preview (if installed)
 
 ## Safari (WebKit) Setup (macOS)
 
@@ -83,15 +83,16 @@ Safari uses the built-in safaridriver (no npm service). One-time steps:
 
 If you see the error: You must enable 'Allow remote automation' ... it means step 3 is incomplete.
 
-## Headless Firefox
+## Headless Mode
 
-Set HEADLESS=1 to run Firefox headless:
+Set HEADLESS=1 to run Chrome and Firefox headless:
 
+```
 HEADLESS=1 BROWSERS=firefox npx wdio run ./wdio.conf.ts
+HEADLESS=1 BROWSERS=chrome,firefox npx wdio run ./wdio.conf.ts
+```
 
-You can also combine:
-
-HEADLESS=1 BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts (Firefox headless; others normal)
+Safari ignores HEADLESS (WebKit headless mode isn’t enabled here).
 
 ## Reports
 
@@ -144,50 +145,29 @@ For a nightly comprehensive job run: BROWSERS=chrome,firefox,safari npm test
 
 Entry point: src/mcp-server.ts (run with npm run mcp:server)
 
+## Window Size & Visibility
+
+All headed runs enforce a 1440x900 window via Chrome's `--window-size=1440,900`, Firefox runtime `setWindowSize` (and headless width/height flags), and Safari runtime `setWindowSize`. Change this by editing the args in `wdio.conf.ts` and the `before` hook window sizing call.
+
+If windows are not appearing:
+
+1. Check you didn't export HEADLESS inadvertently (`echo $HEADLESS`).
+2. Run a single browser: `BROWSERS=chrome npx wdio run ./wdio.conf.ts`.
+3. Kill stale processes: `pkill -f chromedriver; pkill -f geckodriver; pkill -f Google\\ Chrome`.
+4. Ensure Safari Remote Automation is enabled (steps below) if using Safari.
+5. Try Firefox REPL: `npx wdio repl firefox` to confirm a window launches.
+
+Add your own pauses (for debugging) temporarily in the `beforeTest` hook—kept minimal by default.
+
 ## Troubleshooting
 
-| Symptom                                              | Fix                                                                     |
-| ---------------------------------------------------- | ----------------------------------------------------------------------- |
-| Safari session not created / remote automation error | Enable Develop > Allow Remote Automation in Safari                      |
-| Geckodriver not starting                             | Ensure geckodriver version matches installed Firefox; reinstall deps    |
-| Flaky network-dependent tests                        | Increase waitforTimeout or add explicit waits                           |
-| Element not interactable (esp. Safari)               | Use resilient helper (safeSetValue / safeClick) to scroll, focus, retry |
-| Chrome/Firefox windows disappear too fast / not visible | Use observe mode: `npm run test:observe` to add start/end pauses        |
-
-### Why you might only see Safari
-
-Safari often stays foregrounded while Chrome and Firefox may:
-
-1. Open and finish their (fast) specs in under a second, closing before you notice.
-2. Open behind an existing full-screen / other desktop space on macOS.
-3. Be minimized automatically if another app steals focus.
-
-Use the new observe mode to slow things down for visual confirmation:
-
-```
-npm run test:observe
-```
-
-Environment variables controlling observe mode:
-
-- OBSERVE=1 enables an initial pause (default 5000ms) before the first test.
-- OBSERVE_AT_START_MS sets the start pause duration (ms).
-- OBSERVE_END=1 adds a pause after all tests (default 15000ms) so windows remain.
-- OBSERVE_END_MS sets that end pause duration.
-
-Examples:
-
-Keep windows up longer at end:
-```
-OBSERVE=1 OBSERVE_END=1 OBSERVE_END_MS=30000 npm run test:all-browsers
-```
-
-Longer initial inspection only (no end pause):
-```
-OBSERVE=1 OBSERVE_AT_START_MS=10000 npm run test:all-browsers
-```
-
-Note: Headless is only applied if you explicitly set HEADLESS=1. Ensure it's unset for visual debugging (`echo $HEADLESS`).
+| Symptom                                              | Fix                                                                 |
+| ---------------------------------------------------- | ------------------------------------------------------------------- |
+| Safari session not created / remote automation error | Enable Develop > Allow Remote Automation in Safari                  |
+| Geckodriver not starting                             | Verify geckodriver version vs installed Firefox; reinstall deps     |
+| Flaky network-dependent tests                        | Raise `waitforTimeout` or add explicit waits                        |
+| Element not interactable (esp. Safari)               | Add scroll/focus helpers or small pauses                            |
+| Window size not 1440x900                             | Ensure no extensions resizing; confirm `setWindowSize` not removed  |
 
 ## License
 
