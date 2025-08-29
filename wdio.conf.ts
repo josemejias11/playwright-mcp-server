@@ -7,35 +7,61 @@ const requestedBrowsers = (process.env.BROWSERS || 'chrome')
   .map((b) => b.trim().toLowerCase())
   .filter(Boolean);
 
-// Define canonical per-browser capability templates
+// Define canonical per-browser capability templates (adjusted dynamically for OBSERVE / VISIBLE modes)
 const capabilityCatalog: Record<string, any> = {
-  chrome: {
-    browserName: 'chrome',
-    'goog:chromeOptions': {
-      args: [
-        '--no-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-gpu',
-        '--window-size=1920,1080',
-        ...(process.env.HEADLESS ? ['--headless=new'] : []),
-      ],
-    },
-    acceptInsecureCerts: true,
-    maxInstances: 5,
-  },
-  firefox: {
-    browserName: 'firefox',
-    // Add headless if CI sets HEADLESS=1
-    'moz:firefoxOptions': process.env.HEADLESS ? { args: ['-headless'] } : {},
-    acceptInsecureCerts: true,
-    maxInstances: 3,
-  },
+  chrome: (() => {
+    const observe = !!process.env.OBSERVE;
+    const visible = !!process.env.VISIBLE; // stronger guarantee of a real, foreground window
+    const argsBase: string[] = [];
+
+    if (!visible) {
+      // Standard stability flags (omit in VISIBLE to avoid any chance of suppression/minimization)
+      argsBase.push('--no-sandbox', '--disable-dev-shm-usage');
+    }
+
+    // Window sizing / visibility helpers
+    argsBase.push(visible ? '--new-window' : '--window-size=1920,1080');
+
+    if (process.env.HEADLESS) argsBase.push('--headless=new');
+    if (observe) argsBase.push('--auto-open-devtools-for-tabs', '--start-maximized');
+    if (visible) {
+      // Create isolated temp profile so Chrome always launches a fresh, showing window
+      argsBase.push('--user-data-dir=/tmp/wdio-visible-profile');
+      // Remove any GPU disabling in visible mode; ensure accelerated path
+    } else if (!observe) {
+      // Only disable GPU in fully automated non-observe mode
+      argsBase.push('--disable-gpu');
+    }
+
+    return {
+      browserName: 'chrome',
+      'goog:chromeOptions': { args: argsBase },
+      acceptInsecureCerts: true,
+      maxInstances: visible ? 1 : 5,
+    };
+  })(),
+  firefox: (() => {
+    const observe = !!process.env.OBSERVE;
+    const visible = !!process.env.VISIBLE;
+    const ffArgs: string[] = [];
+    if (process.env.HEADLESS) ffArgs.push('-headless');
+    if ((observe || visible) && !process.env.HEADLESS) ffArgs.push('-foreground');
+    // Force a clean temporary profile in visible mode (prevents restored hidden state)
+    if (visible) {
+      ffArgs.push('-profile', '/tmp/wdio-visible-ff-profile');
+    }
+    return {
+      browserName: 'firefox',
+      'moz:firefoxOptions': ffArgs.length ? { args: ffArgs } : {},
+      acceptInsecureCerts: true,
+      maxInstances: visible ? 1 : 3,
+    };
+  })(),
   safari: {
     browserName: 'safari',
-    // Safari Technology Preview can be toggled with SAFARI_TP=1
     ...(process.env.SAFARI_TP ? { 'safari.options': { technologyPreview: true } } : {}),
     acceptInsecureCerts: true,
-    maxInstances: 1, // Safari is less parallel-friendly locally
+    maxInstances: 1,
   },
 };
 
@@ -57,7 +83,7 @@ export const config: Options.Testrunner = {
     },
   },
 
-  maxInstances: 10,
+  maxInstances: process.env.VISIBLE ? 1 : 10,
   // Dynamically generated capability list based on BROWSERS env var
   capabilities: resolvedCapabilities.length ? resolvedCapabilities : [capabilityCatalog.chrome],
 
@@ -126,6 +152,27 @@ export const config: Options.Testrunner = {
   beforeTest: async function (test, context) {
     // Short defensive wait for network-heavy marketing pages to settle
     await browser.pause(150);
+  },
+
+  // Optional observe pauses to help visually confirm Chrome/Firefox windows appear.
+  // Enable with OBSERVE=1. Adjust start/end durations with OBSERVE_AT_START_MS / OBSERVE_END_MS.
+  before: async function () {
+    if (process.env.OBSERVE) {
+      const ms = Number(process.env.OBSERVE_AT_START_MS || 5000);
+      console.log(`[observe] Start pause ${ms}ms so you can see the browser window.`);
+      await browser.pause(ms);
+    }
+    if (process.env.VISIBLE) {
+      console.log('[visible] VISIBLE=1 enabled: running sequentially with simplified args to ensure windows appear.');
+    }
+  },
+
+  after: async function () {
+    if (process.env.OBSERVE && process.env.OBSERVE_END) {
+      const ms = Number(process.env.OBSERVE_END_MS || 15000);
+      console.log(`[observe] End pause ${ms}ms before session quits.`);
+      await browser.pause(ms);
+    }
   },
 
   afterTest: async function (test, context, { error }) {

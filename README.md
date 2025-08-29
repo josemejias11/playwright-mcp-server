@@ -37,23 +37,23 @@ Automation test harness using WebdriverIO + TypeScript with multi-browser suppor
 
 Lint the codebase:
 
-   npm run lint
+npm run lint
 
 Auto-fix lint issues where possible:
 
-   npm run lint:fix
+npm run lint:fix
 
 Check formatting (no changes written):
 
-   npm run format:check
+npm run format:check
 
 Write formatting changes:
 
-   npm run format
+npm run format
 
 Integrate locally via a pre-commit hook (optional example using Husky):
 
-   npx husky add .husky/pre-commit "npm run lint && npm run format:check"
+npx husky add .husky/pre-commit "npm run lint && npm run format:check"
 
 Current policy: lint warnings allowed in tests; errors blocked in core src. Prettier ensures consistent style across contributors.
 
@@ -152,6 +152,42 @@ Entry point: src/mcp-server.ts (run with npm run mcp:server)
 | Geckodriver not starting                             | Ensure geckodriver version matches installed Firefox; reinstall deps    |
 | Flaky network-dependent tests                        | Increase waitforTimeout or add explicit waits                           |
 | Element not interactable (esp. Safari)               | Use resilient helper (safeSetValue / safeClick) to scroll, focus, retry |
+| Chrome/Firefox windows disappear too fast / not visible | Use observe mode: `npm run test:observe` to add start/end pauses        |
+
+### Why you might only see Safari
+
+Safari often stays foregrounded while Chrome and Firefox may:
+
+1. Open and finish their (fast) specs in under a second, closing before you notice.
+2. Open behind an existing full-screen / other desktop space on macOS.
+3. Be minimized automatically if another app steals focus.
+
+Use the new observe mode to slow things down for visual confirmation:
+
+```
+npm run test:observe
+```
+
+Environment variables controlling observe mode:
+
+- OBSERVE=1 enables an initial pause (default 5000ms) before the first test.
+- OBSERVE_AT_START_MS sets the start pause duration (ms).
+- OBSERVE_END=1 adds a pause after all tests (default 15000ms) so windows remain.
+- OBSERVE_END_MS sets that end pause duration.
+
+Examples:
+
+Keep windows up longer at end:
+```
+OBSERVE=1 OBSERVE_END=1 OBSERVE_END_MS=30000 npm run test:all-browsers
+```
+
+Longer initial inspection only (no end pause):
+```
+OBSERVE=1 OBSERVE_AT_START_MS=10000 npm run test:all-browsers
+```
+
+Note: Headless is only applied if you explicitly set HEADLESS=1. Ensure it's unset for visual debugging (`echo $HEADLESS`).
 
 ## License
 

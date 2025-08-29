@@ -14,6 +14,7 @@
     "test:safari": "BROWSERS=safari npx wdio run ./wdio.conf.ts",
     "test:cross": "BROWSERS=chrome,firefox npx wdio run ./wdio.conf.ts",
     "test:all-browsers": "BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts",
+  "test:observe": "OBSERVE=1 OBSERVE_END=1 BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts",
     "test:smoke": "npx wdio run ./wdio.conf.ts --spec ./tests/smoke/home.smoke.spec.ts",
     "test:a11y": "npx wdio run ./wdio.conf.ts --spec ./tests/accessibility/a11y.spec.ts",
     "test:links": "npx wdio run ./wdio.conf.ts --spec ./tests/links/link-health.spec.ts",
@@ -29,7 +30,7 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-  "validate:workflow": "tsx scripts/validate-workflow.ts"
+    "validate:workflow": "tsx scripts/validate-workflow.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.4.0",
