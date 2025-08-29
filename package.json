@@ -8,12 +8,12 @@
     "build": "tsc",
     "start": "node dist/mcp-server.js",
     "dev": "tsx src/mcp-server.ts",
-    "test": "wdio run ./wdio.conf.js",
+    "test": "wdio run ./wdio.conf.ts",
     "test:report": "npm run test && npm run allure:generate",
     "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
     "allure:open": "allure open reports/allure-report",
     "mcp:server": "tsx src/mcp-server.ts",
-    "demo": "node examples/demo.js",
+    "demo": "tsx examples/demo.ts",
     "setup": "npm install && npm run build",
     "clean": "rm -rf dist/ reports/ test-results/"
   },
@@ -22,6 +22,7 @@
     "webdriverio": "^8.28.0"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.10",
     "@types/node": "^20.0.0",
     "@wdio/allure-reporter": "^8.43.0",
     "@wdio/cli": "^8.28.0",

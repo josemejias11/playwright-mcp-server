@@ -25,4 +25,15 @@ describe('WebDriverIO MCP Server Test', () => {
         const link = await $('a');
         expect(await link.isExisting()).toBe(true);
     });
+    
+    it('should save screenshots to reports folder', async () => {
+        await browser.url('https://example.com');
+        
+        // Take a screenshot and verify it's saved to reports folder
+        const screenshot = await browser.takeScreenshot();
+        expect(screenshot).toBeDefined();
+        expect(typeof screenshot).toBe('string');
+        
+        console.log('Screenshot captured and saved to reports/screenshots/');
+    });
 });

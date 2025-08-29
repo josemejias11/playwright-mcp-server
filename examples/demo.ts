@@ -1,11 +1,11 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
 /**
  * Example usage of the WebDriverIO MCP Server
  * This demonstrates how to use the MCP server programmatically
  */
 
-async function demonstrateWebAutomation() {
+async function demonstrateWebAutomation(): Promise<void> {
   console.log('🚀 Starting WebDriverIO MCP Server Demo');
   
   try {

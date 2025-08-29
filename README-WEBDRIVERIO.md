@@ -1,6 +1,6 @@
 # WebDriverIO MCP Server
 
-A Model Context Protocol (MCP) server that provides web automation capabilities using WebDriverIO. This server allows AI assistants to perform web browser automation tasks through a standardized protocol.
+A Model Context Protocol (MCP) server that provides web automation capabilities using WebDriverIO and TypeScript. This server allows AI assistants to perform web browser automation tasks through a standardized protocol.
 
 ## Features
 
@@ -115,7 +115,7 @@ The server provides the following tools for web automation:
 
 ## Configuration
 
-The WebDriverIO configuration is in `wdio.conf.js`. You can modify browser settings, timeouts, and other options there.
+The WebDriverIO configuration is in `wdio.conf.ts`. You can modify browser settings, timeouts, and other options there.
 
 Default configuration:
 - Browser: Chrome
@@ -194,6 +194,14 @@ src/
 │   └── manager.ts         # WebDriver session management
 └── tools/
     └── index.ts           # Tool definitions and schemas
+
+examples/
+└── demo.ts                # TypeScript demo script
+
+tests/
+└── basic.spec.js          # WebDriverIO test suite
+
+wdio.conf.ts               # WebDriverIO TypeScript configuration
 ```
 
 ## Browser Requirements

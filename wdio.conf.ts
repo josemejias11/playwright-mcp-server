@@ -1,4 +1,6 @@
-export const config = {
+import type { Options } from '@wdio/types';
+
+export const config: Options.Testrunner = {
     runner: 'local',
     
     specs: [
@@ -45,23 +47,20 @@ export const config = {
         }],
         ['json', {
             outputDir: './reports/json',
-            outputFileFormat: function(options) {
-                return `results-${new Date().toISOString().split('T')[0]}.json`
+            outputFileFormat: function(options: any) {
+                return `results-${new Date().toISOString().split('T')[0]}.json`;
             }
         }],
         ['junit', {
             outputDir: './reports/junit',
-            outputFileFormat: function(options) {
-                return `results-${new Date().toISOString().split('T')[0]}.xml`
+            outputFileFormat: function(options: any) {
+                return `results-${new Date().toISOString().split('T')[0]}.xml`;
             }
         }]
     ],
-    
-    // Screenshot configuration
-    screenshotPath: './reports/screenshots',
     
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
     }
-}
+};
