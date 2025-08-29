@@ -231,16 +231,13 @@ jobs:
         run: npm ci
 
       - name: Run npm audit
-        run: npm audit --audit-level=moderate
-        continue-on-error: true
+        run: npm audit --audit-level=moderate || true
 
       - name: Install audit-ci
-        run: npm install -g audit-ci
-        continue-on-error: true
+        run: npm install -g audit-ci || true
 
       - name: Run dependency check
-  run: npx audit-ci --config ./.auditciconfig.json || true
-  continue-on-error: true
+        run: npx audit-ci --config ./.auditciconfig.json || true
 
   generate-reports:
     name: Aggregate Test Reports
