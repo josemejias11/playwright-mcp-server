@@ -51,12 +51,6 @@ Write formatting changes:
 
 npm run format
 
-Integrate locally via a pre-commit hook (optional example using Husky):
-
-npx husky add .husky/pre-commit "npm run lint && npm run format:check"
-
-Current policy: lint warnings allowed in tests; errors blocked in core src. Prettier ensures consistent style across contributors.
-
 ## Selecting Browsers Dynamically
 
 Use env var BROWSERS (comma separated):
@@ -122,42 +116,11 @@ Script mapping (Chrome by default unless BROWSERS provided):
 - npm run test:forms -> forms suite
   (Functional & landing covered inside full run; add targeted scripts similarly if needed.)
 
-## Adding Another Browser
-
-Add its capability template in capabilityCatalog inside wdio.conf.ts, then include it in BROWSERS env var.
-
-Tip: Keep capability objects minimal & deterministic; prefer adding browser-specific flags (like headless) via environment-driven conditionals inside the catalog to avoid duplicated spec code.
-
-## CI Recommendation
-
-- PR: Chrome full + smoke on Firefox & Safari
-- Nightly: all-browsers full suite
-
-Suggested matrix example (GitHub Actions pseudo):
-strategy:
-matrix:
-browser: [chrome, firefox, safari]
-steps: - run: BROWSERS=${{ matrix.browser }} npm test - run: npm run allure:generate
-
-For a nightly comprehensive job run: BROWSERS=chrome,firefox,safari npm test
 
 ## MCP Server
 
 Entry point: src/mcp-server.ts (run with npm run mcp:server)
 
-## Window Size & Visibility
-
-All headed runs enforce a 1440x900 window via Chrome's `--window-size=1440,900`, Firefox runtime `setWindowSize` (and headless width/height flags), and Safari runtime `setWindowSize`. Change this by editing the args in `wdio.conf.ts` and the `before` hook window sizing call.
-
-If windows are not appearing:
-
-1. Check you didn't export HEADLESS inadvertently (`echo $HEADLESS`).
-2. Run a single browser: `BROWSERS=chrome npx wdio run ./wdio.conf.ts`.
-3. Kill stale processes: `pkill -f chromedriver; pkill -f geckodriver; pkill -f Google\\ Chrome`.
-4. Ensure Safari Remote Automation is enabled (steps below) if using Safari.
-5. Try Firefox REPL: `npx wdio repl firefox` to confirm a window launches.
-
-Add your own pauses (for debugging) temporarily in the `beforeTest` hook—kept minimal by default.
 
 ## Troubleshooting
 
