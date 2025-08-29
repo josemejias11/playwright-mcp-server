@@ -3,8 +3,9 @@ import type { Options } from '@wdio/types';
 export const config: Options.Testrunner = {
     runner: 'local',
     
+    // Tests folder removed; keep empty array to allow wdio invocation without error
     specs: [
-        './tests/**/*.spec.js'
+        // No specs present intentionally; MCP server does not rely on WDIO spec tests now
     ],
     
     maxInstances: 10,
