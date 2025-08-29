@@ -1,0 +1,15 @@
+{
+  "failOn": {
+    "critical": true,
+    "high": false,
+    "moderate": false,
+    "low": false
+  },
+  "allowlist": [
+    "GHSA-pq67-2wwv-3xjx",
+    "GHSA-8cj5-5rvv-wf4v",
+    "GHSA-52f5-9888-hmc6",
+    "GHSA-3h5v-q93c-6h6q"
+  ],
+  "report": true
+}

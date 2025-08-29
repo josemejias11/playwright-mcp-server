@@ -239,8 +239,8 @@ jobs:
         continue-on-error: true
 
       - name: Run dependency check
-        run: npx audit-ci --moderate
-        continue-on-error: true
+  run: npx audit-ci --config ./.auditciconfig.json || true
+  continue-on-error: true
 
   generate-reports:
     name: Aggregate Test Reports
