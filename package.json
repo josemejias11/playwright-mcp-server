@@ -1,119 +1,43 @@
 {
-  "name": "newsela-educational-testing-framework",
+  "name": "newsela-test-automation",
   "version": "1.0.0",
-  "description": "Comprehensive QA automation framework for Newsela Educational Platform - Luna AI, educational content, teacher tools, and student privacy testing",
+  "description": "Newsela Educational Platform - Cross-Browser Test Automation",
   "type": "module",
-  "bin": {
-    "playwright-mcp-server": "./build/index.js"
-  },
-  "main": "./build/index.js",
   "scripts": {
-    "build": "tsc && chmod +x build/index.js",
-    "start": "npm run build && node build/index.js",
-    "dev": "tsc --watch",
-    
-    "demo": "node demo.js",
-    "demo:advanced": "node e2e/newsela-demo.js",
-    
     "test": "playwright test",
-    "test:all": "npm run newsela:all",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
     
-    "newsela:all": "playwright test --headed",
+    "newsela": "playwright test --headed",
     "newsela:chromium": "playwright test --project=chromium --headed",
     "newsela:firefox": "playwright test --project=firefox --headed", 
     "newsela:webkit": "playwright test --project=webkit --headed",
     "newsela:all-browsers": "playwright test --project=chromium --project=firefox --project=webkit --headed",
     
-    "newsela:multi-browser": "playwright test --headed",
-    "newsela:multi-browser:headed": "playwright test --headed",
-    "newsela:headed": "playwright test --headed",
-    "newsela:chromium:headed": "playwright test --project=chromium --headed",
-    "newsela:firefox:headed": "playwright test --project=firefox --headed",
-    "newsela:webkit:headed": "playwright test --project=webkit --headed",
+    "smoke": "playwright test tests/smoke --headed",
+    "functional": "playwright test tests/functional --headed",
+    "accessibility": "playwright test tests/accessibility --headed",
     
-    "newsela:smoke": "playwright test newsela-smoke --headed",
-    "newsela:luna": "playwright test newsela-luna --headed",
-    "newsela:content": "playwright test newsela-content --headed",
-    "newsela:teachers": "playwright test newsela-teacher-tools --headed",
-    "newsela:accessibility": "playwright test newsela-accessibility --headed",
-    
-    "educational:complete": "playwright test --headed",
-    "educational:quick": "playwright test newsela-smoke newsela-luna --headed",
-    "educational:compliance": "playwright test newsela-accessibility --headed",
-    "educational:content": "playwright test newsela-content --headed",
-    
-    "smoke": "playwright test newsela-smoke --headed",
-    "functional": "playwright test newsela-luna newsela-content newsela-teacher-tools --headed",
-    "accessibility": "playwright test newsela-accessibility --headed",
-    "performance": "npm run newsela:performance",
-    "security": "npm run newsela:security",
-    
-    "all": "playwright test --headed",
-    "quick": "playwright test newsela-smoke newsela-luna --headed",
-    "compliance": "playwright test newsela-accessibility --headed",
     "cross-browser": "playwright test --project=chromium --project=firefox --project=webkit --headed",
-    "visual-test": "playwright test --headed",
+    "quick": "playwright test tests/smoke tests/functional/luna.spec.js --headed",
     
-    "clean": "npm run reports:clean",
     "setup": "npm install && npx playwright install",
-    "validate": "playwright test newsela-smoke --headed",
-    "full-test": "playwright test --headed",
-    
-    "teacher-workflow": "playwright test newsela-smoke newsela-teacher-tools --headed",
-    "student-safety": "npm run newsela:security && npm run newsela:accessibility",
-    "content-validation": "npm run newsela:content && npm run newsela:performance",
-    
-    "api": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,json --reporter-json-export reports/api/api-results.json",
-    "api:detailed": "newman run postman/API-Tests.postman_collection.json -e postman/Environment.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export reports/api/api-test-report.html",
-    
-    "reports:init": "node e2e/utils/report-manager.js init",
-    "reports:clean": "node e2e/utils/report-manager.js clean", 
-    "reports:status": "node e2e/utils/report-manager.js status",
-    "reports:archive": "node e2e/utils/report-manager.js archive"
+    "clean": "rm -rf test-results/ playwright-report/"
   },
-  "files": [
-    "build"
-  ],
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@axe-core/playwright": "^4.8.2"
+  },
   "keywords": [
-    "newsela",
-    "educational-testing",
-    "luna-ai",
-    "educational-platform",
-    "teacher-tools",
-    "student-privacy",
-    "coppa-compliance",
-    "wcag-accessibility",
     "playwright",
+    "testing",
+    "newsela",
+    "education",
     "automation",
-    "mcp",
-    "educational-content",
-    "curriculum-testing",
-    "formative-assessment"
+    "cross-browser"
   ],
   "author": "Newsela QA Team",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/josemejias11/playwright-mcp-server.git",
-    "branch": "newsela"
-  },
-  "homepage": "https://github.com/josemejias11/playwright-mcp-server/tree/newsela#readme",
-  "devDependencies": {
-    "@playwright/test": "^1.53.2",
-    "@types/node": "^24.0.10",
-    "audit-ci": "^7.1.0",
-    "newman": "^6.2.1",
-    "newman-reporter-htmlextra": "^1.23.1",
-    "typescript": "^5.8.3"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.15.0",
-    "dotenv": "^17.0.1",
-    "playwright": "^1.53.2",
-    "zod": "^3.25.74"
-  }
+  "license": "MIT"
 }

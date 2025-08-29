@@ -1,0 +1,1207 @@
+{
+  "config": {
+    "configFile": "/Users/josemejias/VSCodeProject/playwright-mcp-server/playwright.config.js",
+    "rootDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 5
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "reports/playwright"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/playwright/results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "mobile-chrome",
+        "name": "mobile-chrome",
+        "testDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "mobile-safari",
+        "name": "mobile-safari",
+        "testDir": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.53.2",
+    "workers": 5,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "smoke/landing-page.spec.js",
+      "file": "smoke/landing-page.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Newsela Platform - Smoke Tests",
+          "file": "smoke/landing-page.spec.js",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Landing page loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4483,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:03.662Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-23f3c83094a35b86f9cc",
+              "file": "smoke/landing-page.spec.js",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "Main navigation elements are accessible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 3876,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:03.649Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-6a6af7a80945969be24d",
+              "file": "smoke/landing-page.spec.js",
+              "line": 32,
+              "column": 3
+            },
+            {
+              "title": "Footer contains required information",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 4566,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67",
+                        "location": {
+                          "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                          "column": 67,
+                          "line": 77
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                            "column": 67,
+                            "line": 77
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n\n\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:03.645Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                        "column": 67,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-bd18cd9214ee41b844cb",
+              "file": "smoke/landing-page.spec.js",
+              "line": 61,
+              "column": 3
+            },
+            {
+              "title": "Page is responsive on mobile viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 4409,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:03.650Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-881f55bf3d1d2f1c7015",
+              "file": "smoke/landing-page.spec.js",
+              "line": 83,
+              "column": 3
+            },
+            {
+              "title": "Luna AI content is featured prominently",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 3850,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:03.647Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-f86fe3d97959317353ab",
+              "file": "smoke/landing-page.spec.js",
+              "line": 107,
+              "column": 3
+            },
+            {
+              "title": "Landing page loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 3003,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:08.928Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-9299fecb9f0d5e58855a",
+              "file": "smoke/landing-page.spec.js",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "Main navigation elements are accessible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 3426,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:08.942Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-97208580777ac2b40117",
+              "file": "smoke/landing-page.spec.js",
+              "line": 32,
+              "column": 3
+            },
+            {
+              "title": "Footer contains required information",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 3766,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67",
+                        "location": {
+                          "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                          "column": 67,
+                          "line": 77
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                            "column": 67,
+                            "line": 77
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n\n\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:09.029Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-firefox/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                        "column": 67,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-8659b9ad4753fb07062f",
+              "file": "smoke/landing-page.spec.js",
+              "line": 61,
+              "column": 3
+            },
+            {
+              "title": "Page is responsive on mobile viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2969,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:09.052Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-d6dccd4c7c40c60ba85b",
+              "file": "smoke/landing-page.spec.js",
+              "line": 83,
+              "column": 3
+            },
+            {
+              "title": "Luna AI content is featured prominently",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 3085,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:09.095Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-30dcc31eb5b901e8635a",
+              "file": "smoke/landing-page.spec.js",
+              "line": 107,
+              "column": 3
+            },
+            {
+              "title": "Landing page loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1934,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:13.835Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-ab0fac19a2bfe278c254",
+              "file": "smoke/landing-page.spec.js",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "Main navigation elements are accessible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 3343,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:13.952Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-8509aa4a296f4578d697",
+              "file": "smoke/landing-page.spec.js",
+              "line": 32,
+              "column": 3
+            },
+            {
+              "title": "Footer contains required information",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 2210,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67",
+                        "location": {
+                          "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                          "column": 67,
+                          "line": 77
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                            "column": 67,
+                            "line": 77
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n\n\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:14.728Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                        "column": 67,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-0a2ff89b8b58ac18c841",
+              "file": "smoke/landing-page.spec.js",
+              "line": 61,
+              "column": 3
+            },
+            {
+              "title": "Page is responsive on mobile viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 2001,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:15.190Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-b554c189acbc3df8d69d",
+              "file": "smoke/landing-page.spec.js",
+              "line": 83,
+              "column": 3
+            },
+            {
+              "title": "Luna AI content is featured prominently",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 2058,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:14.843Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-fe8b58884782e76e3b77",
+              "file": "smoke/landing-page.spec.js",
+              "line": 107,
+              "column": 3
+            },
+            {
+              "title": "Landing page loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3578,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:17.250Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-2fbefd89906ad121c447",
+              "file": "smoke/landing-page.spec.js",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "Main navigation elements are accessible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 3611,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:17.774Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-07f98c436209579fe9b9",
+              "file": "smoke/landing-page.spec.js",
+              "line": 32,
+              "column": 3
+            },
+            {
+              "title": "Footer contains required information",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 3755,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67",
+                        "location": {
+                          "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                          "column": 67,
+                          "line": 77
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                            "column": 67,
+                            "line": 77
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n\n\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:17.777Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-mobile-chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-mobile-chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-mobile-chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                        "column": 67,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-e5eefd6f6e7905e1610c",
+              "file": "smoke/landing-page.spec.js",
+              "line": 61,
+              "column": 3
+            },
+            {
+              "title": "Page is responsive on mobile viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 3704,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:18.054Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-6e890f60515be15fe97f",
+              "file": "smoke/landing-page.spec.js",
+              "line": 83,
+              "column": 3
+            },
+            {
+              "title": "Luna AI content is featured prominently",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 3479,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:18.253Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-ccc29bf78e59d7bc84ee",
+              "file": "smoke/landing-page.spec.js",
+              "line": 107,
+              "column": 3
+            },
+            {
+              "title": "Landing page loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3002,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:22.490Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-1a2022a1b42f8ddee35a",
+              "file": "smoke/landing-page.spec.js",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "Main navigation elements are accessible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 3125,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:22.617Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-901c693ebefee7b8b6ea",
+              "file": "smoke/landing-page.spec.js",
+              "line": 32,
+              "column": 3
+            },
+            {
+              "title": "Footer contains required information",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 3080,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67",
+                        "location": {
+                          "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                          "column": 67,
+                          "line": 77
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                            "column": 67,
+                            "line": 77
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Products' }) resolved to 2 elements:\n    1) <h2 class=\"text _4xl\">…</h2> aka getByRole('heading', { name: 'Premium products' })\n    2) <h2 class=\"text footer-gray\" id=\"w-node-a19f1985-5c1c-5ede-ba0c-acd02f86e8ad-2f86e89f\">Products</h2> aka getByRole('heading', { name: 'Products', exact: true })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Products' })\u001b[22m\n\n\n\u001b[0m \u001b[90m 75 |\u001b[39m     \n \u001b[90m 76 |\u001b[39m     \u001b[90m// Check footer sections are present\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Products'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Resources'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'About'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'heading'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Contact Us'\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js:77:67\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:22.668Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-mobile-safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-mobile-safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/josemejias/VSCodeProject/playwright-mcp-server/test-results/smoke-landing-page-Newsela-b1954-ntains-required-information-mobile-safari/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/josemejias/VSCodeProject/playwright-mcp-server/tests/smoke/landing-page.spec.js",
+                        "column": 67,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-1c9799b45c0d9657e120",
+              "file": "smoke/landing-page.spec.js",
+              "line": 61,
+              "column": 3
+            },
+            {
+              "title": "Page is responsive on mobile viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 23,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2225,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:22.851Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-4d9a7cf888685e9b1889",
+              "file": "smoke/landing-page.spec.js",
+              "line": 83,
+              "column": 3
+            },
+            {
+              "title": "Luna AI content is featured prominently",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 24,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 2217,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-29T14:49:22.984Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eb10ee938a04b958dac1-09d0464f11f63d0d0898",
+              "file": "smoke/landing-page.spec.js",
+              "line": 107,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-29T14:49:03.235Z",
+    "duration": 22766.262000000002,
+    "expected": 20,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}
