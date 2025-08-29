@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Playwright Configuration for Test Suite
+ * Playwright Configuration for Newsela Educational Platform Testing
  */
 export default defineConfig({
   testDir: './tests',
@@ -10,29 +10,39 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: [
-    ['html', { outputFolder: 'e2e/reports/playwright-report' }],
-    ['json', { outputFile: 'e2e/reports/results.json' }],
+    ['html', { outputFolder: 'reports/playwright' }],
+    ['json', { outputFile: 'reports/playwright/results.json' }],
     ['list']
   ],
   use: {
-    baseURL: 'https://www.royalcaribbean.com',
+    baseURL: 'https://newsela.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    headless: false, // Default to headed for visual testing
   },
 
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 }
+      },
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: { 
+        ...devices['Desktop Firefox'],
+        viewport: { width: 1280, height: 720 }
+      },
     },
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: { 
+        ...devices['Desktop Safari'],
+        viewport: { width: 1280, height: 720 }
+      },
     },
     {
       name: 'mobile-chrome',

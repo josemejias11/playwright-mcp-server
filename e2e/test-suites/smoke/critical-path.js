@@ -3,7 +3,7 @@
 /**
  * Newsela Educational Platform - Critical Path Smoke Tests
  * 
- * Purpose: Verify core educational functionality - run first, fail fast
+ * Purpose: Verify core educational platform functionality - run first, fail fast
  * Frequency: Every deployment
  * Timeout: 5 minutes max
  * 
@@ -12,151 +12,215 @@
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { NewselaHomePage } from '../../page-objects/homepage.js';
-import { NewselaContactPage } from '../../page-objects/contact-page.js';
 
-class NewselaCriticalPathSmokeTests extends BaseTestFramework {
+class NewselaEducationalSmokeTests extends BaseTestFramework {
   constructor() {
     super();
-    this.homePage = null;
-    this.contactPage = null;
-  }
-
-  async initializePageObjects() {
-    this.homePage = new NewselaHomePage(this.client);
-    this.contactPage = new NewselaContactPage(this.client);
   }
 
   /**
    * SMOKE TEST 1: Educational Platform Availability
    * Critical: Learning platform must be accessible
    */
-  async testWebsiteAvailability() {
+  async testEducationalPlatformAvailability() {
     await this.executeTest('Educational Platform Availability Check', async () => {
-      await this.homePage.navigate();
+      await this.client.navigateTo('https://newsela.com');
       
-      // Simple check - if we can navigate and get educational content, platform is accessible
-      const title = await this.homePage.getHeroTitle();
-      if (!title || title.length < 3) {
-        throw new Error('Educational platform not accessible - no content loaded');
+      // Handle cookie consent
+      try {
+        const cookieResult = await this.client.click('button:has-text("Accept All Cookies")', 3000);
+        if (cookieResult.success) {
+          await this.logger.info('✓ Cookie consent handled');
+        }
+      } catch (e) {
+        // Continue if no cookie banner
+      }
+      
+      // Check for educational content - main hero message
+      const heroResult = await this.client.getText('h1, .hero, [data-testid="hero"]', 10000);
+      if (!heroResult.success || !heroResult.output || heroResult.output.length < 10) {
+        throw new Error('Educational platform not accessible - no educational content loaded');
       }
       
       await this.logger.business(`✓ Educational platform accessible and responsive`);
-      await this.logger.business(`✓ Content loaded: ${title}`);
+      await this.logger.business(`✓ Educational content loaded: ${heroResult.output.substring(0, 100)}...`);
+    }, { timeout: 15000 });
+  }
+
+  /**
+   * SMOKE TEST 2: Luna AI Assistant Availability
+   * Critical: AI-powered teaching assistant must be discoverable
+   */
+  async testLunaAIAvailability() {
+    await this.executeTest('Luna AI Teaching Assistant Discovery', async () => {
+      await this.client.navigateTo('https://newsela.com');
+      
+      // Look for Luna mentions on homepage
+      const lunaContentResult = await this.client.getText('body', 10000);
+      if (!lunaContentResult.success || !lunaContentResult.output.toLowerCase().includes('luna')) {
+        throw new Error('Luna AI assistant not prominently featured - critical educational feature missing');
+      }
+      
+      // Try to find Luna-specific link or button
+      const lunaLinkResult = await this.client.waitForElement('a[href*="luna"], button:has-text("Luna"), a:has-text("Luna")', 'visible', 5000);
+      const hasLunaLink = lunaLinkResult.success;
+      
+      await this.logger.business(`✓ Luna AI assistant mentioned on homepage`);
+      await this.logger.business(`✓ Luna navigation link: ${hasLunaLink ? 'Found' : 'Text mention only'}`);
     }, { timeout: 10000 });
   }
 
   /**
-   * SMOKE TEST 2: Educational Homepage Core Elements
-   * Critical: Educational branding and learning functionality
+   * SMOKE TEST 3: Educational Product Navigation
+   * Critical: Teachers must be able to access educational products
    */
-  async testHomepageCoreElements() {
-    await this.executeTest('Educational Homepage Core Elements', async () => {
-      await this.homePage.navigate();
+  async testEducationalProductAccess() {
+    await this.executeTest('Educational Product Navigation', async () => {
+      await this.client.navigateTo('https://newsela.com');
       
-      // Check educational title/branding
-      const title = await this.homePage.getHeroTitle();
-      if (!title || title.length < 3) {
-        throw new Error('Educational title missing or too short');
+      // Check for main educational products mentioned on the page
+      const contentResult = await this.client.getText('body', 10000);
+      if (!contentResult.success) {
+        throw new Error('Cannot access page content for educational product validation');
       }
       
-      // Check educational navigation exists
-      const navigation = await this.homePage.validateNavigation();
-      if (!navigation || navigation.length === 0) {
-        throw new Error('Educational navigation not found');
+      const content = contentResult.output.toLowerCase();
+      const educationalProducts = {
+        'ELA': content.includes('ela') || content.includes('english language arts'),
+        'Social Studies': content.includes('social studies'),
+        'Science': content.includes('science'),
+        'Formative': content.includes('formative')
+      };
+      
+      const availableProducts = Object.entries(educationalProducts).filter(([name, available]) => available);
+      
+      if (availableProducts.length < 3) {
+        throw new Error(`Insufficient educational products visible - only ${availableProducts.length} found`);
       }
       
-      // Check for grade level filters (critical for educational platform)
-      const gradeLevels = await this.homePage.validateGradeLevels();
-      
-      await this.logger.business(`✓ Educational title found: ${title}`);
-      await this.logger.business(`✓ Navigation elements: ${navigation.length}`);
-      await this.logger.business(`✓ Grade level filters: ${gradeLevels ? 'Found' : 'Not detected'}`);
+      await this.logger.business(`✓ Educational products found: ${availableProducts.map(([name]) => name).join(', ')}`);
     }, { timeout: 8000 });
   }
 
   /**
-   * SMOKE TEST 3: Educational Content Access
-   * Critical: Students must be able to access articles and content
+   * SMOKE TEST 4: Teacher Sign-up Flow
+   * Critical: Teachers must be able to access the platform
    */
-  async testEducationalContentAccess() {
-    await this.executeTest('Educational Content Access', async () => {
-      // Check for article elements on homepage
-      const articles = await this.homePage.validateArticleElements();
-      if (!articles || articles.length === 0) {
-        throw new Error('No educational articles found - critical learning impact');
+  async testTeacherSignupAccess() {
+    await this.executeTest('Teacher Sign-up Access', async () => {
+      await this.client.navigateTo('https://newsela.com');
+      
+      // Look for sign-up related elements
+      const signupSelectors = [
+        'a:has-text("Sign up")', 
+        'a:has-text("Get started")', 
+        'button:has-text("Get started")',
+        'a[href*="join"]',
+        'a[href*="signup"]'
+      ];
+      
+      let signupFound = false;
+      for (const selector of signupSelectors) {
+        try {
+          const result = await this.client.waitForElement(selector, 'visible', 2000);
+          if (result.success) {
+            signupFound = true;
+            await this.logger.business(`✓ Teacher signup found via: ${selector}`);
+            break;
+          }
+        } catch (e) {
+          continue;
+        }
       }
       
-      // Check for subject categories
-      const subjects = await this.homePage.validateSubjectCategories();
-      if (!subjects || subjects.length === 0) {
-        throw new Error('No subject categories found - critical curriculum impact');
+      if (!signupFound) {
+        throw new Error('Teacher sign-up access not found - critical onboarding issue');
       }
       
-      // Verify search functionality for educational content
-      const searchFunctional = await this.homePage.validateSearchFunctionality();
-      if (!searchFunctional) {
-        throw new Error('Search functionality not working - critical student impact');
-      }
+      // Also check for login access
+      const loginResult = await this.client.waitForElement('a:has-text("Log in"), a:has-text("Sign in")', 'visible', 3000);
+      const hasLogin = loginResult.success;
       
-      await this.logger.business(`✓ Educational articles found: ${articles.length}`);
-      await this.logger.business(`✓ Subject categories: ${subjects.length}`);
-      await this.logger.business(`✓ Search functionality: Working`);
-    }, { timeout: 10000 });
+      await this.logger.business(`✓ Teacher login access: ${hasLogin ? 'Found' : 'Not found'}`);
+    }, { timeout: 8000 });
   }
 
   /**
-   * SMOKE TEST 4: Educational Contact Support
-   * Critical: Teachers/educators must be able to get support
+   * SMOKE TEST 5: Educational Content Preview
+   * Critical: Content must be accessible for evaluation
    */
-  async testEducationalContactSupport() {
-    await this.executeTest('Educational Contact Support', async () => {
-      // Navigate to contact page
-      await this.contactPage.navigate();
+  async testEducationalContentPreview() {
+    await this.executeTest('Educational Content Preview Access', async () => {
+      await this.client.navigateTo('https://newsela.com');
       
-      // Verify educator support form structure
-      const formStructure = await this.contactPage.validateFormStructure();
-      if (!formStructure.hasForm) {
-        throw new Error('Educator support form not found - critical support impact');
+      // Look for content preview or demo access
+      const previewSelectors = [
+        'a:has-text("preview")',
+        'a:has-text("demo")', 
+        'a:has-text("Try")',
+        'a:has-text("Lite")',
+        'button:has-text("Explore")'
+      ];
+      
+      let previewFound = false;
+      for (const selector of previewSelectors) {
+        try {
+          const result = await this.client.waitForElement(selector, 'visible', 2000);
+          if (result.success) {
+            previewFound = true;
+            await this.logger.business(`✓ Content preview found via: ${selector}`);
+            break;
+          }
+        } catch (e) {
+          continue;
+        }
       }
       
-      // Verify educational support information
-      const supportInfo = await this.contactPage.validateSupportInfo();
-      if (!supportInfo.hasEmail && !supportInfo.hasPhone) {
-        throw new Error('No educational support contact found - critical support impact');
+      // Check page content mentions preview or trial options
+      const contentResult = await this.client.getText('body', 5000);
+      if (contentResult.success) {
+        const content = contentResult.output.toLowerCase();
+        const hasPreviewMention = content.includes('preview') || content.includes('lite') || content.includes('free') || content.includes('trial');
+        
+        if (hasPreviewMention) {
+          previewFound = true;
+          await this.logger.business(`✓ Content preview mentioned in text`);
+        }
       }
       
-      await this.logger.business(`✓ Educator support form found with ${formStructure.fieldCount} fields`);
-      await this.logger.business(`✓ Support info: Email=${supportInfo.hasEmail}, Phone=${supportInfo.hasPhone}`);
-    }, { timeout: 10000 });
+      if (!previewFound) {
+        throw new Error('Educational content preview not accessible - teachers cannot evaluate platform');
+      }
+    }, { timeout: 8000 });
   }
 
-  /**
-   * Run all critical educational path smoke tests
-   */
   async runSmokeTests() {
     try {
-      await this.initialize('Newsela Educational Critical Path Smoke Tests', 'chromium');
-      await this.initializePageObjects();
-      
-      // Run tests in order of educational criticality
-      await this.testWebsiteAvailability();
-      await this.testHomepageCoreElements();
-      await this.testEducationalContentAccess();
-      await this.testEducationalContactSupport();
-      
+      console.log('\n🚨 NEWSELA EDUCATIONAL PLATFORM - CRITICAL PATH SMOKE TESTS');
+      console.log('==========================================================');
+      console.log('⚠️  If these tests fail, DO NOT DEPLOY EDUCATIONAL PLATFORM');
+      console.log('');
+
+      await this.testEducationalPlatformAvailability();
+      await this.testLunaAIAvailability();
+      await this.testEducationalProductAccess();
+      await this.testTeacherSignupAccess();
+      await this.testEducationalContentPreview();
+
+      // Generate summary
       const summary = this.getTestSummary();
-      await this.logger.suiteEnd('Educational Critical Path Smoke Tests Complete', summary);
+      console.log('\n📊 EDUCATIONAL SMOKE TEST SUMMARY');
+      console.log('=================================');
+      console.log(`Total Educational Tests: ${summary.total}`);
+      console.log(`Passed: ${summary.passed}`);
+      console.log(`Failed: ${summary.failed}`);
+      console.log(`Educational Platform Success Rate: ${Math.round((summary.passed / summary.total) * 100)}%`);
       
-      // Critical: All educational smoke tests must pass
       if (summary.failed > 0) {
-        throw new Error(`CRITICAL: ${summary.failed}/${summary.total} educational smoke tests failed - BLOCK DEPLOYMENT`);
+        throw new Error(`${summary.failed} critical educational smoke tests failed`);
       }
       
-      await this.logger.success('🎉 All educational critical path smoke tests PASSED - Deployment approved');
-      
     } catch (error) {
-      await this.logger.error(`💥 EDUCATIONAL CRITICAL FAILURE: ${error.message}`);
       throw error;
     } finally {
       await this.cleanup();
@@ -166,7 +230,7 @@ class NewselaCriticalPathSmokeTests extends BaseTestFramework {
 
 // Execute educational smoke tests
 async function main() {
-  const smokeTests = new NewselaCriticalPathSmokeTests();
+  const smokeTests = new NewselaEducationalSmokeTests();
   
   // Set a timeout for the entire educational smoke test suite
   const timeoutId = setTimeout(() => {

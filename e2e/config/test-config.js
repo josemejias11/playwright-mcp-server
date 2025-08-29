@@ -185,6 +185,12 @@ export const TestConfig = {
   // Browser Configuration
   headless: process.env.HEADLESS === 'true' || false,
   defaultBrowser: 'chromium',
+  supportedBrowsers: ['chromium', 'firefox', 'webkit'],
+  browserSettings: {
+    chromium: { name: 'Chromium', slowMo: 500 },
+    firefox: { name: 'Firefox', slowMo: 500 },
+    webkit: { name: 'WebKit (Safari)', slowMo: 500 }
+  },
   viewport: {
     width: 1280,
     height: 720

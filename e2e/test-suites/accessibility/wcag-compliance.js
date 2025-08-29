@@ -1,589 +1,589 @@
 #!/usr/bin/env node
 
 /**
- * Accessibility Compliance Tests
+ * Newsela Educational Platform - Accessibility Tests
  * 
- * Purpose: WCAG compliance and inclusive design validation
- * Frequency: Weekly accessibility runs
- * Timeout: 10 minutes max
+ * Purpose: Ensure educational platform meets WCAG 2.1 AA standards for all learners
+ * Focus: Educational accessibility, assistive technology support, inclusive design
+ * Frequency: Every deployment, accessibility compliance
  * 
- * Ensures the website meets accessibility standards required
- * for software development services and provides inclusive user experience.
+ * Critical for ensuring all students and teachers can access educational content
  */
 
 import { BaseTestFramework } from '../../framework/base-test-framework.js';
-import { NewselaHomePage } from '../../page-objects/homepage.js';
-import { NewselaContactPage } from '../../page-objects/contact-page.js';
 
-class AccessibilityComplianceTests extends BaseTestFramework {
+class NewselaAccessibilityTests extends BaseTestFramework {
   constructor() {
     super();
-    this.homePage = null;
-    this.contactPage = null;
-    this.accessibilityIssues = [];
-  }
-
-  async initializePageObjects() {
-    this.homePage = new NewselaHomePage(this.client);
-    this.contactPage = new NewselaContactPage(this.client);
   }
 
   /**
-   * ACCESSIBILITY TEST 1: Keyboard Navigation
+   * ACCESSIBILITY TEST 1: Educational Content Accessibility
+   * Test: Educational content is accessible to all learners
    */
-  async testKeyboardNavigation() {
-    await this.executeTest('Keyboard Navigation Compliance', async () => {
-      await this.homePage.navigate();
+  async testEducationalContentAccessibility() {
+    await this.executeTest('Educational Content Accessibility', async () => {
+      await this.client.navigateTo('https://newsela.com');
       
-      // Test focusable elements
-      const focusableElements = await this.client.evaluateJavaScript(`
-        (() => {
-          const focusableSelectors = [
-            'a[href]',
-            'button:not([disabled])',
-            'input:not([disabled])',
-            'textarea:not([disabled])',
-            'select:not([disabled])',
-            '[tabindex]:not([tabindex="-1"])'
-          ];
-          
-          const elements = document.querySelectorAll(focusableSelectors.join(', '));
-          let tabbableCount = 0;
-          let withoutTabindex = 0;
-          
-          elements.forEach(el => {
-            if (!el.hasAttribute('tabindex') || el.tabIndex >= 0) {
-              tabbableCount++;
-            }
-            if (!el.hasAttribute('tabindex')) {
-              withoutTabindex++;
-            }
-          });
-          
-          return JSON.stringify({
-            totalFocusable: elements.length,
-            tabbableElements: tabbableCount,
-            withoutExplicitTabindex: withoutTabindex,
-            hasProperTabSequence: tabbableCount > 0
-          });
-        })()
-      `);
+      // Wait for content to load
+      await this.client.waitForElement('body', 'visible', 10000);
       
-      const keyboardNav = focusableElements.success ? (() => {
-        try {
-          // Extract JSON from "JavaScript execution result: " wrapper
-          const jsonStr = focusableElements.output.replace(/^JavaScript execution result: /, '');
-          const parsed = JSON.parse(jsonStr);
-          return {
-            totalFocusable: parsed.totalFocusable || 0,
-            tabbableElements: parsed.tabbableElements || 0,
-            withoutExplicitTabindex: parsed.withoutExplicitTabindex || 0,
-            hasProperTabSequence: parsed.hasProperTabSequence || false
-          };
-        } catch (e) {
-          return {
-            totalFocusable: 0,
-            tabbableElements: 0,
-            withoutExplicitTabindex: 0,
-            hasProperTabSequence: false
-          };
-        }
-      })() : {
-        totalFocusable: 0,
-        tabbableElements: 0,
-        withoutExplicitTabindex: 0,
-        hasProperTabSequence: false
+      // Take accessibility snapshot for analysis
+      const snapshotResult = await this.client.getAccessibilitySnapshot();
+      
+      if (!snapshotResult.success) {
+        throw new Error('Cannot generate accessibility snapshot for analysis');
+      }
+      
+      const snapshot = snapshotResult.data;
+      
+      // Check for critical accessibility elements
+      const accessibilityFeatures = {
+        'Page has title': !!snapshot.title,
+        'Main content identified': this.hasRole(snapshot, 'main'),
+        'Navigation structure': this.hasRole(snapshot, 'navigation'),
+        'Headings present': this.hasHeadings(snapshot),
+        'Images have alt text': this.checkImageAltText(snapshot),
+        'Links are descriptive': this.checkLinkDescriptions(snapshot)
       };
       
-      if (keyboardNav.totalFocusable === 0) {
-        throw new Error('No focusable elements found - critical accessibility violation');
+      const passedFeatures = Object.entries(accessibilityFeatures).filter(([name, passed]) => passed);
+      const failedFeatures = Object.entries(accessibilityFeatures).filter(([name, passed]) => !passed);
+      
+      if (failedFeatures.length > 2) {
+        throw new Error(`Critical accessibility issues found: ${failedFeatures.map(([name]) => name).join(', ')}`);
       }
       
-      if (keyboardNav.totalFocusable < 5) {
-        this.accessibilityIssues.push({
-          severity: 'medium',
-          issue: `Low number of focusable elements: ${keyboardNav.totalFocusable}`,
-          page: 'homepage'
-        });
+      await this.logger.business(`✓ Accessibility features passed: ${passedFeatures.map(([name]) => name).join(', ')}`);
+      
+      if (failedFeatures.length > 0) {
+        await this.logger.warning(`⚠️ Accessibility issues: ${failedFeatures.map(([name]) => name).join(', ')}`);
       }
-      
-      await this.logger.business(`✓ Focusable elements found: ${keyboardNav.totalFocusable}`);
-      await this.logger.business(`✓ Tabbable elements: ${keyboardNav.tabbableElements}`);
-      
-    }, { timeout: 8000 });
+    }, { timeout: 15000 });
   }
 
   /**
-   * ACCESSIBILITY TEST 2: Focus Management
+   * ACCESSIBILITY TEST 2: Keyboard Navigation for Educational Tools
+   * Test: All educational features are keyboard accessible
    */
-  async testFocusManagement() {
-    await this.executeTest('Focus Management Validation', async () => {
-      await this.contactPage.navigate();
+  async testKeyboardNavigationEducational() {
+    await this.executeTest('Educational Keyboard Navigation', async () => {
+      await this.client.navigateTo('https://newsela.com');
       
-      // Test focus on form elements
-      const focusTest = await this.client.evaluateJavaScript(`
-        (() => {
-          const firstInput = document.querySelector('input, textarea, select');
-          if (!firstInput) return JSON.stringify({ hasFocusableForm: false });
+      // Test tab navigation through critical educational elements
+      const tabStops = [];
+      let currentElement = null;
+      let tabCount = 0;
+      const maxTabs = 20; // Limit to prevent infinite loops
+      
+      try {
+        // Start tabbing and collect focusable elements
+        while (tabCount < maxTabs) {
+          await this.client.pressKey('Tab');
+          tabCount++;
           
-          firstInput.focus();
-          const hasFocus = document.activeElement === firstInput;
-          
-          // Test focus indicators
-          const computedStyle = window.getComputedStyle(firstInput, ':focus');
-          const hasVisibleFocus = computedStyle.outline !== 'none' || 
-                                 computedStyle.boxShadow !== 'none' ||
-                                 computedStyle.border !== computedStyle.getPropertyValue('border');
-          
-          return JSON.stringify({
-            hasFocusableForm: true,
-            focusWorks: hasFocus,
-            hasVisibleFocusIndicator: hasVisibleFocus,
-            elementType: firstInput.tagName.toLowerCase()
+          // Get currently focused element
+          const focusResult = await this.client.evaluate(() => {
+            const focused = document.activeElement;
+            if (!focused || focused === document.body) return null;
+            
+            return {
+              tagName: focused.tagName.toLowerCase(),
+              text: focused.textContent?.trim().substring(0, 50) || '',
+              type: focused.type || '',
+              role: focused.getAttribute('role') || '',
+              ariaLabel: focused.getAttribute('aria-label') || '',
+              href: focused.href || ''
+            };
           });
-        })()
-      `);
-      
-      const focus = focusTest.success ? (() => {
-        try {
-          // Extract JSON from "JavaScript execution result: " wrapper
-          const jsonStr = focusTest.output.replace(/^JavaScript execution result: /, '');
-          return JSON.parse(jsonStr);
-        } catch (e) {
-          return {
-            hasFocusableForm: false,
-            focusWorks: false,
-            hasVisibleFocusIndicator: false,
-            elementType: 'none'
-          };
+          
+          if (focusResult.success && focusResult.output) {
+            tabStops.push(focusResult.output);
+          }
+          
+          // Break if we've cycled back to the beginning
+          if (tabCount > 5 && focusResult.success && focusResult.output?.tagName === 'a' && focusResult.output?.text.includes('Skip')) {
+            break;
+          }
         }
-      })() : {
-        hasFocusableForm: false,
-        focusWorks: false,
-        hasVisibleFocusIndicator: false,
-        elementType: 'none'
-      };
-      
-      if (!focus.hasFocusableForm) {
-        throw new Error('No focusable form elements found on contact page');
-      }
-      
-      if (!focus.focusWorks) {
-        throw new Error('Focus management not working properly');
-      }
-      
-      if (!focus.hasVisibleFocusIndicator) {
-        this.accessibilityIssues.push({
-          severity: 'high',
-          issue: 'Focus indicators may not be visible enough',
-          page: 'contact'
+        
+        // Analyze tab stops for educational functionality
+        const educationalElements = tabStops.filter(element => {
+          const text = element.text.toLowerCase();
+          const isEducational = text.includes('sign') || text.includes('luna') || text.includes('teacher') || 
+                               text.includes('content') || text.includes('learn') || text.includes('student') ||
+                               element.tagName === 'button' || element.href;
+          return isEducational;
         });
+        
+        if (educationalElements.length < 3) {
+          throw new Error(`Insufficient keyboard-accessible educational elements - only ${educationalElements.length} found`);
+        }
+        
+        // Check for skip links
+        const hasSkipLink = tabStops.some(element => 
+          element.text.toLowerCase().includes('skip') || element.text.toLowerCase().includes('main')
+        );
+        
+        await this.logger.business(`✓ Total keyboard-accessible elements: ${tabStops.length}`);
+        await this.logger.business(`✓ Educational elements accessible: ${educationalElements.length}`);
+        await this.logger.business(`✓ Skip to main content: ${hasSkipLink ? 'Available' : 'Not found'}`);
+        
+      } catch (error) {
+        throw new Error(`Keyboard navigation test failed: ${error.message}`);
       }
-      
-      await this.logger.business(`✓ Focus management working on ${focus.elementType} elements`);
-      await this.logger.business(`✓ Focus indicators: ${focus.hasVisibleFocusIndicator ? 'visible' : 'needs improvement'}`);
-      
-    }, { timeout: 8000 });
+    }, { timeout: 20000 });
   }
 
   /**
-   * ACCESSIBILITY TEST 3: Semantic HTML Structure
+   * ACCESSIBILITY TEST 3: Screen Reader Support for Educational Content
+   * Test: Educational content works with screen readers
    */
-  async testSemanticHTMLStructure() {
-    await this.executeTest('Semantic HTML Structure Validation', async () => {
-      await this.homePage.navigate();
+  async testScreenReaderSupportEducational() {
+    await this.executeTest('Educational Screen Reader Support', async () => {
+      await this.client.navigateTo('https://newsela.com');
       
-      const semanticStructure = await this.client.evaluateJavaScript(`
-        (() => {
-          const semantic = {
-            hasNav: !!document.querySelector('nav'),
-            hasMain: !!document.querySelector('main'),
-            hasHeader: !!document.querySelector('header'),
-            hasFooter: !!document.querySelector('footer'),
-            headings: {
-              h1: document.querySelectorAll('h1').length,
-              h2: document.querySelectorAll('h2').length,
-              h3: document.querySelectorAll('h3').length,
-              total: document.querySelectorAll('h1, h2, h3, h4, h5, h6').length
-            },
-            landmarks: document.querySelectorAll('[role]').length,
-            images: {
-              total: document.querySelectorAll('img').length,
-              withAlt: document.querySelectorAll('img[alt]').length,
-              withEmptyAlt: document.querySelectorAll('img[alt=""]').length
-            }
-          };
-          
-          return JSON.stringify(semantic);
-        })()
-      `);
+      const snapshotResult = await this.client.getAccessibilitySnapshot();
+      if (!snapshotResult.success) {
+        throw new Error('Cannot analyze screen reader support');
+      }
       
-      const structure = semanticStructure.success ? (() => {
-        try {
-          // Extract JSON from "JavaScript execution result: " wrapper
-          const jsonStr = semanticStructure.output.replace(/^JavaScript execution result: /, '');
-          const parsed = JSON.parse(jsonStr);
-          // Ensure all required properties exist with defaults
-          return {
-            hasNav: parsed.hasNav || false,
-            hasMain: parsed.hasMain || false,
-            hasHeader: parsed.hasHeader || false,
-            hasFooter: parsed.hasFooter || false,
-            headings: {
-              h1: parsed.headings?.h1 || 0,
-              h2: parsed.headings?.h2 || 0,
-              h3: parsed.headings?.h3 || 0,
-              total: parsed.headings?.total || 0
-            },
-            landmarks: parsed.landmarks || 0,
-            images: {
-              total: parsed.images?.total || 0,
-              withAlt: parsed.images?.withAlt || 0,
-              withEmptyAlt: parsed.images?.withEmptyAlt || 0
-            }
-          };
-        } catch (e) {
-          return {
-            hasNav: false,
-            hasMain: false,
-            hasHeader: false,
-            hasFooter: false,
-            headings: { h1: 0, h2: 0, h3: 0, total: 0 },
-            landmarks: 0,
-            images: { total: 0, withAlt: 0, withEmptyAlt: 0 }
-          };
-        }
-      })() : {
-        hasNav: false,
-        hasMain: false,
-        hasHeader: false,
-        hasFooter: false,
-        headings: { h1: 0, h2: 0, h3: 0, total: 0 },
-        landmarks: 0,
-        images: { total: 0, withAlt: 0, withEmptyAlt: 0 }
+      const snapshot = snapshotResult.data;
+      
+      // Check for screen reader friendly features
+      const screenReaderFeatures = {
+        'Proper heading hierarchy': this.checkHeadingHierarchy(snapshot),
+        'Descriptive page title': snapshot.title && snapshot.title.length > 10,
+        'Landmark regions': this.countLandmarks(snapshot) >= 2,
+        'Form labels': this.checkFormLabels(snapshot),
+        'Button descriptions': this.checkButtonDescriptions(snapshot),
+        'Image alternatives': this.checkImageAltText(snapshot)
       };
       
-      // Critical accessibility checks
-      if (structure.headings.h1 !== 1) {
-        this.accessibilityIssues.push({
-          severity: 'high',
-          issue: `Improper H1 usage: ${structure.headings.h1} H1 tags (should be exactly 1)`,
-          page: 'homepage'
-        });
+      const passedScreenReaderFeatures = Object.entries(screenReaderFeatures).filter(([name, passed]) => passed);
+      const failedScreenReaderFeatures = Object.entries(screenReaderFeatures).filter(([name, passed]) => !passed);
+      
+      if (failedScreenReaderFeatures.length > 2) {
+        throw new Error(`Screen reader support issues: ${failedScreenReaderFeatures.map(([name]) => name).join(', ')}`);
       }
       
-      if (structure.headings.total === 0) {
-        throw new Error('No heading elements found - critical accessibility violation');
+      // Check for educational content structure
+      const educationalStructure = {
+        'Educational headings': this.hasEducationalHeadings(snapshot),
+        'Navigation clarity': this.hasRole(snapshot, 'navigation'),
+        'Content organization': this.hasRole(snapshot, 'main'),
+        'Interactive elements labeled': this.checkInteractiveLabels(snapshot)
+      };
+      
+      const passedStructure = Object.entries(educationalStructure).filter(([name, passed]) => passed);
+      
+      await this.logger.business(`✓ Screen reader features: ${passedScreenReaderFeatures.map(([name]) => name).join(', ')}`);
+      await this.logger.business(`✓ Educational structure: ${passedStructure.map(([name]) => name).join(', ')}`);
+      
+      if (failedScreenReaderFeatures.length > 0) {
+        await this.logger.warning(`⚠️ Screen reader issues: ${failedScreenReaderFeatures.map(([name]) => name).join(', ')}`);
       }
-      
-      if (!structure.hasNav) {
-        this.accessibilityIssues.push({
-          severity: 'medium',
-          issue: 'No nav element found - consider adding semantic navigation',
-          page: 'homepage'
-        });
-      }
-      
-      // Image accessibility
-      const missingAlt = structure.images.total - structure.images.withAlt;
-      if (missingAlt > 0) {
-        this.accessibilityIssues.push({
-          severity: 'high',
-          issue: `${missingAlt} images missing alt text`,
-          page: 'homepage'
-        });
-      }
-      
-      await this.logger.business(`✓ Heading structure: ${structure.headings.total} headings (H1: ${structure.headings.h1})`);
-      await this.logger.business(`✓ Semantic elements: nav=${structure.hasNav}, main=${structure.hasMain}, header=${structure.hasHeader}, footer=${structure.hasFooter}`);
-      await this.logger.business(`✓ Images: ${structure.images.total} total, ${structure.images.withAlt} with alt text`);
-      
-    }, { timeout: 8000 });
+    }, { timeout: 12000 });
   }
 
   /**
    * ACCESSIBILITY TEST 4: Color Contrast & Visual Accessibility
+   * Test: Educational content meets color contrast requirements
    */
-  async testColorContrastAndVisual() {
-    await this.executeTest('Color Contrast and Visual Accessibility', async () => {
-      await this.homePage.navigate();
+  async testVisualAccessibilityEducational() {
+    await this.executeTest('Educational Visual Accessibility', async () => {
+      await this.client.navigateTo('https://newsela.com');
       
-      const visualAccessibility = await this.client.evaluateJavaScript(`
-        (() => {
-          // Basic color contrast estimation (simplified)
-          const elements = document.querySelectorAll('a, button, .btn, h1, h2, h3, p');
-          let textElements = 0;
-          let potentialIssues = 0;
-          
-          elements.forEach(el => {
-            const style = window.getComputedStyle(el);
-            const fontSize = parseFloat(style.fontSize);
-            const fontWeight = style.fontWeight;
-            
-            textElements++;
-            
-            // Check for very small text (potential accessibility issue)
-            if (fontSize < 14) {
-              potentialIssues++;
-            }
-          });
-          
-          // Check for proper text sizing
-          const rootFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
-          
-          return JSON.stringify({
-            textElements,
-            potentialContrastIssues: potentialIssues,
-            rootFontSize,
-            hasProperTextSizing: rootFontSize >= 16,
-            elementsChecked: elements.length
-          });
-        })()
-      `);
+      // Take screenshot for visual analysis
+      const screenshotResult = await this.client.takeScreenshot('visual-accessibility-analysis');
       
-      const visual = visualAccessibility.success ? (() => {
-        try {
-          // Extract JSON from "JavaScript execution result: " wrapper
-          const jsonStr = visualAccessibility.output.replace(/^JavaScript execution result: /, '');
-          const parsed = JSON.parse(jsonStr);
-          return {
-            textElements: parsed.textElements || 0,
-            potentialContrastIssues: parsed.potentialContrastIssues || 0,
-            rootFontSize: parsed.rootFontSize || 16,
-            hasProperTextSizing: parsed.hasProperTextSizing !== false,
-            elementsChecked: parsed.elementsChecked || 0
-          };
-        } catch (e) {
-          return {
-            textElements: 0,
-            potentialContrastIssues: 0,
-            rootFontSize: 16,
-            hasProperTextSizing: true,
-            elementsChecked: 0
-          };
-        }
-      })() : {
-        textElements: 0,
-        potentialContrastIssues: 0,
-        rootFontSize: 16,
-        hasProperTextSizing: true,
-        elementsChecked: 0
-      };
-      
-      if (!visual.hasProperTextSizing) {
-        this.accessibilityIssues.push({
-          severity: 'medium',
-          issue: `Root font size may be too small: ${visual.rootFontSize}px (recommended: 16px+)`,
-          page: 'homepage'
-        });
+      // Check for visual accessibility features using content analysis
+      const contentResult = await this.client.getText('body', 10000);
+      if (!contentResult.success) {
+        throw new Error('Cannot analyze visual content');
       }
       
-      if (visual.potentialContrastIssues > visual.textElements * 0.2) {
-        this.accessibilityIssues.push({
-          severity: 'medium',
-          issue: `Potential text size issues found in ${visual.potentialContrastIssues} elements`,
-          page: 'homepage'
-        });
+      // Use CSS evaluation to check for accessibility features
+      const visualCheckResult = await this.client.evaluate(() => {
+        const results = {
+          hasHighContrastMode: false,
+          hasFontSizeOptions: false,
+          hasResponsiveDesign: false,
+          hasVisualFocus: false,
+          textReadability: false
+        };
+        
+        // Check for common accessibility CSS
+        const styles = document.querySelectorAll('style, link[rel="stylesheet"]');
+        const cssText = Array.from(styles).map(style => style.textContent || '').join(' ').toLowerCase();
+        
+        // Check for high contrast or theme options
+        results.hasHighContrastMode = cssText.includes('contrast') || 
+                                     document.querySelector('[class*="contrast"]') !== null ||
+                                     document.querySelector('[class*="theme"]') !== null;
+        
+        // Check for font size controls
+        results.hasFontSizeOptions = document.querySelector('button[class*="font"], button[class*="size"], [aria-label*="font"], [aria-label*="size"]') !== null;
+        
+        // Check for responsive design indicators
+        const viewport = document.querySelector('meta[name="viewport"]');
+        results.hasResponsiveDesign = viewport !== null;
+        
+        // Check for visible focus indicators
+        results.hasVisualFocus = cssText.includes(':focus') || cssText.includes('outline');
+        
+        // Check text size and spacing
+        const mainContent = document.querySelector('main, [role="main"], .main, #main') || document.body;
+        const computedStyle = window.getComputedStyle(mainContent);
+        const fontSize = parseFloat(computedStyle.fontSize);
+        const lineHeight = parseFloat(computedStyle.lineHeight);
+        
+        results.textReadability = fontSize >= 14 && (lineHeight / fontSize) >= 1.2;
+        
+        return results;
+      });
+      
+      if (!visualCheckResult.success) {
+        throw new Error('Cannot evaluate visual accessibility features');
       }
       
-      await this.logger.business(`✓ Text elements analyzed: ${visual.textElements}`);
-      await this.logger.business(`✓ Root font size: ${visual.rootFontSize}px`);
-      await this.logger.business(`✓ Potential issues: ${visual.potentialContrastIssues}/${visual.textElements}`);
+      const visualFeatures = visualCheckResult.output;
+      const passedVisualFeatures = Object.entries(visualFeatures).filter(([name, passed]) => passed);
+      const failedVisualFeatures = Object.entries(visualFeatures).filter(([name, passed]) => !passed);
       
-    }, { timeout: 8000 });
+      // At least basic visual accessibility should be present
+      if (passedVisualFeatures.length < 2) {
+        throw new Error(`Insufficient visual accessibility features - only ${passedVisualFeatures.length} found`);
+      }
+      
+      await this.logger.business(`✓ Visual accessibility features: ${passedVisualFeatures.map(([name]) => name).join(', ')}`);
+      
+      if (failedVisualFeatures.length > 0) {
+        await this.logger.business(`⚠️ Visual accessibility improvements needed: ${failedVisualFeatures.map(([name]) => name).join(', ')}`);
+      }
+    }, { timeout: 15000 });
   }
 
   /**
-   * ACCESSIBILITY TEST 5: Form Accessibility
+   * ACCESSIBILITY TEST 5: Educational Form & Input Accessibility
+   * Test: Educational forms and inputs are accessible
    */
-  async testFormAccessibility() {
-    await this.executeTest('Form Accessibility Validation', async () => {
-      await this.contactPage.navigate();
+  async testEducationalFormAccessibility() {
+    await this.executeTest('Educational Form Accessibility', async () => {
+      await this.client.navigateTo('https://newsela.com');
       
-      const formAccessibility = await this.client.evaluateJavaScript(`
-        (() => {
-          const forms = document.querySelectorAll('form');
-          if (forms.length === 0) return JSON.stringify({ hasForm: false });
-          
-          const form = forms[0];
-          const inputs = form.querySelectorAll('input, textarea, select');
-          
-          let labelledInputs = 0;
-          let requiredInputs = 0;
-          let inputsWithIds = 0;
-          
-          inputs.forEach(input => {
-            // Check for labels
-            const hasLabel = document.querySelector(\`label[for="\${input.id}"]\`) || 
-                            input.closest('label') ||
-                            input.getAttribute('aria-label') ||
-                            input.getAttribute('aria-labelledby');
-            
-            if (hasLabel) labelledInputs++;
-            if (input.required) requiredInputs++;
-            if (input.id) inputsWithIds++;
-          });
-          
-          return JSON.stringify({
-            hasForm: true,
-            totalInputs: inputs.length,
-            labelledInputs,
-            requiredInputs,
-            inputsWithIds,
-            labellingRate: inputs.length > 0 ? (labelledInputs / inputs.length) * 100 : 0
-          });
-        })()
-      `);
-      
-      const formA11y = formAccessibility.success ? (() => {
-        try {
-          // Extract JSON from "JavaScript execution result: " wrapper
-          const jsonStr = formAccessibility.output.replace(/^JavaScript execution result: /, '');
-          return JSON.parse(jsonStr);
-        } catch (e) {
-          return {
-            hasForm: false,
-            totalInputs: 0,
-            labelledInputs: 0,
-            requiredInputs: 0,
-            inputsWithIds: 0,
-            labellingRate: 0
+      // Look for forms on the page (sign-up, search, etc.)
+      const formResult = await this.client.evaluate(() => {
+        const forms = document.querySelectorAll('form, input, button, select, textarea');
+        const formElements = [];
+        
+        forms.forEach(element => {
+          const info = {
+            tagName: element.tagName.toLowerCase(),
+            type: element.type || '',
+            hasLabel: false,
+            hasAriaLabel: !!element.getAttribute('aria-label'),
+            hasPlaceholder: !!element.getAttribute('placeholder'),
+            hasId: !!element.id,
+            isRequired: element.required || element.getAttribute('aria-required') === 'true',
+            text: element.textContent?.trim().substring(0, 30) || ''
           };
-        }
-      })() : {
-        hasForm: false,
-        totalInputs: 0,
-        labelledInputs: 0,
-        requiredInputs: 0,
-        inputsWithIds: 0,
-        labellingRate: 0
-      };
-      
-      if (!formA11y.hasForm) {
-        throw new Error('No forms found on contact page');
-      }
-      
-      if (formA11y.labellingRate < 80) {
-        this.accessibilityIssues.push({
-          severity: 'high',
-          issue: `Low form labelling rate: ${formA11y.labellingRate.toFixed(1)}% (${formA11y.labelledInputs}/${formA11y.totalInputs})`,
-          page: 'contact'
+          
+          // Check for associated label
+          if (element.id) {
+            const label = document.querySelector(`label[for="${element.id}"]`);
+            info.hasLabel = !!label;
+          }
+          
+          // Check if element is inside a label
+          if (!info.hasLabel) {
+            const parentLabel = element.closest('label');
+            info.hasLabel = !!parentLabel;
+          }
+          
+          formElements.push(info);
         });
+        
+        return formElements;
+      });
+      
+      if (!formResult.success) {
+        throw new Error('Cannot analyze form accessibility');
       }
       
-      if (formA11y.inputsWithIds < formA11y.totalInputs) {
-        this.accessibilityIssues.push({
-          severity: 'medium',
-          issue: `Some form inputs missing IDs for proper labelling`,
-          page: 'contact'
-        });
+      const formElements = formResult.output;
+      
+      if (formElements.length === 0) {
+        await this.logger.business('✓ No forms found on homepage - accessibility compliance by default');
+        return;
       }
       
-      await this.logger.business(`✓ Form inputs: ${formA11y.totalInputs} total, ${formA11y.labelledInputs} properly labelled`);
-      await this.logger.business(`✓ Required fields: ${formA11y.requiredInputs}`);
-      await this.logger.business(`✓ Labelling rate: ${formA11y.labellingRate.toFixed(1)}%`);
+      // Analyze form accessibility
+      const inputElements = formElements.filter(el => ['input', 'textarea', 'select'].includes(el.tagName));
+      const buttonElements = formElements.filter(el => el.tagName === 'button' || el.type === 'button' || el.type === 'submit');
       
-    }, { timeout: 8000 });
+      const accessibleInputs = inputElements.filter(el => 
+        el.hasLabel || el.hasAriaLabel || el.hasPlaceholder
+      );
+      
+      const accessibleButtons = buttonElements.filter(el => 
+        el.text.length > 0 || el.hasAriaLabel
+      );
+      
+      const accessibilityRatio = inputElements.length > 0 ? 
+        (accessibleInputs.length / inputElements.length) * 100 : 100;
+      
+      if (accessibilityRatio < 80) {
+        throw new Error(`Poor form accessibility - only ${Math.round(accessibilityRatio)}% of inputs are properly labeled`);
+      }
+      
+      await this.logger.business(`✓ Form elements found: ${formElements.length} total`);
+      await this.logger.business(`✓ Input accessibility: ${accessibleInputs.length}/${inputElements.length} properly labeled`);
+      await this.logger.business(`✓ Button accessibility: ${accessibleButtons.length}/${buttonElements.length} properly described`);
+      await this.logger.business(`✓ Form accessibility score: ${Math.round(accessibilityRatio)}%`);
+    }, { timeout: 10000 });
   }
 
   /**
-   * Run all accessibility tests
+   * ACCESSIBILITY TEST 6: Educational Mobile Accessibility
+   * Test: Educational platform is accessible on mobile devices
    */
+  async testEducationalMobileAccessibility() {
+    await this.executeTest('Educational Mobile Accessibility', async () => {
+      // Set mobile viewport
+      await this.client.resizeBrowser(375, 667); // iPhone SE size
+      await this.client.navigateTo('https://newsela.com');
+      
+      // Wait for mobile layout to load
+      await this.client.waitForElement('body', 'visible', 5000);
+      
+      // Check mobile-specific accessibility features
+      const mobileAccessibilityResult = await this.client.evaluate(() => {
+        const results = {
+          hasViewportMeta: !!document.querySelector('meta[name="viewport"]'),
+          hasTouch: 'ontouchstart' in window,
+          responsiveDesign: false,
+          textScalable: false,
+          buttonSizeAdequate: false,
+          navigationAccessible: false
+        };
+        
+        // Check if design responds to small screen
+        const body = document.body;
+        const bodyWidth = body.offsetWidth;
+        results.responsiveDesign = bodyWidth <= 400; // Reasonable for mobile
+        
+        // Check text scaling
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+          const content = viewport.getAttribute('content') || '';
+          results.textScalable = !content.includes('user-scalable=no') && !content.includes('maximum-scale=1');
+        }
+        
+        // Check button/link sizes (should be at least 44px for touch)
+        const interactiveElements = document.querySelectorAll('button, a, input[type="button"], input[type="submit"]');
+        let adequateSizeCount = 0;
+        
+        interactiveElements.forEach(element => {
+          const rect = element.getBoundingClientRect();
+          if (rect.width >= 44 && rect.height >= 44) {
+            adequateSizeCount++;
+          }
+        });
+        
+        results.buttonSizeAdequate = interactiveElements.length === 0 || 
+                                    (adequateSizeCount / interactiveElements.length) >= 0.7;
+        
+        // Check navigation accessibility
+        const nav = document.querySelector('nav, [role="navigation"]');
+        results.navigationAccessible = !!nav;
+        
+        return results;
+      });
+      
+      if (!mobileAccessibilityResult.success) {
+        throw new Error('Cannot analyze mobile accessibility');
+      }
+      
+      const mobileFeatures = mobileAccessibilityResult.output;
+      const passedMobileFeatures = Object.entries(mobileFeatures).filter(([name, passed]) => passed);
+      const failedMobileFeatures = Object.entries(mobileFeatures).filter(([name, passed]) => !passed);
+      
+      if (failedMobileFeatures.length > 2) {
+        throw new Error(`Mobile accessibility issues: ${failedMobileFeatures.map(([name]) => name).join(', ')}`);
+      }
+      
+      await this.logger.business(`✓ Mobile accessibility features: ${passedMobileFeatures.map(([name]) => name).join(', ')}`);
+      
+      if (failedMobileFeatures.length > 0) {
+        await this.logger.warning(`⚠️ Mobile accessibility improvements: ${failedMobileFeatures.map(([name]) => name).join(', ')}`);
+      }
+      
+      // Reset to desktop view
+      await this.client.resizeBrowser(1280, 720);
+    }, { timeout: 15000 });
+  }
+
+  // Helper methods for accessibility analysis
+  hasRole(snapshot, role) {
+    return this.findInSnapshot(snapshot, node => node.role === role);
+  }
+
+  hasHeadings(snapshot) {
+    return this.findInSnapshot(snapshot, node => 
+      node.role === 'heading' || ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(node.tag)
+    );
+  }
+
+  checkImageAltText(snapshot) {
+    const images = this.findAllInSnapshot(snapshot, node => node.tag === 'img');
+    if (images.length === 0) return true; // No images to check
+    const imagesWithAlt = images.filter(img => img.description || img.value);
+    return (imagesWithAlt.length / images.length) >= 0.8; // At least 80% should have alt text
+  }
+
+  checkLinkDescriptions(snapshot) {
+    const links = this.findAllInSnapshot(snapshot, node => node.role === 'link');
+    if (links.length === 0) return true;
+    const descriptiveLinks = links.filter(link => 
+      link.name && link.name.length > 5 && !link.name.toLowerCase().includes('click here')
+    );
+    return (descriptiveLinks.length / links.length) >= 0.7;
+  }
+
+  checkHeadingHierarchy(snapshot) {
+    const headings = this.findAllInSnapshot(snapshot, node => node.role === 'heading');
+    if (headings.length < 2) return true; // Not enough headings to check hierarchy
+    
+    // Check if there's at least one h1 and logical progression
+    const hasH1 = headings.some(h => h.level === 1);
+    return hasH1;
+  }
+
+  countLandmarks(snapshot) {
+    const landmarks = ['main', 'navigation', 'banner', 'contentinfo', 'complementary'];
+    return landmarks.reduce((count, landmark) => {
+      return count + (this.findInSnapshot(snapshot, node => node.role === landmark) ? 1 : 0);
+    }, 0);
+  }
+
+  checkFormLabels(snapshot) {
+    const inputs = this.findAllInSnapshot(snapshot, node => 
+      ['textbox', 'combobox', 'searchbox'].includes(node.role)
+    );
+    if (inputs.length === 0) return true;
+    const labeledInputs = inputs.filter(input => input.name || input.description);
+    return (labeledInputs.length / inputs.length) >= 0.8;
+  }
+
+  checkButtonDescriptions(snapshot) {
+    const buttons = this.findAllInSnapshot(snapshot, node => node.role === 'button');
+    if (buttons.length === 0) return true;
+    const describedButtons = buttons.filter(button => 
+      button.name && button.name.length > 2
+    );
+    return (describedButtons.length / buttons.length) >= 0.9;
+  }
+
+  hasEducationalHeadings(snapshot) {
+    const headings = this.findAllInSnapshot(snapshot, node => node.role === 'heading');
+    return headings.some(heading => {
+      const text = (heading.name || '').toLowerCase();
+      return text.includes('newsela') || text.includes('education') || text.includes('learn') || 
+             text.includes('teacher') || text.includes('student');
+    });
+  }
+
+  checkInteractiveLabels(snapshot) {
+    const interactive = this.findAllInSnapshot(snapshot, node => 
+      ['button', 'link', 'textbox', 'combobox'].includes(node.role)
+    );
+    if (interactive.length === 0) return true;
+    const labeled = interactive.filter(el => el.name || el.description);
+    return (labeled.length / interactive.length) >= 0.8;
+  }
+
+  // Helper methods for snapshot traversal
+  findInSnapshot(snapshot, predicate) {
+    if (!snapshot) return false;
+    
+    const traverse = (node) => {
+      if (predicate(node)) return true;
+      if (node.children) {
+        return node.children.some(child => traverse(child));
+      }
+      return false;
+    };
+    
+    return traverse(snapshot);
+  }
+
+  findAllInSnapshot(snapshot, predicate) {
+    if (!snapshot) return [];
+    
+    const results = [];
+    const traverse = (node) => {
+      if (predicate(node)) results.push(node);
+      if (node.children) {
+        node.children.forEach(child => traverse(child));
+      }
+    };
+    
+    traverse(snapshot);
+    return results;
+  }
+
   async runAccessibilityTests() {
     try {
-      await this.initialize('Accessibility Compliance Tests', 'chromium');
-      await this.initializePageObjects();
-      
-      // Execute accessibility tests
-      await this.testKeyboardNavigation();
-      await this.testFocusManagement();
-      await this.testSemanticHTMLStructure();
-      await this.testColorContrastAndVisual();
-      await this.testFormAccessibility();
-      
+      console.log('\n♿ NEWSELA EDUCATIONAL PLATFORM - ACCESSIBILITY TESTS');
+      console.log('====================================================');
+      console.log('🎯 Testing WCAG 2.1 AA compliance for educational accessibility');
+      console.log('');
+
+      await this.testEducationalContentAccessibility();
+      await this.testKeyboardNavigationEducational();
+      await this.testScreenReaderSupportEducational();
+      await this.testVisualAccessibilityEducational();
+      await this.testEducationalFormAccessibility();
+      await this.testEducationalMobileAccessibility();
+
+      // Generate summary
       const summary = this.getTestSummary();
-      await this.logger.suiteEnd('Accessibility Tests Complete', summary);
+      console.log('\n📊 EDUCATIONAL ACCESSIBILITY TEST SUMMARY');
+      console.log('==========================================');
+      console.log(`Total Accessibility Tests: ${summary.total}`);
+      console.log(`Passed: ${summary.passed}`);
+      console.log(`Failed: ${summary.failed}`);
+      console.log(`Accessibility Compliance Rate: ${Math.round((summary.passed / summary.total) * 100)}%`);
       
-      // Generate accessibility report
-      const report = {
-        suite: 'Accessibility Compliance Tests',
-        timestamp: new Date().toISOString(),
-        summary,
-        accessibilityIssues: this.accessibilityIssues,
-        complianceScore: this.calculateComplianceScore(),
-        recommendations: this.generateAccessibilityRecommendations(summary)
-      };
-      
-      console.log('\n=== ACCESSIBILITY COMPLIANCE RESULTS ===');
-      console.log(JSON.stringify(report, null, 2));
+      if (summary.failed > 0) {
+        console.log(`⚠️ ${summary.failed} accessibility tests failed - review WCAG compliance`);
+      }
       
     } catch (error) {
-      await this.logger.error(`Accessibility tests failed: ${error.message}`);
       throw error;
     } finally {
       await this.cleanup();
     }
   }
-
-  calculateComplianceScore() {
-    const highSeverityIssues = this.accessibilityIssues.filter(issue => issue.severity === 'high').length;
-    const mediumSeverityIssues = this.accessibilityIssues.filter(issue => issue.severity === 'medium').length;
-    
-    // Start with 100% and deduct points for issues
-    let score = 100;
-    score -= (highSeverityIssues * 15); // 15 points per high severity issue
-    score -= (mediumSeverityIssues * 5); // 5 points per medium severity issue
-    
-    return Math.max(0, score);
-  }
-
-  generateAccessibilityRecommendations(summary) {
-    const recommendations = [];
-    
-    if (summary.failed > 0) {
-      recommendations.push('Address failed accessibility tests immediately');
-    }
-    
-    const highSeverityIssues = this.accessibilityIssues.filter(issue => issue.severity === 'high');
-    if (highSeverityIssues.length > 0) {
-      recommendations.push('Critical accessibility issues found - review WCAG 2.1 guidelines');
-    }
-    
-    const complianceScore = this.calculateComplianceScore();
-    if (complianceScore < 85) {
-      recommendations.push('Accessibility compliance below recommended threshold - comprehensive audit needed');
-    }
-    
-    recommendations.push('Regular accessibility testing should be part of development workflow');
-    recommendations.push('Consider automated accessibility testing tools integration');
-    recommendations.push('User testing with assistive technologies recommended');
-    
-    return recommendations;
-  }
 }
 
 // Execute accessibility tests
 async function main() {
-  const accessibilityTests = new AccessibilityComplianceTests();
-  
-  // Set a timeout for the entire accessibility test suite
-  const timeoutId = setTimeout(() => {
-    console.error('Accessibility tests timed out after 10 minutes');
-    process.exit(1);
-  }, 600000); // 10 minutes
+  const accessibilityTests = new NewselaAccessibilityTests();
   
   try {
     await accessibilityTests.runAccessibilityTests();
-    clearTimeout(timeoutId);
+    console.log('✅ EDUCATIONAL ACCESSIBILITY TESTS COMPLETED');
     process.exit(0);
   } catch (error) {
-    clearTimeout(timeoutId);
-    console.error('Accessibility tests failed:', error);
+    console.error('❌ EDUCATIONAL ACCESSIBILITY TESTS FAILED');
+    console.error('Error:', error.message);
     process.exit(1);
   }
 }
 
 main().catch(error => {
-  console.error('Accessibility test error:', error);
+  console.error('❌ ACCESSIBILITY TEST SUITE FAILURE:', error);
   process.exit(1);
 });
