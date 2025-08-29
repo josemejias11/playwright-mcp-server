@@ -1,0 +1,288 @@
+name: CI - WebDriverIO MCP Server
+
+on:
+  push:
+    branches: [ newsela ]
+  pull_request:
+    branches: [ newsela ]
+  workflow_dispatch:  # Allow manual triggers
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  NODE_VERSION: '20'
+  CHROME_VERSION: 'stable'
+
+jobs:
+  lint-and-build:
+    name: Lint, Build & Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint TypeScript
+        run: npx tsc --noEmit
+
+      - name: Build MCP server
+        run: npm run build
+
+      - name: Setup Chrome for WebDriverIO
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+
+      - name: Run WebDriverIO tests
+        run: npm test
+
+      - name: Test MCP server demo
+        run: npm run demo
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: reports/
+          retention-days: 30
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist/
+          retention-days: 30
+
+  mcp-server-validation:
+    name: MCP Server Validation
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Setup Chrome for WebDriverIO
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+
+      - name: Validate MCP server starts correctly
+        run: |
+          echo "🔍 Testing MCP server startup..."
+          timeout 10s npm run mcp:server || [ $? -eq 124 ] && echo "✅ MCP server started successfully"
+
+      - name: Test WebDriver manager functionality
+        run: |
+          echo "🧪 Testing WebDriver functionality..."
+          node -e "
+          import('./dist/webdriver/manager.js').then(async ({ WebDriverManager }) => {
+            const manager = new WebDriverManager();
+            try {
+              console.log('Testing WebDriver manager...');
+              const driver = await manager.getDriver();
+              await driver.url('https://example.com');
+              const title = await driver.getTitle();
+              console.log('✅ WebDriver test successful, title:', title);
+              await manager.closeDriver();
+            } catch (error) {
+              console.error('❌ WebDriver test failed:', error);
+              process.exit(1);
+            }
+          });
+          "
+
+      - name: Validate screenshot functionality
+        run: |
+          echo "📸 Testing screenshot functionality..."
+          node -e "
+          import('./dist/webdriver/manager.js').then(async ({ WebDriverManager }) => {
+            const manager = new WebDriverManager();
+            try {
+              console.log('Testing screenshot capture...');
+              const driver = await manager.getDriver();
+              await driver.url('https://example.com');
+              const screenshotPath = await manager.takeScreenshot('ci-test.png');
+              console.log('✅ Screenshot saved to:', screenshotPath);
+              await manager.closeDriver();
+            } catch (error) {
+              console.error('❌ Screenshot test failed:', error);
+              process.exit(1);
+            }
+          });
+          "
+
+  security-scan:
+    name: Security & Dependency Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: Install audit-ci
+        run: npm install -g audit-ci
+        continue-on-error: true
+
+      - name: Run dependency check
+        run: npx audit-ci --moderate
+        continue-on-error: true
+
+  generate-reports:
+    name: Generate Test Reports
+    needs: [lint-and-build, mcp-server-validation]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Download test reports
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports
+          path: reports/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create index page for reports
+        run: |
+          mkdir -p reports/
+          cat > reports/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>WebDriverIO MCP Server - Test Reports</title>
+              <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; }
+                  .report-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+                  .success { background-color: #d4edda; border-color: #c3e6cb; }
+                  .info { background-color: #d1ecf1; border-color: #bee5eb; }
+                  ul { list-style-type: none; padding: 0; }
+                  li { padding: 8px; margin: 4px 0; background: #f8f9fa; border-radius: 4px; }
+                  a { text-decoration: none; color: #007bff; }
+                  a:hover { text-decoration: underline; }
+              </style>
+          </head>
+          <body>
+              <h1>🚀 WebDriverIO MCP Server - Test Reports</h1>
+              <p><strong>Branch:</strong> newsela | <strong>Build:</strong> ${{ github.run_number }}</p>
+              
+              <div class="report-section success">
+                  <h2>📊 Available Reports</h2>
+                  <ul>
+                      <li>📄 <a href="json/">JSON Test Results</a> - Machine-readable test data</li>
+                      <li>📋 <a href="junit/">JUnit XML Reports</a> - CI/CD integration format</li>
+                      <li>📸 <a href="screenshots/">Screenshots</a> - Test execution screenshots</li>
+                      <li>📝 <a href="wdio/">WebDriverIO Logs</a> - Detailed execution logs</li>
+                  </ul>
+              </div>
+
+              <div class="report-section info">
+                  <h2>🔧 WebDriverIO MCP Server</h2>
+                  <p>This is a Model Context Protocol (MCP) server that provides web automation capabilities using WebDriverIO and TypeScript.</p>
+                  <ul>
+                      <li><strong>15 automation tools</strong> available for web interactions</li>
+                      <li><strong>Chrome browser</strong> automation with headless support</li>
+                      <li><strong>Centralized reporting</strong> with multiple output formats</li>
+                      <li><strong>TypeScript</strong> implementation with full type safety</li>
+                  </ul>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: reports/
+
+  deploy-reports:
+    name: Deploy Reports to Pages
+    needs: generate-reports
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/newsela'
+    
+    steps:
+      - name: Download reports
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports
+          path: reports/
+
+      - name: Display deployment info
+        run: |
+          echo "✅ Reports generated successfully"
+          echo "📊 To enable GitHub Pages deployment:"
+          echo "1. Go to repository Settings → Pages"
+          echo "2. Set source to 'GitHub Actions'"
+          echo "3. Re-run this workflow"
+
+  test-summary:
+    name: Test Summary
+    needs: [lint-and-build, mcp-server-validation, security-scan]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Create test summary
+        run: |
+          echo "# 🧪 WebDriverIO MCP Server - Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📊 Test Results Overview" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Suite | Status | Description |" >> $GITHUB_STEP_SUMMARY
+          echo "|------------|--------|-------------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Build & Test | ${{ needs.lint-and-build.result }} | TypeScript compilation and WebDriverIO tests |" >> $GITHUB_STEP_SUMMARY
+          echo "| MCP Validation | ${{ needs.mcp-server-validation.result }} | MCP server startup and WebDriver functionality |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security Scan | ${{ needs.security-scan.result }} | Dependency vulnerability assessment |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎯 Branch: newsela" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ **WebDriverIO Integration**: Complete web automation framework" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔧 **TypeScript Migration**: Full type safety and modern build process" >> $GITHUB_STEP_SUMMARY
+          echo "- 📊 **Centralized Reporting**: All test results in reports/ folder" >> $GITHUB_STEP_SUMMARY
+          echo "- 🚀 **15 MCP Tools**: Comprehensive web automation capabilities" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📋 Available Tools" >> $GITHUB_STEP_SUMMARY
+          echo "- 🌐 **Navigation**: navigate, wait_for_element" >> $GITHUB_STEP_SUMMARY
+          echo "- 🖱️ **Interaction**: click, double_click, right_click, hover" >> $GITHUB_STEP_SUMMARY
+          echo "- ⌨️ **Input**: type, clear, select_option" >> $GITHUB_STEP_SUMMARY
+          echo "- 📸 **Capture**: take_screenshot, get_page_source" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔍 **Information**: get_element_text, get_element_attribute, get_page_title, get_current_url" >> $GITHUB_STEP_SUMMARY
+          echo "- ⏳ **Synchronization**: execute_script" >> $GITHUB_STEP_SUMMARY
