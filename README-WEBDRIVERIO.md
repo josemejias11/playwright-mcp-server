@@ -115,7 +115,59 @@ The server provides the following tools for web automation:
 
 ## Configuration
 
-The WebDriverIO configuration is in `wdio.conf.ts`. You can modify browser settings, timeouts, and other options there.
+The WebDriverIO configuration is in `wdio.conf.js`. You can modify browser settings, timeouts, and other options there.
+
+Default configuration:
+- Browser: Chrome
+- Headless mode: Enabled
+- Window size: 1920x1080
+- Wait timeout: 10 seconds
+
+## Reports and Outputs
+
+All test results and outputs are centralized in the `reports/` folder:
+
+```
+reports/
+├── wdio/              # WebDriverIO test outputs
+├── screenshots/       # Screenshots taken during tests or MCP operations
+├── allure-results/    # Allure test reporting data
+├── json/              # JSON test results
+├── junit/             # JUnit XML test results
+└── chromedriver/      # ChromeDriver logs
+```
+
+### Report Types
+
+- **Spec Reporter**: Real-time console output during test runs
+- **JSON Reporter**: Machine-readable test results for CI/CD integration
+- **JUnit Reporter**: XML format for integration with CI systems
+- **Allure Reporter**: Comprehensive HTML reports (requires Java runtime)
+
+### Accessing Reports
+
+After running tests with `npm test`, you can find:
+- Screenshots in `reports/screenshots/`
+- Test results in `reports/json/` and `reports/junit/`
+- Detailed logs in `reports/wdio/`
+- Allure data in `reports/allure-results/` (use `npm run allure:generate` to create HTML reports)
+
+### Generate HTML Reports
+
+To generate and view comprehensive HTML test reports:
+
+```bash
+# Generate Allure HTML report (requires Java)
+npm run allure:generate
+
+# Open the HTML report in browser
+npm run allure:open
+
+# Or run tests and generate report in one command
+npm run test:report
+```
+
+**Note**: Allure reports require Java runtime to be installed.
 
 Default configuration:
 - Browser: Chrome

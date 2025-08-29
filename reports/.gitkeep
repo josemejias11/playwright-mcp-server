@@ -1,0 +1,2 @@
+# This file ensures the reports directory is tracked by git
+# All test results, screenshots, and reports will be stored in subdirectories here

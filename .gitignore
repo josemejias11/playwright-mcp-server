@@ -9,15 +9,8 @@ build/
 dist/
 
 # Test artifacts - centralized reports
-reports/e2e/*.html
-reports/e2e/*.json  
-reports/e2e/*.txt
-reports/artifacts/screenshots/*.png
-reports/artifacts/screenshots/*.jpg
-reports/artifacts/screenshots/*.jpeg
-reports/artifacts/videos/*.mp4
-reports/artifacts/traces/*.zip
-reports/api/*.html
+reports/*
+!reports/.gitkeep
 reports/api/*.json
 
 # Keep report directory structure

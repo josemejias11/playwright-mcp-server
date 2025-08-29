@@ -135,6 +135,7 @@ class MCPWebDriverServer {
   }
 
   private async handleScreenshot() {
+    const screenshotPath = await this.webDriverManager.takeScreenshot();
     const driver = await this.webDriverManager.getDriver();
     const screenshot = await driver.takeScreenshot();
     
@@ -142,7 +143,7 @@ class MCPWebDriverServer {
       content: [
         {
           type: 'text',
-          text: 'Screenshot captured successfully',
+          text: `Screenshot captured successfully and saved to: ${screenshotPath}`,
         },
         {
           type: 'image',

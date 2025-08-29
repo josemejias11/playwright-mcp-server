@@ -1,10 +1,16 @@
 import { remote, RemoteOptions, Browser } from 'webdriverio';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export class WebDriverManager {
   private driver: Browser | null = null;
   private options: RemoteOptions;
+  private screenshotDir: string;
 
   constructor() {
+    this.screenshotDir = './reports/screenshots';
+    this.ensureDirectoryExists(this.screenshotDir);
+    
     this.options = {
       logLevel: 'info',
       capabilities: {
@@ -79,5 +85,24 @@ export class WebDriverManager {
     if (this.driver) {
       await this.driver.setWindowSize(width, height);
     }
+  }
+
+  private ensureDirectoryExists(dirPath: string): void {
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+  }
+
+  getScreenshotPath(filename?: string): string {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const screenshotName = filename || `screenshot-${timestamp}.png`;
+    return path.join(this.screenshotDir, screenshotName);
+  }
+
+  async takeScreenshot(filename?: string): Promise<string> {
+    const driver = await this.getDriver();
+    const screenshotPath = this.getScreenshotPath(filename);
+    await driver.saveScreenshot(screenshotPath);
+    return screenshotPath;
   }
 }

@@ -26,10 +26,39 @@ export const config = {
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
     
-    services: ['chromedriver'],
+    // Centralize all outputs to reports folder
+    outputDir: './reports/wdio',
+    
+    services: [
+        ['chromedriver', {
+            outputDir: './reports/chromedriver'
+        }]
+    ],
     
     framework: 'mocha',
-    reporters: ['spec'],
+    reporters: [
+        'spec',
+        ['allure', {
+            outputDir: './reports/allure-results',
+            disableWebdriverStepsReporting: true,
+            disableWebdriverScreenshotsReporting: false,
+        }],
+        ['json', {
+            outputDir: './reports/json',
+            outputFileFormat: function(options) {
+                return `results-${new Date().toISOString().split('T')[0]}.json`
+            }
+        }],
+        ['junit', {
+            outputDir: './reports/junit',
+            outputFileFormat: function(options) {
+                return `results-${new Date().toISOString().split('T')[0]}.xml`
+            }
+        }]
+    ],
+    
+    // Screenshot configuration
+    screenshotPath: './reports/screenshots',
     
     mochaOpts: {
         ui: 'bdd',
