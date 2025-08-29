@@ -1,6 +1,10 @@
 /// <reference types="@wdio/globals" />
 import type { Options } from '@wdio/types';
 
+// GOAL: Always show real browser windows by default.
+// Headless will ONLY be enabled if you explicitly set HEADLESS=1.
+// Use BROWSERS=chrome,firefox,safari (comma separated) to choose browsers.
+
 // Allow selecting browsers via env var, e.g. BROWSERS=chrome,firefox,safari
 const requestedBrowsers = (process.env.BROWSERS || 'chrome')
   .split(',')
@@ -8,53 +12,36 @@ const requestedBrowsers = (process.env.BROWSERS || 'chrome')
   .filter(Boolean);
 
 // Define canonical per-browser capability templates (adjusted dynamically for OBSERVE / VISIBLE modes)
-const capabilityCatalog: Record<string, any> = {
+interface BrowserCaps { [k: string]: any }
+
+const HEADLESS = process.env.HEADLESS === '1';
+const SHOW_DEVTOOLS = !!process.env.OBSERVE; // reuse OBSERVE flag to also open devtools
+
+const uniqueRunId = Date.now();
+
+const capabilityCatalog: Record<string, BrowserCaps> = {
   chrome: (() => {
-    const observe = !!process.env.OBSERVE;
-    const visible = !!process.env.VISIBLE; // stronger guarantee of a real, foreground window
-    const argsBase: string[] = [];
-
-    if (!visible) {
-      // Standard stability flags (omit in VISIBLE to avoid any chance of suppression/minimization)
-      argsBase.push('--no-sandbox', '--disable-dev-shm-usage');
-    }
-
-    // Window sizing / visibility helpers
-    argsBase.push(visible ? '--new-window' : '--window-size=1920,1080');
-
-    if (process.env.HEADLESS) argsBase.push('--headless=new');
-    if (observe) argsBase.push('--auto-open-devtools-for-tabs', '--start-maximized');
-    if (visible) {
-      // Create isolated temp profile so Chrome always launches a fresh, showing window
-      argsBase.push('--user-data-dir=/tmp/wdio-visible-profile');
-      // Remove any GPU disabling in visible mode; ensure accelerated path
-    } else if (!observe) {
-      // Only disable GPU in fully automated non-observe mode
-      argsBase.push('--disable-gpu');
-    }
-
+    // Explicit window size for consistent viewport
+    const args: string[] = ['--window-size=1920,1080', '--new-window'];
+    if (HEADLESS) args.push('--headless=new');
+    if (SHOW_DEVTOOLS && !HEADLESS) args.push('--auto-open-devtools-for-tabs');
     return {
       browserName: 'chrome',
-      'goog:chromeOptions': { args: argsBase },
       acceptInsecureCerts: true,
-      maxInstances: visible ? 1 : 5,
+      'goog:chromeOptions': { args },
+      maxInstances: 1, // sequential to keep focus
     };
   })(),
   firefox: (() => {
-    const observe = !!process.env.OBSERVE;
-    const visible = !!process.env.VISIBLE;
     const ffArgs: string[] = [];
-    if (process.env.HEADLESS) ffArgs.push('-headless');
-    if ((observe || visible) && !process.env.HEADLESS) ffArgs.push('-foreground');
-    // Force a clean temporary profile in visible mode (prevents restored hidden state)
-    if (visible) {
-      ffArgs.push('-profile', '/tmp/wdio-visible-ff-profile');
+    if (HEADLESS) {
+      ffArgs.push('-headless', '-width', '1920', '-height', '1080');
     }
     return {
       browserName: 'firefox',
-      'moz:firefoxOptions': ffArgs.length ? { args: ffArgs } : {},
       acceptInsecureCerts: true,
-      maxInstances: visible ? 1 : 3,
+      'moz:firefoxOptions': ffArgs.length ? { args: ffArgs } : {},
+      maxInstances: 1,
     };
   })(),
   safari: {
@@ -83,12 +70,12 @@ export const config: Options.Testrunner = {
     },
   },
 
-  maxInstances: process.env.VISIBLE ? 1 : 10,
+  maxInstances: 1, // force sequential so each window shows in foreground
   // Dynamically generated capability list based on BROWSERS env var
   capabilities: resolvedCapabilities.length ? resolvedCapabilities : [capabilityCatalog.chrome],
 
   // Allow overriding log level (e.g. LOG_LEVEL=debug) for CI troubleshooting
-  logLevel: (process.env.LOG_LEVEL as any) || 'info',
+  logLevel: (process.env.LOG_LEVEL as Options.Testrunner['logLevel']) || 'info',
   bail: 0,
   baseUrl: 'https://newsela.com',
   waitforTimeout: 10000,
@@ -99,8 +86,10 @@ export const config: Options.Testrunner = {
   outputDir: './reports/wdio',
 
   services: [
-    ['chromedriver', { outputDir: './reports/chromedriver' }],
-    // Geckodriver for Firefox (only started if firefox requested)
+    // Start only the services we actually need to avoid startup noise / failures
+    ...(requestedBrowsers.includes('chrome')
+      ? [['chromedriver', { outputDir: './reports/chromedriver' }]]
+      : []),
     ...(requestedBrowsers.includes('firefox')
       ? [['geckodriver', { outputDir: './reports/geckodriver' }]]
       : []),
@@ -149,28 +138,54 @@ export const config: Options.Testrunner = {
   specFileRetriesDelay: 2,
   specFileRetriesDeferred: true,
 
-  beforeTest: async function (test, context) {
-    // Short defensive wait for network-heavy marketing pages to settle
-    await browser.pause(150);
+  beforeTest: async function (test) {
+    if ((browser as any).__firstTestHandled !== true) {
+      (browser as any).__firstTestHandled = true;
+      console.log('[visibility] First test: giving 1200ms for window to fully paint at 1920x1080.');
+      await browser.pause(1200);
+      try {
+        const size = await browser.getWindowSize();
+        console.log(`[visibility] Actual window size: ${size.width}x${size.height}`);
+        // Take a screenshot even if passing to prove we had a window
+        await browser.saveScreenshot(`./reports/screenshots/FIRST_${Date.now()}_${test.title}.png`);
+      } catch {}
+    } else {
+      await browser.pause(150);
+    }
   },
 
   // Optional observe pauses to help visually confirm Chrome/Firefox windows appear.
   // Enable with OBSERVE=1. Adjust start/end durations with OBSERVE_AT_START_MS / OBSERVE_END_MS.
   before: async function () {
-    if (process.env.OBSERVE) {
-      const ms = Number(process.env.OBSERVE_AT_START_MS || 5000);
-      console.log(`[observe] Start pause ${ms}ms so you can see the browser window.`);
-      await browser.pause(ms);
+    console.log('[debug] Requested browsers:', requestedBrowsers);
+    console.log('[debug] Headless mode:', process.env.HEADLESS === '1');
+    // Navigate to blank so we always create a foreground tab, then enforce 1920x1080 size
+    try {
+      await browser.url('about:blank');
+      await browser.pause(100); // allow window to appear
+      await browser.setWindowSize(1920, 1080);
+    } catch (e) {
+      // non-fatal
     }
-    if (process.env.VISIBLE) {
-      console.log('[visible] VISIBLE=1 enabled: running sequentially with simplified args to ensure windows appear.');
+    // Fallback retry if session seems not ready
+    try {
+      if (!(await browser.getTitle())) {
+        console.log('[visibility] Blank title after first load, retrying navigation.');
+        await browser.url('about:blank');
+        await browser.pause(300);
+      }
+    } catch {}
+    if (SHOW_DEVTOOLS && !HEADLESS) {
+      const ms = Number(process.env.OBSERVE_AT_START_MS || 4000);
+      console.log(`[observe] Pause ${ms}ms for manual inspection.`);
+      await browser.pause(ms);
     }
   },
 
   after: async function () {
-    if (process.env.OBSERVE && process.env.OBSERVE_END) {
-      const ms = Number(process.env.OBSERVE_END_MS || 15000);
-      console.log(`[observe] End pause ${ms}ms before session quits.`);
+    if (SHOW_DEVTOOLS && process.env.OBSERVE_END) {
+      const ms = Number(process.env.OBSERVE_END_MS || 5000);
+      console.log(`[observe] End pause ${ms}ms before quit.`);
       await browser.pause(ms);
     }
   },
