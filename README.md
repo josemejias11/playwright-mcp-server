@@ -12,6 +12,85 @@ Simple TypeScript WebDriverIO + MCP server project for multi-browser UI, accessi
 - Chromedriver / Geckodriver services
 - Video playback testing (Wistia integration)
 
+## Quick Start
+
+Install & build:
+
+```bash
+npm run setup
+```
+
+Run all tests (all browsers):
+
+```bash
+npm test
+```
+
+Run smoke tests only:
+
+```bash
+npm run test:smoke
+```
+
+Run video playback tests:
+
+```bash
+npm run test:video
+```
+
+Single browser test:
+
+```bash
+npm run test:chrome
+```
+
+Headless run:
+
+```bash
+HEADLESS=1 npm test
+```
+
+Accessibility testing:
+
+```bash
+npm run test:a11y
+```
+
+Skip report auto-open (CI):
+
+```bash
+SKIP_ALLURE_OPEN=1 npm test
+```
+
+## Video Testing
+
+The project includes comprehensive video playback testing for Newsela product pages:
+
+- **Wistia Integration**: Detects and validates Wistia video players
+- **Cross-Browser**: Tests video functionality across Chrome, Firefox, and Safari
+- **Smart Detection**: Identifies video infrastructure and validates playback capability
+- **Product Coverage**: Tests all main product pages (ELA, Social Studies, Science, Writing, Formative)
+
+Run video tests:
+
+```bash
+npm run test:video
+```
+
+## MCP Server
+
+Start locally (compiled):
+
+```bash
+npm run build && npm start
+```
+
+Or direct TS execution:
+
+```bash
+npm run mcp:server
+```
+
 ## Scripts
 
 ### Core Development
@@ -92,85 +171,6 @@ Generated under `reports/`:
 - `scripts/` : utility scripts (clean-reports, validate-workflow)
 - `examples/` : demo usage
 - `reports/` : output artifacts (gitignored except keep files)
-
-## Quick Start
-
-Install & build:
-
-```bash
-npm run setup
-```
-
-Run all tests (all browsers):
-
-```bash
-npm test
-```
-
-Run smoke tests only:
-
-```bash
-npm run test:smoke
-```
-
-Run video playback tests:
-
-```bash
-npm run test:video
-```
-
-Single browser test:
-
-```bash
-npm run test:chrome
-```
-
-Headless run:
-
-```bash
-HEADLESS=1 npm test
-```
-
-Accessibility testing:
-
-```bash
-npm run test:a11y
-```
-
-Skip report auto-open (CI):
-
-```bash
-SKIP_ALLURE_OPEN=1 npm test
-```
-
-## Video Testing
-
-The project includes comprehensive video playback testing for Newsela product pages:
-
-- **Wistia Integration**: Detects and validates Wistia video players
-- **Cross-Browser**: Tests video functionality across Chrome, Firefox, and Safari
-- **Smart Detection**: Identifies video infrastructure and validates playback capability
-- **Product Coverage**: Tests all main product pages (ELA, Social Studies, Science, Writing, Formative)
-
-Run video tests:
-
-```bash
-npm run test:video
-```
-
-## MCP Server
-
-Start locally (compiled):
-
-```bash
-npm run build && npm start
-```
-
-Or direct TS execution:
-
-```bash
-npm run mcp:server
-```
 
 ## Failure Artifacts
 
