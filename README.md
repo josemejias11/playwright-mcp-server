@@ -1,130 +1,106 @@
-# WebDriverIO MCP Server
+# QA Automation Stack
 
-Automation test harness using WebdriverIO + TypeScript with multi-browser support (Chrome, Firefox, Safari) and Model Context Protocol server utilities. Default headed resolution is 1440x900 (all browsers). Headless only when HEADLESS=1.
+Simple TypeScript WebDriverIO + MCP server project for multi-browser UI, accessibility, links, forms, and smoke testing with Allure reporting.
 
-## Quick Start
+## Tech
+- TypeScript
+- WebdriverIO (Mocha)
+- Allure Reports (JSON + JUnit + Screenshots on failure)
+- MCP server (Model Context Protocol) endpoint
+- Axe-core (basic accessibility scan)
+- Chromedriver / Geckodriver services
 
-1. Install & build:
-   npm install
-   npm run build
+## Scripts
+Core:
+- build: compile TypeScript
+- dev / mcp:server: run MCP server (live tsx)
+- test: full test run (default chrome unless BROWSERS set) + generate & open Allure
+- test:chrome | test:firefox | test:safari | test:cross | test:all-browsers
+- test:observe: headed multi-browser with observe pauses (set OBSERVE=1 / OBSERVE_END=1)
+- test:smoke: smoke spec only
+- test:a11y: accessibility spec only
+- test:links: link health spec
+- test:forms: form spec
+- test:report: alias for test + allure generation
+Reporting:
+- allure:generate: build static report from allure-results
+- allure:open: serve an existing report
+- allure:regen-open: generate then open (auto run after every test script)
+Maintenance:
+- clean: remove build + report artifacts
+- clean:reports: clear report folders but keep .gitkeep
+- lint / lint:fix, format / format:check
+- validate:workflow: YAML workflow validator script
+- demo: run sample script in examples/
 
-   
-2. Run default (Chrome only):
-   npm test
-
-
-3. Run specific browsers:
-   # Chrome
-   npm run test:chrome
-   # Firefox
-   npm run test:firefox
-   # Safari (after enabling Remote Automation)
-   npm run test:safari
-   # Chrome + Firefox
-   npm run test:cross
-   # All 3 (requires Safari setup below)
-   npm run test:all-browsers
-
-
-4. Run individual suites (Chrome default unless BROWSERS is set):
-   # Smoke
-   npm run test:smoke
-   # Accessibility
-   npm run test:a11y
-   # Links
-   npm run test:links
-   # Forms
-   npm run test:forms
-
-
-5. Generate & open Allure report (aggregates last run):
-   npm run test:report
-   npm run allure:open
-
-## Code Quality (ESLint & Prettier)
-
-Lint the codebase:
-
-npm run lint
-
-Auto-fix lint issues where possible:
-
-npm run lint:fix
-
-Check formatting (no changes written):
-
-npm run format:check
-
-Write formatting changes:
-
-npm run format
-
-## Selecting Browsers Dynamically
-
-Use env var BROWSERS (comma separated):
-
-BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts
-
-If omitted it defaults to chrome.
-
-Environment variables summary:
-
-- BROWSERS: comma separated list of browser keys (chrome,firefox,safari)
-- HEADLESS=1: run supported browsers headless (Chrome uses --headless=new; Firefox adds -headless with width/height flags)
-- SAFARI_TP=1: request Safari Technology Preview (if installed)
-
-## Safari (WebKit) Setup (macOS)
-
-Safari uses the built-in safaridriver (no npm service). One-time steps:
-
-1. Enable the driver (Terminal):
-   safaridriver --enable
-2. Open Safari > Settings > Advanced: check "Show features for web developers" (if not already).
-3. Menu Bar > Develop (appears) > Enable "Allow Remote Automation".
-4. (Optional) For Safari Technology Preview: export SAFARI_TP=1 before running to request tech preview via capabilities.
-
-If you see the error: You must enable 'Allow remote automation' ... it means step 3 is incomplete.
-
-## Headless Mode
-
-Set HEADLESS=1 to run Chrome and Firefox headless:
-
-```
-HEADLESS=1 BROWSERS=firefox npx wdio run ./wdio.conf.ts
-HEADLESS=1 BROWSERS=chrome,firefox npx wdio run ./wdio.conf.ts
-```
-
-Safari ignores HEADLESS (WebKit headless mode isn’t enabled here).
+## Environment Variables
+- BROWSERS=chrome,firefox,safari (default chrome)
+- HEADLESS=1 (force headless for chrome/firefox)
+- OBSERVE=1 (slow start & end pauses) + OBSERVE_END=1
+- LOG_LEVEL=debug (override WDIO log level)
+- SAFARI_TP=1 (use Safari Technology Preview)
+- SKIP_ALLURE_OPEN=1 (suppress auto-open of report)
+- CI (enables single retry for flaky specs)
 
 ## Reports
+Generated under `reports/`:
+- allure-results / allure-report
+- json (daily aggregated JSON file)
+- junit (daily XML)
+- wdio (runner logs)
+- chromedriver / geckodriver logs
+- screenshots (only on failure)
 
-All outputs land under reports/:
+## Directory Layout
+- src/ : MCP server code & (future) page objects/utilities
+- tests/ : spec files grouped by domain (smoke, accessibility, links, forms, etc.)
+- scripts/ : utility scripts (clean-reports, validate-workflow)
+- examples/ : demo usage
+- reports/ : output artifacts (gitignored except keep files)
 
-- allure-results (generate HTML: npm run allure:generate && npm run allure:open)
-- json, junit, wdio logs, screenshots
-
-Convenience script:
-
-- npm run test:report -> runs full default test then generates Allure HTML into reports/allure-report
-
-## Test Suites
-
-- smoke: ./tests/smoke/\*
-- accessibility: ./tests/accessibility/\* (axe-core)
-- links: ./tests/links/\*
-- forms: ./tests/forms/\*
-- functional: ./tests/functional/\*
-- landing: ./tests/landing/\*
-
-Script mapping (Chrome by default unless BROWSERS provided):
-
-- npm run test:smoke -> smoke suite
-- npm run test:a11y -> accessibility suite
-- npm run test:links -> link health suite
-- npm run test:forms -> forms suite
-  (Functional & landing covered inside full run; add targeted scripts similarly if needed.)
-
+## Quick Start
+Install & build:
+```
+npm install
+npm run build
+```
+Run smoke test:
+```
+npm run test:smoke
+```
+Cross-browser sample:
+```
+BROWSERS=chrome,firefox npm test
+```
+Headless run:
+```
+HEADLESS=1 npm test
+```
+Accessibility only:
+```
+npm run test:a11y
+```
+Skip report auto-open (CI):
+```
+SKIP_ALLURE_OPEN=1 npm test
+```
 
 ## MCP Server
+Start locally (compiled):
+```
+npm run build && npm start
+```
+Or direct TS execution:
+```
+npm run mcp:server
+```
 
-Entry point: src/mcp-server.ts (run with npm run mcp:server)
+## Failure Artifacts
+On test failure a PNG screenshot is saved under `reports/screenshots/` with a timestamp + test title.
+
+## Cleaning
+- Fast cleanup (keep folders): `npm run clean:reports`
+- Full cleanup: `npm run clean`
+
+## License
+MIT
