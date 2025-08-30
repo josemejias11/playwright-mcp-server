@@ -13,7 +13,9 @@ const requestedBrowsers = (process.env.BROWSERS || 'chrome')
   .filter(Boolean);
 
 // Define canonical per-browser capability templates (adjusted dynamically for OBSERVE / VISIBLE modes)
-interface BrowserCaps { [k: string]: any }
+interface BrowserCaps {
+  [k: string]: any;
+}
 const HEADLESS = process.env.HEADLESS === '1';
 
 const capabilityCatalog: Record<string, BrowserCaps> = {
@@ -21,17 +23,16 @@ const capabilityCatalog: Record<string, BrowserCaps> = {
     browserName: 'chrome',
     acceptInsecureCerts: true,
     'goog:chromeOptions': {
-      args: [
-        '--window-size=1440,900',
-        ...(HEADLESS ? ['--headless=new'] : []),
-      ],
+      args: ['--window-size=1440,900', ...(HEADLESS ? ['--headless=new'] : [])],
     },
     maxInstances: 1,
   },
   firefox: {
     browserName: 'firefox',
     acceptInsecureCerts: true,
-  'moz:firefoxOptions': HEADLESS ? { args: ['-headless', '-width', '1440', '-height', '900'] } : {},
+    'moz:firefoxOptions': HEADLESS
+      ? { args: ['-headless', '-width', '1440', '-height', '900'] }
+      : {},
     maxInstances: 1,
   },
   safari: {
@@ -134,7 +135,7 @@ export const config: Options.Testrunner = {
   // Enable with OBSERVE=1. Adjust start/end durations with OBSERVE_AT_START_MS / OBSERVE_END_MS.
   before: async function () {
     try {
-  await browser.setWindowSize(1440, 900);
+      await browser.setWindowSize(1440, 900);
     } catch {}
   },
 

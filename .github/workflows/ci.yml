@@ -347,7 +347,15 @@ jobs:
 
   test-summary:
     name: Test Summary
-    needs: [lint-and-build, wdio-browser-matrix, wdio-safari, mcp-server-validation, security-scan, postman-api-smoke]
+    needs:
+      [
+        lint-and-build,
+        wdio-browser-matrix,
+        wdio-safari,
+        mcp-server-validation,
+        security-scan,
+        postman-api-smoke,
+      ]
     runs-on: ubuntu-latest
     if: always()
 

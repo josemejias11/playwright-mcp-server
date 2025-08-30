@@ -14,7 +14,7 @@
     "test:safari": "BROWSERS=safari npx wdio run ./wdio.conf.ts && npm run allure:regen-open",
     "test:cross": "BROWSERS=chrome,firefox npx wdio run ./wdio.conf.ts && npm run allure:regen-open",
     "test:all-browsers": "BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts && npm run allure:regen-open",
-  "test:observe": "OBSERVE=1 OBSERVE_END=1 BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts && npm run allure:regen-open",
+    "test:observe": "OBSERVE=1 OBSERVE_END=1 BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts && npm run allure:regen-open",
     "test:smoke": "npx wdio run ./wdio.conf.ts --spec ./tests/smoke/home.smoke.spec.ts && npm run allure:regen-open",
     "test:a11y": "npx wdio run ./wdio.conf.ts --spec ./tests/accessibility/a11y.spec.ts && npm run allure:regen-open",
     "test:links": "npx wdio run ./wdio.conf.ts --spec ./tests/links/link-health.spec.ts && npm run allure:regen-open",
@@ -22,22 +22,22 @@
     "test:report": "npm run test",
     "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
     "allure:open": "allure open reports/allure-report",
-  "allure:regen-open": "npm run allure:generate && if [ -z \"$SKIP_ALLURE_OPEN\" ]; then if command -v allure >/dev/null 2>&1; then (allure open reports/allure-report >/dev/null 2>&1 &) ; else (npx allure open reports/allure-report >/dev/null 2>&1 &) ; fi; fi",
+    "allure:regen-open": "npm run allure:generate && if [ -z \"$SKIP_ALLURE_OPEN\" ]; then if command -v allure >/dev/null 2>&1; then (allure open reports/allure-report >/dev/null 2>&1 &) ; else (npx allure open reports/allure-report >/dev/null 2>&1 &) ; fi; fi",
     "mcp:server": "tsx src/mcp-server.ts",
     "demo": "tsx examples/demo.ts",
     "setup": "npm install && npm run build",
     "clean": "rm -rf dist/ reports/ test-results/",
-  "clean:reports": "tsx scripts/clean-reports.ts",
+    "clean:reports": "tsx scripts/clean-reports.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "validate:workflow": "tsx scripts/validate-workflow.ts"
-  ,"postman:test": "newman run postman/collections/newsela-public-smoke.postman_collection.json -e postman/environments/newsela-environment.json --reporters cli,junit,json --reporter-junit-export reports/api/newman-results.xml --reporter-json-export reports/api/newman-results.json && npm run postman:to-allure"
-  ,"postman:test:env": "COLLECTION=${COLLECTION:-postman/collections/newsela-public-smoke.postman_collection.json}; ENV=${ENV:-postman/environments/newsela-environment.json}; newman run $COLLECTION -e $ENV --reporters cli,junit,json --reporter-junit-export reports/api/newman-results.xml --reporter-json-export reports/api/newman-results.json && npm run postman:to-allure"
-  ,"postman:test:allure": "npm run postman:test"
-  ,"postman:to-allure": "tsx scripts/newman-to-allure.ts"
-  ,"test:all:stack": "BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts && npm run postman:test:allure && npm run allure:regen-open"
+    "validate:workflow": "tsx scripts/validate-workflow.ts",
+    "postman:test": "newman run postman/collections/newsela-public-smoke.postman_collection.json -e postman/environments/newsela-environment.json --reporters cli,junit,json --reporter-junit-export reports/api/newman-results.xml --reporter-json-export reports/api/newman-results.json && npm run postman:to-allure",
+    "postman:test:env": "COLLECTION=${COLLECTION:-postman/collections/newsela-public-smoke.postman_collection.json}; ENV=${ENV:-postman/environments/newsela-environment.json}; newman run $COLLECTION -e $ENV --reporters cli,junit,json --reporter-junit-export reports/api/newman-results.xml --reporter-json-export reports/api/newman-results.json && npm run postman:to-allure",
+    "postman:test:allure": "npm run postman:test",
+    "postman:to-allure": "tsx scripts/newman-to-allure.ts",
+    "test:all:stack": "BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts && npm run postman:test:allure && npm run allure:regen-open"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.4.0",
@@ -69,8 +69,8 @@
     "tsx": "^4.0.0",
     "typescript": "^5.0.0",
     "wdio-chromedriver-service": "^8.1.1",
-    "wdio-geckodriver-service": "^5.0.2"
-  ,"newman": "^6.1.0"
+    "wdio-geckodriver-service": "^5.0.2",
+    "newman": "^6.1.0"
   },
   "keywords": [
     "mcp",
