@@ -19,6 +19,7 @@
     "test:a11y": "npx wdio run ./wdio.conf.ts --spec ./tests/accessibility/a11y.spec.ts && npm run allure:regen-open",
     "test:links": "npx wdio run ./wdio.conf.ts --spec ./tests/links/link-health.spec.ts && npm run allure:regen-open",
     "test:forms": "npx wdio run ./wdio.conf.ts --spec ./tests/forms/contact-form.spec.ts && npm run allure:regen-open",
+    "test:video": "SKIP_ALLURE_OPEN=1 BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts --spec ./tests/functional/video-products.spec.ts && npm run allure:regen-open",
     "test:report": "npm run test",
     "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
     "allure:open": "allure open reports/allure-report",

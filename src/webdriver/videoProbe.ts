@@ -10,6 +10,7 @@ export interface VideoProbeResult {
   paused: boolean;
   skipped: boolean;
   reason?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   raw?: any;
 }
 export interface VideoProbeOptions {
@@ -77,7 +78,9 @@ export async function playAndProbeVideo(opts: VideoProbeOptions): Promise<VideoP
             w.__mediaProbe.before = video.time();
             try {
               (customPlayer || container)?.click();
-            } catch {}
+            } catch {
+              // Click failed, continue without interaction
+            }
             const p = video.play?.();
             if (p && typeof p.then === 'function') p.catch(() => {});
             setTimeout(() => {
@@ -90,7 +93,9 @@ export async function playAndProbeVideo(opts: VideoProbeOptions): Promise<VideoP
                 w.__mediaProbe.delta = w.__mediaProbe.after - w.__mediaProbe.before;
               }, 1500);
             }, 1200);
-          } catch {}
+          } catch {
+            // Video playback setup failed, continue
+          }
         },
       });
       return 'queued';
@@ -124,7 +129,9 @@ export async function playAndProbeVideo(opts: VideoProbeOptions): Promise<VideoP
               w.__mediaProbe.delta = w.__mediaProbe.after - w.__mediaProbe.before;
             }, 1500);
           }, 1200);
-        } catch {}
+        } catch {
+          // Native video playback failed, continue
+        }
       }
       return { mode: 'native' };
     }
@@ -186,9 +193,13 @@ export async function playAndProbeVideo(opts: VideoProbeOptions): Promise<VideoP
                   video.pause?.();
                   w.__mediaProbe.paused = video.isPaused ? video.isPaused() : true;
                 }, 1600);
-              } catch {}
+              } catch {
+                // Video timing measurement failed
+              }
             });
-          } catch {}
+          } catch {
+            // Video interaction failed, continue
+          }
         }
       });
       await browser.pause(2000);
