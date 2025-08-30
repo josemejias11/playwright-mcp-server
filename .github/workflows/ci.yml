@@ -338,7 +338,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 🎯 Branch: newsela" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ **Multi-Browser Integration**: Chrome, Firefox, Safari covered" >> $GITHUB_STEP_SUMMARY
-          echo "- 🔧 **TypeScript Migration**: Full type safety and modern build process" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔧 **TypeScript**: Full type safety and modern build process" >> $GITHUB_STEP_SUMMARY
           echo "- 📊 **Centralized Reporting**: Aggregated per-browser artifacts" >> $GITHUB_STEP_SUMMARY
           echo "- 🚀 **15 MCP Tools**: Comprehensive web automation capabilities" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
