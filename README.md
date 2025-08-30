@@ -9,6 +9,7 @@ Simple TypeScript WebDriverIO + MCP server project for multi-browser UI, accessi
 - MCP server (Model Context Protocol) endpoint
 - Axe-core (basic accessibility scan)
 - Chromedriver / Geckodriver services
+ - Postman / Newman (API smoke tests)
 
 ## Scripts
 Core:
@@ -22,6 +23,9 @@ Core:
 - test:links: link health spec
 - test:forms: form spec
 - test:report: alias for test + allure generation
+API:
+- postman:test: run sample Postman collection (outputs JUnit/XML, JSON, HTML to reports/api)
+- postman:test:env: run custom COLLECTION & ENV provided via env vars
 Reporting:
 - allure:generate: build static report from allure-results
 - allure:open: serve an existing report
@@ -41,6 +45,8 @@ Maintenance:
 - SAFARI_TP=1 (use Safari Technology Preview)
 - SKIP_ALLURE_OPEN=1 (suppress auto-open of report)
 - CI (enables single retry for flaky specs)
+ - COLLECTION (path to a Postman collection for postman:test:env)
+ - ENV (path to a Postman environment JSON for postman:test:env)
 
 ## Reports
 Generated under `reports/`:
@@ -101,6 +107,28 @@ On test failure a PNG screenshot is saved under `reports/screenshots/` with a ti
 ## Cleaning
 - Fast cleanup (keep folders): `npm run clean:reports`
 - Full cleanup: `npm run clean`
+
+## Postman / Newman API Tests
+Sample assets live under `postman/collections` and `postman/environments`.
+
+Run sample collection:
+```
+npm run postman:test
+```
+
+Custom collection + environment:
+```
+COLLECTION=postman/collections/your-collection.json \
+ENV=postman/environments/your-env.json \
+npm run postman:test:env
+```
+
+Outputs (created if missing) in `reports/api`:
+- newman-results.xml (JUnit)
+- newman-report.json
+- newman-report.html
+
+These can be archived in CI. (Future enhancement: transform Newman output into Allure format.)
 
 ## License
 MIT
