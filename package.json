@@ -22,7 +22,7 @@
     "test:report": "npm run test",
     "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
     "allure:open": "allure open reports/allure-report",
-    "allure:regen-open": "npm run allure:generate && if [ -z \"$SKIP_ALLURE_OPEN\" ]; then if command -v open >/dev/null 2>&1; then open reports/allure-report/index.html >/dev/null 2>&1 || true; else (allure open reports/allure-report >/dev/null 2>&1 &) ; fi; fi",
+  "allure:regen-open": "npm run allure:generate && if [ -z \"$SKIP_ALLURE_OPEN\" ]; then if command -v allure >/dev/null 2>&1; then (allure open reports/allure-report >/dev/null 2>&1 &) ; else (npx allure open reports/allure-report >/dev/null 2>&1 &) ; fi; fi",
     "mcp:server": "tsx src/mcp-server.ts",
     "demo": "tsx examples/demo.ts",
     "setup": "npm install && npm run build",
