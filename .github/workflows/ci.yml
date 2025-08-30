@@ -214,6 +214,36 @@ jobs:
           });
           "
 
+  postman-api-smoke:
+    name: Postman API Smoke
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Postman smoke tests (Newsela public)
+        run: |
+          mkdir -p reports/api
+          npm run postman:test
+
+      - name: Upload Postman results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-api-smoke
+          path: reports/api/
+          retention-days: 14
+
   security-scan:
     name: Security & Dependency Check
     runs-on: ubuntu-latest
@@ -317,7 +347,7 @@ jobs:
 
   test-summary:
     name: Test Summary
-    needs: [lint-and-build, wdio-browser-matrix, wdio-safari, mcp-server-validation, security-scan]
+    needs: [lint-and-build, wdio-browser-matrix, wdio-safari, mcp-server-validation, security-scan, postman-api-smoke]
     runs-on: ubuntu-latest
     if: always()
 
@@ -335,6 +365,7 @@ jobs:
           echo "| WebDriverIO (Safari) | ${{ needs.wdio-safari.result }} | Safari remote automation |" >> $GITHUB_STEP_SUMMARY
           echo "| MCP Validation | ${{ needs.mcp-server-validation.result }} | MCP server startup and WebDriver functionality |" >> $GITHUB_STEP_SUMMARY
           echo "| Security Scan | ${{ needs.security-scan.result }} | Dependency vulnerability assessment |" >> $GITHUB_STEP_SUMMARY
+          echo "| Postman API Smoke | ${{ needs.postman-api-smoke.result }} | Newsela public endpoints |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 🎯 Branch: newsela" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ **Multi-Browser Integration**: Chrome, Firefox, Safari covered" >> $GITHUB_STEP_SUMMARY
