@@ -1,6 +1,6 @@
 # QA Automation Stack
 
-Simple TypeScript WebDriverIO + MCP server project for multi-browser UI, accessibility, links, forms, and smoke testing with Allure reporting.
+Simple TypeScript WebDriverIO + MCP server project for multi-browser UI, accessibility, links, forms, video, and smoke testing with Allure reporting.
 
 ## Tech
 
@@ -10,124 +10,165 @@ Simple TypeScript WebDriverIO + MCP server project for multi-browser UI, accessi
 - MCP server (Model Context Protocol) endpoint
 - Axe-core (basic accessibility scan)
 - Chromedriver / Geckodriver services
-- Postman / Newman (API smoke tests)
+- Video playback testing (Wistia integration)
 
 ## Scripts
 
-Core:
+### Core Development
 
-- build: compile TypeScript
-- dev / mcp:server: run MCP server (live tsx)
-- test: full test run (default chrome unless BROWSERS set) + generate & open Allure
-- test:chrome | test:firefox | test:safari | test:cross | test:all-browsers
-- test:observe: headed multi-browser with observe pauses (set OBSERVE=1 / OBSERVE_END=1)
-- test:smoke: smoke spec only
-- test:a11y: accessibility spec only
-- test:links: link health spec
-- test:forms: form spec
-- test:report: alias for test + allure generation
-- test:all:stack: run full multi-browser UI suite (chrome,firefox,safari) then Postman Newsela API smoke, then open Allure
-  API:
-- postman:test: run sample Postman collection (outputs JUnit/XML, JSON, HTML to reports/api)
-- postman:test:env: run custom COLLECTION & ENV provided via env vars
-  Reporting:
-- allure:generate: build static report from allure-results
-- allure:open: serve an existing report
-- allure:regen-open: generate then open (auto run after every test script)
-  Maintenance:
-- clean: remove build + report artifacts
-- clean:reports: clear report folders but keep .gitkeep
-- lint / lint:fix, format / format:check
-- validate:workflow: YAML workflow validator script
-- demo: run sample script in examples/
+- `build`: compile TypeScript
+- `start`: run compiled MCP server
+- `dev`: run MCP server in development mode (live tsx)
+- `setup`: install dependencies and build
+- `clean`: remove build + report artifacts
+- `clean:reports`: clear report folders but keep .gitkeep
+
+### Code Quality
+
+- `lint`: check code style
+- `lint:fix`: fix code style issues
+- `format`: format code with Prettier
+- `format:check`: check code formatting
+
+### Testing
+
+- `test`: full test suite on all browsers (Chrome, Firefox, Safari) + generate & open Allure
+- `test:chrome`: run tests on Chrome only
+- `test:firefox`: run tests on Firefox only
+- `test:safari`: run tests on Safari only
+- `test:observe`: headed multi-browser with observe pauses (set OBSERVE=1 / OBSERVE_END=1)
+
+### Specific Test Suites
+
+- `test:smoke`: smoke spec only
+- `test:a11y`: accessibility spec only
+- `test:links`: link health spec
+- `test:forms`: form spec
+- `test:video`: video playback validation across all browsers
+
+### Reporting
+
+- `allure:generate`: build static report from allure-results
+- `allure:open`: serve an existing report
+- `allure:regen-open`: generate then open (auto run after every test script)
+
+### Utilities
+
+- `mcp:server`: run MCP server directly
+- `demo`: run sample script in examples/
+- `validate:workflow`: YAML workflow validator script
 
 ## Environment Variables
 
-- BROWSERS=chrome,firefox,safari (default chrome)
-- HEADLESS=1 (force headless for chrome/firefox)
-- OBSERVE=1 (slow start & end pauses) + OBSERVE_END=1
-- LOG_LEVEL=debug (override WDIO log level)
-- SAFARI_TP=1 (use Safari Technology Preview)
-- SKIP_ALLURE_OPEN=1 (suppress auto-open of report)
-- CI (enables single retry for flaky specs)
-- COLLECTION (path to a Postman collection for postman:test:env)
-- ENV (path to a Postman environment JSON for postman:test:env)
+- `BROWSERS=chrome,firefox,safari` (default: chrome)
+- `HEADLESS=1` (force headless for chrome/firefox)
+- `OBSERVE=1` (slow start & end pauses) + `OBSERVE_END=1`
+- `LOG_LEVEL=debug` (override WDIO log level)
+- `SAFARI_TP=1` (use Safari Technology Preview)
+- `SKIP_ALLURE_OPEN=1` (suppress auto-open of report)
+- `CI` (enables single retry for flaky specs)
 
 ## Reports
 
 Generated under `reports/`:
 
-- allure-results / allure-report
-- json (daily aggregated JSON file)
-- junit (daily XML)
-- wdio (runner logs)
-- chromedriver / geckodriver logs
-- screenshots (only on failure)
+- `allure-results` / `allure-report`
+- `json` (daily aggregated JSON file)
+- `junit` (daily XML)
+- `wdio` (runner logs)
+- `chromedriver` / `geckodriver` logs
+- `screenshots` (only on failure)
 
 ## Directory Layout
 
-- src/ : MCP server code & (future) page objects/utilities
-- tests/ : spec files grouped by domain (smoke, accessibility, links, forms, etc.)
-- scripts/ : utility scripts (clean-reports, validate-workflow)
-- examples/ : demo usage
-- reports/ : output artifacts (gitignored except keep files)
+- `src/` : MCP server code & utilities
+- `tests/` : spec files grouped by domain
+  - `smoke/` : basic functionality tests
+  - `accessibility/` : a11y validation tests
+  - `links/` : link health checks
+  - `forms/` : form interaction tests
+  - `functional/` : advanced feature tests (e.g., video playback)
+  - `helpers/` : reusable test utilities
+- `scripts/` : utility scripts (clean-reports, validate-workflow)
+- `examples/` : demo usage
+- `reports/` : output artifacts (gitignored except keep files)
 
 ## Quick Start
 
 Install & build:
 
-```
-npm install
-npm run build
-```
-
-Run all test:
-
-```
-npm run test
+```bash
+npm run setup
 ```
 
-Run smoke test:
+Run all tests (all browsers):
 
+```bash
+npm test
 ```
+
+Run smoke tests only:
+
+```bash
 npm run test:smoke
 ```
 
-Cross-browser sample:
+Run video playback tests:
 
+```bash
+npm run test:video
 ```
-BROWSERS=chrome,firefox npm test
+
+Single browser test:
+
+```bash
+npm run test:chrome
 ```
 
 Headless run:
 
-```
+```bash
 HEADLESS=1 npm test
 ```
 
-Accessibility only:
+Accessibility testing:
 
-```
+```bash
 npm run test:a11y
 ```
 
 Skip report auto-open (CI):
 
-```
+```bash
 SKIP_ALLURE_OPEN=1 npm test
+```
+
+## Video Testing
+
+The project includes comprehensive video playback testing for Newsela product pages:
+
+- **Wistia Integration**: Detects and validates Wistia video players
+- **Cross-Browser**: Tests video functionality across Chrome, Firefox, and Safari
+- **Smart Detection**: Identifies video infrastructure and validates playback capability
+- **Product Coverage**: Tests all main product pages (ELA, Social Studies, Science, Writing, Formative)
+
+Run video tests:
+
+```bash
+npm run test:video
 ```
 
 ## MCP Server
 
 Start locally (compiled):
 
-```
+```bash
 npm run build && npm start
 ```
 
 Or direct TS execution:
 
-```
+```bash
 npm run mcp:server
 ```
 
@@ -139,50 +180,6 @@ On test failure a PNG screenshot is saved under `reports/screenshots/` with a ti
 
 - Fast cleanup (keep folders): `npm run clean:reports`
 - Full cleanup: `npm run clean`
-
-## Postman / Newman API Tests
-
-Newsela public smoke collection: `postman/collections/newsela-public-smoke.postman_collection.json` with environment `postman/environments/newsela-environment.json`.
-
-Run Newsela smoke:
-
-```
-npm run postman:test
-```
-
-Custom collection + environment:
-
-```
-COLLECTION=postman/collections/another.postman_collection.json \
-ENV=postman/environments/another-environment.json \
-npm run postman:test:env
-```
-
-Outputs (created if missing):
-
-- `reports/api/newman-results.xml` (JUnit)
-- `reports/api/newman-results.json` (raw summary)
-- Converted into Allure as suite "API Smoke" via `scripts/newman-to-allure.ts` (run automatically by `postman:test`).
-
-Unified run (UI + API + Allure):
-
-```
-npm run test:all:stack
-```
-
-Add custom collection with Allure conversion:
-
-```
-COLLECTION=postman/collections/another.postman_collection.json \
-ENV=postman/environments/another-environment.json \
-npm run postman:test:env
-```
-
-Skip opening Allure UI (e.g. CI):
-
-```
-SKIP_ALLURE_OPEN=1 npm run test:all:stack
-```
 
 ## License
 
