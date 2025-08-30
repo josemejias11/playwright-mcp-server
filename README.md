@@ -109,26 +109,24 @@ On test failure a PNG screenshot is saved under `reports/screenshots/` with a ti
 - Full cleanup: `npm run clean`
 
 ## Postman / Newman API Tests
-Sample assets live under `postman/collections` and `postman/environments`.
+Newsela public smoke collection: `postman/collections/newsela-public-smoke.postman_collection.json` with environment `postman/environments/newsela-environment.json`.
 
-Run sample collection:
+Run Newsela smoke:
 ```
 npm run postman:test
 ```
 
 Custom collection + environment:
 ```
-COLLECTION=postman/collections/your-collection.json \
-ENV=postman/environments/your-env.json \
+COLLECTION=postman/collections/another.postman_collection.json \
+ENV=postman/environments/another-environment.json \
 npm run postman:test:env
 ```
 
 Outputs (created if missing) in `reports/api`:
 - newman-results.xml (JUnit)
-- newman-report.json
-- newman-report.html
 
-These can be archived in CI. (Future enhancement: transform Newman output into Allure format.)
+You can add more reporters (json, html) by extending the npm scripts if needed.
 
 ## License
 MIT
