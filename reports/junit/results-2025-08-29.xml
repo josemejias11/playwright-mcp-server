@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="0" errors="0" skipped="0">
+  <testsuite name="Smoke Home" timestamp="2025-08-29T16:18:54" time="2.127" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="0"/>
+      <property name="suiteName" value="Smoke: Home"/>
+      <property name="capabilities" value="safari.18_6.macos"/>
+      <property name="file" value="file://./tests/smoke/home.smoke.spec.ts"/>
+    </properties>
+    <testcase classname="safari.18_6.macos.Smoke:_Home" name="renders title hero quickly" time="2.125">
+      <system-out><![CDATA[
+COMMAND: POST /session/DEF1BA07-124E-46B3-A9A4-62E5B7C95BC3/url - {"url":"https://newsela.com/"}
+RESULT: {"url":"https://newsela.com/"}
+COMMAND: GET /session/DEF1BA07-124E-46B3-A9A4-62E5B7C95BC3/title - {}
+RESULT: {}
+COMMAND: POST /session/DEF1BA07-124E-46B3-A9A4-62E5B7C95BC3/element - {"using":"css selector","value":"h1"}
+RESULT: {"using":"css selector","value":"h1"}
+COMMAND: POST /session/DEF1BA07-124E-46B3-A9A4-62E5B7C95BC3/elements - {"using":"css selector","value":"h1"}
+RESULT: {"using":"css selector","value":"h1"}
+COMMAND: DELETE /session/DEF1BA07-124E-46B3-A9A4-62E5B7C95BC3 - {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+  </testsuite>
+</testsuites>
