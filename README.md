@@ -130,3 +130,5 @@ You can add more reporters (json, html) by extending the npm scripts if needed.
 
 ## License
 MIT
+
+<!-- trigger ci: 2025-08-30T07:44:00Z -->
