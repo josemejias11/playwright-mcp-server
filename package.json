@@ -32,6 +32,7 @@
     "mcp:server": "tsx src/mcp-server.ts",
     "demo": "tsx examples/demo.ts",
     "validate:workflow": "tsx scripts/validate-workflow.ts",
+    "postman:test": "newman run postman/collections/newsela-public-smoke.postman_collection.json -e postman/environments/newsela-environment.json --reporters=cli,json --reporter-json-export=reports/api/postman-results.json",
     "wdio": "wdio run ./wdio.conf.ts"
   },
   "dependencies": {
