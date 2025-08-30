@@ -26,6 +26,7 @@
     "demo": "tsx examples/demo.ts",
     "setup": "npm install && npm run build",
     "clean": "rm -rf dist/ reports/ test-results/",
+  "clean:reports": "tsx scripts/clean-reports.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier . --write",
