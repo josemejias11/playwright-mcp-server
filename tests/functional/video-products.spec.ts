@@ -1,5 +1,5 @@
 import { expect } from 'expect';
-import { playAndProbeVideo } from '../helpers/videoProbeRuntime.js';
+import { playAndProbeVideo } from '../helpers/videoProbeRuntime.ts';
 
 // Dedicated per-product video playback tests using reusable probe helper.
 // Skips (non-strict) when playback can't be confirmed instead of failing the build.
@@ -25,7 +25,11 @@ describe('Functional: Product Videos Playback', () => {
         return this.skip();
       }
       expect(res.played).toBe(true);
-      expect(res.delta).toBeGreaterThan(0.1);
+      expect(res.delta).toBeGreaterThanOrEqual(2.8); // ~3s playback (allow slight drift)
+      // Debug output for now
+      if (res.delta === 0) {
+        console.log(`[DEBUG] ${url} - mode: ${res.mode}, before: ${res.before}, after: ${res.after}, raw:`, res.raw);
+      }
       expect(res.after).toBeGreaterThan(res.before);
       expect(res.paused).toBe(true);
     });
