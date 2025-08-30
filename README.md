@@ -23,6 +23,7 @@ Core:
 - test:links: link health spec
 - test:forms: form spec
 - test:report: alias for test + allure generation
+ - test:all:stack: run full multi-browser UI suite (chrome,firefox,safari) then Postman Newsela API smoke, then open Allure
 API:
 - postman:test: run sample Postman collection (outputs JUnit/XML, JSON, HTML to reports/api)
 - postman:test:env: run custom COLLECTION & ENV provided via env vars
@@ -69,6 +70,10 @@ Install & build:
 ```
 npm install
 npm run build
+```
+Run all test:
+```
+npm run test
 ```
 Run smoke test:
 ```
@@ -123,12 +128,27 @@ ENV=postman/environments/another-environment.json \
 npm run postman:test:env
 ```
 
-Outputs (created if missing) in `reports/api`:
-- newman-results.xml (JUnit)
+Outputs (created if missing):
+- `reports/api/newman-results.xml` (JUnit)
+- `reports/api/newman-results.json` (raw summary)
+- Converted into Allure as suite "API Smoke" via `scripts/newman-to-allure.ts` (run automatically by `postman:test`).
 
-You can add more reporters (json, html) by extending the npm scripts if needed.
+Unified run (UI + API + Allure):
+```
+npm run test:all:stack
+```
+
+Add custom collection with Allure conversion:
+```
+COLLECTION=postman/collections/another.postman_collection.json \
+ENV=postman/environments/another-environment.json \
+npm run postman:test:env
+```
+
+Skip opening Allure UI (e.g. CI):
+```
+SKIP_ALLURE_OPEN=1 npm run test:all:stack
+```
 
 ## License
 MIT
-
-<!-- trigger ci: 2025-08-30T07:44:00Z -->

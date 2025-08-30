@@ -33,8 +33,11 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "validate:workflow": "tsx scripts/validate-workflow.ts"
-  ,"postman:test": "newman run postman/collections/newsela-public-smoke.postman_collection.json -e postman/environments/newsela-environment.json --reporters cli,junit --reporter-junit-export reports/api/newman-results.xml"
-  ,"postman:test:env": "COLLECTION=${COLLECTION:-postman/collections/newsela-public-smoke.postman_collection.json}; ENV=${ENV:-postman/environments/newsela-environment.json}; newman run $COLLECTION -e $ENV --reporters cli,junit --reporter-junit-export reports/api/newman-results.xml"
+  ,"postman:test": "newman run postman/collections/newsela-public-smoke.postman_collection.json -e postman/environments/newsela-environment.json --reporters cli,junit,json --reporter-junit-export reports/api/newman-results.xml --reporter-json-export reports/api/newman-results.json && npm run postman:to-allure"
+  ,"postman:test:env": "COLLECTION=${COLLECTION:-postman/collections/newsela-public-smoke.postman_collection.json}; ENV=${ENV:-postman/environments/newsela-environment.json}; newman run $COLLECTION -e $ENV --reporters cli,junit,json --reporter-junit-export reports/api/newman-results.xml --reporter-json-export reports/api/newman-results.json && npm run postman:to-allure"
+  ,"postman:test:allure": "npm run postman:test"
+  ,"postman:to-allure": "tsx scripts/newman-to-allure.ts"
+  ,"test:all:stack": "BROWSERS=chrome,firefox,safari npx wdio run ./wdio.conf.ts && npm run postman:test:allure && npm run allure:regen-open"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.4.0",
